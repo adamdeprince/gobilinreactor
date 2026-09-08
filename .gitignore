@@ -1,0 +1,18 @@
+# build output
+build/
+out/
+*.apk
+*.so
+*.o
+*.dex
+*.idsig
+*.keystore
+
+# tooling
+.gradle/
+local.properties
+.idea/
+.DS_Store
+
+# probe results pulled from devices
+probe/results/

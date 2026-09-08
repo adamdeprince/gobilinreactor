@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- No Java, no classes.dex: android:hasCode="false" plus the framework's own
+     NativeActivity host. targetSdkVersion 36 is the whole point, because the
+     API 29 W^X restriction only applies at 29 and above and the probe exists
+     to measure life on the far side of it. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dev.goblinlinux.probe">
+
+    <application
+        android:label="goblin-linux probe"
+        android:hasCode="false"
+        android:allowBackup="false"
+        android:debuggable="true"
+        android:extractNativeLibs="true">
+
+        <activity
+            android:name="android.app.NativeActivity"
+            android:label="goblin-linux probe"
+            android:exported="true">
+            <meta-data android:name="android.app.lib_name" android:value="goblinprobe" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
