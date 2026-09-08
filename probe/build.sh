@@ -50,6 +50,7 @@ echo "==> compiling libgoblinprobe.so"
     -std=c++17 -O2 -g -fPIC -shared \
     -Wall -Wextra -Wno-unused-parameter \
     -fvisibility=hidden \
+    -static-libstdc++ \
     -o "$OUT/lib/$ABI/libgoblinprobe.so" \
     "$SRC/cpp/probe.cpp" "$SRC/cpp/main.cpp" \
     -llog -landroid

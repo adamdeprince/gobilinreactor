@@ -114,11 +114,17 @@ std::string Err() {
 std::string ReadFileTrimmed(const char* path, size_t limit = 256) {
     int fd = open(path, O_RDONLY | O_CLOEXEC);
     if (fd < 0) return "<unreadable>";
-    std::string out(limit, '\0');
-    ssize_t n = read(fd, &out[0], limit - 1);
+    // procfs hands back one chunk at a time, so a single read() truncates
+    // silently -- which is how /proc/self/status lost everything past VmSwap.
+    std::string out;
+    char buf[1024];
+    ssize_t n;
+    while (out.size() < limit && (n = read(fd, buf, sizeof(buf))) > 0) {
+        out.append(buf, static_cast<size_t>(n));
+    }
     close(fd);
-    if (n < 0) return "<unreadable>";
-    out.resize(static_cast<size_t>(n));
+    if (out.empty()) return "<unreadable>";
+    if (out.size() > limit) out.resize(limit);
     while (!out.empty() && (out.back() == '\n' || out.back() == '\0')) out.pop_back();
     return out;
 }
@@ -207,10 +213,19 @@ void ProbeEnvironment(Report* r) {
     r->Add(ps == 4096 ? Status::kInfo : Status::kWarn, "page size", "%ld bytes%s", ps,
            ps == 16384 ? "  (16 KiB device)" : "");
 
-    r->Add(Status::kInfo, "seccomp (inherited)", "%s",
-           ReadFileTrimmed("/proc/self/status").find("Seccomp:") != std::string::npos
-               ? "see /proc/self/status in full dump"
-               : "field absent");
+    {
+        // Android's zygote installs a filter on every app process. Ours stacks on
+        // top of it, and the most restrictive result wins.
+        const std::string status = ReadFileTrimmed("/proc/self/status", 8192);
+        size_t at = status.find("Seccomp:");
+        std::string mode = at == std::string::npos
+                               ? "field absent"
+                               : status.substr(at, status.find('\n', at) - at);
+        for (char& c : mode) {
+            if (c == '\t') c = ' ';
+        }
+        r->Add(Status::kInfo, "seccomp (inherited)", "%s", mode.c_str());
+    }
     r->Add(Status::kInfo, "vm.max_map_count", "%s",
            ReadFileTrimmed("/proc/sys/vm/max_map_count").c_str());
     r->Add(Status::kInfo, "yama ptrace_scope", "%s",
@@ -869,7 +884,7 @@ std::string RunAllProbes(const ProbePaths& paths) {
 
     r.Section("Full /proc/self/status");
     r.Add(Status::kInfo, "status", "\n%s",
-          ReadFileTrimmed("/proc/self/status", 4096).c_str());
+          ReadFileTrimmed("/proc/self/status", 8192).c_str());
 
     return r.Text();
 }

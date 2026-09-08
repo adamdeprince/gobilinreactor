@@ -147,12 +147,61 @@ party. `apt` then adds to it inside the sandbox.
 6. **Wayland.** Compositor, framebuffer output, `goblin display`.
 7. **Store submission.** Asset pack packaging, data safety, policy declarations.
 
-## Open questions the probe answers
+## What the probe has established
 
-- Is `memfd`-backed execution permitted? Decides whether guest processes share one copy
-  of libc or each pay for their own.
-- What does a seccomp trap round-trip cost? Sets the ceiling on syscall-heavy workloads.
-- Is `userfaultfd` available? Decides lazy versus eager `fork()`.
-- Does the filter stay thread-local? Decides whether the sentry can live in the same
-  process as its stubs.
-- 4 KiB or 16 KiB pages? Affects loader placement on Android 15+ devices.
+Emulator only so far — `sdk_gphone64_arm64`, Android 16 / API 36, kernel 6.6.66,
+4 KiB pages. An emulator answers a different question than a shipping device, so
+every line below needs confirming on real hardware. But nothing here is a blocker,
+and several answers are better than assumed.
+
+| Question | Answer |
+|---|---|
+| Can guest code be placed in executable memory? | Yes, both `PROT_EXEC` anonymous mapping and RW→RX `mprotect`. |
+| Are guest syscalls interceptable? | Yes. `SIGSYS` fires, `si_syscall` and the argument registers read correctly, writing `x0` injects a return value, and an `svc` issued from a JIT page traps. |
+| What does a trap round-trip cost? | **780 ns.** Sub-microsecond, so syscall-heavy workloads are viable. |
+| Does the filter stay thread-local? | Yes. The sentry can share a process with its stubs. |
+| Is `memfd` execution permitted? | **Yes — including sealed.** See below; this is the best answer available. |
+| Is `userfaultfd` available? | No, `EPERM`. `fork()` without `exec` copies eagerly. |
+| Can we `fork()` off a native thread? | Yes, and the child reports back over a socketpair. |
+| `process_vm_readv`? | Works across our own processes. |
+| Address space for guest layouts? | 256 GiB `PROT_NONE` reservations, `MAP_FIXED_NOREPLACE` honoured. |
+| Inherited seccomp state? | `Seccomp: 2` — the zygote's filter is already installed and ours stacks on it. |
+
+### The loader design this settles
+
+Sealed `memfd` execution working is the good outcome. The loader can:
+
+1. read a guest ELF's segments out of the rootfs as ordinary file data,
+2. write them into a `memfd`,
+3. seal it with `F_SEAL_WRITE`,
+4. map it `PROT_READ | PROT_EXEC` and share that same `memfd` across every guest
+   process that needs the object.
+
+That gets a shared page cache — one copy of libc for all guest processes rather than
+one per process — while never asking the kernel to execute a guest *file*, and while
+the mapping is provably not self-modifying code, because the backing memory is sealed
+read-only before it is ever made executable. It is simultaneously the cheapest option
+and the strongest version of the compliance argument.
+
+### One result to be careful about
+
+`mmap(PROT_EXEC)` and `dlopen()` on files in the app data directory were **permitted**;
+only `execve` was denied. That is consistent with AOSP policy granting `execute` on
+`app_data_file` while withholding `execute_no_trans`, and it means a loader *could*
+map guest binaries file-backed and skip the copy entirely.
+
+The project will not do that. Mapping downloaded guest binaries directly as executable
+is precisely the pattern Play's policy is aimed at, and doing it would trade the
+virtual-machine argument for a marginal memory saving that the `memfd` path already
+provides. The behaviour is recorded because it may differ across devices, not because
+it is a route worth taking.
+
+### Still unknown
+
+- **16 KiB page devices.** The emulator runs a 4 KiB kernel. Android 15+ hardware
+  ships 16 KiB pages, and Debian arm64 ELF segments are aligned for 64 KiB, so guest
+  segment placement needs checking there.
+- **Vendor SELinux policy.** Shipping devices add to AOSP's policy. The `memfd`
+  execution result in particular should not be assumed to hold everywhere; the loader
+  needs a runtime check and a plain-anonymous-memory fallback.
+- **Real-hardware trap cost.** 780 ns was measured under a hypervisor on Apple Silicon.
