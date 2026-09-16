@@ -23,6 +23,7 @@ loaded               bias=0x7701000000 entry=0x7701004284
   backing            sealed memfd
   guest stdout: bench done
 exited               status 0 after 200002 syscalls
-cost                 8165 ns per syscall, through the full sentry path
+cost                 3313 ns per syscall total
+  of which             64 ns in the sentry, 3249 ns in signal delivery
 
 PHASE 1 PASS

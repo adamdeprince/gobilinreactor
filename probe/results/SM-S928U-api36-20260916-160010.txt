@@ -1,14 +1,14 @@
-device:  sdk_gphone64_arm64
+device:  SM-S928U
 android: 16 (API 36)
 abi:     arm64-v8a
-kernel:  Linux localhost 6.6.66-android15-8-gd0c43a640eab-ab13812146-4k #1 SMP PREEMPT Mon Jul 21 17:41:13 UTC 2025 aarch64 Toybox
+kernel:  Linux localhost 6.1.145-android14-11-33419968-abS928USQS6DZH3 #1 SMP PREEMPT Tue Aug 11 10:58:41 UTC 2026 aarch64 Toybox
 
 [INFO] goblin-linux probe                 phase 0 device capability report
 
 == Environment 
-[INFO] kernel                             Linux 6.6.66-android15-8-gd0c43a640eab-ab13812146-4k aarch64
-[INFO] selinux context                    u:r:untrusted_app:s0:c215,c256,c512,c768
-[INFO] uid / pid                          10215 / 10417
+[INFO] kernel                             Linux 6.1.145-android14-11-33419968-abS928USQS6DZH3 aarch64
+[INFO] selinux context                    u:r:untrusted_app:s0:c0,c258,c512,c768
+[INFO] uid / pid                          10512 / 20014
 [INFO] page size                          4096 bytes
 [INFO] seccomp (inherited)                Seccomp: 2
 [INFO] vm.max_map_count                   <unreadable>
@@ -42,7 +42,7 @@ kernel:  Linux localhost 6.6.66-android15-8-gd0c43a640eab-ab13812146-4k #1 SMP P
 [ OK ] args readable from ucontext        x0/x1 match
 [ OK ] return value injectable            writing x0 works
 [ OK ] SVC from JIT page trapped          yes -- guest path proven
-[ OK ] trap round-trip                    7830 ns/syscall  (~7.83 us)
+[ OK ] trap round-trip                    1464 ns/syscall  (~1.46 us)
 [ OK ] filter stayed thread-local         other threads unfiltered
 
 == Processes and address spaces 
@@ -50,7 +50,7 @@ kernel:  Linux localhost 6.6.66-android15-8-gd0c43a640eab-ab13812146-4k #1 SMP P
 [ OK ] process_vm_readv                   cross-process read works
 [ OK ] ptrace own child                   attach ok
 [WARN] userfaultfd                        Operation not permitted (1) -- fork must copy eagerly
-[ OK ] membarrier                         supported cmds mask 0x27f
+[ OK ] membarrier                         supported cmds mask 0x7f
 [ OK ] sparse VA reservation              largest PROT_NONE reservation: 256 GiB
 [ OK ] MAP_FIXED_NOREPLACE                honoured -- safe guest layout placement
 
@@ -59,28 +59,28 @@ kernel:  Linux localhost 6.6.66-android15-8-gd0c43a640eab-ab13812146-4k #1 SMP P
 Name:	blinlinux.probe
 Umask:	0077
 State:	S (sleeping)
-Tgid:	10417
+Tgid:	20014
 Ngid:	0
-Pid:	10417
-PPid:	461
+Pid:	20014
+PPid:	1643
 TracerPid:	0
-Uid:	10215	10215	10215	10215
-Gid:	10215	10215	10215	10215
-FDSize:	128
-Groups:	9997 20215 50215 
-Kthread:	0
-VmPeak:	284988148 kB
-VmSize:	16552692 kB
+Uid:	10512	10512	10512	10512
+Gid:	10512	10512	10512	10512
+FDSize:	256
+Groups:	9997 20512 50512 
+VmPeak:	287427604 kB
+VmSize:	18992148 kB
 VmLck:	       0 kB
 VmPin:	       0 kB
-VmHWM:	  121292 kB
-VmRSS:	  121292 kB
-RssAnon:	   41168 kB
-RssFile:	   78204 kB
-RssShmem:	    1920 kB
-VmData:	 2184416 kB
+VmHWM:	  119616 kB
+VmRSS:	  119616 kB
+RssAnon:	   39308 kB
+RssFile:	   74432 kB
+RssShmem:	    5876 kB
+VmData:	 2273656 kB
 VmStk:	    8192 kB
-VmExe:	       4 kB
-VmLib:	  148204 kB
-VmPTE:	    1088 kB
-VmSwap:	   22132 k
+VmExe:	       8 kB
+VmLib:	  192160 kB
+VmPTE:	    1264 kB
+VmSwap:	   20532 kB
+CoreDump

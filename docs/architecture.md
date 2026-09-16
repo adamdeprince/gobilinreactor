@@ -149,16 +149,15 @@ party. `apt` then adds to it inside the sandbox.
 
 ## What the probe has established
 
-Emulator only so far — `sdk_gphone64_arm64`, Android 16 / API 36, kernel 6.6.66,
-4 KiB pages. An emulator answers a different question than a shipping device, so
-every line below needs confirming on real hardware. But nothing here is a blocker,
-and several answers are better than assumed.
+Confirmed on real hardware: **Galaxy S24 Ultra (SM-S928U)**, Android 16 / API 36,
+kernel 6.1.145, 4 KiB pages, under Samsung's own SELinux policy — not just AOSP's
+emulator image. Every result below matches what the emulator reported.
 
 | Question | Answer |
 |---|---|
 | Can guest code be placed in executable memory? | Yes, both `PROT_EXEC` anonymous mapping and RW→RX `mprotect`. |
 | Are guest syscalls interceptable? | Yes. `SIGSYS` fires, `si_syscall` and the argument registers read correctly, writing `x0` injects a return value, and an `svc` issued from a JIT page traps. |
-| What does a trap round-trip cost? | **780 ns.** Sub-microsecond, so syscall-heavy workloads are viable. |
+| What does a trap round-trip cost? | **1.5 us** bare, **3.3 us** for a full guest syscall. Of that, 64 ns is the sentry's own dispatch; the rest is signal delivery. |
 | Does the filter stay thread-local? | Yes. The sentry can share a process with its stubs. |
 | Is `memfd` execution permitted? | **Yes — including sealed.** See below; this is the best answer available. |
 | Is `userfaultfd` available? | No, `EPERM`. `fork()` without `exec` copies eagerly. |
@@ -198,10 +197,17 @@ it is a route worth taking.
 
 ### Still unknown
 
-- **16 KiB page devices.** The emulator runs a 4 KiB kernel. Android 15+ hardware
+- **16 KiB page devices.** Both machines tested run 4 KiB kernels. Android 15+ hardware
   ships 16 KiB pages, and Debian arm64 ELF segments are aligned for 64 KiB, so guest
-  segment placement needs checking there.
-- **Vendor SELinux policy.** Shipping devices add to AOSP's policy. The `memfd`
-  execution result in particular should not be assumed to hold everywhere; the loader
-  needs a runtime check and a plain-anonymous-memory fallback.
-- **Real-hardware trap cost.** 780 ns was measured under a hypervisor on Apple Silicon.
+  segment placement needs checking there. The loader copies into its own backing store
+  rather than mapping the guest file, so file-offset alignment is already a non-issue.
+- **Other vendors.** One Samsung device is not every device. The `memfd` execution
+  result still needs a runtime check and the anonymous fallback it already has.
+
+### Where the performance lever is
+
+The sentry's dispatch is 64 ns; signal delivery is ~3.2 us. Nothing in the syscall
+handler is worth optimising. If guest syscalls ever need to be faster, the change is
+architectural and well-trodden: stop returning through the signal path, and have the
+stub hand syscalls to a dedicated sentry thread over shared memory, which is what
+gVisor's systrap does.

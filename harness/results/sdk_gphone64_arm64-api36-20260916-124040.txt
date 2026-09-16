@@ -1,5 +1,0 @@
-== goblin-linux phase 1: loader + sentry ==
-page size            4096
-memfd exec           supported (sealed, shared)
-guest window         0x40000000 - 0x80000000
-FAILED: reserving guest window: File exists
