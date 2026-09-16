@@ -36,12 +36,25 @@ Termux ever had. See [docs/compliance.md](docs/compliance.md).
 | `keys/` | Termux-style extra-keys row and IME handling. |
 | `wayland/` | Framebuffer-backed Wayland output, toggled from inside the guest by a CLI tool. |
 | `probe/` | **Phase 0.** Device capability probe. Gates every design decision below it. |
+| `guest/` | Freestanding test guests: raw `svc` syscalls, no libc. |
+| `harness/` | **Phase 1.** Loads a guest and runs it under the sentry on-device. |
 
 ## Status
 
-Phase 0. Nothing above `probe/` is written yet, because whether the design is possible
-at all is an empirical question about a specific device's kernel and SELinux policy.
-Run the probe first: [probe/README.md](probe/README.md).
+Phase 1. A guest ELF loads into sealed memfd-backed executable memory, runs natively,
+and has every syscall trapped and serviced in userspace:
+
+```
+loaded               bias=0x7701000000 entry=0x770100428c
+  backing            sealed memfd
+  syscall trace:
+    write           (0x1, 0x7701000238, 0xd) = 13
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 2 syscalls
+```
+
+Start with the probe, which establishes that any of this is possible on a given
+device: [probe/README.md](probe/README.md). Then `harness/build.sh && harness/run.sh`.
 
 ## Decisions on record
 

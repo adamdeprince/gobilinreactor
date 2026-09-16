@@ -1,0 +1,20 @@
+== goblin-linux phase 1: loader + sentry ==
+page size            4096
+memfd exec           supported (sealed, shared)
+guest window         0x7700000000 - 0x7740000000 (4 GiB aligned)
+guest image          hello, 2544 bytes
+loaded               bias=0x7701000000 entry=0x770100428c
+  mapped span        0x7701000000 - 0x7701009000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+  guest stdout: hello, world
+
+-- syscall trace --
+  write           (0x1, 0x7701000238, 0xd) = 13
+  exit_group      (0, 0, 0) = 0
+
+RESULT: guest exited with status 0 after 2 syscalls
+        10834 ns per trapped syscall
+guest stdout: hello, world
+
+PHASE 1 PASS
