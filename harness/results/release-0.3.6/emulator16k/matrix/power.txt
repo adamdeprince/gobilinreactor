@@ -1,0 +1,5 @@
+PASS: keep-awake preference acquires/releases the actual Android partial wake lock without restarting Linux
+PASS: background Linux process advances while the terminal is defocused and the screen is off
+PASS: Linux shutdown releases the OS wake lock
+PASS: restarting Linux reacquires the lock
+GOBLIN POWER PASS

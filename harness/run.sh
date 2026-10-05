@@ -4,7 +4,7 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 APK="${GOBLIN_APK:-$HERE/build/goblin-sentry.apk}"
-PKG="dev.goblinlinux.sentry"
+PKG="dev.goblinreactor.sentry"
 SERIAL="${1:-}"
 MODE="${2:-regression}"
 case "$MODE" in regression|persistent|developer|recovery|emacs) ;; *) echo "usage: harness/run.sh [serial] [regression|persistent|developer|recovery|emacs]" >&2; exit 2 ;; esac

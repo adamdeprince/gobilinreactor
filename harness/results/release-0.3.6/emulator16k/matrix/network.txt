@@ -1,0 +1,6 @@
+PASS: Android localhost reaches systemd-managed TCP and UDP servers over IPv4 and IPv6
+PASS: Live changes preserve open TCP connections; conflicting ports retain the previous rules
+PASS: 260 IPv4/IPv6 listener rules work beyond the removed 255-rule limit
+PASS: Guest UDP and TCP DNS queries resolve through Android's resolver
+PASS: Debian user sessions start a user service manager; server services survive terminal closure
+GOBLIN SERVICES PASS

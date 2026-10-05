@@ -30,7 +30,7 @@ void Error(JNIEnv* env, const char* message) {
 }
 }
 
-extern "C" JNIEXPORT jint JNICALL Java_dev_goblinlinux_sentry_KernelService_spawn(
+extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_KernelService_spawn(
         JNIEnv* env, jclass, jstring executable, jobjectArray arguments,
         jintArray descriptors, jintArray destinations, jint status_fd) {
     std::unique_lock<std::mutex> guard(mutex);
@@ -97,7 +97,7 @@ extern "C" JNIEXPORT jint JNICALL Java_dev_goblinlinux_sentry_KernelService_spaw
     return child;
 }
 
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_KernelService_stop(JNIEnv*, jclass) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_KernelService_stop(JNIEnv*, jclass) {
     std::unique_lock<std::mutex> guard(mutex);
     if (machine <= 0) return;
     kill(-machine, SIGKILL);

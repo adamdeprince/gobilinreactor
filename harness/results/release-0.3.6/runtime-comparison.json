@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "new_application_id": "dev.goblinreactor.sentry",
+  "kernel_unchanged": true,
+  "changed": [
+    "assets/release-info.json",
+    "lib/arm64-v8a/libgoblinkitty.so",
+    "lib/arm64-v8a/libgoblinlauncher.so",
+    "lib/arm64-v8a/libgoblinuml-netservice.so",
+    "lib/arm64-v8a/libgoblinuml.so"
+  ],
+  "added": [],
+  "removed": []
+}

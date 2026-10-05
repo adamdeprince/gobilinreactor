@@ -1,4 +1,4 @@
-package dev.goblinlinux.sentry;
+package dev.goblinreactor.sentry;
 
 import android.app.*;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.content.res.AssetManager;
 import android.os.*;
 
 public final class SessionService extends Service {
-    static final String POWER_ACTION = "dev.goblinlinux.sentry.POWER_POLICY";
+    static final String POWER_ACTION = "dev.goblinreactor.sentry.POWER_POLICY";
     static final String POWER_PREFERENCES = "linux-power";
     static final String KEEP_AWAKE = "keep-awake";
     static { System.loadLibrary("goblinuml"); }

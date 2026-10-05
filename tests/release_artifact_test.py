@@ -16,6 +16,8 @@ bt = sdk / 'build-tools' / os.environ.get('BT_VER', '36.1.0')
 env = dict(os.environ); env.setdefault('JAVA_HOME', '/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home')
 def run(*command): return subprocess.check_output([str(c) for c in command], env=env, text=True, stderr=subprocess.STDOUT)
 manifest = run(bt/'aapt2', 'dump', 'xmltree', args.apk, '--file', 'AndroidManifest.xml')
+assert 'package="dev.goblinreactor.sentry"' in manifest
+assert 'dev.goblinlinux' not in manifest
 assert 'HarnessActivity' not in manifest and 'Acceptance' not in manifest and 'E: instrumentation' not in manifest
 assert 'debuggable' in manifest and '0xffffffff' not in next(line for line in manifest.splitlines() if 'debuggable' in line)
 assert '=true' not in next(line for line in manifest.splitlines() if 'debuggable' in line)
@@ -24,10 +26,14 @@ assert len(labels) == 2 and all('="GoblinReactor"' in line for line in labels), 
 version = json.loads((ROOT/'harness/version.json').read_text())
 assert version['name'] in manifest
 signature = run(bt/'apksigner', 'verify', '--verbose', '--print-certs', args.apk)
-assert 'v3 scheme (APK Signature Scheme v3): true' in signature and 'CN=Goblin Linux' in signature
+assert 'v3 scheme (APK Signature Scheme v3): true' in signature and 'CN=GoblinReactor' in signature
 run(bt/'zipalign', '-c', '-P', '16', '4', args.apk)
 with zipfile.ZipFile(args.apk) as apk:
     names = apk.namelist(); dex = apk.read('classes.dex')
+    assert b'dev/goblinlinux' not in dex
+    for name in names:
+        if name.startswith('lib/') and name.endswith('.so'):
+            assert b'Java_dev_goblinlinux_' not in apk.read(name), name
     assert b'HarnessActivity;' not in dex and not any(name + b';' in dex for name in
         (b'ServicesAcceptance', b'TerminalAcceptance', b'PowerAcceptance', b'ProductAcceptance'))
     assert b'Disable child process restrictions' not in dex

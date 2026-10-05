@@ -1,4 +1,4 @@
-package dev.goblinlinux.sentry;
+package dev.goblinreactor.sentry;
 
 import android.net.DnsResolver;
 import java.util.concurrent.Executor;

@@ -193,8 +193,8 @@ For a running debug APK:
 python3 tests/uml_control.py DEVICE exec 'uname -a; free -h; df -h /'
 python3 tests/uml_control.py DEVICE exec '/bin/sh /run/goblin-host/acceptance.sh 4'
 python3 tests/uml_parallel_test.py DEVICE
-adb -s DEVICE shell am instrument -w dev.goblinlinux.sentry/.TerminalAcceptance
-adb -s DEVICE shell am instrument -w dev.goblinlinux.sentry/.PowerAcceptance
+adb -s DEVICE shell am instrument -w dev.goblinreactor.sentry/.TerminalAcceptance
+adb -s DEVICE shell am instrument -w dev.goblinreactor.sentry/.PowerAcceptance
 ```
 
 The parallel test compares host and guest CPU counts, performs syscall-free

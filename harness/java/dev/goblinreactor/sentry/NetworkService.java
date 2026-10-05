@@ -1,4 +1,4 @@
-package dev.goblinlinux.sentry;
+package dev.goblinreactor.sentry;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Process;

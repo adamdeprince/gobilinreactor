@@ -24,7 +24,7 @@ p.add_argument('--ui', action='store_true', help='Also run terminal rendering; l
 args = p.parse_args()
 args.output.mkdir(parents=True, exist_ok=True)
 adb = [os.environ.get('ADB', 'adb'), '-s', args.serial]
-component = 'dev.goblinlinux.sentry.tests/dev.goblinlinux.sentry.'
+component = 'dev.goblinreactor.sentry.tests/dev.goblinreactor.sentry.'
 
 def run(command, name, timeout=1200):
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=timeout)

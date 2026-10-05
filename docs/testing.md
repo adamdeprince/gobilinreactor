@@ -36,7 +36,7 @@ bash tests/harness_runner_test.sh
 bash harness/run.sh DEVICE regression
 bash harness/run.sh DEVICE emacs
 bash harness/run.sh DEVICE recovery
-adb -s DEVICE shell am instrument -w dev.goblinlinux.sentry/.TerminalAcceptance
+adb -s DEVICE shell am instrument -w dev.goblinreactor.sentry/.TerminalAcceptance
 python3 tests/terminal_lifecycle_test.py DEVICE
 python3 tests/emacs_install_test.py DEVICE --output /tmp/goblin-emacs-check
 python3 tests/terminal_keyboard_test.py EMULATOR
@@ -109,7 +109,7 @@ serialization; it also reports serial/parallel throughput. It checks TLS on
 every CPU, cross-core mmap/mprotect/munmap, 80 migrating threads, targeted signals,
 and fork/exec while a sibling runs. Its deadlines belong only to the test runner.
 
-`adb -s DEVICE shell am instrument -w dev.goblinlinux.sentry/.PowerAcceptance`
+`adb -s DEVICE shell am instrument -w dev.goblinreactor.sentry/.PowerAcceptance`
 checks actual Android wake-lock acquisition, opt-out, re-enable, screen-off
 background progress, release on shutdown and reacquisition on restart. It
 restores the original keep-awake preference. Like terminal instrumentation, it
@@ -157,7 +157,7 @@ reconnecting to leave a margin around the five-minute measurement. Start this
 instrumentation without `-w` so the launching USB shell exits independently:
 
 ```sh
-adb -s DEVICE shell am instrument -e mode unplugged -e seconds 300 dev.goblinlinux.sentry.tests/dev.goblinlinux.sentry.ServicesAcceptance
+adb -s DEVICE shell am instrument -e mode unplugged -e seconds 300 dev.goblinreactor.sentry.tests/dev.goblinreactor.sentry.ServicesAcceptance
 adb -s DEVICE shell logcat -d -s goblin-battery:I
 ```
 

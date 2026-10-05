@@ -1,8 +1,9 @@
 # Goblin: Linux guest execution and Google Play policy review
 
-Prepared September 20, 2026 for Google Play policy support.
-Android package: `dev.goblinlinux.sentry`.
-Implementation reference: signed release APK 0.2.1, version code 20001.
+Updated October 5, 2026 for Google Play policy support.
+Android package: `dev.goblinreactor.sentry`.
+Current proposed public identity: preview 0.3.6, version code 30006.
+Earlier implementation evidence below was collected under the private test identity.
 
 **Purpose and requested clarification**
 
@@ -81,8 +82,8 @@ or select a replacement host UML kernel from the guest filesystem.
 
 For the proposed Google Play distribution, the Android app, UML runtime, and
 bundled boot assets would be delivered and updated through Google Play.
-The current test artifact is a signed APK; an App Bundle and Play distribution
-have not yet been validated. Guest package installation and upgrade remain
+Release APK and App Bundle packaging have been validated locally. Google Play
+distribution has not yet been validated. Guest package installation and upgrade remain
 part of the proposed product's functionality.
 
 **Lifecycle and Android controls**
@@ -113,8 +114,8 @@ remain separate review topics from the downloaded-code exception.
 
 **Evidence and reviewer reproduction**
 
-The reference APK is non-debuggable and excludes development test components.
-Its SHA-256 is
+The historical 0.2.1 reference APK was non-debuggable and excluded development
+test components. Its SHA-256 is
 `a2c0b5ca86361de8827cbc0f7deda84c5e2c74a13a13109c6b1a64dd37c02c14`.
 Recorded tests cover Android 16 on a Samsung SM-S928U and 4 KiB/16 KiB emulators,
 including guest operation, multiple terminals, networking, APK upgrade
@@ -135,13 +136,14 @@ dpkg-query -W hello
 
 This downloads and executes a Linux package inside the guest. The default
 account has passwordless sudo. Goblin's notification shutdown action stops the
-Linux instance. A demonstration recording and an App Bundle are still to be
-prepared; neither is represented as attached to this brief.
+Linux instance. A demonstration recording is still to be prepared. The current release
+handoff includes a locally validated App Bundle; neither artifact is
+represented as attached to this brief.
 
 Implementation and test references in this repository:
 
 - [Architecture](architecture.md) and [UML integration](../uml/README.md).
-- [Android service declarations](../harness/AndroidManifest.xml), [Binder descriptor transfer](../harness/java/dev/goblinlinux/sentry/ManagedLinux.java), and [runtime startup and disk handling](../uml/runtime.cpp).
+- [Android service declarations](../harness/AndroidManifest.xml), [Binder descriptor transfer](../harness/java/dev/goblinreactor/sentry/ManagedLinux.java), and [runtime startup and disk handling](../uml/runtime.cpp).
 - [Release manifest generation](../harness/manifest.py) and [signed APK inventory](../harness/results/app-zygote/final-release-artifact.json).
 - [App-zygote research and isolation observations](app-zygote-research.md) and [integration evidence](../harness/results/app-zygote/README.md).
 - [Guest repository configuration](../fixtures/deployment.py).

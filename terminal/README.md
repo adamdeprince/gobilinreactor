@@ -71,7 +71,7 @@ graphics-path rejection, and saves a screenshot and report. Run it after the
 developer suite has installed less and vim-tiny:
 
 ```sh
-adb -s SERIAL shell am instrument -w -r dev.goblinlinux.sentry/.TerminalAcceptance
+adb -s SERIAL shell am instrument -w -r dev.goblinreactor.sentry/.TerminalAcceptance
 python3 tests/terminal_lifecycle_test.py SERIAL
 ```
 

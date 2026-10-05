@@ -12,11 +12,11 @@ case "$*" in
   get-state) echo device ;;
   'logcat -d -s goblin-sentry:I')
     if [ "$GOBLIN_TEST_CASE" != timeout ] && [ "$GOBLIN_TEST_CASE" != report_only ]; then echo 'GOBLIN COMPLETE'; fi ;;
-  'shell run-as dev.goblinlinux.sentry test -s files/phase1-report.txt')
+  'shell run-as dev.goblinreactor.sentry test -s files/phase1-report.txt')
     [ "$GOBLIN_TEST_CASE" = report_only ] || exit 1 ;;
   'shell getprop ro.product.model') echo mocked-device ;;
   'shell getprop ro.build.version.sdk') echo 36 ;;
-  'shell run-as dev.goblinlinux.sentry cat files/phase1-report.txt')
+  'shell run-as dev.goblinreactor.sentry cat files/phase1-report.txt')
     case "$GOBLIN_TEST_CASE" in
       pass|report_only) printf 'GOBLIN PASS\r\n' ;;
       fail) echo 'GOBLIN FAIL' ;;

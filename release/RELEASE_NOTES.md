@@ -1,18 +1,15 @@
-# GoblinReactor 0.3.5
+# GoblinReactor 0.3.6 preview
 
-October 5, 2026 · version code 30005 · ARM64 Android
+October 5, 2026 · version code 30006 · ARM64 Android
 
-- The guest kernel now uses stable Linux 7.2.9, replacing 7.2-rc4.
-- The ARM64 UML port is preserved as a separate, pinned patch over the verified
-  official stable source. Android integration, native execution, parallel guest
-  threads, 16 KiB guest pages and persistent storage remain enabled.
-- The build rejects a kernel binary whose release string differs from the
-  stable source pin. Source archives include the stable kernel and full port
-  provenance, patches and build configuration.
-- Goblin artwork, application ID, signing identity and licensing UI are retained.
-  Install over the previous release to preserve files and packages. Updating
-  restarts the guest; save work before applying an update.
+- Public application ID: `dev.goblinreactor.sentry`.
+- Java and native integration namespaces now use GoblinReactor throughout.
+- Public previews are signed with a new GoblinReactor certificate. Private test
+  keys and previous local test installations are retained separately.
+- Stable 7.2.9-goblin kernel, Debian packages, native kitty terminal, multiple
+  terminals, background services, backup and rescue remain available.
+- The supplied Goblin artwork is the app icon.
 
-The port remains an external ARM64 UML implementation. Using a stable upstream
-base does not imply upstream support for the port or Google Play approval.
-Validation scope and remaining device coverage are recorded in VALIDATION.md.
+This is an early sideload preview for Android 12+ on ARM64 devices, not a
+Google Play release. Android 10–11 remain experimental. See VALIDATION.md for
+what was tested. Back up work before relying on preview software.

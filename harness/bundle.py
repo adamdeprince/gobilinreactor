@@ -49,7 +49,7 @@ def main():
     bt = sdk / 'build-tools' / os.environ.get('BT_VER', '36.1.0')
     jdk = Path(os.environ.get('JAVA_HOME', '/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home'))
     java, jarsigner = jdk / 'bin/java', jdk / 'bin/jarsigner'
-    signing = Path(os.environ.get('GOBLIN_SIGNING_DIR', ROOT / 'harness/signing'))
+    signing = Path(os.environ.get('GOBLIN_SIGNING_DIR', ROOT / 'harness/signing/reactor'))
     key, password = signing / 'release.keystore', signing / 'password'
     if not key.exists() or not password.exists():
         raise SystemExit('Build the signed release APK first; an existing release key is required')
@@ -57,7 +57,7 @@ def main():
     def run(*command):
         return subprocess.check_output([str(c) for c in command], env=env, text=True, stderr=subprocess.STDOUT)
     signature = run(bt / 'apksigner', 'verify', '--verbose', '--print-certs', args.apk)
-    if 'CN=Goblin Linux' not in signature:
+    if 'CN=GoblinReactor' not in signature:
         raise SystemExit('The source must be a release-signed Goblin APK')
     out = args.output; out.mkdir(parents=True, exist_ok=True)
     proto = out / 'proto.apk'

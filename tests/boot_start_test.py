@@ -16,7 +16,7 @@ import time
 import uuid
 import xml.etree.ElementTree as ET
 
-PACKAGE = 'dev.goblinlinux.sentry'
+PACKAGE = 'dev.goblinreactor.sentry'
 DATA = '/data/user/0/' + PACKAGE
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('serial')

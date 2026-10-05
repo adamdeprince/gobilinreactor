@@ -13,7 +13,7 @@ import re
 import subprocess
 import time
 
-PACKAGE = 'dev.goblinlinux.sentry'
+PACKAGE = 'dev.goblinreactor.sentry'
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('serial')
 p.add_argument('--mode', choices=['soak', 'network', 'recovery', 'transport'], default='soak')
@@ -90,7 +90,7 @@ metadata['tracked_phantoms'] = sorted({line for sample in samples for line in sa
 remaining = {row.split()[0] for row in shell('ps', '-A', '-o', 'PID').splitlines()[1:]}
 metadata['workers_remaining_after_stop'] = sorted(worker_pids & remaining)
 logs = shell('logcat', '-d', '-s', 'ActivityManager:I')
-(args.output / 'activity-log.txt').write_text('\n'.join(line for line in logs.splitlines() if re.search(r'goblinlinux|uml-userspace', line)) + '\n')
+(args.output / 'activity-log.txt').write_text('\n'.join(line for line in logs.splitlines() if re.search(r'goblinreactor|uml-userspace', line)) + '\n')
 (args.output / 'metadata.json').write_text(json.dumps(metadata, indent=2) + '\n')
 print('\n'.join(output.splitlines()[-25:]))
 print(json.dumps(metadata, indent=2))

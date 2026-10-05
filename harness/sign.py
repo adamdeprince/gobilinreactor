@@ -23,10 +23,10 @@ def main():
         if not old.exists():
             run('keytool', '-genkeypair', '-keystore', old, '-storepass', 'android', '-keypass', 'android',
                 '-alias', 'goblindebug', '-keyalg', 'RSA', '-keysize', '2048', '-validity', '10000',
-                '-dname', 'CN=goblin-linux debug, OU=probe, O=goblin-linux, C=US')
+                '-dname', 'CN=GoblinReactor debug, OU=probe, O=GoblinReactor, C=US')
         options = ['--ks', old, '--ks-pass', 'pass:android', '--ks-key-alias', 'goblindebug']
     else:
-        directory = Path(os.environ.get('GOBLIN_SIGNING_DIR', ROOT / 'harness/signing'))
+        directory = Path(os.environ.get('GOBLIN_SIGNING_DIR', ROOT / 'harness/signing/reactor'))
         directory.mkdir(mode=0o700, parents=True, exist_ok=True)
         key, password, lineage = (directory / name for name in ['release.keystore', 'password', 'lineage'])
         if not key.exists():
@@ -36,14 +36,9 @@ def main():
             with os.fdopen(fd, 'w') as stream: stream.write(secrets.token_urlsafe(48) + '\n')
             run('keytool', '-genkeypair', '-keystore', key, '-storepass:file', password,
                 '-alias', 'goblinrelease', '-keyalg', 'RSA', '-keysize', '4096', '-validity', '10000',
-                '-dname', 'CN=Goblin Linux, O=Goblin Linux, C=US')
+                '-dname', 'CN=GoblinReactor, O=GoblinReactor, C=US')
             key.chmod(0o600)
         if not password.exists(): raise SystemExit('Missing release keystore password file')
-        if not lineage.exists() and old.exists():
-            run(signer, 'rotate', '--out', lineage, '--old-signer', '--ks', old,
-                '--ks-pass', 'pass:android', '--ks-key-alias', 'goblindebug',
-                '--set-installed-data', 'true', '--set-rollback', 'false',
-                '--new-signer', '--ks', key, '--ks-pass', 'file:' + str(password), '--ks-key-alias', 'goblinrelease')
         certificate = directory / 'release-certificate.pem'
         if not certificate.exists():
             run('keytool', '-exportcert', '-rfc', '-keystore', key, '-storepass:file', password,

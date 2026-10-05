@@ -17,7 +17,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PKG = 'dev.goblinlinux.sentry'
+PKG = 'dev.goblinreactor.sentry'
 
 
 def main():

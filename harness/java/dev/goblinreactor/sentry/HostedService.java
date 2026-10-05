@@ -1,4 +1,4 @@
-package dev.goblinlinux.sentry;
+package dev.goblinreactor.sentry;
 
 import android.app.Service;
 import android.content.Intent;

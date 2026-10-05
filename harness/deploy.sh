@@ -7,4 +7,4 @@ APK="${2:-$HERE/build-release/goblin-sentry.apk}"
 ADB=("${ADB:-adb}" -s "$SERIAL")
 [ "$#" -le 2 ] || { echo 'usage: deploy.sh SERIAL [APK]' >&2; exit 2; }
 "${ADB[@]}" install -r "$APK"
-"${ADB[@]}" shell am start -n dev.goblinlinux.sentry/.TerminalActivity
+"${ADB[@]}" shell am start -n dev.goblinreactor.sentry/.TerminalActivity

@@ -83,7 +83,7 @@ void Worker(const std::string& data, JavaVM* vm, jobject asset_reference) {
 }
 }
 
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_startNative(JNIEnv* env, jclass, jstring directory, jobject assets) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_startNative(JNIEnv* env, jclass, jstring directory, jobject assets) {
     if (running.exchange(true)) return;
     if (auto previous = Runtime()) for (const auto& s : previous->Sessions()) GoblinKittyClose(s->id);
     const char* path = env->GetStringUTFChars(directory, nullptr);
@@ -102,11 +102,11 @@ extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_sta
     jobject reference = env->NewGlobalRef(assets);
     std::thread(Worker, data, vm, reference).detach();
 }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_stopNative(JNIEnv*, jclass) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_stopNative(JNIEnv*, jclass) {
     if (auto r = Runtime()) r->stop = true;
     std::lock_guard<std::mutex> lock(state_mutex); if (session) session->stop = true;
 }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_testsNative(JNIEnv* env, jclass, jstring directory, jobject assets, jint mode) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_testsNative(JNIEnv* env, jclass, jstring directory, jobject assets, jint mode) {
     if (running.exchange(true)) return;
     const char* path = env->GetStringUTFChars(directory, nullptr);
     std::string data(path); env->ReleaseStringUTFChars(directory, path);
@@ -121,49 +121,49 @@ extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_tes
         State("Tests complete"); running = false;
     }).detach();
 }
-extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinlinux_sentry_SessionService_runningNative(JNIEnv*, jclass) { return running; }
-extern "C" JNIEXPORT jbyteArray JNICALL Java_dev_goblinlinux_sentry_SessionService_transcriptNative(JNIEnv* env, jclass) {
+extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinreactor_sentry_SessionService_runningNative(JNIEnv*, jclass) { return running; }
+extern "C" JNIEXPORT jbyteArray JNICALL Java_dev_goblinreactor_sentry_SessionService_transcriptNative(JNIEnv* env, jclass) {
     auto s = Current(); std::string bytes = s ? s->Transcript() : "";
     jbyteArray result = env->NewByteArray(bytes.size());
     if (result) env->SetByteArrayRegion(result, 0, bytes.size(), reinterpret_cast<const jbyte*>(bytes.data()));
     return result;
 }
-extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinlinux_sentry_SessionService_stateNative(JNIEnv* env, jclass) {
+extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinreactor_sentry_SessionService_stateNative(JNIEnv* env, jclass) {
     std::lock_guard<std::mutex> lock(state_mutex); return env->NewStringUTF(state.c_str());
 }
-extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinlinux_sentry_SessionService_inputNative(JNIEnv* env, jclass, jbyteArray value) {
+extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinreactor_sentry_SessionService_inputNative(JNIEnv* env, jclass, jbyteArray value) {
     auto s = Current(); if (!s || !running || s->stop) return false;
     if (auto terminal = Terminal(selected); terminal && terminal->state >= goblin::TerminalSession::kExited) return false;
     std::string bytes(env->GetArrayLength(value), '\0');
     env->GetByteArrayRegion(value, 0, bytes.size(), reinterpret_cast<jbyte*>(bytes.data()));
     return s->Input(bytes);
 }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_resizeNative(JNIEnv*, jclass, jint rows, jint columns) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_resizeNative(JNIEnv*, jclass, jint rows, jint columns) {
     if (auto s = Current()) s->Resize(rows > 0 ? rows : 1, columns > 0 ? columns : 1);
 }
 
-extern "C" JNIEXPORT jint JNICALL Java_dev_goblinlinux_sentry_SessionService_selectedNative(JNIEnv*, jclass) { return selected; }
-extern "C" JNIEXPORT jint JNICALL Java_dev_goblinlinux_sentry_SessionService_terminalStateNative(JNIEnv*, jclass, jint id) {
+extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_SessionService_selectedNative(JNIEnv*, jclass) { return selected; }
+extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_SessionService_terminalStateNative(JNIEnv*, jclass, jint id) {
     auto s = Terminal(id); return s ? s->state.load() : goblin::TerminalSession::kExited;
 }
-extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinlinux_sentry_SessionService_terminalsNative(JNIEnv* env, jclass) {
+extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinreactor_sentry_SessionService_terminalsNative(JNIEnv* env, jclass) {
     std::ostringstream list;
     if (auto r = Runtime()) for (const auto& s : r->Sessions()) if (s->state < goblin::TerminalSession::kExited)
         list << s->id << '\t' << s->user << '\t' << s->pid << '\n';
     return env->NewStringUTF(list.str().c_str());
 }
-extern "C" JNIEXPORT jint JNICALL Java_dev_goblinlinux_sentry_SessionService_openTerminalNative(JNIEnv* env, jclass, jstring name, jboolean create) {
+extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_SessionService_openTerminalNative(JNIEnv* env, jclass, jstring name, jboolean create) {
     auto r = Runtime(); if (!r || !running || r->stop) return 0;
     const char* text = env->GetStringUTFChars(name,nullptr); std::string user(text); env->ReleaseStringUTFChars(name,text);
     auto s = r->Open(user,create); if (!s) return 0;
     selected = s->id; GoblinKittySelect(s->id); return s->id;
 }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_selectNative(JNIEnv*, jclass, jint id) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_selectNative(JNIEnv*, jclass, jint id) {
     auto s = Terminal(id); if (s && s->state < goblin::TerminalSession::kExited) { selected = id; GoblinKittySelect(id); }
 }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_closeTerminalNative(JNIEnv*, jclass, jint id) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_closeTerminalNative(JNIEnv*, jclass, jint id) {
     if (auto s = Terminal(id)) s->control->stop = true;
 }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_releaseTerminalNative(JNIEnv*, jclass, jint id) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_releaseTerminalNative(JNIEnv*, jclass, jint id) {
     auto s = Terminal(id); if (!s || s->state >= goblin::TerminalSession::kExited) { GoblinKittyClose(id); if (selected == id) selected = 0; }
 }

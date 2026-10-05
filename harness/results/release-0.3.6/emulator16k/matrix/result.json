@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "serial": "emulator-5554",
+  "finished": "2026-10-05T20:58:34Z",
+  "apk_sha256": "78dba147fcabd323b5801392ab61f7713f890d1f8e365bd90a236fe893b7dabf",
+  "soak_seconds": 30,
+  "ui": true,
+  "physical_unplugged_test": "separate ServicesAcceptance unplugged mode; not simulated here"
+}

@@ -516,10 +516,10 @@ void Start(JNIEnv* env, jstring directory, jstring library, jobject assets, int 
     if (current && current->test_mode < 0) for (const auto& session : current->terminals) GoblinKittyClose(session.first);
     auto r = std::make_shared<Runtime>(); r->data = JavaString(env, directory); r->library = JavaString(env, library); r->test_mode = test_mode; current = r;
     r->generation = ++generation;
-    jclass bridge = env->FindClass("dev/goblinlinux/sentry/NetworkBridge");
+    jclass bridge = env->FindClass("dev/goblinreactor/sentry/NetworkBridge");
     r->dns_class = reinterpret_cast<jclass>(env->NewGlobalRef(bridge));
     r->dns_resolve = env->GetStaticMethodID(bridge, "resolve", "(JI[B)V"); env->DeleteLocalRef(bridge);
-    bridge = env->FindClass("dev/goblinlinux/sentry/ManagedLinux");
+    bridge = env->FindClass("dev/goblinreactor/sentry/ManagedLinux");
     r->managed_class = reinterpret_cast<jclass>(env->NewGlobalRef(bridge));
     r->managed_start = env->GetStaticMethodID(bridge, "start", "(Z[Ljava/lang/String;[I[II)I");
     r->managed_stop = env->GetStaticMethodID(bridge, "stop", "(Z)V"); env->DeleteLocalRef(bridge);
@@ -528,34 +528,34 @@ void Start(JNIEnv* env, jstring directory, jstring library, jobject assets, int 
     std::thread(Worker, r, vm, reference).detach();
 }
 
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_NetworkBridge_answerNative(JNIEnv* env, jclass, jlong generation_id, jint id, jbyteArray response) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_NetworkBridge_answerNative(JNIEnv* env, jclass, jlong generation_id, jint id, jbyteArray response) {
     auto r = Current(); if (!r || r->generation != uint64_t(generation_id) || !r->running) return;
     std::string bytes(env->GetArrayLength(response), '\0');
     env->GetByteArrayRegion(response, 0, bytes.size(), reinterpret_cast<jbyte*>(bytes.data()));
     std::lock_guard<std::mutex> guard(r->mutex); r->dns_answers.emplace_back(uint32_t(id), std::move(bytes)); r->notify();
 }
-extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinlinux_sentry_SessionService_rescueNative(JNIEnv*, jclass) {
+extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinreactor_sentry_SessionService_rescueNative(JNIEnv*, jclass) {
     auto r = Current(); if (!r) return false; std::lock_guard<std::mutex> guard(r->mutex); return r->rescue;
 }
-extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinlinux_sentry_NetworkSettings_applyNative(JNIEnv* env, jclass, jstring value) {
+extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinreactor_sentry_NetworkSettings_applyNative(JNIEnv* env, jclass, jstring value) {
     auto r = Current(); auto error = r && r->running ? ApplyPorts(r, JavaString(env, value)) : "Start Linux before changing port forwarding";
     return env->NewStringUTF(error.c_str());
 }
 }
 
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_startNative(JNIEnv* e, jclass, jstring d, jstring l, jobject a) { Start(e, d, l, a, -1); }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_testsNative(JNIEnv* e, jclass, jstring d, jstring l, jobject a, jint mode) { Start(e, d, l, a, mode); }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_stopNative(JNIEnv*, jclass) { if (auto r = Current()) { r->stop = true; r->notify(); } }
-extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinlinux_sentry_SessionService_runningNative(JNIEnv*, jclass) { auto r = Current(); return r && r->running; }
-extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinlinux_sentry_SessionService_stateNative(JNIEnv* env, jclass) { auto r = Current(); if (!r) return env->NewStringUTF("Stopped"); std::lock_guard<std::mutex> lock(r->mutex); return env->NewStringUTF(r->state.c_str()); }
-extern "C" JNIEXPORT jint JNICALL Java_dev_goblinlinux_sentry_SessionService_selectedNative(JNIEnv*, jclass) { auto r = Current(); if (!r) return 0; std::lock_guard<std::mutex> lock(r->mutex); return r->selected; }
-extern "C" JNIEXPORT jint JNICALL Java_dev_goblinlinux_sentry_SessionService_terminalStateNative(JNIEnv*, jclass, jint id) { auto r = Current(); if (!r) return 2; std::lock_guard<std::mutex> lock(r->mutex); auto it = r->terminals.find(id); return it == r->terminals.end() ? 2 : it->second->state; }
-extern "C" JNIEXPORT jbyteArray JNICALL Java_dev_goblinlinux_sentry_SessionService_transcriptNative(JNIEnv* env, jclass) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_startNative(JNIEnv* e, jclass, jstring d, jstring l, jobject a) { Start(e, d, l, a, -1); }
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_testsNative(JNIEnv* e, jclass, jstring d, jstring l, jobject a, jint mode) { Start(e, d, l, a, mode); }
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_stopNative(JNIEnv*, jclass) { if (auto r = Current()) { r->stop = true; r->notify(); } }
+extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinreactor_sentry_SessionService_runningNative(JNIEnv*, jclass) { auto r = Current(); return r && r->running; }
+extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinreactor_sentry_SessionService_stateNative(JNIEnv* env, jclass) { auto r = Current(); if (!r) return env->NewStringUTF("Stopped"); std::lock_guard<std::mutex> lock(r->mutex); return env->NewStringUTF(r->state.c_str()); }
+extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_SessionService_selectedNative(JNIEnv*, jclass) { auto r = Current(); if (!r) return 0; std::lock_guard<std::mutex> lock(r->mutex); return r->selected; }
+extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_SessionService_terminalStateNative(JNIEnv*, jclass, jint id) { auto r = Current(); if (!r) return 2; std::lock_guard<std::mutex> lock(r->mutex); auto it = r->terminals.find(id); return it == r->terminals.end() ? 2 : it->second->state; }
+extern "C" JNIEXPORT jbyteArray JNICALL Java_dev_goblinreactor_sentry_SessionService_transcriptNative(JNIEnv* env, jclass) {
     auto r = Current(); std::string bytes;
     if (r) { std::lock_guard<std::mutex> lock(r->mutex); bytes = r->diagnostics; }
     jbyteArray result = env->NewByteArray(bytes.size()); if (result) env->SetByteArrayRegion(result, 0, bytes.size(), reinterpret_cast<const jbyte*>(bytes.data())); return result;
 }
-extern "C" JNIEXPORT jbyteArray JNICALL Java_dev_goblinlinux_sentry_SessionService_readGuestNative(JNIEnv* env, jclass, jstring path) {
+extern "C" JNIEXPORT jbyteArray JNICALL Java_dev_goblinreactor_sentry_SessionService_readGuestNative(JNIEnv* env, jclass, jstring path) {
     std::string bytes;
     try { if (auto r = Current()) Request(r->data + "/uml/control.sock", ReadFile, JavaString(env, path), [&](const char* data, size_t n) { bytes.append(data, n); }); }
     catch (...) { bytes.clear(); }
@@ -563,28 +563,28 @@ extern "C" JNIEXPORT jbyteArray JNICALL Java_dev_goblinlinux_sentry_SessionServi
     if (result) env->SetByteArrayRegion(result, 0, bytes.size(), reinterpret_cast<const jbyte*>(bytes.data()));
     return result;
 }
-extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinlinux_sentry_SessionService_inputNative(JNIEnv* env, jclass, jbyteArray value) {
+extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinreactor_sentry_SessionService_inputNative(JNIEnv* env, jclass, jbyteArray value) {
     auto r = Current(); if (!r || !r->running) return false;
     std::lock_guard<std::mutex> lock(r->mutex); auto it = r->terminals.find(r->selected); if (it == r->terminals.end() || it->second->state >= 2) return false;
     std::string bytes(env->GetArrayLength(value), '\0'); env->GetByteArrayRegion(value, 0, bytes.size(), reinterpret_cast<jbyte*>(bytes.data())); it->second->input += bytes; r->notify(); return true;
 }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_resizeNative(JNIEnv*, jclass, jint rows, jint columns) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_resizeNative(JNIEnv*, jclass, jint rows, jint columns) {
     auto r = Current(); if (!r) return; std::lock_guard<std::mutex> lock(r->mutex); auto it = r->terminals.find(r->selected);
     if (it != r->terminals.end()) { it->second->rows = std::clamp(rows, 1, 65535); it->second->columns = std::clamp(columns, 1, 65535); it->second->resized = true; r->notify(); }
 }
-extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinlinux_sentry_SessionService_terminalsNative(JNIEnv* env, jclass) {
+extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinreactor_sentry_SessionService_terminalsNative(JNIEnv* env, jclass) {
     auto r = Current(); std::ostringstream text;
     if (r) { std::lock_guard<std::mutex> lock(r->mutex); for (const auto& item : r->terminals) if (item.second->state < 2) text << item.first << '\t' << item.second->user << '\t' << item.second->pid << '\n'; }
     return env->NewStringUTF(text.str().c_str());
 }
-extern "C" JNIEXPORT jint JNICALL Java_dev_goblinlinux_sentry_SessionService_openTerminalNative(JNIEnv* env, jclass, jstring name, jboolean create) { auto r = Current(); return r ? NewTerminal(r, JavaString(env, name), create) : 0; }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_selectNative(JNIEnv*, jclass, jint id) {
+extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_SessionService_openTerminalNative(JNIEnv* env, jclass, jstring name, jboolean create) { auto r = Current(); return r ? NewTerminal(r, JavaString(env, name), create) : 0; }
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_selectNative(JNIEnv*, jclass, jint id) {
     auto r = Current(); if (!r) return; std::lock_guard<std::mutex> lock(r->mutex); auto it = r->terminals.find(id); if (it != r->terminals.end() && it->second->state < 2) { r->selected = id; GoblinKittySelect(id); }
 }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_closeTerminalNative(JNIEnv*, jclass, jint id) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_closeTerminalNative(JNIEnv*, jclass, jint id) {
     auto r = Current(); if (!r) return; std::lock_guard<std::mutex> lock(r->mutex); auto it = r->terminals.find(id); if (it != r->terminals.end()) { it->second->close = true; r->notify(); }
 }
-extern "C" JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_SessionService_releaseTerminalNative(JNIEnv*, jclass, jint id) {
+extern "C" JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_SessionService_releaseTerminalNative(JNIEnv*, jclass, jint id) {
     auto r = Current(); if (!r) return; std::lock_guard<std::mutex> lock(r->mutex); auto it = r->terminals.find(id);
     if (it == r->terminals.end() || it->second->state >= 2) { GoblinKittyClose(id); r->terminals.erase(id); if (r->selected == id) r->selected = 0; }
 }

@@ -1,4 +1,4 @@
-package dev.goblinlinux.sentry;
+package dev.goblinreactor.sentry;
 
 import android.content.*;
 import android.os.*;
@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 /** The foreground session owns these bindings, independently of terminal views. */
 final class ManagedLinux {
-    static final String PROTOCOL = "dev.goblinlinux.sentry.HostedLinux";
+    static final String PROTOCOL = "dev.goblinreactor.sentry.HostedLinux";
     static final int START = IBinder.FIRST_CALL_TRANSACTION;
     static final int STOP = START + 1;
     private static Context context;

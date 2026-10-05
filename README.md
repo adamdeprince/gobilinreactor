@@ -1,5 +1,8 @@
 # GoblinReactor
 
+[Download the Android preview, installation instructions, and source](https://distribution.goblinreactor.com/goblinreactor/).
+Public application ID: `dev.goblinreactor.sentry`.
+
 GoblinReactor is a terminal and local development environment for Android.
 It runs a real Linux® kernel built for **User-Mode Linux (UML)** inside an
 Android app, with Debian ARM64 packages and the existing native kitty terminal.
@@ -64,7 +67,7 @@ python3 terminal/build.py
 bash harness/build.sh
 bash harness/run.sh DEVICE regression
 bash harness/run.sh DEVICE emacs
-adb -s DEVICE shell am start -n dev.goblinlinux.sentry/.TerminalActivity
+adb -s DEVICE shell am start -n dev.goblinreactor.sentry/.TerminalActivity
 ```
 
 `harness/build.sh` builds offline from prepared artifacts and signs the development

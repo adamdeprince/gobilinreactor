@@ -16,7 +16,7 @@ parser.add_argument('serial')
 parser.add_argument('--screenshot', type=Path)
 args = parser.parse_args()
 adb = ['adb', '-s', args.serial]
-pkg = 'dev.goblinlinux.sentry'
+pkg = 'dev.goblinreactor.sentry'
 
 
 def call(*command):

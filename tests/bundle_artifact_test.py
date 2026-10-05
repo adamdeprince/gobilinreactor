@@ -41,7 +41,7 @@ with zipfile.ZipFile(args.apks) as archive, tempfile.TemporaryDirectory(prefix='
         if not name.startswith('splits/') or not name.endswith('.apk'): continue
         data = archive.read(name); path = Path(directory) / Path(name).name; path.write_bytes(data)
         signature = run(bt / 'apksigner', 'verify', '--verbose', '--print-certs', path)
-        assert 'CN=Goblin Linux' in signature and 'v3 scheme (APK Signature Scheme v3): true' in signature
+        assert 'CN=GoblinReactor' in signature and 'v3 scheme (APK Signature Scheme v3): true' in signature
         run(bt / 'zipalign', '-c', '-P', '16', '4', path)
         manifest = run(bt / 'aapt2', 'dump', 'xmltree', path, '--file', 'AndroidManifest.xml')
         assert 'HarnessActivity' not in manifest and 'Acceptance' not in manifest

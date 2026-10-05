@@ -4,7 +4,7 @@ import os
 import shlex
 import subprocess
 
-PACKAGE = 'dev.goblinlinux.sentry'
+PACKAGE = 'dev.goblinreactor.sentry'
 
 def request(adb, operation, argument, timeout=30):
     path = subprocess.check_output([*adb, 'shell', 'run-as', PACKAGE, 'cat',

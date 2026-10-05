@@ -12,16 +12,16 @@ OUT="$HERE/build-tests"
 mkdir -p "$OUT/classes" "$OUT/dex"
 rm -rf "$OUT/classes" "$OUT/dex"
 mkdir -p "$OUT/classes" "$OUT/dex"
-javac --release 8 -Xlint:-options -classpath "$ANDROID_JAR:$TARGET/classes" -d "$OUT/classes" "$HERE"/java/dev/goblinlinux/sentry/*Acceptance.java
+javac --release 8 -Xlint:-options -classpath "$ANDROID_JAR:$TARGET/classes" -d "$OUT/classes" "$HERE"/java/dev/goblinreactor/sentry/*Acceptance.java
 jar cf "$OUT/tests.jar" -C "$OUT/classes" .
 "$BT/d8" --min-api 29 --lib "$ANDROID_JAR" --classpath "$TARGET/terminal.jar" --output "$OUT/dex" "$OUT/tests.jar"
 cat > "$OUT/AndroidManifest.xml" <<'XML'
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="dev.goblinlinux.sentry.tests" android:versionCode="1" android:versionName="1">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="dev.goblinreactor.sentry.tests" android:versionCode="1" android:versionName="1">
   <application android:label="Goblin acceptance tests" android:hasCode="true" />
-  <instrumentation android:name="dev.goblinlinux.sentry.ServicesAcceptance" android:targetPackage="dev.goblinlinux.sentry" />
-  <instrumentation android:name="dev.goblinlinux.sentry.TerminalAcceptance" android:targetPackage="dev.goblinlinux.sentry" />
-  <instrumentation android:name="dev.goblinlinux.sentry.PowerAcceptance" android:targetPackage="dev.goblinlinux.sentry" />
-  <instrumentation android:name="dev.goblinlinux.sentry.ProductAcceptance" android:targetPackage="dev.goblinlinux.sentry" />
+  <instrumentation android:name="dev.goblinreactor.sentry.ServicesAcceptance" android:targetPackage="dev.goblinreactor.sentry" />
+  <instrumentation android:name="dev.goblinreactor.sentry.TerminalAcceptance" android:targetPackage="dev.goblinreactor.sentry" />
+  <instrumentation android:name="dev.goblinreactor.sentry.PowerAcceptance" android:targetPackage="dev.goblinreactor.sentry" />
+  <instrumentation android:name="dev.goblinreactor.sentry.ProductAcceptance" android:targetPackage="dev.goblinreactor.sentry" />
 </manifest>
 XML
 mkdir -p "$OUT/assets"

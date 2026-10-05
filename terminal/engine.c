@@ -70,7 +70,7 @@ static PyMethodDef host_methods[] = {
 static PyModuleDef host_module = {PyModuleDef_HEAD_INIT, "_goblin_android", NULL, -1, host_methods};
 static PyObject* init_host(void) { return PyModule_Create(&host_module); }
 
-JNIEXPORT jstring JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_initializeNative(JNIEnv* env, jclass cls, jstring directory) {
+JNIEXPORT jstring JNICALL Java_dev_goblinreactor_sentry_KittyRuntime_initializeNative(JNIEnv* env, jclass cls, jstring directory) {
     pthread_mutex_lock(&mutex);
     if (attempted) { pthread_mutex_unlock(&mutex); return (*env)->NewStringUTF(env, error_text); }
     attempted=true;
@@ -164,10 +164,10 @@ void GoblinKittyClose(int id) {
     }
     pthread_mutex_unlock(&mutex);
 }
-JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_contextNative(JNIEnv* env,jclass cls) {
+JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_KittyRuntime_contextNative(JNIEnv* env,jclass cls) {
     pthread_mutex_lock(&mutex); GoblinRenderReset(); pthread_mutex_unlock(&mutex);
 }
-JNIEXPORT jintArray JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_drawNative(JNIEnv* env,jclass cls,jint width,jint height) {
+JNIEXPORT jintArray JNICALL Java_dev_goblinreactor_sentry_KittyRuntime_drawNative(JNIEnv* env,jclass cls,jint width,jint height) {
     jint dims[2]={24,80};
     pthread_mutex_lock(&mutex);
     if (initialized && width>0 && height>0) {
@@ -216,11 +216,11 @@ JNIEXPORT jintArray JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_drawNative(
     pthread_mutex_unlock(&mutex);
     jintArray result=(*env)->NewIntArray(env,2); (*env)->SetIntArrayRegion(env,result,0,2,dims); return result;
 }
-JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_fontSizeNative(JNIEnv* env,jclass cls,jfloat points) {
+JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_KittyRuntime_fontSizeNative(JNIEnv* env,jclass cls,jfloat points) {
     if (!(points >= 6.f && points <= 36.f)) return;
     pthread_mutex_lock(&mutex); requested_font_size=points; pthread_mutex_unlock(&mutex);
 }
-JNIEXPORT jbyteArray JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_dumpNative(JNIEnv* env,jclass cls) {
+JNIEXPORT jbyteArray JNICALL Java_dev_goblinreactor_sentry_KittyRuntime_dumpNative(JNIEnv* env,jclass cls) {
     pthread_mutex_lock(&mutex); jbyteArray out=(*env)->NewByteArray(env,0);
     if (initialized) {
         PyGILState_STATE gil=PyGILState_Ensure(); select_session(active_id); PyObject* text=PyObject_CallMethod(engine,"dump",NULL);
@@ -232,7 +232,7 @@ JNIEXPORT jbyteArray JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_dumpNative
     }
     pthread_mutex_unlock(&mutex); return out;
 }
-JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_keyNative(JNIEnv* env,jclass cls,jint key,jint mods,jstring text) {
+JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_KittyRuntime_keyNative(JNIEnv* env,jclass cls,jint key,jint mods,jstring text) {
     pthread_mutex_lock(&mutex);
     if (initialized) {
         PyGILState_STATE gil=PyGILState_Ensure();
@@ -246,7 +246,7 @@ JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_keyNative(JNIEnv
     pthread_mutex_unlock(&mutex);
 }
 
-JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_KittyRuntime_scrollNative(JNIEnv* env,jclass cls,jint lines) {
+JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_KittyRuntime_scrollNative(JNIEnv* env,jclass cls,jint lines) {
     pthread_mutex_lock(&mutex);
     if (initialized) {
         PyGILState_STATE gil=PyGILState_Ensure();

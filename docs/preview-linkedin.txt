@@ -1,0 +1,10 @@
+I've been building GoblinReactor, a local Debian development environment for Android, and I'm ready to share an early preview.
+
+It runs on the phone. No rooting or remote server required. You get a terminal, apt packages, multiple shells, and background services. Install an editor, run Python, or bring a project over and see what works.
+
+The preview is a direct APK download for ARM64 phones running Android 12 or newer. It's early, so back up anything important. I'd like feedback on setup, terminal usability, battery use, and how it behaves on different phones.
+
+Download, installation instructions, and source:
+https://distribution.goblinreactor.com/goblinreactor/
+
+If you try it, let me know what phone you're using and what worked—or broke.

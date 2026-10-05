@@ -14,7 +14,7 @@ void goblin_network_namespace_unavailable(void)
     _exit(125);
 }
 
-JNIEXPORT void JNICALL Java_dev_goblinlinux_sentry_NetworkService_run(
+JNIEXPORT void JNICALL Java_dev_goblinreactor_sentry_NetworkService_run(
         JNIEnv *env, jclass type, jobjectArray arguments, jint packets, jint log, jint status)
 {
     (void)type;

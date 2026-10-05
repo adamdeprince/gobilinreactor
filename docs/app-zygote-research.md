@@ -97,12 +97,12 @@ keeps the binding alive. The isolated host retains the disk lock until its UML
 workers are reaped; status pipes and Binder death handling report failure.
 Android can still terminate the app under memory pressure or after force-stop.
 
-The implementation is in [ManagedLinux.java](../harness/java/dev/goblinlinux/sentry/ManagedLinux.java),
+The implementation is in [ManagedLinux.java](../harness/java/dev/goblinreactor/sentry/ManagedLinux.java),
 [launcher.cpp](../uml/launcher.cpp), [runtime.cpp](../uml/runtime.cpp), and
 [the kernel patches](../uml/patches/). UML consumes `fd:N` directly and disables
 host UMID files with `uml_dir=none`. Read-only block descriptors carry boot assets
 and the seed/migration archive; there is no live hostfs deployment mount.
-[NetworkService.java](../harness/java/dev/goblinlinux/sentry/NetworkService.java)
+[NetworkService.java](../harness/java/dev/goblinreactor/sentry/NetworkService.java)
 hosts passt's event loop without another long-lived native child.
 
 Acceptance covers existing-disk upgrades, full guest boot, multicore execution,

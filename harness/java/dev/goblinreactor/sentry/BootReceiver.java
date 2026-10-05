@@ -1,4 +1,4 @@
-package dev.goblinlinux.sentry;
+package dev.goblinreactor.sentry;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.util.Log;
 
 /** Optional startup after credential-encrypted guest storage becomes available. */
 public final class BootReceiver extends BroadcastReceiver {
-    static final String START_ACTION = "dev.goblinlinux.sentry.START_AFTER_BOOT";
+    static final String START_ACTION = "dev.goblinreactor.sentry.START_AFTER_BOOT";
     private static final String PREFERENCES = "linux-startup";
     private static final String ENABLED = "after-reboot";
     static boolean enabled(Context context) {

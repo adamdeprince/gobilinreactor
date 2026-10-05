@@ -16,7 +16,7 @@ import uuid
 import xml.etree.ElementTree as ET
 from uml_control import request
 
-PKG = 'dev.goblinlinux.sentry'
+PKG = 'dev.goblinreactor.sentry'
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('serial')
 parser.add_argument('--output', type=Path, required=True)

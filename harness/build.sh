@@ -73,7 +73,7 @@ echo "==> building UML terminal and lifecycle adapter"
 echo "==> compiling terminal application"
 mkdir -p "$OUT/classes" "$OUT/dex"
 SOURCES=()
-for source in "$HERE"/java/dev/goblinlinux/sentry/*.java; do
+for source in "$HERE"/java/dev/goblinreactor/sentry/*.java; do
     case "$source" in */ServicesAcceptance.java) continue;; esac
     if [ "$VARIANT" = release ]; then
         case "$source" in *Acceptance.java|*/HarnessActivity.java) continue;; esac
