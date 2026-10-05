@@ -3,8 +3,9 @@
 # its target sysroot and compiler-rt are architecture independent.
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SOURCE="${UML_SOURCE:-$HERE/build/linux}"
-OUTPUT="${UML_OUTPUT:-$HERE/build/kernel}"
+if [ -z "${UML_SOURCE:-}" ]; then python3 "$HERE/prepare-kernel.py"; fi
+SOURCE="${UML_SOURCE:-$(python3 "$HERE/prepare-kernel.py" --path-only)}"
+OUTPUT="${UML_OUTPUT:-$HERE/build/kernel-stable}"
 NDK_TOOLS="${NDK_TOOLS:?Set NDK_TOOLS to the NDK toolchains/llvm/prebuilt directory}"
 CLANG="${CLANG:-clang}"
 RESOURCE="$(find "$NDK_TOOLS/lib/clang" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)"
@@ -17,7 +18,7 @@ for name in libc libm libdl; do
     llvm-objcopy --strip-debug "$NDK_TOOLS/sysroot/usr/lib/aarch64-linux-android/$name.a" "$OUTPUT/android-libs/$name.a"
 done
 compiler="$CLANG --target=aarch64-linux-android30 --sysroot=$NDK_TOOLS/sysroot -resource-dir=$RESOURCE --rtlib=compiler-rt --unwindlib=libunwind -fuse-ld=lld -Wno-unused-command-line-argument -L$OUTPUT/android-libs"
-args=(ARCH=um SUBARCH=arm64 LLVM=1 "O=$OUTPUT" "CC=$compiler" HOSTCC=clang HOSTCXX=clang++ "CLANG_FLAGS=--target=aarch64-linux-android30 -fintegrated-as" "LDFLAGS_vmlinux=-S")
+args=(ARCH=um SUBARCH=arm64 LLVM=1 "O=$OUTPUT" "CC=$compiler" HOSTCC=clang HOSTCXX=clang++ "CLANG_FLAGS=--target=aarch64-linux-android30 -fintegrated-as" "LDFLAGS_vmlinux=-S" "LOCALVERSION=")
 make -C "$SOURCE" "${args[@]}" defconfig
 # Build the full CPU capacity supported by this UML port's Kconfig. The actual
 # online count is selected from Android hardware by runtime.cpp at each boot.
@@ -31,7 +32,7 @@ make -C "$SOURCE" "${args[@]}" defconfig
     -e EXT4_FS_POSIX_ACL -e EXT4_FS_SECURITY -e TMPFS_POSIX_ACL \
     -e OVERLAY_FS -e FUSE_FS -e SECCOMP -e SECCOMP_FILTER \
     -e BLK_DEV_LOOP -e BLK_DEV_INITRD -e DEVTMPFS -e DEVTMPFS_MOUNT \
-    -d DEBUG_INFO -d DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT -e DEBUG_INFO_NONE \
+    -d DEBUG_INFO -d DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT -e DEBUG_INFO_NONE -d LOCALVERSION_AUTO \
     --set-str LOCALVERSION '-goblin' --set-str CON_CHAN null --set-str SSL_CHAN null
 make -C "$SOURCE" "${args[@]}" olddefconfig
 make -C "$SOURCE" "${args[@]}" -j"${JOBS:-$(nproc)}" linux

@@ -6,7 +6,9 @@ Android app, with Debian ARM64 packages and the existing native kitty terminal.
 The default APK uses UML. The earlier custom Linux ABI implementation in
 `sentry/` is retained as historical source and is not linked into the app.
 
-The ARM64/Android UML port is pinned in [uml/sources.lock.json](uml/sources.lock.json).
+The kernel is based on stable **Linux 7.2.9**, with the ARM64 UML port and Android
+integration applied as separate patches. Source checksums and port provenance
+are pinned in [uml/sources.lock.json](uml/sources.lock.json).
 Guest ARM64 instructions execute natively; Linux implements syscalls, memory,
 processes, permissions, filesystems, networking and PTYs. Startup gives Linux
 one virtual CPU per configured Android hardware CPU. Threads within one process

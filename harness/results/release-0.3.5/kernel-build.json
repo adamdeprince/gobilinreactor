@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "kernel_release": "7.2.9-goblin",
+  "upstream_url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.9.tar.xz",
+  "upstream_sha256": "b4c5dfbe51a364a6c7f03869200f88c8e1f77403539005f14b7fc6bc91b8d8ba",
+  "arm64_port": {
+    "repository": "https://github.com/zalexdev/linux-um-arm64.git",
+    "commit": "8897487c52233cd00cf2850008ca068892f1ae91",
+    "base_commit": "1590cf0329716306e948a8fc29f1d3ee87d3989f",
+    "patch": "port-patches/0001-arm64-uml.patch",
+    "sha256": "44d06ecf6b7576f671ac0b17f75ad8e700eae4802f4598b0ae5e01e1cd3e50c1"
+  },
+  "kernel_sha256": "2d7d6e233940fb128f0e05fa6ed8891a0d5f5434334156f404827f1ff6cde660",
+  "config_sha256": "e34c8a568b948f02d6944ba1c7cbdda4b124063b094fc64e56b3ffd1b7388d71",
+  "checks": [
+    "Official stable archive checksum",
+    "Pinned ARM64 port checksum",
+    "223 port and integration paths match built source",
+    "Repeated source preparation and Android patch application are idempotent",
+    "Kernel ELF release string matches stable pin",
+    "Published config equals build config"
+  ]
+}

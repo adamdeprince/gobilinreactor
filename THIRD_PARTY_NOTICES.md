@@ -7,7 +7,7 @@ The app's **Open-source notices** menu exposes the packaged license texts.
 | Component | License information | Source identity |
 | --- | --- | --- |
 | Original application and adapters | GPL-3.0-or-later, with component exceptions in LICENSE | Release project source |
-| Linux UML kernel and execution stub | GPL-2.0-only; kernel SPDX notices and syscall exceptions apply to their respective files | `uml/sources.lock.json`, `uml/patches/`, `uml/patch-kernel.py` |
+| Linux UML kernel and execution stub | GPL-2.0-only; kernel SPDX notices and syscall exceptions apply to their respective files | `uml/sources.lock.json`, `uml/port-patches/`, `uml/patches/`, `uml/patch-kernel.py` |
 | passt and port helper | GPL-2.0-or-later and BSD-3-Clause, per file | `uml/sources.lock.json`, `uml/patch-passt.py` |
 | kitty terminal | GPL-3.0-only | `terminal/sources.lock.json`, `terminal/patches/kitty-android.patch` |
 | CPython | Python/PSF license and included historical notices | `terminal/sources.lock.json` |

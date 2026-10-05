@@ -1,0 +1,222 @@
+{
+  "base_commit": "1590cf0329716306e948a8fc29f1d3ee87d3989f",
+  "port_commit": "8897487c52233cd00cf2850008ca068892f1ae91",
+  "commits": [
+    {
+      "commit": "8897487c52233cd00cf2850008ca068892f1ae91",
+      "subject": "um: say why the stub could not be exec'd"
+    },
+    {
+      "commit": "344bf24d389abfe62a6e5810c63312ff24b5919a",
+      "subject": "tools/um-arm64: let a benchmark condition carry two boot arguments"
+    },
+    {
+      "commit": "d06cc2a4ec6fae227dadfebb70059ae320e2da3e",
+      "subject": "um: hand dead stubs to the reaper instead of waiting for them"
+    },
+    {
+      "commit": "ce1a317551414ab541aa89d62e0b0b4343fb6a7e",
+      "subject": "um: fix the uniprocessor build of the ptrace CPU clamp"
+    },
+    {
+      "commit": "1532f4aee863d3a580d13cc99685599c46caf3e1",
+      "subject": "tools/um-arm64: add the SMP scaling benchmark"
+    },
+    {
+      "commit": "7d1b5396f151b5990acfa791ebcc9bd552b9a51a",
+      "subject": "um: default ncpus to one less than the host has"
+    },
+    {
+      "commit": "1d555ded4df4537a30f92839f3c34a5d91c1a221",
+      "subject": "um: run on one CPU under ptrace instead of refusing to boot"
+    },
+    {
+      "commit": "03c57e1808f9fc3df91a770e42ce0ff7ac466269",
+      "subject": "um/arm64: enable SMP"
+    },
+    {
+      "commit": "413418f94d9d136b2db89ed603ae48a9b0b0c171",
+      "subject": "um/arm64: drop the BPF-less docker config"
+    },
+    {
+      "commit": "3da6f8ed6d093603a484add38c777fb4c3d15e61",
+      "subject": "um/arm64: report the benchmarks in units that mean something"
+    },
+    {
+      "commit": "c03a93b43a939008933d7d44566cd06dd0e987fe",
+      "subject": "tools/um-arm64: find the NDK instead of hardcoding a home directory"
+    },
+    {
+      "commit": "fff410c3939c84ba63449df4fb282339b50e8a5d",
+      "subject": "um/arm64: derive the bionic symbol rename list at link time"
+    },
+    {
+      "commit": "0489ef6e4a49ec0bc9af57a9edb33d3453b1061b",
+      "subject": "um: scale the fault-around default with PAGE_SIZE"
+    },
+    {
+      "commit": "a528aeed4c2830217b26f5943b2b513a4117607b",
+      "subject": "um: do not panic on shutdown when uml_dir was never created"
+    },
+    {
+      "commit": "8d984326036a8d1c9ae9d5debcebf6d0895344cd",
+      "subject": "um: arm64: name the test devices correctly and add the second one"
+    },
+    {
+      "commit": "86ad39c37ac223168733d6711da9c2f38b49c4cd",
+      "subject": "um: arm64: update the README for the three fixes found on hardware"
+    },
+    {
+      "commit": "eb18fac1d000b24c7ee82bffc74db2837ed8e213",
+      "subject": "um: arm64: disable pointer authentication in the stub"
+    },
+    {
+      "commit": "2fd75ba864f8acfc35f8f6f49d72ddbefe61f384",
+      "subject": "um: offer 16K pages on the arm64 subarch"
+    },
+    {
+      "commit": "f235346e267ba8e326e437fa19d3cfc2baf42607",
+      "subject": "um: derive PTRS_PER_PTE from PAGE_SHIFT"
+    },
+    {
+      "commit": "4741dd4073e6d4471cb8004b95e18ddb78a9e85e",
+      "subject": "um: arm64: restore guest FP/SIMD state across signals in SECCOMP mode"
+    },
+    {
+      "commit": "6dd145a5bb80d6e52d1d4376e5ad24ef6751dd76",
+      "subject": "um: arm64: add the port's README and test harness"
+    },
+    {
+      "commit": "1df1e8f2c1b0a320cb4fc95b0f4270415e09ccf6",
+      "subject": "um: let the IOMEM and DMA emulations be selected on their own"
+    },
+    {
+      "commit": "d2219a3ded9d91c8e727baa72f3b411890d087e7",
+      "subject": "um: fault around anonymous guest faults"
+    },
+    {
+      "commit": "72cc9b79bb1f037ba1306fc607e3770d20b2bf98",
+      "subject": "um: probe that the stub's cycle counter can be read"
+    },
+    {
+      "commit": "81fc0f12b6d9785019fafc81afbe6a324d715cb8",
+      "subject": "um: elide the stub handoff wake, and spin briefly before parking"
+    },
+    {
+      "commit": "e324024434bdeb81f4c530e25a03ec3259ab4757",
+      "subject": "um: do not test the seccomp filter through a libc wrapper"
+    },
+    {
+      "commit": "a364bdc133ac6bb1fb05a1668ce30ab4fccf5cfb",
+      "subject": "um: intercept guest syscalls where -1 cannot be written"
+    },
+    {
+      "commit": "2104b6891ca2e8d17f0e7f6acb3e09cb3a8ff39c",
+      "subject": "um: build against bionic (Android NDK)"
+    },
+    {
+      "commit": "beac9bd4235fae4faf8efbc90188923cdf2ab735",
+      "subject": "um: arm64: support loadable modules"
+    },
+    {
+      "commit": "94a9a05e81df8ceeebec1647a91cad9011c5cd74",
+      "subject": "um: arm64: default to 16 KB pages"
+    },
+    {
+      "commit": "761702e2157ffa11920af17406dbe65533fc2ea2",
+      "subject": "um: arm64: stop leaking -ENOSYS into the first syscall argument"
+    },
+    {
+      "commit": "af50e005969e36721ff7ed20f74395043a682416",
+      "subject": "um: arm64: implement the NT_ARM_SYSTEM_CALL regset for guest tracers"
+    },
+    {
+      "commit": "46f29eef01a682a71432e288a4f251c597f35a7c",
+      "subject": "um: correct three claims that were wrong in shipped text"
+    },
+    {
+      "commit": "f2e15bab08b614a25f7f3b54483a5a810bcdd349",
+      "subject": "um: arm64: select HAVE_PAGE_SIZE_16KB and ARCH_WANT_FRAME_POINTERS"
+    },
+    {
+      "commit": "e13a5206e8d58aa037b5836fc6d869f68d109540",
+      "subject": "um: arm64: clear the right field in rt_sigreturn"
+    },
+    {
+      "commit": "c5733109470bcf1839e2f0aee2a232ea9557c8f9",
+      "subject": "um: use ARCH_INIT_SP_RESERVE for the stub syscall handler's stack too"
+    },
+    {
+      "commit": "008b0a6f3eb0e941513545b81826693d13097556",
+      "subject": "um: read AT_MINSIGSTKSZ and report the stub's signal stack against it"
+    },
+    {
+      "commit": "132819f10a89a867d058718b412c9c07ef35b4d9",
+      "subject": "um: arm64: tolerate stub signals while stepping off a syscall stop"
+    },
+    {
+      "commit": "a4079a8d0311e774ac684d903ef1109b3ef10f60",
+      "subject": "um: x86: add the missing 32-bit stub_seccomp_save_state"
+    },
+    {
+      "commit": "b0efa964ca5cbbfb2302c2f6e4de90d6ea94545e",
+      "subject": "um: do not accept a signal frame that does not fit the stub data area"
+    },
+    {
+      "commit": "c0e3390d240488ae935adedd20600a184a69b9d2",
+      "subject": "um: arm64: read the guest thread pointer back from the stub"
+    },
+    {
+      "commit": "39fc5d614b34efb4b6dc20431dbe76facc9517ae",
+      "subject": "um: give the seccomp probe a legal signal stack, and say why it failed"
+    },
+    {
+      "commit": "6836d815410db45d5a6395e87183d4681753e1f5",
+      "subject": "um: make the initial kernel stack alignment a subarch decision"
+    },
+    {
+      "commit": "aa48e9327f9812acfeea2aa998564442930ff796",
+      "subject": "um: arm64: step off the syscall stop before touching the register set"
+    },
+    {
+      "commit": "a72587df0610b8496c302fe9545e4a0bbfe22623",
+      "subject": "um: fix x86 build regressions from the subarch cpuinfo split"
+    },
+    {
+      "commit": "b19bd42afb8610728b8dd458fbe47524daefd6ab",
+      "subject": "um: arm64: never write NT_ARM_SYSTEM_CALL during a register restore"
+    },
+    {
+      "commit": "db12996e882d0c04f835f3420823aeb8c98870c7",
+      "subject": "um: arm64: sanitise the HWCAP handed to the guest"
+    },
+    {
+      "commit": "911ad7918f505acb2e159d0ecf3f1835c31ba17b",
+      "subject": "um: arm64: select CLONE_BACKWARDS"
+    },
+    {
+      "commit": "6e2355f3d5717dd451fac6d5ee23ac59a6f217c9",
+      "subject": "um: arm64: pin signal frame ABI offsets used by the vDSO trampoline"
+    },
+    {
+      "commit": "2021178e2a8ffc86ff65e53c1030aa0f4a0437bc",
+      "subject": "um: arm64: restore x8 when restarting a syscall"
+    },
+    {
+      "commit": "f269a74e545da0a0726c43623f6e80c7351cc0a0",
+      "subject": "um: arm64: fix FPCR/FPSR loss across guest signal delivery"
+    },
+    {
+      "commit": "3a32202a04111821b9608537b918462b268df06d",
+      "subject": "um: arm64: do not clobber guest TLS on context switch"
+    },
+    {
+      "commit": "db7b19e8c6967eed43dbf7ffa176d21161e6fad0",
+      "subject": "um: arm64: fix syscall arg1 aliasing, add boot harness fixes"
+    },
+    {
+      "commit": "78ec85134f6b90d89b525263935f6ec0a0026ccd",
+      "subject": "um: arm64: initial ARCH=um SUBARCH=arm64 subarch"
+    }
+  ]
+}

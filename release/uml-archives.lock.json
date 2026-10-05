@@ -1,10 +1,10 @@
 [
   {
-    "path": "uml/linux-8897487c52233cd00cf2850008ca068892f1ae91.tar.gz",
-    "repository": "https://github.com/zalexdev/linux-um-arm64.git",
-    "commit": "8897487c52233cd00cf2850008ca068892f1ae91",
-    "sha256": "22405c88c3dd117c013ce64d996fdad95dc19765d95caa6a42b4434c79857192",
-    "size": 265733634
+    "path": "uml/linux-7.2.9.tar.xz",
+    "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.9.tar.xz",
+    "version": "7.2.9",
+    "sha256": "b4c5dfbe51a364a6c7f03869200f88c8e1f77403539005f14b7fc6bc91b8d8ba",
+    "size": 160392664
   },
   {
     "path": "uml/passt-588b545dae741bec6fd7622a33c7852c06d72a59.tar.gz",

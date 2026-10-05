@@ -35,14 +35,18 @@ with zipfile.ZipFile(args.apk) as apk:
     assert any(name.startswith('assets/release-notices/debian/') for name in names)
     assert any(name.startswith('assets/release-notices/boot/') for name in names)
     assert 'assets/release-info.json' in names and any(name.startswith('assets/terminal-licenses/') for name in names)
-    assert json.loads(apk.read('assets/release-info.json'))['product_name'] == 'GoblinReactor'
+    metadata = json.loads(apk.read('assets/release-info.json'))
+    assert metadata['product_name'] == 'GoblinReactor'
+    kernel_release = json.loads((ROOT/'uml/sources.lock.json').read_text())['linux']['version'] + '-goblin'
+    assert metadata['kernel_release'] == kernel_release and '-rc' not in kernel_release
+    assert ('Linux version ' + kernel_release + ' ').encode() in apk.read('lib/arm64-v8a/libgoblinuml-kernel.so')
     assert 'icon' in manifest
     assert 'assets/uml-acceptance.sh' not in names
     assert not any('keystore' in name or 'signing/' in name or 'password' == Path(name).name for name in names)
     native = {name:hashlib.sha256(apk.read(name)).hexdigest() for name in names if name.startswith('lib/') and name.endswith('.so')}
     for name in ['kernel', 'stub', 'netservice', 'ports']: assert 'lib/arm64-v8a/libgoblinuml-' + name + '.so' in native
     assert 'lib/arm64-v8a/libgoblinlauncher.so' in native
-report = {'result':'PASS', 'version':version, 'apk_sha256':hashlib.sha256(args.apk.read_bytes()).hexdigest(), 'native_sha256':native,
+report = {'result':'PASS', 'version':version, 'kernel_release':kernel_release, 'apk_sha256':hashlib.sha256(args.apk.read_bytes()).hexdigest(), 'native_sha256':native,
           'checks':['non-debuggable', 'no test components/classes/assets', 'release RSA signing and v3 verification', '16 KiB ZIP alignment', 'no signing secrets']}
 if args.output: args.output.write_text(json.dumps(report, indent=2) + '\n')
 print(json.dumps(report, indent=2))

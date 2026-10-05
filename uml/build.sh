@@ -9,7 +9,7 @@ mkdir -p "$HERE/build"
 python3 - "$HERE" <<'PY'
 import json, pathlib, subprocess, sys
 root=pathlib.Path(sys.argv[1]); lock=json.loads((root/'sources.lock.json').read_text())
-for name in ('linux', 'passt'):
+for name in ('passt',):
     pin=lock[name]; path=root/'build'/name
     if not path.exists():
         subprocess.run(['git','init',str(path)],check=True)
@@ -18,6 +18,7 @@ for name in ('linux', 'passt'):
     actual=subprocess.check_output(['git','-C',str(path),'rev-parse','HEAD'],text=True).strip()
     if actual!=pin['commit']: raise SystemExit(f'{path} has an unexpected revision; leave it intact and select the pinned source')
 PY
+python3 "$HERE/prepare-kernel.py"
 bash "$HERE/build-kernel.sh"
 bash "$HERE/build-passt.sh"
 python3 "$HERE/build-initramfs.py"
@@ -27,7 +28,7 @@ root=pathlib.Path(sys.argv[1]); out=root/'build/artifacts'
 manifest={'sources':json.loads((root/'sources.lock.json').read_text()),
           'compiler':subprocess.check_output(['clang','--version'],text=True).splitlines()[0],
           'inputs':{str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest()
-                    for p in [*root.iterdir(), *sorted((root/'patches').glob('*.patch'))] if p.is_file()},
+                    for p in [*root.iterdir(), *sorted((root/'patches').glob('*.patch')), *sorted((root/'port-patches').iterdir())] if p.is_file()},
           'artifacts':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in out.iterdir() if p.is_file() and p.name!='build-manifest.json'}}
 (out/'build-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 PY

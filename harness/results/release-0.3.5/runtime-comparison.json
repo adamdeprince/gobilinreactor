@@ -1,0 +1,15 @@
+{
+  "old_apk_sha256": "9449bd962cc78736c62da129356931f099e166f90b1e2ce096c63d442efba630",
+  "new_apk_sha256": "a8d0741d0e6a4916d90ed084d24161d0497010e4882077c1a21388e32d4dcbe0",
+  "changed": [
+    "assets/release-info.json",
+    "assets/release-notices/LICENSE",
+    "assets/release-notices/THIRD_PARTY_NOTICES.md",
+    "assets/uml-sources.json",
+    "lib/arm64-v8a/libgoblinuml-kernel.so"
+  ],
+  "added": [],
+  "removed": [],
+  "unchanged": 268,
+  "result": "PASS"
+}

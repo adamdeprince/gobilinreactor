@@ -1,0 +1,9 @@
+/root/stable-work/prepared-v2
+PASS: 223 patched files, clean application and idempotent repeat
+PASS: patched source matches the compiled tree
+0001-arm64-shared-mm-workers.patch 7f3a9d505854cec5e121f2d55430402f3125c0a2bb258e762c46c6a9819262ee
+0002-inherited-boot-files.patch ef2c077f107fc882e524828c912da1a5bb033de70266daeb1e713d816d10ea59
+0003-serial-flow-control.patch 40645d4704491522b6cb3b62f3e9b98db4cee3274d1a51840a65960062a2ed0d
+0004-stub-page-alignment.patch e0d517052838bb21f6085e1867f700e9eccc7d5919e12c995122e44cfa7ba488
+0005-android-fd-cleanup.patch 3d983365cbb2775ddea5bff4b499cb6063af608f1382e449cb537739cba6a3e4
+0006-android-fd-cleanup-bootstrap.patch b7623ad7030c1deef8ed22357ba950aa763475bf24d00fd3dddbfa9d47f2f09d

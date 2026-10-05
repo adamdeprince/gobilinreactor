@@ -38,14 +38,19 @@ for name in sorted(set(paths)):
     if path.suffix in ('.md', '.txt', '.log'): continue
     if name.startswith(('harness/', 'uml/', 'terminal/', 'fixtures/', 'release/')) or name in ('LICENSE', 'COPYING'):
         source_inputs[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+uml_sources = json.loads((root / 'uml/sources.lock.json').read_text())
+kernel_release = uml_sources['linux']['version'] + '-goblin'
+kernel_bytes = (output / 'lib/arm64-v8a/libgoblinuml-kernel.so').read_bytes()
+assert ('Linux version ' + kernel_release + ' ').encode() in kernel_bytes, 'Rebuild the kernel: binary release differs from stable source pin'
 metadata = {
     'product_name': ET.parse(root / 'harness/AndroidManifest.xml').getroot().find('application').get('{http://schemas.android.com/apk/res/android}label'),
     'source_inputs': source_inputs,
     'version': json.loads((root / 'harness/version.json').read_text()),
-    'kernel_sha256': hashlib.sha256((output / 'lib/arm64-v8a/libgoblinuml-kernel.so').read_bytes()).hexdigest(),
+    'kernel_release': kernel_release,
+    'kernel_sha256': hashlib.sha256(kernel_bytes).hexdigest(),
     'initramfs_sha256': hashlib.sha256((assets / 'uml-initramfs.cpio.gz').read_bytes()).hexdigest(),
     'terminal_runtime': (assets / 'kitty-runtime-version.txt').read_text().strip(),
-    'uml_sources': json.loads((root / 'uml/sources.lock.json').read_text()),
+    'uml_sources': uml_sources,
     'kernel_patches': {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted((root / 'uml/patches').glob('*.patch'))},
     'fd_cleanup_sha256': hashlib.sha256((root / 'uml/fd-cleanup.h').read_bytes()).hexdigest(),
 }

@@ -1,0 +1,2 @@
+PASS: Signed release upgrade preserves Linux data, ownership, configuration and package versions
+GOBLIN SERVICES PASS

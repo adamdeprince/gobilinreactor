@@ -11,7 +11,7 @@ promise to supply sources later. No signing keys are part of the handoff.
 
 - `project/`: the committed GoblinReactor source, local modifications, build
   scripts, Android resources, dependency locks, kernel configuration, and notices.
-- `upstream/uml/`: pristine kernel and passt source at the pinned commits;
+- `upstream/uml/`: the official stable kernel archive and pristine passt source;
   a passt Git bundle supports its Git-based patcher without a network checkout.
 - `upstream/terminal/`: upstream terminal, Python, rendering and build-tool archives.
 - `upstream/python-sources/` and `upstream/python-recipes/`: exact dependency
@@ -37,7 +37,7 @@ Verify SHA256SUMS before unpacking. On a case-sensitive filesystem:
 ```sh
 mkdir goblin-source
 cd goblin-source
-tar -xf ../GoblinReactor-0.3.4-corresponding-source.tar
+tar -xf ../GoblinReactor-0.3.5-corresponding-source.tar
 cd project
 git init
 python3 release/restore-source-cache.py
@@ -70,7 +70,7 @@ builder used clang 19.1.7, GCC 14.2.0, and the Debian runtime versions recorded 
 
 ```sh
 mkdir -p uml/build
-tar -xf ../upstream/uml/linux-8897487c52233cd00cf2850008ca068892f1ae91.tar.gz -C uml/build
+python3 uml/prepare-kernel.py --archive ../upstream/uml/linux-7.2.9.tar.xz --offline
 git clone ../upstream/uml/passt.git.bundle uml/build/passt
 export NDK_TOOLS=/path/to/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64
 bash uml/build-kernel.sh
@@ -78,9 +78,10 @@ bash uml/build-passt.sh
 python3 uml/build-initramfs.py
 ```
 
-The individual build scripts work with the supplied trees. The aggregate
-`uml/build.sh` expects Git checkouts and is intended for a normal online source
-checkout. The build scripts apply all local modifications. Install the recorded
+The kernel preparation step verifies stable Linux 7.2.9 and applies the ARM64
+port from `uml/port-patches/`. The aggregate `uml/build.sh` fetches missing inputs
+for a normal checkout; passt uses a pinned Git checkout. The kernel build script
+applies the separate Android integration patches. Install the recorded
 Debian package versions when reproducing the original boot image; an intentional
 change requires refreshing the boot-package audit and corresponding source locks.
 

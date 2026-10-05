@@ -1,7 +1,7 @@
 # Android UML runtime
 
-The production APK runs a Linux kernel built for User-Mode Linux. The pinned
-ARM64/Android port is in [sources.lock.json](sources.lock.json). Goblin's code here
+The production APK runs stable Linux **7.2.9** built for User-Mode Linux. The
+official source archive, checksum and ARM64 port provenance are in [sources.lock.json](sources.lock.json). Goblin's code here
 provides Android lifecycle, deployment, disk migration and terminal transport.
 Linux implements syscalls, memory, credentials, filesystems, sockets and PTYs.
 
@@ -11,7 +11,7 @@ Use a case-sensitive Debian 13 ARM64 Linux builder with these packages:
 
 ```sh
 apt-get install build-essential clang llvm lld flex bison bc libelf-dev libssl-dev \
-  git cpio pkg-config python3 e2fsprogs
+  git cpio pkg-config python3 e2fsprogs busybox-static
 export NDK_TOOLS=/path/to/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64
 bash uml/build.sh
 ```
@@ -21,8 +21,9 @@ executes the build, so the NDK host package does not need to match the build CPU
 `build-kernel.sh` also accepts `UML_SOURCE` and `UML_OUTPUT`, and
 `build-passt.sh` accepts `PASST_SOURCE`. On macOS, put the Linux source and object
 tree inside a Linux VM rather than building through a case-insensitive share.
-The source pins are checked before the idempotent Android and parallel-worker
-patches apply. Patches in `patches/` must apply cleanly without fuzz; a repeat
+The stable archive is checksum-verified before extraction by `prepare-kernel.py`.
+It applies the pinned ARM64 port in `port-patches/` without changing the upstream
+release version. The separate Android and parallel-worker patches then apply. Patches in `patches/` must apply cleanly without fuzz; a repeat
 build verifies the complete stack by reversing its applied prefix in staging
 and applying the current stack before updating the source tree. `check-stub.py` rejects compiler-generated
 references outside the stub's copied code page.

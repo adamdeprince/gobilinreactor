@@ -1,17 +1,18 @@
-# GoblinReactor 0.3.4
+# GoblinReactor 0.3.5
 
-October 5, 2026 · version code 30004 · ARM64 Android
+October 5, 2026 · version code 30005 · ARM64 Android
 
-- The launcher now uses the supplied Goblin character artwork. Adaptive-icon
-  padding keeps the character visible within launcher masks. The original PNG
-  is retained unchanged in the project and included in the corresponding-source archive.
-- Icon artwork is now covered by the APK's source-input hashes.
-- The GoblinReactor name and the Open-source notices viewer from 0.3.3 remain.
-- The application ID and signing identity are unchanged. Install over the
-  previous release to retain the local installation; do not uninstall first.
+- The guest kernel now uses stable Linux 7.2.9, replacing 7.2-rc4.
+- The ARM64 UML port is preserved as a separate, pinned patch over the verified
+  official stable source. Android integration, native execution, parallel guest
+  threads, 16 KiB guest pages and persistent storage remain enabled.
+- The build rejects a kernel binary whose release string differs from the
+  stable source pin. Source archives include the stable kernel and full port
+  provenance, patches and build configuration.
+- Goblin artwork, application ID, signing identity and licensing UI are retained.
+  Install over the previous release to preserve files and packages. Updating
+  restarts the guest; save work before applying an update.
 
-The kernel, terminal engine and guest runtime are unchanged. This release does
-not add device support or establish Google Play eligibility. Android 12+ with a
-64-bit ARM64 Android installation is the support target; Android 10–11 remain
-experimental. Validation scope is recorded in VALIDATION.md. Broader device
-and long-duration testing remains outstanding.
+The port remains an external ARM64 UML implementation. Using a stable upstream
+base does not imply upstream support for the port or Google Play approval.
+Validation scope and remaining device coverage are recorded in VALIDATION.md.
