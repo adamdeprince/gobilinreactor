@@ -39,8 +39,12 @@ mkdir goblin-source
 cd goblin-source
 tar -xf ../GoblinReactor-0.3.3-corresponding-source.tar
 cd project
+git init
 python3 release/restore-source-cache.py
 ```
+
+The local `git init` lets the Android builder enumerate source inputs for its
+embedded provenance record; no upstream checkout or private repository is needed.
 
 The source packages can be inspected or rebuilt without contacting the source
 hosts. For a Debian component, use `dpkg-source -x PACKAGE.dsc` from its directory
