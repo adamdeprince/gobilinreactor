@@ -22,10 +22,10 @@ is no added RAM or storage quota. Start with 2 GiB devices for stress testing;
 more memory gives Android and installed applications more room to work.
 The 0.3.0 runtime passed a fresh Android 12 emulator with 2 GiB RAM, the Android
 16 Samsung SM-S928U, and Android 16 emulators with 4 KiB and 16 KiB pages.
-Version 0.3.2 added optional startup after reboot. Version 0.3.3 updates branding
-and adds the source and license handoff. Android 13–15 and other physical
+Version 0.3.2 added optional startup after reboot. Version 0.3.3 updated branding
+and added the source and license handoff. Version 0.3.4 adds the Goblin artwork. Android 13–15 and other physical
 manufacturers still need direct testing. Exact checks and artifact identities
-are listed in the [release evidence](../harness/results/release-0.3.3/README.md).
+are listed in the [release evidence](../harness/results/release-0.3.4/README.md).
 
 Install updates over the existing app. Keep the same signing identity and
 increase `harness/version.json` for each distributed update. The APK can update

@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "aab_sha256": "ffeae32230fdfa218e5d00eb9d331d215eccc2ae3c8744dae10cb8e0d7833906",
+  "apks_sha256": "bc78eba31687296d81c448dafb5b7c22d8015b1902c64f9a10bf3d999a67955d",
+  "splits": [
+    "splits/base-arm64_v8a.apk",
+    "splits/base-arm64_v8a_2.apk",
+    "splits/base-master.apk",
+    "splits/base-master_2.apk"
+  ],
+  "native_components": 12,
+  "assets": 261,
+  "checks": [
+    "release signatures",
+    "non-debuggable",
+    "native executable extraction retained",
+    "16 KiB ELF load alignment and APK ZIP alignment",
+    "runtime and asset hashes match release APK",
+    "no test components or signing keys"
+  ]
+}

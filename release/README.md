@@ -37,7 +37,7 @@ Verify SHA256SUMS before unpacking. On a case-sensitive filesystem:
 ```sh
 mkdir goblin-source
 cd goblin-source
-tar -xf ../GoblinReactor-0.3.3-corresponding-source.tar
+tar -xf ../GoblinReactor-0.3.4-corresponding-source.tar
 cd project
 git init
 python3 release/restore-source-cache.py

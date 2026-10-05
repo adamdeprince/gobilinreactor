@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "device": "Samsung SM-S928U",
+  "previous_version": "0.3.2 (30002)",
+  "installed_version": "0.3.4 (30004)",
+  "apk_sha256": "9449bd962cc78736c62da129356931f099e166f90b1e2ce096c63d442efba630",
+  "installed_apk_sha256": "9449bd962cc78736c62da129356931f099e166f90b1e2ce096c63d442efba630",
+  "checks": [
+    "adb install -r succeeded",
+    "installed version confirmed",
+    "installed APK checksum matches local release",
+    "TerminalActivity launch succeeded"
+  ],
+  "data_cleared": false,
+  "uninstalled": false,
+  "scope": "Installation and launch only; no full device acceptance suite performed."
+}

@@ -4,7 +4,7 @@ Product name and public display: **GoblinReactor**.
 Description: **A terminal and local development environment for Android.**
 
 Use this name in the launcher, app title, notifications, store listings, release
-filenames and documentation. Keep the original terminal icon. Do not add Linux®
+filenames and documentation. Use the supplied Goblin character artwork as the app icon. Do not add Linux®
 to the product name, logo or brand identifier.
 
 Linux references describe the kernel and operating environment provided by the

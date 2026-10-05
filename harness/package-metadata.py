@@ -35,7 +35,7 @@ source_inputs = {}
 for name in sorted(set(paths)):
     path = root / name
     if (not name or not path.is_file() or name.startswith(('harness/results/', 'release/build/'))): continue
-    if path.suffix in ('.md', '.txt', '.png', '.log'): continue
+    if path.suffix in ('.md', '.txt', '.log'): continue
     if name.startswith(('harness/', 'uml/', 'terminal/', 'fixtures/', 'release/')) or name in ('LICENSE', 'COPYING'):
         source_inputs[name] = hashlib.sha256(path.read_bytes()).hexdigest()
 metadata = {
