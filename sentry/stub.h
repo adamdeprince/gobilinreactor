@@ -13,20 +13,23 @@ struct RunResult {
     bool entered = false;   // the guest actually started executing
     bool exited = false;    // it called exit/exit_group
     int status = 0;
+    int fault_signal = 0;
     uint64_t syscalls = 0;
+    uint64_t wall_time_ns = 0;
+    uint64_t startup_ns = 0; // mount/load/fork until the first guest trap
+    uint64_t broker_rss_start_bytes = 0;
+    uint64_t broker_rss_end_bytes = 0;
+    uint64_t broker_rss_sampled_peak_bytes = 0; // whole app process, 50 ms samples
     double ns_per_syscall = 0;  // wall clock, guest entry to exit
     double ns_in_handler = 0;   // of which, spent inside the SIGSYS handler
     std::string error;      // setup failure, or how the guest died
 };
 
-// Runs `img` to completion on the calling thread.
+// Forks a stub process, runs `img` in it, and services its syscalls until it
+// exits. Returns when the guest is gone.
 //
-// The calling thread acquires a seccomp filter, which is permanent and cannot be
-// removed, so this must be given a thread of its own. The filter traps by
-// instruction pointer rather than by syscall number: anything issued from inside
-// the guest window is the guest's, anything else is the sentry's own and passes
-// straight through. That is what lets the syscall handler do real work -- open
-// files, log, allocate -- on the very thread it is servicing.
-RunResult RunGuest(const LoadedImage& img, Sentry* sentry);
+// Only a freestanding runtime remains in the child. It does not depend on
+// bionic TLS, and its syscall gate remains constrained if called by the guest.
+RunResult RunGuest(const LoadedImage& img, Sentry* sentry, bool expose_test_gate = false);
 
 }  // namespace goblin

@@ -1,0 +1,8 @@
+PASS: terminal activity starts Bash
+PASS: typed command reaches guest filesystem
+PASS: recreated activity reconnects to the same shell and live job
+Traceback (most recent call last):
+  File "/Users/adam/dev/goblin-linux/tests/terminal_lifecycle_test.py", line 97, in <module>
+    tap(next(n for n in ui().iter("node") if n.attrib.get("text") == "Close terminal"))
+        ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration

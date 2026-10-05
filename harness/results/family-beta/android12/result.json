@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "apk_sha256": "d1a2f3d68c1ca78363464a67a17ba1e55a6ede7bb1fc5f44c220c158bd8cd119",
+  "serial": "emulator-5558",
+  "bundle_splits": false,
+  "checks": [
+    "transport",
+    "network",
+    "soak",
+    "power"
+  ],
+  "finished": "2026-09-20T18:05:45Z"
+}

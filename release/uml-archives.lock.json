@@ -1,0 +1,23 @@
+[
+  {
+    "path": "uml/linux-8897487c52233cd00cf2850008ca068892f1ae91.tar.gz",
+    "repository": "https://github.com/zalexdev/linux-um-arm64.git",
+    "commit": "8897487c52233cd00cf2850008ca068892f1ae91",
+    "sha256": "22405c88c3dd117c013ce64d996fdad95dc19765d95caa6a42b4434c79857192",
+    "size": 265733634
+  },
+  {
+    "path": "uml/passt-588b545dae741bec6fd7622a33c7852c06d72a59.tar.gz",
+    "repository": "https://passt.top/passt",
+    "commit": "588b545dae741bec6fd7622a33c7852c06d72a59",
+    "sha256": "aa1135195ce85d96d5ad94b20faecddff4bf7cac9115f60edefbbd16ce56a2b9",
+    "size": 392112
+  },
+  {
+    "path": "uml/passt.git.bundle",
+    "repository": "https://passt.top/passt",
+    "commit": "588b545dae741bec6fd7622a33c7852c06d72a59",
+    "sha256": "044c44d29f5ba55b634e1cc0326f2ef592d10327d466d16cc5d209197f1a26b3",
+    "size": 463718
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "serial": "emulator-5556",
+  "finished": "2026-09-20T12:45:32Z",
+  "apk_sha256": "a2c0b5ca86361de8827cbc0f7deda84c5e2c74a13a13109c6b1a64dd37c02c14",
+  "soak_seconds": 120,
+  "ui": true,
+  "note": "Terminal test rerun after waiting for the Debian login prompt; all other final matrix reports retained.",
+  "physical_unplugged_test": "Not simulated on emulator"
+}

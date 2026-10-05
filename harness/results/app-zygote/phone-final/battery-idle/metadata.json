@@ -1,0 +1,48 @@
+{
+  "serial": "R5CX3468YQR",
+  "started_utc": "2026-09-20T13:30:36.504258+00:00",
+  "requested_seconds": 300,
+  "physical_battery_state_simulated": false,
+  "call_context": "User reports ending the phone call before this fresh run; instructions require the call to finish before unplugging.",
+  "before": {
+    "monitor_setting": "null",
+    "monitor_property": "",
+    "selinux": "Enforcing",
+    "phantom_limit": [
+      "max_phantom_processes=32"
+    ]
+  },
+  "power_before": {
+    "AC powered": "false",
+    "USB powered": "true",
+    "Wireless powered": "false",
+    "Dock powered": "false",
+    "status": "5",
+    "level": "100"
+  },
+  "ready_log": "         1789911066.935  9033  9058 I goblin-battery: 03f46222281241c08ce076cca8ebab94 READY: unplug USB and turn the screen off for 300 seconds",
+  "run_token": "03f46222281241c08ce076cca8ebab94",
+  "state": "COMPLETED",
+  "result": "PASS",
+  "test_condition": "Fresh screen-off interval after user reported ending the call",
+  "after": {
+    "monitor_setting": "null",
+    "monitor_property": "",
+    "selinux": "Enforcing",
+    "phantom_limit": [
+      "max_phantom_processes=32"
+    ]
+  },
+  "policy_unchanged": true,
+  "measurement_seconds": 300,
+  "android_power_samples": 301,
+  "guest_heartbeat_advance": 281,
+  "guest_restarted": false,
+  "battery_optimization_exemption": false,
+  "event_times_utc": {
+    "READY": "2026-09-20T13:31:06.935000+00:00",
+    "RUNNING": "2026-09-20T13:31:30.156000+00:00",
+    "PASS": "2026-09-20T13:36:31.177000+00:00"
+  },
+  "interpretation": "Passed the bounded physical battery/screen-off check. This does not establish indefinite operation or demonstrate that Android entered deep Doze."
+}

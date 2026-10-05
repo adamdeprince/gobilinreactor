@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/tmp/goblin-emacs-ui.py", line 34, in <module>
+    wait(lambda:'goblin@goblin:~$' in screen(),'regular-user terminal ready')
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/goblin-emacs-ui.py", line 28, in wait
+    raise AssertionError(label+'; screen='+screen())
+AssertionError: regular-user terminal ready; screen=

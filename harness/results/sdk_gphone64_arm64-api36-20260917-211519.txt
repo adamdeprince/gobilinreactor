@@ -1,0 +1,118 @@
+== goblin-linux: isolated stub and memory ABI regression harness ==
+page size            4096
+memfd exec           supported (sealed, shared)
+guest window         0x7300000000 - 0x7340000000 (4 GiB aligned)
+core regressions     48 checks passed
+
+-- guest: hello --
+image                2544 bytes
+loaded               bias=0x7301000000 entry=0x730100428c
+  mapped span        0x7301000000 - 0x7301009000
+  executable         0x7301004000 - 0x7301005000
+  backing            sealed memfd
+  syscall trace:
+    write           (0x1, 0x7301000238, 0xd) = 13
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 2 syscalls
+
+-- guest: bench --
+image                2592 bytes
+loaded               bias=0x7301000000 entry=0x7301004284
+  mapped span        0x7301000000 - 0x7301009000
+  executable         0x7301004000 - 0x7301005000
+  backing            sealed memfd
+exited               status 0 after 200002 syscalls
+cost                 47494 ns per syscall total
+  of which             80 ns in the sentry, 47414 ns in signal delivery
+
+-- guest: memtest --
+image                3528 bytes
+loaded               bias=0x7301000000 entry=0x730100439c
+  mapped span        0x7301000000 - 0x7301009000
+  executable         0x7301004000 - 0x7301005000
+  backing            sealed memfd
+  syscall trace:
+    brk             (0, 0, 0) = 0x7301009000
+    brk             (0x7301019000, 0, 0) = 0x7301019000
+    mmap            (0, 0x4000, 0x3) = 0x733f7fc000
+    mprotect        (0x733f7fc000, 0x4000, 0x1) = 0
+    munmap          (0x733f7fc000, 0x4000, 0) = 0
+    mmap            (0, 0x4000, 0x3) = 0x733f7fc000
+    write           (0x1, 0x730100026f, 0xb) = 11
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 8 syscalls
+
+-- guest: memerrors --
+image                4016 bytes
+loaded               bias=0x7301000000 entry=0x73010042cc
+  mapped span        0x7301000000 - 0x7301009000
+  executable         0x7301004000 - 0x7301005000
+  backing            sealed memfd
+  syscall trace:
+    brk             (0, 0, 0) = 0x7301009000
+    brk             (0x7301009001, 0, 0) = 0x7301009001
+    brk             (0x7301009002, 0, 0) = 0x7301009002
+    brk             (0x7301009001, 0, 0) = 0x7301009001
+    mmap            (0, 0xffffffffffffffff, 0x3) = -12
+    mmap            (0x7301009001, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x40000000) = -22
+    mmap            (0, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x3) = 0x733f7fc000
+    mmap            (0x733f7fc000, 0x4000, 0x3) = -17
+    madvise         (0x733f7fc000, 0x4000, 0x4) = 0
+    madvise         (0x733f7fc000, 0x4000, 0x7fffffff) = -22
+    mprotect        (0x733f7fc000, 0x4000, 0x40000000) = -22
+    munmap          (0x733f7fc000, 0x4000, 0) = 0
+    mprotect        (0x733f7fc000, 0x4000, 0x1) = -12
+    madvise         (0x733f7fc000, 0x4000, 0x4) = -12
+    munmap          (0x733f7fc000, 0x4000, 0) = 0
+    mmap            (0x733f7fc000, 0x4000, 0x3) = 0x733f7fc000
+    mmap            (0, 0x4000, 0x3) = 0x733f7f8000
+    madvise         (0x733f7f8000, 0x4000, 0x8) = -22
+    write           (0x1, 0x7301000238, 0x11) = 17
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 23 syscalls
+
+-- guest: isolation --
+image                3600 bytes
+loaded               bias=0x7301000000 entry=0x73010042dc
+  mapped span        0x7301000000 - 0x7301009000
+  executable         0x7301004000 - 0x7301005000
+  backing            sealed memfd
+  syscall trace:
+    getpid          (0, 0, 0) = 1
+    getpid          (0, 0, 0) = 1
+    brk             (0, 0, 0) = 0x7301009000
+    openat          (0xffffffffffffff9c, 0x733ffffe00, 0) = -2
+    write           (0x1, 0x7301000260, 0x12) = 18
+    exit_group      (0x9, 0, 0) = 0
+exited               status 9 after 6 syscalls
+FAILED: status 9, stdout regression failed
+
+
+-- guest: oldcode --
+image                2776 bytes
+loaded               bias=0x7301000000 entry=0x73010042d4
+  mapped span        0x7301000000 - 0x7301009000
+  executable         0x7301004000 - 0x7301005000
+  backing            sealed memfd
+expected fault       guest faulted: Segmentation fault at pc=0x77dc523c00 accessing 0x77dc523c00
+
+-- guest: badstack --
+image                2088 bytes
+loaded               bias=0x7301000000 entry=0x7301004200
+  mapped span        0x7301000000 - 0x7301009000
+  executable         0x7301004000 - 0x7301005000
+  backing            sealed memfd
+  syscall trace:
+    getpid          (0, 0, 0) = 1
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 2 syscalls
+-- Debian: /bin/true --
+PASS: /bin/true status=0 syscalls=23 stdout=
+-- Debian: /bin/echo --
+PASS: /bin/echo status=0 syscalls=31 stdout=Debian ARM64 works
+
+
+GOBLIN FAIL

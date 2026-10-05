@@ -1,0 +1,47 @@
+--- a/arch/um/os-Linux/start_up.c
++++ b/arch/um/os-Linux/start_up.c
+@@ -8,6 +8,9 @@
+ #include <stdlib.h>
+ #include <stdarg.h>
+ #include <unistd.h>
++#ifdef __ANDROID__
++#include "goblin-fds.h"
++#endif
+ #include <errno.h>
+ #include <fcntl.h>
+ #include <sched.h>
+@@ -560,8 +563,12 @@
+ 	};
+ 	struct sigaction sa;
+ 
+-	/* close_range is needed for the stub */
++	/* Use the same descriptor cleanup as the real stub on Android. */
++#ifdef __ANDROID__
++	if (goblin_cleanup_fds(1, 0))
++#else
+ 	if (stub_syscall3(__NR_close_range, 1, ~0U, 0))
++#endif
+ 		exit(1);
+ 
+ 	/*
+--- a/arch/um/kernel/skas/stub_exe.c
++++ b/arch/um/kernel/skas/stub_exe.c
+@@ -76,9 +76,18 @@
+ 
+ 	/* In SECCOMP mode, we only need the signalling FD from now on */
+ 	if (init_data.seccomp) {
++#ifdef __ANDROID__
++		/* prepare_stub marked every FD CLOEXEC except stdin and the
++		 * mapping descriptors. Close those explicitly on older Android,
++		 * whose inherited filter kills close_range callers. */
++		stub_syscall1(__NR_close, init_data.stub_code_fd);
++		if (init_data.stub_data_fd != init_data.stub_code_fd)
++			stub_syscall1(__NR_close, init_data.stub_data_fd);
++#else
+ 		res = stub_syscall3(__NR_close_range, 1, ~0U, 0);
+ 		if (res != 0)
+ 			stub_syscall1(__NR_exit, 13);
++#endif
+ 	}
+ 
+ 	/* setup signal stack inside stub data */

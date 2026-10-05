@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "version": {
+    "name": "0.3.0",
+    "code": 30000
+  },
+  "apk_sha256": "24ac6d82fbf43cc98a76ef6e2dbbc1418c81a1d643df15167a74e3ecaf125fa5",
+  "native_sha256": {
+    "lib/arm64-v8a/libgoblinlauncher.so": "9c8e48ca7aa9c5b8d949d041d9e9e416cd695ff9b12c1e85b4bf377ef3875414",
+    "lib/arm64-v8a/libgoblinuml-ctl.so": "a1af298a4f1491be9aa8c375a9d92a74e73d68ba11f84c674939e3c862fbcd6d",
+    "lib/arm64-v8a/libgoblinuml-ports.so": "082005b72ffaa466f543811bde50e99e1c24d8a7224c6b0a2a5a62faaf894287",
+    "lib/arm64-v8a/libgoblinuml-netservice.so": "82c0cbdb2599dad336981e74870bf2d8873cce2ef0d17bc83982f3b4dfe81a94",
+    "lib/arm64-v8a/libcrypto_python.so": "f53fb5b493a903e3c3388a0229427c71118c094f96c4cafd7d9df29eaacede64",
+    "lib/arm64-v8a/libgoblinuml.so": "787a20586d6fd88ee349b7ecd58e124e6bab67642a89cb44cf788ee7e99874a3",
+    "lib/arm64-v8a/libsqlite3_python.so": "bef196794aeaf3a16029422bf16c7124739c082069dbd81c8ae986b24ea31937",
+    "lib/arm64-v8a/libgoblinuml-stub.so": "75c043e55323f91fefeb56f4f26a79a4f7cd16a323a5dd185538f5b98d6cd995",
+    "lib/arm64-v8a/libpython3.13.so": "13f2820e612138f602c55af91d94952b03e5f79c29cd39834b4370148318b0b8",
+    "lib/arm64-v8a/libssl_python.so": "c1ec62f6dcfb288583047d14806c728f4aa5062b4be461974ec1fa4dd082f270",
+    "lib/arm64-v8a/libgoblinkitty.so": "81d1a5b63a3717879c48aae91214b346aa9b0c515f2bbf46b6546d21896e25c6",
+    "lib/arm64-v8a/libgoblinuml-kernel.so": "42097406f694f32b057a4d7ac433f217efd5d9e36d35336bd03e0fc481e71f70"
+  },
+  "checks": [
+    "non-debuggable",
+    "no test components/classes/assets",
+    "release RSA signing and v3 verification",
+    "16 KiB ZIP alignment",
+    "no signing secrets"
+  ]
+}

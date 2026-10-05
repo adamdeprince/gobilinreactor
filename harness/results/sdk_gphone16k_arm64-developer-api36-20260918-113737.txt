@@ -1,0 +1,155 @@
+page size            16384
+-- Developer: Debian bootstrap --
+PASS: Debian bootstrap status=0 elapsed_ms=261 
+-- Developer: install developer tools --
+PASS: install developer tools status=0 elapsed_ms=874 
+gcc (Debian 14.2.0-19) 14.2.0
+GNU Make 4.4.1
+Python 3.13.5
+-- Developer: ps shows live guest processes --
+PASS: ps shows live guest processes status=0 elapsed_ms=256 
+         1          0 bash
+         2          1 sleep
+-- Developer: pinned HTTPS clone --
+PASS: pinned HTTPS clone status=0 elapsed_ms=3462 
+51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf zlib 1.3.1
+Cloning into '/tmp/goblin-developer-1297629745993/zlib'...
+-- Developer: GCC and Make build --
+PASS: GCC and Make build status=0 elapsed_ms=8978 
+hello world
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+		*** zlib test OK ***
+hello world
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+		*** zlib 64-bit test OK ***
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+-- Developer: Python venv and hashed wheel --
+FAILED: Python venv and hashed wheel status=1 elapsed_ms=15656 
+Collecting idna@ https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl (from -r requirements.txt (line 1))
+  WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x794b3d5f4830>: Failed to establish a new connection: [Errno 25] Inappropriate ioctl for device')': /packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl
+  WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x794b3d769e50>: Failed to establish a new connection: [Errno 25] Inappropriate ioctl for device')': /packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl
+  WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x794b3d769f90>: Failed to establish a new connection: [Errno 25] Inappropriate ioctl for device')': /packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl
+  WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x794b3d76a0d0>: Failed to establish a new connection: [Errno 25] Inappropriate ioctl for device')': /packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl
+  WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x794b3d76a210>: Failed to establish a new connection: [Errno 25] Inappropriate ioctl for device')': /packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl
+ERROR: Could not install packages due to an OSError: HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Max retries exceeded with url: /packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl (Caused by NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x794b3d76a350>: Failed to establish a new connection: [Errno 25] Inappropriate ioctl for device'))
+
+Android DNS: queries=12 answers=12 failures=0 last_error=0
+Recent syscall errors:
+ioctl           (0x3, 0x5421, 0x794b3fffdbbc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffdbbc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffdbbc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffdbbc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffdbbc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffdbbc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffdbbc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffdbbc) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd780) = -25
+ioctl           (0, 0x5413, 0x794b3fffd9f8) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffd9f8) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffd9f8) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd780) = -25
+ioctl           (0, 0x5413, 0x794b3fffd9f8) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffd9f8) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffd9f8) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd780) = -25
+ioctl           (0, 0x5413, 0x794b3fffd9f8) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffd9f8) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffd9f8) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd780) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd510) = -25
+syscall_198     (0x10, 0x80003, 0) = -97
+syscall_203     (0x3, 0x11967e0, 0x10) = -97
+ioctl           (0x3, 0x5421, 0x794b3fffd91c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd91c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd91c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd91c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd91c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd91c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd91c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd91c) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd4e0) = -25
+ioctl           (0, 0x5413, 0x794b3fffd758) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffd758) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffd758) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd4e0) = -25
+ioctl           (0, 0x5413, 0x794b3fffd758) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffd758) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffd758) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd4e0) = -25
+ioctl           (0, 0x5413, 0x794b3fffd758) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffd758) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffd758) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd4e0) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd270) = -25
+syscall_198     (0x10, 0x80003, 0) = -97
+syscall_203     (0x3, 0x12e96d0, 0x10) = -97
+ioctl           (0x3, 0x5421, 0x794b3fffd67c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd67c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd67c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd67c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd67c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd67c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd67c) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd67c) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd240) = -25
+ioctl           (0, 0x5413, 0x794b3fffd4b8) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffd4b8) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffd4b8) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd240) = -25
+ioctl           (0, 0x5413, 0x794b3fffd4b8) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffd4b8) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffd4b8) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd240) = -25
+ioctl           (0, 0x5413, 0x794b3fffd4b8) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffd4b8) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffd4b8) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffd240) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffcfd0) = -25
+syscall_198     (0x10, 0x80003, 0) = -97
+syscall_203     (0x3, 0x11967e0, 0x10) = -97
+ioctl           (0x3, 0x5421, 0x794b3fffd3dc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd3dc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd3dc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd3dc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd3dc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd3dc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd3dc) = -25
+ioctl           (0x3, 0x5421, 0x794b3fffd3dc) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffef90) = -25
+ioctl           (0, 0x5413, 0x794b3ffff208) = -25
+ioctl           (0x1, 0x5413, 0x794b3ffff208) = -25
+ioctl           (0x2, 0x5413, 0x794b3ffff208) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffef90) = -25
+ioctl           (0, 0x5413, 0x794b3ffff208) = -25
+ioctl           (0x1, 0x5413, 0x794b3ffff208) = -25
+ioctl           (0x2, 0x5413, 0x794b3ffff208) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffef90) = -25
+ioctl           (0, 0x5413, 0x794b3ffff208) = -25
+ioctl           (0x1, 0x5413, 0x794b3ffff208) = -25
+ioctl           (0x2, 0x5413, 0x794b3ffff208) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffef90) = -25
+ioctl           (0x2, 0x5401, 0x794b3fffed20) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffefe0) = -25
+wait4           (0xffffffffffffffff, 0x794b3fffdc80, 0x1) = -10
+GOBLIN FAIL

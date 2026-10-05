@@ -1,0 +1,16 @@
+test_deleted_files_stay_deleted_across_updates (__main__.DeploymentUpgradeTest.test_deleted_files_stay_deleted_across_updates) ... ok
+test_directory_in_place_of_config_is_preserved (__main__.DeploymentUpgradeTest.test_directory_in_place_of_config_is_preserved) ... ok
+test_edits_and_unrelated_user_data_survive (__main__.DeploymentUpgradeTest.test_edits_and_unrelated_user_data_survive) ... ok
+test_empty_dns_is_a_user_setting (__main__.DeploymentUpgradeTest.test_empty_dns_is_a_user_setting) ... ok
+test_fresh_install_and_unchanged_defaults_upgrade (__main__.DeploymentUpgradeTest.test_fresh_install_and_unchanged_defaults_upgrade) ... ok
+test_legacy_deployment_retains_edits_and_deletions (__main__.DeploymentUpgradeTest.test_legacy_deployment_retains_edits_and_deletions) ... ok
+test_legacy_matching_defaults_can_receive_future_updates (__main__.DeploymentUpgradeTest.test_legacy_matching_defaults_can_receive_future_updates) ... ok
+test_permissions_ownership_and_hard_links_are_preserved (__main__.DeploymentUpgradeTest.test_permissions_ownership_and_hard_links_are_preserved) ... ok
+test_repeated_startup_leaves_files_and_markers_untouched (__main__.DeploymentUpgradeTest.test_repeated_startup_leaves_files_and_markers_untouched) ... ok
+test_retry_after_live_file_was_updated_before_snapshot (__main__.DeploymentUpgradeTest.test_retry_after_live_file_was_updated_before_snapshot) ... ok
+test_symlinks_including_dangling_links_are_preserved (__main__.DeploymentUpgradeTest.test_symlinks_including_dangling_links_are_preserved) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.685s
+
+OK

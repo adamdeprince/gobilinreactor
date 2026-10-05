@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "serial": "emulator-5554",
+  "apk_sha256": "1350c30cdf91fe2ab660fd99b2f312b3b7e39f533a9b89c04310674659af1f2e",
+  "kernel_before": "#9 SMP Sat Sep 19 23:54:50 UTC 2026",
+  "kernel_after": "#10 SMP Sun Sep 20 00:05:46 UTC 2026",
+  "kernel_sha256": "0205c85d6c5550df689d83fb292cfd4bfdc603498c95c873f1556a019764720d",
+  "initramfs_sha256": "ecaa17792dba0844b01e6ce3255b4426ee1d3d9c7f54c2ccc77411fe8169342c",
+  "running_init_sha256": "6e1c2bb4734ee3044848cdda4bd8e66e06606a45021be467fe5addcd88a90d11",
+  "deployment": "1586f51334c68c6e87bf4172aba975ce2a7c1823b8a6c4a9a690ba7c27394509",
+  "preserved_paths": 15,
+  "preserved_packages": 188,
+  "same_disk": true,
+  "edited_and_deleted_config_tested": true
+}

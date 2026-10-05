@@ -1,0 +1,7 @@
+Warning: Activity not started, intent has been delivered to currently running top-most instance.
+PASS: extra keys are visible without a physical keyboard
+PASS: connecting a physical keyboard hides the extra keys
+PASS: terminal menu remains accessible with the extra keys hidden
+PASS: physical keyboard input executes in the terminal
+PASS: disconnecting the physical keyboard restores the extra keys
+TERMINAL KEYBOARD PASS

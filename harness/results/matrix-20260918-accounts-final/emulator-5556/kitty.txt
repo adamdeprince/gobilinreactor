@@ -1,0 +1,85 @@
+INSTRUMENTATION_RESULT: stream=PASS: upstream kitty screen displays the guest Bash prompt
+PASS: goblin starts in /home/goblin with a real unprivileged UID and protected system files
+PASS: IME commits accented, wide, combining and supplementary Unicode through Bash
+PASS: IME composition replaces pre-edit text before committing
+PASS: less paints, navigates and restores the alternate screen
+FAILED: java.lang.AssertionError: Vim writes Unicode; screen=café 界 é 🙂 
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+:wq
+café 界 é 🙂 
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+~                                                                  
+:wq
+
+INSTRUMENTATION_CODE: 0

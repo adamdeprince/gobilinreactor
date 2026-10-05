@@ -1,0 +1,1134 @@
+== goblin-linux: isolated stub and memory ABI regression harness ==
+page size            16384
+memfd exec           supported (sealed, shared)
+guest window         0x7fb400000000 - 0x7fb440000000 (4 GiB aligned)
+core regressions     68 checks passed
+
+-- guest: hello --
+image                2544 bytes
+loaded               bias=0x7fb401000000 entry=0x7fb40100428c
+  mapped span        0x7fb401000000 - 0x7fb40100c000
+  executable         0x7fb401004000 - 0x7fb401008000
+  backing            sealed memfd
+  syscall trace:
+    write           (0x1, 0x7fb401000238, 0xd) = 13
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 2 syscalls
+
+-- guest: bench --
+image                2592 bytes
+loaded               bias=0x7fb401000000 entry=0x7fb401004284
+  mapped span        0x7fb401000000 - 0x7fb40100c000
+  executable         0x7fb401004000 - 0x7fb401008000
+  backing            sealed memfd
+exited               status 0 after 200002 syscalls
+cost                 38723 ns per syscall total
+  of which             82 ns in the sentry, 38641 ns in signal delivery
+
+-- guest: memtest --
+image                3528 bytes
+loaded               bias=0x7fb401000000 entry=0x7fb40100439c
+  mapped span        0x7fb401000000 - 0x7fb40100c000
+  executable         0x7fb401004000 - 0x7fb401008000
+  backing            sealed memfd
+  syscall trace:
+    brk             (0, 0, 0) = 0x7fb40100c000
+    brk             (0x7fb40101c000, 0, 0) = 0x7fb40101c000
+    mmap            (0, 0x4000, 0x3) = 0x7fb43f7fc000
+    mprotect        (0x7fb43f7fc000, 0x4000, 0x1) = 0
+    munmap          (0x7fb43f7fc000, 0x4000, 0) = 0
+    mmap            (0, 0x4000, 0x3) = 0x7fb43f7fc000
+    write           (0x1, 0x7fb40100026f, 0xb) = 11
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 8 syscalls
+
+-- guest: memerrors --
+image                4016 bytes
+loaded               bias=0x7fb401000000 entry=0x7fb4010042cc
+  mapped span        0x7fb401000000 - 0x7fb40100c000
+  executable         0x7fb401004000 - 0x7fb401008000
+  backing            sealed memfd
+  syscall trace:
+    brk             (0, 0, 0) = 0x7fb40100c000
+    brk             (0x7fb40100c001, 0, 0) = 0x7fb40100c001
+    brk             (0x7fb40100c002, 0, 0) = 0x7fb40100c002
+    brk             (0x7fb40100c001, 0, 0) = 0x7fb40100c001
+    mmap            (0, 0xffffffffffffffff, 0x3) = -12
+    mmap            (0x7fb40100c001, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x40000000) = -22
+    mmap            (0, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x3) = 0x7fb43f7fc000
+    mmap            (0x7fb43f7fc000, 0x4000, 0x3) = -17
+    madvise         (0x7fb43f7fc000, 0x4000, 0x4) = 0
+    madvise         (0x7fb43f7fc000, 0x4000, 0x7fffffff) = -22
+    mprotect        (0x7fb43f7fc000, 0x4000, 0x40000000) = -22
+    munmap          (0x7fb43f7fc000, 0x4000, 0) = 0
+    mprotect        (0x7fb43f7fc000, 0x4000, 0x1) = -12
+    madvise         (0x7fb43f7fc000, 0x4000, 0x4) = -12
+    munmap          (0x7fb43f7fc000, 0x4000, 0) = 0
+    mmap            (0x7fb43f7fc000, 0x4000, 0x3) = 0x7fb43f7fc000
+    mmap            (0, 0x4000, 0x3) = 0x7fb43f7f8000
+    madvise         (0x7fb43f7f8000, 0x4000, 0x8) = -22
+    write           (0x1, 0x7fb401000238, 0x11) = 17
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 23 syscalls
+
+-- guest: isolation --
+image                3600 bytes
+loaded               bias=0x7fb401000000 entry=0x7fb4010042dc
+  mapped span        0x7fb401000000 - 0x7fb40100c000
+  executable         0x7fb401004000 - 0x7fb401008000
+  backing            sealed memfd
+  syscall trace:
+    getpid          (0, 0, 0) = 1
+    getpid          (0, 0, 0) = 1
+    brk             (0, 0, 0) = 0x7fb40100c000
+    openat          (0xffffffffffffff9c, 0x7fb43ffffdf0, 0) = -2
+    clone           (0x10011, 0, 0) = -22
+    syscall_167     (0, 0, 0) = -38
+    getpid          (0, 0, 0) = 1
+    write           (0x1, 0x7fb40100024a, 0x15) = 21
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 9 syscalls
+
+-- guest: oldcode --
+image                2776 bytes
+loaded               bias=0x7fb401000000 entry=0x7fb4010042d4
+  mapped span        0x7fb401000000 - 0x7fb40100c000
+  executable         0x7fb401004000 - 0x7fb401008000
+  backing            sealed memfd
+expected fault       guest terminated: Segmentation fault
+
+-- guest: badstack --
+image                2088 bytes
+loaded               bias=0x7fb401000000 entry=0x7fb401004200
+  mapped span        0x7fb401000000 - 0x7fb40100c000
+  executable         0x7fb401004000 - 0x7fb401008000
+  backing            sealed memfd
+  syscall trace:
+    getpid          (0, 0, 0) = 1
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 2 syscalls
+
+-- guest: process --
+image                5520 bytes
+loaded               bias=0x7fb401000000 entry=0x7fb40100435c
+  mapped span        0x7fb401000000 - 0x7fb401010000
+  executable         0x7fb401004000 - 0x7fb401008000
+  backing            sealed memfd
+  syscall trace:
+    mmap            (0, 0x4000, 0x3) = 0x7fb43f7fc000
+    mmap            (0, 0x4000, 0x3) = 0x7fb43f7f8000
+    mprotect        (0x7fb43f7f8000, 0x4000, 0) = 0
+    pipe2           (0x7fb43ffffe38, 0, 0) = 0
+    clone           (0x1300011, 0, 0x7fb43ffffe34) = 2
+    close           (0x4, 0, 0) = 0
+    gettid          (0, 0, 0) = 2
+    mprotect        (0x7fb43f7f8000, 0x4000, 0x1) = 0
+    close           (0x3, 0, 0) = 0
+    syscall_24      (0x4, 0x13, 0x80000) = 19
+    fcntl           (0x13, 0x1, 0) = 1
+    close           (0x4, 0, 0) = 0
+    futex           (0x7fb43f7fc000, 0x1, 0x1) = 1
+    futex           (0x7fb43f7fc000, 0, 0) = 0
+    write           (0x13, 0x7fb43ffffe00, 0x5) = 5
+    read            (0x3, 0x7fb43ffffe18, 0x8) = 5
+    exit_group      (0x17, 0, 0) = 0
+    read            (0x3, 0x7fb43ffffe18, 0x8) = 0
+    wait4           (0x2, 0x7fb43ffffe14, 0) = 2
+    wait4           (0x2, 0x7fb43ffffe14, 0x1) = -10
+    mprotect        (0x7fb43f7f8000, 0x4000, 0x1) = 0
+    futex           (0x7fb43f7fc000, 0, 0x2a) = -110
+    futex           (0x7fb43f7fc000, 0, 0) = -11
+    clone           (0x11, 0, 0) = 3
+    kill            (0x3, 0x13, 0) = 0
+    wait4           (0x3, 0x7fb43ffffe14, 0x2) = 3
+    kill            (0x3, 0x12, 0) = 0
+    wait4           (0x3, 0x7fb43ffffe14, 0x8) = 3
+    kill            (0x3, 0xf, 0) = 0
+    wait4           (0x3, 0x7fb43ffffe14, 0) = 3
+    clone           (0x4111, 0, 0) = 4
+    exit_group      (0, 0, 0) = 0
+    wait4           (0x4, 0x7fb43ffffe14, 0) = 4
+    write           (0x1, 0x7fb4010002b0, 0x26) = 38
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 37 syscalls
+
+-- guest: signals --
+image                4120 bytes
+loaded               bias=0x7fb401000000 entry=0x7fb401004354
+  mapped span        0x7fb401000000 - 0x7fb401010000
+  executable         0x7fb401004000 - 0x7fb401008000
+  backing            sealed memfd
+  syscall trace:
+    mmap            (0, 0x20000, 0x3) = 0x7fb43f7e0000
+    syscall_132     (0x7fb43ffffe28, 0, 0) = 0
+    rt_sigaction    (0xa, 0x7fb43ffffe08, 0) = 0
+    rt_sigprocmask  (0, 0x7fb43ffffe00, 0) = 0
+    kill            (0x1, 0xa, 0) = 0
+    syscall_136     (0x7fb43ffffdf8, 0x8, 0) = 0
+    rt_sigprocmask  (0x1, 0x7fb43ffffe00, 0) = 0
+    rt_sigreturn    (0xa, 0x7fb43f7fedb0, 0x7fb43f7fee30) = 0
+    clone           (0x11, 0, 0) = 2
+    kill            (0x1, 0xa, 0) = 0
+    exit_group      (0, 0, 0) = 0
+    rt_sigreturn    (0xa, 0x7fb43f7fedb0, 0x7fb43f7fee30) = -4
+    wait4           (0x2, 0x7fb43ffffdcc, 0) = 2
+    kill            (0xf423f, 0x9, 0) = -3
+    write           (0x1, 0x7fb401000270, 0x24) = 36
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 18 syscalls
+VFS/ELF regressions  21 checks passed
+-- Debian: /bin/true --
+PASS: /bin/true status=0 syscalls=21 stdout=
+-- Debian: /tmp/filemap --
+PASS: /tmp/filemap status=0 syscalls=26 stdout=file mapping coherence and faults ok
+
+-- Debian: /tmp/pthreads --
+PASS: /tmp/pthreads status=0 syscalls=95 stdout=pthread TLS, locks, conditions, signals, preemption and robust recovery ok
+
+-- Debian: /tmp/fdexec --
+PASS: /tmp/fdexec status=0 syscalls=21 stdout=exec descriptors and signals ok
+
+-- Debian: /bin/echo --
+PASS: /bin/echo status=0 syscalls=29 stdout=Debian ARM64 works
+
+-- Debian: /bin/dash --
+PASS: /bin/dash status=7 syscalls=105 stdout=child
+
+-- Debian: /bin/dash --
+PASS: /bin/dash status=0 syscalls=152 stdout=pipeline works
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=197 stdout=bash works
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=163 stdout=signal caught
+after signal
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=512 stdout=printf 'pty ready\n' | /bin/cat
+exit 0
+bash-5.2# printf 'pty ready\n' | /bin/cat
+pty ready
+bash-5.2# exit 0
+exit
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=211 stdout=parent
+child
+/root
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=126 stdout=signal-status:143
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=244 stdout=y
+y
+y
+
+-- Debian: /bin/bash --
+FAILED: /bin/bash status=1 syscalls=355 stdout=dpkg: error: error creating new backup file '/var/lib/dpkg/status-old': Permission denied
+
+error:  stderr: 
+  brk             (0, 0, 0) = 0x7fb401174000
+  faccessat       (0xffffffffffffff9c, 0x7fb400222ea0, 0x4) = -2
+  openat          (0xffffffffffffff9c, 0x7fb400220d10, 0x80000) = -2
+  openat          (0xffffffffffffff9c, 0x7fb43fffec80, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef20, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffeda0, 0x3) = 0
+  mmap            (0, 0x508d0, 0) = 0x7fb43f7ac000
+  mmap            (0x7fb43f7b0000, 0x408d0, 0x5) = 0x7fb43f7b0000
+  munmap          (0x7fb43f7ac000, 0x4000, 0x7fb43f7b0000) = 0
+  munmap          (0x7fb43f7f4000, 0x88d0, 0x7fb43f7b0000) = 0
+  mprotect        (0x7fb43f7e0000, 0xc000, 0) = 0
+  mmap            (0x7fb43f7ec000, 0x8000, 0x3) = 0x7fb43f7ec000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffec60, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef00, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffed80, 0x3) = 0
+  mmap            (0, 0x1ce010, 0) = 0x7fb43f5e0000
+  mmap            (0x7fb43f5e0000, 0x1be010, 0x5) = 0x7fb43f5e0000
+  munmap          (0x7fb43f7a0000, 0xe010, 0x7fb43f5e0000) = 0
+  mprotect        (0x7fb43f77c000, 0x10000, 0) = 0
+  mmap            (0x7fb43f78c000, 0x8000, 0x3) = 0x7fb43f78c000
+  mmap            (0x7fb43f794000, 0xa010, 0x3) = 0x7fb43f794000
+  close           (0x3, 0x3, 0x6) = 0
+  mmap            (0, 0x8000, 0x3) = 0x7fb43f7f8000
+  set_tid_address (0x7fb43f7f80f0, 0x7fb400240000, 0x7fb43f7f80e0) = 1
+  set_robust_list (0x7fb43f7f8100, 0x18, 0x7fb43f7f8100) = 0
+  rseq            (0x7fb43f7f8800, 0x20, 0) = -38
+  mprotect        (0x7fb43f78c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43f7ec000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb401158000, 0x8000, 0x1) = 0
+  mprotect        (0x7fb40023c000, 0x4000, 0x1) = 0
+  prlimit64       (0, 0x3, 0) = 0
+  openat          (0xffffffffffffff9c, 0x7fb401103110, 0x802) = -6
+  ioctl           (0, 0x5401, 0x7fb43ffffa00) = -25
+  getrandom       (0x7fb43f796768, 0x8, 0x1) = 8
+  brk             (0, 0, 0x202b0) = 0x7fb401174000
+  brk             (0x7fb401198000, 0x7fb401198000, 0x7fb43f797320) = 0x7fb401198000
+  getuid          (0, 0x7fb43f78e808, 0) = 0
+  getgid          (0x7fb401160000, 0xffffffff, 0) = 0
+  geteuid         (0, 0xffffffff, 0) = 0
+  getegid         (0, 0xffffffff, 0) = 0
+  rt_sigprocmask  (0, 0, 0x7fb4011684d8) = 0
+  syscall_169     (0x7fb4011685b8, 0, 0x7fb43fffffe6) = 0
+  rt_sigaction    (0x11, 0x7fb43ffff698, 0x7fb43ffff730) = 0
+  rt_sigaction    (0x11, 0x7fb43ffff698, 0x7fb43ffff730) = 0
+  rt_sigaction    (0x2, 0x7fb43ffff698, 0x7fb43ffff730) = 0
+  rt_sigaction    (0x2, 0x7fb43ffff698, 0x7fb43ffff730) = 0
+  rt_sigaction    (0x3, 0x7fb43ffff698, 0x7fb43ffff730) = 0
+  rt_sigaction    (0x3, 0x7fb43ffff698, 0x7fb43ffff730) = 0
+  rt_sigaction    (0x14, 0x7fb43ffff678, 0x7fb43ffff710) = 0
+  rt_sigaction    (0x14, 0x7fb43ffff678, 0x7fb43ffff710) = 0
+  rt_sigaction    (0x15, 0x7fb43ffff678, 0x7fb43ffff710) = 0
+  rt_sigaction    (0x15, 0x7fb43ffff678, 0x7fb43ffff710) = 0
+  rt_sigaction    (0x16, 0x7fb43ffff678, 0x7fb43ffff710) = 0
+  rt_sigaction    (0x16, 0x7fb43ffff678, 0x7fb43ffff710) = 0
+  rt_sigprocmask  (0, 0, 0x7fb401170160) = 0
+  rt_sigaction    (0x3, 0x7fb43ffff698, 0x7fb43ffff730) = 0
+  uname           (0x7fb43ffff7c0, 0xff, 0x7fb40023fb60) = 0
+  getcwd          (0x7fb401178850, 0x4000, 0x7fb43f796000) = 2
+  getpid          (0x7fb4011789f0, 0, 0) = 1
+  getppid         (0x7fb40023fb60, 0, 0) = 0
+  syscall_198     (0x1, 0x80801, 0) = -97
+  syscall_198     (0x1, 0x80801, 0) = -97
+  newfstatat      (0xffffffffffffff9c, 0x7fb43f746ee0, 0x7fb43ffff470) = 0
+  newfstatat      (0xffffffffffffff9c, 0x7fb43f73ed28, 0x7fb43ffff598) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43f746ee0, 0x80000) = 3
+  fstat           (0x3, 0x7fb43ffff398, 0x7fb43f65e40c) = 0
+  read            (0x3, 0x7fb401179b30, 0x1000) = 44
+  read            (0x3, 0x7fb401179b30, 0x1000) = 0
+  fstat           (0x3, 0x7fb43ffff470, 0x7fb40023fb60) = 0
+  close           (0x3, 0x7fb43f65e460, 0x808) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43f7479e0, 0x80000) = 3
+  fstat           (0x3, 0x7fb43ffff4f8, 0x7fb43f65e40c) = 0
+  lseek           (0x3, 0, 0) = 0
+  read            (0x3, 0x7fb401179b30, 0x1000) = 32
+  close           (0x3, 0x7fb43f65e460, 0x808) = 0
+  syscall_169     (0x7fb43ffff878, 0, 0x7fb40023fb60) = 0
+  getpid          (0xa73f9, 0, 0x7fb40023fb60) = 1
+  getppid         (0x1, 0, 0x7fb40023fb60) = 0
+  syscall_169     (0x7fb43ffff888, 0, 0x7fb40023fb60) = 0
+  getpid          (0, 0, 0x7fb40023fb60) = 1
+  getppid         (0x1, 0, 0x7fb40023fb60) = 0
+  syscall_155     (0, 0, 0) = 1
+  ioctl           (0x2, 0x540f, 0x7fb43ffff914) = -25
+  rt_sigaction    (0x11, 0x7fb43ffff678, 0x7fb43ffff710) = 0
+  ioctl           (0x2, 0x540f, 0x7fb43ffff8c4) = -25
+  prlimit64       (0, 0x6, 0) = 0
+  rt_sigprocmask  (0, 0, 0x7fb4011700d8) = 0
+  rt_sigprocmask  (0, 0, 0x7fb43ffff9c8) = 0
+  rt_sigprocmask  (0, 0, 0x7fb43ffff2c8) = 0
+  rt_sigprocmask  (0, 0x7fb43ffff1c8, 0x7fb43ffff248) = 0
+  rt_sigprocmask  (0, 0x7fb43f7488a8, 0x7fb43ffff030) = 0
+  clone           (0x1200011, 0, 0) = 2
+  rt_sigprocmask  (0x2, 0x7fb43ffff030, 0) = 0
+  rt_sigprocmask  (0x2, 0x7fb43ffff248, 0) = 0
+  rt_sigprocmask  (0, 0x7fb43ffff1c8, 0x7fb43ffff248) = 0
+  rt_sigprocmask  (0x2, 0x7fb43ffff248, 0) = 0
+  rt_sigprocmask  (0, 0x7fb43ffff2c8, 0x7fb43ffff348) = 0
+  rt_sigaction    (0x2, 0x7fb43fffeff8, 0x7fb43ffff090) = 0
+  set_robust_list (0x7fb43f7f8100, 0x18, 0) = 0
+  rt_sigprocmask  (0x2, 0x7fb43ffff030, 0) = 0
+  getpid          (0x100, 0, 0) = 2
+  rt_sigprocmask  (0x2, 0x7fb401170160, 0) = 0
+  rt_sigaction    (0x14, 0x7fb43fffeed8, 0x7fb43fffef70) = 0
+  rt_sigaction    (0x15, 0x7fb43fffeed8, 0x7fb43fffef70) = 0
+  rt_sigaction    (0x16, 0x7fb43fffeee8, 0x7fb43fffef80) = 0
+  rt_sigaction    (0x2, 0x7fb43ffff098, 0x7fb43ffff130) = 0
+  rt_sigaction    (0x3, 0x7fb43ffff098, 0x7fb43ffff130) = 0
+  rt_sigaction    (0x11, 0x7fb43ffff098, 0x7fb43ffff130) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4011828d0, 0x241) = 3
+  syscall_24      (0x3, 0x1, 0) = 1
+  close           (0x3, 0, 0) = 0
+  syscall_24      (0x1, 0x2, 0) = 2
+  fcntl           (0x1, 0x1, 0) = 0
+  execve          (0x7fb401182430, 0x7fb401182910, 0x7fb401182450) = 0
+  brk             (0, 0, 0) = 0x7fb4012e8000
+  faccessat       (0xffffffffffffff9c, 0x7fb400222ea0, 0x4) = -2
+  openat          (0xffffffffffffff9c, 0x7fb400220d10, 0x80000) = -2
+  openat          (0xffffffffffffff9c, 0x7fb43fffecc0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef60, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffede0, 0x3) = 0
+  mmap            (0, 0x30058, 0) = 0x7fb43f7cc000
+  mmap            (0x7fb43f7d0000, 0x20058, 0x5) = 0x7fb43f7d0000
+  munmap          (0x7fb43f7cc000, 0x4000, 0x7fb43f7d0000) = 0
+  munmap          (0x7fb43f7f4000, 0x8058, 0x7fb43f7d0000) = 0
+  mprotect        (0x7fb43f7e0000, 0xc000, 0) = 0
+  mmap            (0x7fb43f7ec000, 0x8000, 0x3) = 0x7fb43f7ec000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffeca0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef40, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffedc0, 0x3) = 0
+  mmap            (0, 0x62638, 0) = 0x7fb43f76c000
+  mmap            (0x7fb43f770000, 0x52638, 0x5) = 0x7fb43f770000
+  munmap          (0x7fb43f76c000, 0x4000, 0x7fb43f770000) = 0
+  munmap          (0x7fb43f7c4000, 0xa638, 0x7fb43f770000) = 0
+  mprotect        (0x7fb43f7a4000, 0x18000, 0) = 0
+  mmap            (0x7fb43f7bc000, 0x8000, 0x3) = 0x7fb43f7bc000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffec80, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef20, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffeda0, 0x3) = 0
+  mmap            (0, 0x1ce010, 0) = 0x7fb43f5a0000
+  mmap            (0x7fb43f5a0000, 0x1be010, 0x5) = 0x7fb43f5a0000
+  munmap          (0x7fb43f760000, 0xe010, 0x7fb43f5a0000) = 0
+  mprotect        (0x7fb43f73c000, 0x10000, 0) = 0
+  mmap            (0x7fb43f74c000, 0x8000, 0x3) = 0x7fb43f74c000
+  mmap            (0x7fb43f754000, 0xa010, 0x3) = 0x7fb43f754000
+  close           (0x3, 0x3, 0x6) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffec40, 0x80000) = 3
+  read            (0x3, 0x7fb43fffeee0, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffed60, 0x3) = 0
+  mmap            (0, 0xc0288, 0) = 0x7fb43f4dc000
+  mmap            (0x7fb43f4e0000, 0xb0288, 0x5) = 0x7fb43f4e0000
+  munmap          (0x7fb43f4dc000, 0x4000, 0x7fb43f4e0000) = 0
+  munmap          (0x7fb43f594000, 0x8288, 0x7fb43f4e0000) = 0
+  mprotect        (0x7fb43f578000, 0x14000, 0) = 0
+  mmap            (0x7fb43f58c000, 0x8000, 0x3) = 0x7fb43f58c000
+  close           (0x3, 0x3, 0x1) = 0
+  mmap            (0, 0x8000, 0x3) = 0x7fb43f7f8000
+  set_tid_address (0x7fb43f7f80f0, 0x7fb400240000, 0x7fb43f7f80e0) = 2
+  set_robust_list (0x7fb43f7f8100, 0x18, 0x7fb43f7f8100) = 0
+  rseq            (0x7fb43f7f88e0, 0x20, 0) = -38
+  mprotect        (0x7fb43f74c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43f58c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43f7bc000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43f7ec000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb40105c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb40023c000, 0x4000, 0x1) = 0
+  prlimit64       (0, 0x3, 0) = 0
+  syscall_43      (0x7fb43f797a48, 0x7fb43ffffc50, 0) = -2
+  syscall_43      (0x7fb43f797a58, 0x7fb43ffffc50, 0) = -2
+  getrandom       (0x7fb43f756768, 0x8, 0x1) = 8
+  brk             (0, 0, 0x202b0) = 0x7fb4012e8000
+  brk             (0x7fb40130c000, 0x7fb40130c000, 0x7fb43f757320) = 0x7fb40130c000
+  openat          (0xffffffffffffff9c, 0x7fb43f797a20, 0x80000) = -2
+  openat          (0xffffffffffffff9c, 0x7fb43f797a68, 0x80000) = -2
+  faccessat       (0xffffffffffffff9c, 0x7fb43f797a88, 0) = -2
+  ioctl           (0x1, 0x5401, 0x7fb43ffffb50) = -25
+  syscall_166     (0x12, 0x7fb401022960, 0x7fb4010222a0) = 18
+  openat          (0xffffffffffffff9c, 0x7fb4012e8510, 0x84800) = 3
+  fstat           (0x3, 0x7fb43ffffae8, 0) = 0
+  getdents64      (0x3, 0x7fb4012e8560, 0x8000) = 48
+  getdents64      (0x3, 0x7fb4012e8560, 0x8000) = 0
+  close           (0x3, 0x3abf, 0x7fb43f750000) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4012e8510, 0) = 3
+  fstat           (0x3, 0x7fb43ffff568, 0x7fb43f61e40c) = 0
+  read            (0x3, 0x7fb4012e8530, 0x1000) = 446
+  read            (0x3, 0x7fb4012e8530, 0x1000) = 0
+  close           (0x3, 0x7fb43f61e460, 0x808) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4012e8510, 0) = -2
+  getuid          (0, 0x4004000, 0) = 0
+  getgid          (0, 0x4004000, 0) = 0
+  getuid          (0, 0, 0x1) = 0
+  geteuid         (0, 0, 0x1) = 0
+  getuid          (0x7fb4010606c0, 0, 0x16) = 0
+  geteuid         (0, 0, 0x16) = 0
+  faccessat       (0xffffffffffffff9c, 0x7fb4012e8530, 0x2) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4012e8790, 0x242) = 3
+  openat          (0xffffffffffffff9c, 0x7fb4012e8770, 0x242) = 4
+  fcntl           (0x3, 0x1, 0x7fb40023fb60) = 0
+  fcntl           (0x3, 0x2, 0x1) = 0
+  fcntl           (0x3, 0x6, 0x7fb43ffff8f0) = 0
+  fcntl           (0x4, 0x1, 0x7fb40023fb60) = 0
+  fcntl           (0x4, 0x2, 0x1) = 0
+  fcntl           (0x4, 0x6, 0x7fb43ffff930) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4012e8880, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012e87c0, 0) = 5
+  fstat           (0x5, 0x7fb43ffff8c8, 0) = 0
+  read            (0x5, 0x7fb4012e9560, 0x1881) = 6273
+  close           (0x5, 0, 0) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4012e8800, 0x84800) = 5
+  fstat           (0x5, 0x7fb43ffff8c8, 0) = 0
+  getdents64      (0x5, 0x7fb4012f1e40, 0x8000) = 48
+  getdents64      (0x5, 0x7fb4012f1e40, 0x8000) = 0
+  close           (0x5, 0, 0) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4012e8820, 0x241) = 5
+  fcntl           (0x5, 0x1, 0) = 0
+  fcntl           (0x5, 0x2, 0x1) = 0
+  fstat           (0x5, 0x7fb43ffff7c8, 0x7fb43f61e40c) = 0
+  write           (0x5, 0x7fb4012e9560, 0x1000) = 4096
+  write           (0x5, 0x7fb4012e9560, 0x200) = 512
+  lseek           (0x5, 0, 0) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4012ea570, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012ea780, 0x242) = 6
+  fcntl           (0x6, 0x1, 0x7fb40023fb60) = 0
+  fcntl           (0x6, 0x2, 0x1) = 0
+  fcntl           (0x6, 0x7, 0x7fb43ffff830) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4012ea780, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012ea800, 0x241) = 7
+  fcntl           (0x7, 0x1, 0) = 0
+  fcntl           (0x7, 0x2, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb4012ea8a0, 0) = -2
+  newfstatat      (0xffffffffffffff9c, 0x7fb4012ea8d0, 0x7fb43ffff818) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012ea840, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012ea840, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012ea840, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012ea840, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012ea840, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012eaae0, 0) = -2
+  openat          (0xffffffffffffff9c, 0x7fb4012ea870, 0x241) = 8
+  syscall_52      (0x8, 0x1a4, 0) = 0
+  write           (0x8, 0x7fb4010607b0, 0x1881) = 6273
+  syscall_82      (0x8, 0, 0) = 0
+  close           (0x8, 0x7fb43f61e460, 0) = 0
+  syscall_35      (0xffffffffffffff9c, 0x7fb4012ea8a0, 0) = -2
+  syscall_37      (0xffffffffffffff9c, 0x7fb4012ea7e0, 0xffffffffffffff9c) = -13
+  ioctl           (0x1, 0x5401, 0x7fb43ffff410) = -25
+  write           (0x2, 0x7fb43ffff318, 0x5a) = 90
+  fcntl           (0x6, 0x6, 0x7fb43ffff500) = 0
+  fcntl           (0x4, 0x6, 0x7fb43ffff500) = 0
+  fcntl           (0x3, 0x6, 0x7fb43ffff500) = 0
+  exit_group      (0x2, 0x2, 0x7fb43f7f8740) = 0
+  wait4           (0xffffffffffffffff, 0x7fb43ffff240, 0) = 2
+  rt_sigaction    (0x2, 0x7fb43fffeff8, 0x7fb43ffff090) = 0
+  ioctl           (0x2, 0x5413, 0x7fb43ffff280) = -25
+  rt_sigprocmask  (0x2, 0x7fb43ffff348, 0) = 0
+  wait4           (0xffffffffffffffff, 0x7fb43fffdf20, 0x1) = -10
+  rt_sigreturn    (0xffffffff, 0, 0) = 0
+  rt_sigprocmask  (0, 0, 0x7fb43fffef68) = 0
+  rt_sigprocmask  (0, 0x7fb43fffee68, 0x7fb43fffeee8) = 0
+  rt_sigprocmask  (0, 0x7fb43f7488a8, 0x7fb43fffecd0) = 0
+  clone           (0x1200011, 0, 0) = 3
+  rt_sigprocmask  (0x2, 0x7fb43fffecd0, 0) = 0
+  rt_sigprocmask  (0x2, 0x7fb43fffeee8, 0) = 0
+  rt_sigprocmask  (0, 0x7fb43fffee68, 0x7fb43fffeee8) = 0
+  rt_sigprocmask  (0x2, 0x7fb43fffeee8, 0) = 0
+  rt_sigprocmask  (0, 0x7fb43fffef68, 0x7fb43fffefe8) = 0
+  rt_sigaction    (0x2, 0x7fb43fffec98, 0x7fb43fffed30) = 0
+  set_robust_list (0x7fb43f7f8100, 0x18, 0) = 0
+  rt_sigprocmask  (0x2, 0x7fb43fffecd0, 0) = 0
+  getpid          (0x100, 0, 0) = 3
+  rt_sigprocmask  (0x2, 0x7fb401170160, 0) = 0
+  rt_sigaction    (0x14, 0x7fb43fffeb78, 0x7fb43fffec10) = 0
+  rt_sigaction    (0x15, 0x7fb43fffeb78, 0x7fb43fffec10) = 0
+  rt_sigaction    (0x16, 0x7fb43fffeb88, 0x7fb43fffec20) = 0
+  rt_sigaction    (0x2, 0x7fb43fffed38, 0x7fb43fffedd0) = 0
+  rt_sigaction    (0x3, 0x7fb43fffed38, 0x7fb43fffedd0) = 0
+  rt_sigaction    (0x11, 0x7fb43fffed38, 0x7fb43fffedd0) = 0
+  execve          (0x7fb401182bb0, 0x7fb4011828b0, 0x7fb401182450) = 0
+  brk             (0, 0, 0) = 0x7fb401024000
+  faccessat       (0xffffffffffffff9c, 0x7fb400222ea0, 0x4) = -2
+  openat          (0xffffffffffffff9c, 0x7fb400220d10, 0x80000) = -2
+  openat          (0xffffffffffffff9c, 0x7fb43fffece0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef80, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffee00, 0x3) = 0
+  mmap            (0, 0x1ce010, 0) = 0x7fb43f630000
+  mmap            (0x7fb43f630000, 0x1be010, 0x5) = 0x7fb43f630000
+  munmap          (0x7fb43f7f0000, 0xe010, 0x7fb43f630000) = 0
+  mprotect        (0x7fb43f7cc000, 0x10000, 0) = 0
+  mmap            (0x7fb43f7dc000, 0x8000, 0x3) = 0x7fb43f7dc000
+  mmap            (0x7fb43f7e4000, 0xa010, 0x3) = 0x7fb43f7e4000
+  close           (0x3, 0x3, 0x6) = 0
+  set_tid_address (0x7fb400242c30, 0x7fb400240000, 0x7fb400242c20) = 3
+  set_robust_list (0x7fb400242c40, 0x18, 0x7fb400242c40) = 0
+  rseq            (0x7fb400243340, 0x20, 0) = -38
+  mprotect        (0x7fb43f7dc000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb40101c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb40023c000, 0x4000, 0x1) = 0
+  prlimit64       (0, 0x3, 0) = 0
+  getrandom       (0x7fb43f7e6768, 0x8, 0x1) = 8
+  brk             (0, 0, 0x202b0) = 0x7fb401024000
+  brk             (0x7fb401048000, 0x7fb401048000, 0x7fb43f7e7320) = 0x7fb401048000
+  fstat           (0x1, 0x7fb43ffffbb8, 0) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffffd9, 0) = 3
+  fstat           (0x3, 0x7fb43ffffbb8, 0) = 0
+  syscall_223     (0x3, 0, 0) = -38
+  mmap            (0, 0x48000, 0x3) = 0x7fb43f5e8000
+  read            (0x3, 0x7fb43f5ec000, 0x40000) = 90
+  write           (0x1, 0x7fb43f5ec000, 0x5a) = 90
+  read            (0x3, 0x7fb43f5ec000, 0x40000) = 0
+  munmap          (0x7fb43f5e8000, 0x48000, 0) = 0
+  close           (0x3, 0, 0) = 0
+  close           (0x1, 0x7fb43f6ae460, 0x808) = 0
+  close           (0x2, 0x7fb43f6ae460, 0x808) = 0
+  exit_group      (0, 0, 0x7fb400243280) = 0
+  wait4           (0xffffffffffffffff, 0x7fb43fffeee0, 0) = 3
+  rt_sigaction    (0x2, 0x7fb43fffec98, 0x7fb43fffed30) = 0
+  ioctl           (0x2, 0x5413, 0x7fb43fffef20) = -25
+  rt_sigprocmask  (0x2, 0x7fb43fffefe8, 0) = 0
+  wait4           (0xffffffffffffffff, 0x7fb43fffdbc0, 0x1) = -10
+  rt_sigreturn    (0xffffffff, 0, 0) = 0
+  rt_sigprocmask  (0, 0x7fb43ffff968, 0x7fb43ffff9e8) = 0
+  rt_sigprocmask  (0x2, 0x7fb43ffff9e8, 0) = 0
+  exit_group      (0x1, 0x1, 0x7fb43f7f8740) = 0
+-- Debian: /bin/bash --
+FAILED: /bin/bash status=1 syscalls=8244 stdout=Ign:1 http://localhost:41595 ./ InRelease
+Ign:2 http://localhost:41595 ./ Release
+Err:3 http://localhost:41595 ./ Packages
+  404  Not Found [IP: 127.0.0.1 41595]
+Err:3 http://localhost:41595 ./ Packages
+  404  Not Found [IP: 127.0.0.1 41595]
+Err:3 http://localhost:41595 ./ Packages
+  404  Not Found [IP: 127.0.0.1 41595]
+Err:3 http://localhost:41595 ./ Packages
+  404  Not Found [IP: 127.0.0.1 41595]
+Err:3 http://localhost:41595 ./ Packages
+  404  Not Found [IP: 127.0.0.1 41595]
+Err:3 http://localhost:41595 ./ Packages
+  404  Not Found [IP: 127.0.0.1 41595]
+Get:3 http://localhost:41595 ./ Packages [226 B]
+Fetched 226 B in 0s (5359 B/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+The following NEW packages will be installed:
+  hello
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 52.7 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Get:1 http://localhost:41595 ./ hello 2.10-5 [52.7 kB]
+Fetched 52.7 kB in 0s (2474 kB/s)
+dpkg: error: error creating new backup file '/var/lib/dpkg/status-old': Permission denied
+E: Sub-process /usr/bin/dpkg returned an error code (2)
+
+error:  stderr: 
+  brk             (0, 0, 0) = 0x7fb401174000
+  faccessat       (0xffffffffffffff9c, 0x7fb400222ea0, 0x4) = -2
+  openat          (0xffffffffffffff9c, 0x7fb400220d10, 0x80000) = -2
+  openat          (0xffffffffffffff9c, 0x7fb43fffec40, 0x80000) = 3
+  read            (0x3, 0x7fb43fffeee0, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffed60, 0x3) = 0
+  mmap            (0, 0x508d0, 0) = 0x7fb43f7ac000
+  mmap            (0x7fb43f7b0000, 0x408d0, 0x5) = 0x7fb43f7b0000
+  munmap          (0x7fb43f7ac000, 0x4000, 0x7fb43f7b0000) = 0
+  munmap          (0x7fb43f7f4000, 0x88d0, 0x7fb43f7b0000) = 0
+  mprotect        (0x7fb43f7e0000, 0xc000, 0) = 0
+  mmap            (0x7fb43f7ec000, 0x8000, 0x3) = 0x7fb43f7ec000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffec20, 0x80000) = 3
+  read            (0x3, 0x7fb43fffeec0, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffed40, 0x3) = 0
+  mmap            (0, 0x1ce010, 0) = 0x7fb43f5e0000
+  mmap            (0x7fb43f5e0000, 0x1be010, 0x5) = 0x7fb43f5e0000
+  munmap          (0x7fb43f7a0000, 0xe010, 0x7fb43f5e0000) = 0
+  mprotect        (0x7fb43f77c000, 0x10000, 0) = 0
+  mmap            (0x7fb43f78c000, 0x8000, 0x3) = 0x7fb43f78c000
+  mmap            (0x7fb43f794000, 0xa010, 0x3) = 0x7fb43f794000
+  close           (0x3, 0x3, 0x6) = 0
+  mmap            (0, 0x8000, 0x3) = 0x7fb43f7f8000
+  set_tid_address (0x7fb43f7f80f0, 0x7fb400240000, 0x7fb43f7f80e0) = 1
+  set_robust_list (0x7fb43f7f8100, 0x18, 0x7fb43f7f8100) = 0
+  rseq            (0x7fb43f7f8800, 0x20, 0) = -38
+  mprotect        (0x7fb43f78c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43f7ec000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb401158000, 0x8000, 0x1) = 0
+  mprotect        (0x7fb40023c000, 0x4000, 0x1) = 0
+  prlimit64       (0, 0x3, 0) = 0
+  openat          (0xffffffffffffff9c, 0x7fb401103110, 0x802) = -6
+  ioctl           (0, 0x5401, 0x7fb43ffff9c0) = -25
+  getrandom       (0x7fb43f796768, 0x8, 0x1) = 8
+  brk             (0, 0, 0x202b0) = 0x7fb401174000
+  brk             (0x7fb401198000, 0x7fb401198000, 0x7fb43f797320) = 0x7fb401198000
+  getuid          (0, 0x7fb43f78e808, 0) = 0
+  getgid          (0x7fb401160000, 0xffffffff, 0) = 0
+  geteuid         (0, 0xffffffff, 0) = 0
+  getegid         (0, 0xffffffff, 0) = 0
+  rt_sigprocmask  (0, 0, 0x7fb4011684d8) = 0
+  syscall_169     (0x7fb4011685b8, 0, 0x7fb43fffffe6) = 0
+  rt_sigaction    (0x11, 0x7fb43ffff658, 0x7fb43ffff6f0) = 0
+  rt_sigaction    (0x11, 0x7fb43ffff658, 0x7fb43ffff6f0) = 0
+  rt_sigaction    (0x2, 0x7fb43ffff658, 0x7fb43ffff6f0) = 0
+  rt_sigaction    (0x2, 0x7fb43ffff658, 0x7fb43ffff6f0) = 0
+  rt_sigaction    (0x3, 0x7fb43ffff658, 0x7fb43ffff6f0) = 0
+  rt_sigaction    (0x3, 0x7fb43ffff658, 0x7fb43ffff6f0) = 0
+  rt_sigaction    (0x14, 0x7fb43ffff638, 0x7fb43ffff6d0) = 0
+  rt_sigaction    (0x14, 0x7fb43ffff638, 0x7fb43ffff6d0) = 0
+  rt_sigaction    (0x15, 0x7fb43ffff638, 0x7fb43ffff6d0) = 0
+  rt_sigaction    (0x15, 0x7fb43ffff638, 0x7fb43ffff6d0) = 0
+  rt_sigaction    (0x16, 0x7fb43ffff638, 0x7fb43ffff6d0) = 0
+  rt_sigaction    (0x16, 0x7fb43ffff638, 0x7fb43ffff6d0) = 0
+  rt_sigprocmask  (0, 0, 0x7fb401170160) = 0
+  rt_sigaction    (0x3, 0x7fb43ffff658, 0x7fb43ffff6f0) = 0
+  uname           (0x7fb43ffff780, 0xff, 0x7fb40023fb60) = 0
+  getcwd          (0x7fb401178850, 0x4000, 0x7fb43f796000) = 2
+  getpid          (0x7fb4011789f0, 0, 0) = 1
+  getppid         (0x7fb40023fb60, 0, 0) = 0
+  syscall_198     (0x1, 0x80801, 0) = -97
+  syscall_198     (0x1, 0x80801, 0) = -97
+  newfstatat      (0xffffffffffffff9c, 0x7fb43f746ee0, 0x7fb43ffff430) = 0
+  newfstatat      (0xffffffffffffff9c, 0x7fb43f73ed28, 0x7fb43ffff558) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43f746ee0, 0x80000) = 3
+  fstat           (0x3, 0x7fb43ffff358, 0x7fb43f65e40c) = 0
+  read            (0x3, 0x7fb401179b30, 0x1000) = 44
+  read            (0x3, 0x7fb401179b30, 0x1000) = 0
+  fstat           (0x3, 0x7fb43ffff430, 0x7fb40023fb60) = 0
+  close           (0x3, 0x7fb43f65e460, 0x808) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43f7479e0, 0x80000) = 3
+  fstat           (0x3, 0x7fb43ffff4b8, 0x7fb43f65e40c) = 0
+  lseek           (0x3, 0, 0) = 0
+  read            (0x3, 0x7fb401179b30, 0x1000) = 32
+  close           (0x3, 0x7fb43f65e460, 0x808) = 0
+  syscall_169     (0x7fb43ffff838, 0, 0x7fb40023fb60) = 0
+  getpid          (0xc9352, 0, 0x7fb40023fb60) = 1
+  getppid         (0x1, 0, 0x7fb40023fb60) = 0
+  syscall_169     (0x7fb43ffff848, 0, 0x7fb40023fb60) = 0
+  getpid          (0, 0, 0x7fb40023fb60) = 1
+  getppid         (0x1, 0, 0x7fb40023fb60) = 0
+  syscall_155     (0, 0, 0) = 1
+  ioctl           (0x2, 0x540f, 0x7fb43ffff8d4) = -25
+  rt_sigaction    (0x11, 0x7fb43ffff638, 0x7fb43ffff6d0) = 0
+  ioctl           (0x2, 0x540f, 0x7fb43ffff884) = -25
+  prlimit64       (0, 0x6, 0) = 0
+  rt_sigprocmask  (0, 0, 0x7fb4011700d8) = 0
+  rt_sigprocmask  (0, 0, 0x7fb43ffff988) = 0
+  rt_sigprocmask  (0, 0, 0x7fb43ffff088) = 0
+  rt_sigprocmask  (0, 0x7fb43fffef88, 0x7fb43ffff008) = 0
+  rt_sigprocmask  (0, 0x7fb43f7488a8, 0x7fb43fffedf0) = 0
+  clone           (0x1200011, 0, 0) = 2
+  rt_sigprocmask  (0x2, 0x7fb43fffedf0, 0) = 0
+  rt_sigprocmask  (0x2, 0x7fb43ffff008, 0) = 0
+  rt_sigprocmask  (0, 0x7fb43fffef88, 0x7fb43ffff008) = 0
+  rt_sigprocmask  (0x2, 0x7fb43ffff008, 0) = 0
+  rt_sigprocmask  (0, 0x7fb43ffff088, 0x7fb43ffff108) = 0
+  rt_sigaction    (0x2, 0x7fb43fffedb8, 0x7fb43fffee50) = 0
+  set_robust_list (0x7fb43f7f8100, 0x18, 0) = 0
+  rt_sigprocmask  (0x2, 0x7fb43fffedf0, 0) = 0
+  getpid          (0x100, 0, 0) = 2
+  rt_sigprocmask  (0x2, 0x7fb401170160, 0) = 0
+  rt_sigaction    (0x14, 0x7fb43fffec98, 0x7fb43fffed30) = 0
+  rt_sigaction    (0x15, 0x7fb43fffec98, 0x7fb43fffed30) = 0
+  rt_sigaction    (0x16, 0x7fb43fffeca8, 0x7fb43fffed40) = 0
+  rt_sigaction    (0x2, 0x7fb43fffee58, 0x7fb43fffeef0) = 0
+  rt_sigaction    (0x3, 0x7fb43fffee58, 0x7fb43fffeef0) = 0
+  rt_sigaction    (0x11, 0x7fb43fffee58, 0x7fb43fffeef0) = 0
+  openat          (0xffffffffffffff9c, 0x7fb401182c10, 0x241) = 3
+  syscall_24      (0x3, 0x1, 0) = 1
+  close           (0x3, 0, 0) = 0
+  syscall_24      (0x1, 0x2, 0) = 2
+  fcntl           (0x1, 0x1, 0) = 0
+  execve          (0x7fb401182770, 0x7fb401182c10, 0x7fb401182790) = 0
+  brk             (0, 0, 0) = 0x7fb401024000
+  faccessat       (0xffffffffffffff9c, 0x7fb400222ea0, 0x4) = -2
+  openat          (0xffffffffffffff9c, 0x7fb400220d10, 0x80000) = -2
+  openat          (0xffffffffffffff9c, 0x7fb43fffecd0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef70, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffedf0, 0x3) = 0
+  mmap            (0, 0xd09a8, 0) = 0x7fb43f72c000
+  mmap            (0x7fb43f730000, 0xc09a8, 0x5) = 0x7fb43f730000
+  munmap          (0x7fb43f72c000, 0x4000, 0x7fb43f730000) = 0
+  munmap          (0x7fb43f7f4000, 0x89a8, 0x7fb43f730000) = 0
+  mprotect        (0x7fb43f7d4000, 0x18000, 0) = 0
+  mmap            (0x7fb43f7ec000, 0x8000, 0x3) = 0x7fb43f7ec000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffecb0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef50, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffedd0, 0x3) = 0
+  mmap            (0, 0x261220, 0) = 0x7fb43f4cc000
+  mmap            (0x7fb43f4d0000, 0x251220, 0x5) = 0x7fb43f4d0000
+  munmap          (0x7fb43f4cc000, 0x4000, 0x7fb43f4d0000) = 0
+  munmap          (0x7fb43f724000, 0x9220, 0x7fb43f4d0000) = 0
+  mprotect        (0x7fb43f704000, 0x10000, 0) = 0
+  mmap            (0x7fb43f714000, 0x10000, 0x3) = 0x7fb43f714000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffec90, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef30, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffedb0, 0x3) = 0
+  mmap            (0, 0x276c88, 0) = 0x7fb43f258000
+  mmap            (0x7fb43f260000, 0x266c88, 0x5) = 0x7fb43f260000
+  munmap          (0x7fb43f258000, 0x8000, 0x7fb43f260000) = 0
+  munmap          (0x7fb43f4c8000, 0x6c88, 0x7fb43f260000) = 0
+  mprotect        (0x7fb43f4ac000, 0x8000, 0) = 0
+  mmap            (0x7fb43f4b4000, 0x10000, 0x3) = 0x7fb43f4b4000
+  mmap            (0x7fb43f4c4000, 0x2c88, 0x3) = 0x7fb43f4c4000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffec70, 0x80000) = 3
+  read            (0x3, 0x7fb43fffef10, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffed90, 0x3) = 0
+  mmap            (0, 0x403c0, 0) = 0x7fb43f21c000
+  mmap            (0x7fb43f220000, 0x303c0, 0x5) = 0x7fb43f220000
+  munmap          (0x7fb43f21c000, 0x4000, 0x7fb43f220000) = 0
+  munmap          (0x7fb43f254000, 0x83c0, 0x7fb43f220000) = 0
+  mprotect        (0x7fb43f240000, 0xc000, 0) = 0
+  mmap            (0x7fb43f24c000, 0x8000, 0x3) = 0x7fb43f24c000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffec50, 0x80000) = 3
+  read            (0x3, 0x7fb43fffeef0, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffed70, 0x3) = 0
+  mmap            (0, 0x1ce010, 0) = 0x7fb43f050000
+  mmap            (0x7fb43f050000, 0x1be010, 0x5) = 0x7fb43f050000
+  munmap          (0x7fb43f210000, 0xe010, 0x7fb43f050000) = 0
+  mprotect        (0x7fb43f1ec000, 0x10000, 0) = 0
+  mmap            (0x7fb43f1fc000, 0x8000, 0x3) = 0x7fb43f1fc000
+  mmap            (0x7fb43f204000, 0xa010, 0x3) = 0x7fb43f204000
+  close           (0x3, 0x3, 0x6) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffec10, 0x80000) = 3
+  read            (0x3, 0x7fb43fffeeb0, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffed30, 0x3) = 0
+  mmap            (0, 0x401a0, 0) = 0x7fb43f00c000
+  mmap            (0x7fb43f010000, 0x301a0, 0x5) = 0x7fb43f010000
+  munmap          (0x7fb43f00c000, 0x4000, 0x7fb43f010000) = 0
+  munmap          (0x7fb43f044000, 0x81a0, 0x7fb43f010000) = 0
+  mprotect        (0x7fb43f02c000, 0x10000, 0) = 0
+  mmap            (0x7fb43f03c000, 0x8000, 0x3) = 0x7fb43f03c000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffebf0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffee90, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffed10, 0x3) = 0
+  mmap            (0, 0x8000, 0x3) = 0x7fb43f7f8000
+  mmap            (0, 0x30c10, 0) = 0x7fb43efdc000
+  mmap            (0x7fb43efe0000, 0x20c10, 0x5) = 0x7fb43efe0000
+  munmap          (0x7fb43efdc000, 0x4000, 0x7fb43efe0000) = 0
+  munmap          (0x7fb43f004000, 0x8c10, 0x7fb43efe0000) = 0
+  mprotect        (0x7fb43eff0000, 0xc000, 0) = 0
+  mmap            (0x7fb43effc000, 0x8000, 0x3) = 0x7fb43effc000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffebd0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffee70, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffecf0, 0x3) = 0
+  mmap            (0, 0x50018, 0) = 0x7fb43ef8c000
+  mmap            (0x7fb43ef90000, 0x40018, 0x5) = 0x7fb43ef90000
+  munmap          (0x7fb43ef8c000, 0x4000, 0x7fb43ef90000) = 0
+  munmap          (0x7fb43efd4000, 0x8018, 0x7fb43ef90000) = 0
+  mprotect        (0x7fb43efbc000, 0x10000, 0) = 0
+  mmap            (0x7fb43efcc000, 0x8000, 0x3) = 0x7fb43efcc000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffebb0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffee50, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffecd0, 0x3) = 0
+  mmap            (0, 0x50220, 0) = 0x7fb43ef3c000
+  mmap            (0x7fb43ef40000, 0x40220, 0x5) = 0x7fb43ef40000
+  munmap          (0x7fb43ef3c000, 0x4000, 0x7fb43ef40000) = 0
+  munmap          (0x7fb43ef84000, 0x8220, 0x7fb43ef40000) = 0
+  mprotect        (0x7fb43ef64000, 0x18000, 0) = 0
+  mmap            (0x7fb43ef7c000, 0x8000, 0x3) = 0x7fb43ef7c000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffeb90, 0x80000) = 3
+  read            (0x3, 0x7fb43fffee30, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffecb0, 0x3) = 0
+  mmap            (0, 0xd0098, 0) = 0x7fb43ee6c000
+  mmap            (0x7fb43ee70000, 0xc0098, 0x5) = 0x7fb43ee70000
+  munmap          (0x7fb43ee6c000, 0x4000, 0x7fb43ee70000) = 0
+  munmap          (0x7fb43ef34000, 0x8098, 0x7fb43ee70000) = 0
+  mprotect        (0x7fb43ef1c000, 0x10000, 0) = 0
+  mmap            (0x7fb43ef2c000, 0x8000, 0x3) = 0x7fb43ef2c000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffeb70, 0x80000) = 3
+  read            (0x3, 0x7fb43fffee10, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffec90, 0x3) = 0
+  mmap            (0, 0x60a70, 0) = 0x7fb43ee0c000
+  mmap            (0x7fb43ee10000, 0x50a70, 0x5) = 0x7fb43ee10000
+  munmap          (0x7fb43ee0c000, 0x4000, 0x7fb43ee10000) = 0
+  munmap          (0x7fb43ee64000, 0x8a70, 0x7fb43ee10000) = 0
+  mprotect        (0x7fb43ee50000, 0x8000, 0) = 0
+  mmap            (0x7fb43ee58000, 0xc000, 0x3) = 0x7fb43ee58000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffeb50, 0x80000) = 3
+  read            (0x3, 0x7fb43fffedf0, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffec70, 0x3) = 0
+  mmap            (0, 0x131de8, 0) = 0x7fb43ecdc000
+  mmap            (0x7fb43ece0000, 0x121de8, 0x5) = 0x7fb43ece0000
+  munmap          (0x7fb43ecdc000, 0x4000, 0x7fb43ece0000) = 0
+  munmap          (0x7fb43ee04000, 0x9de8, 0x7fb43ece0000) = 0
+  mmap            (0x7fb43edf0000, 0x14000, 0x3) = 0x7fb43edf0000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffeb30, 0x80000) = 3
+  read            (0x3, 0x7fb43fffedd0, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffec50, 0x3) = 0
+  mmap            (0, 0x625598, 0) = 0x7fb43e6b8000
+  mmap            (0x7fb43e6c0000, 0x615598, 0x5) = 0x7fb43e6c0000
+  munmap          (0x7fb43e6b8000, 0x8000, 0x7fb43e6c0000) = 0
+  munmap          (0x7fb43ecd8000, 0x5598, 0x7fb43e6c0000) = 0
+  mprotect        (0x7fb43ec44000, 0x10000, 0) = 0
+  mmap            (0x7fb43ec54000, 0x80000, 0x3) = 0x7fb43ec54000
+  mmap            (0x7fb43ecd4000, 0x1598, 0x3) = 0x7fb43ecd4000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffeb10, 0x80000) = 3
+  read            (0x3, 0x7fb43fffedb0, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffec30, 0x3) = 0
+  mmap            (0, 0x30010, 0) = 0x7fb43e68c000
+  mmap            (0x7fb43e690000, 0x20010, 0x5) = 0x7fb43e690000
+  munmap          (0x7fb43e68c000, 0x4000, 0x7fb43e690000) = 0
+  munmap          (0x7fb43e6b4000, 0x8010, 0x7fb43e690000) = 0
+  mprotect        (0x7fb43e69c000, 0x10000, 0) = 0
+  mmap            (0x7fb43e6ac000, 0x8000, 0x3) = 0x7fb43e6ac000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffeaf0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffed90, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffec10, 0x3) = 0
+  mmap            (0, 0xb0018, 0) = 0x7fb43e5dc000
+  mmap            (0x7fb43e5e0000, 0xa0018, 0x5) = 0x7fb43e5e0000
+  munmap          (0x7fb43e5dc000, 0x4000, 0x7fb43e5e0000) = 0
+  munmap          (0x7fb43e684000, 0x8018, 0x7fb43e5e0000) = 0
+  mprotect        (0x7fb43e670000, 0xc000, 0) = 0
+  mmap            (0x7fb43e67c000, 0x8000, 0x3) = 0x7fb43e67c000
+  close           (0x3, 0x3, 0x1) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43fffead0, 0x80000) = 3
+  read            (0x3, 0x7fb43fffed70, 0x340) = 832
+  fstat           (0x3, 0x7fb43fffebf0, 0x3) = 0
+  mmap            (0, 0x30060, 0) = 0x7fb43e5ac000
+  mmap            (0x7fb43e5b0000, 0x20060, 0x5) = 0x7fb43e5b0000
+  munmap          (0x7fb43e5ac000, 0x4000, 0x7fb43e5b0000) = 0
+  munmap          (0x7fb43e5d4000, 0x8060, 0x7fb43e5b0000) = 0
+  mprotect        (0x7fb43e5bc000, 0x10000, 0) = 0
+  mmap            (0x7fb43e5cc000, 0x8000, 0x3) = 0x7fb43e5cc000
+  close           (0x3, 0x3, 0x6) = 0
+  set_tid_address (0x7fb43f7fe230, 0x7fb400240000, 0x7fb43f7fe220) = 2
+  set_robust_list (0x7fb43f7fe240, 0x18, 0x7fb43f7fe240) = 0
+  rseq            (0x7fb43f7feae0, 0x20, 0) = -38
+  mprotect        (0x7fb43f1fc000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43e5cc000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43e67c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43e6ac000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43f03c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43ef2c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43ec54000, 0x7c000, 0x1) = 0
+  mprotect        (0x7fb43edf0000, 0x10000, 0x1) = 0
+  mprotect        (0x7fb43ee58000, 0x8000, 0x1) = 0
+  mprotect        (0x7fb43ef7c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43efcc000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43effc000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb43f24c000, 0x4000, 0x1) = 0
+  mmap            (0, 0x8000, 0x3) = 0x7fb43f728000
+  mprotect        (0x7fb43f4b4000, 0xc000, 0x1) = 0
+  mprotect        (0x7fb43f714000, 0xc000, 0x1) = 0
+  mprotect        (0x7fb43f7ec000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb40101c000, 0x4000, 0x1) = 0
+  mprotect        (0x7fb40023c000, 0x4000, 0x1) = 0
+  prlimit64       (0, 0x3, 0) = 0
+  syscall_167     (0x17, 0x20, 0) = -38
+  syscall_167     (0x17, 0xf, 0) = -38
+  syscall_167     (0x17, 0x7, 0) = -38
+  syscall_167     (0x17, 0x3, 0) = -38
+  syscall_167     (0x17, 0x1, 0) = -38
+  syscall_167     (0x17, 0, 0) = -38
+  futex           (0x7fb43f4c37ec, 0x81, 0x7fffffff) = 0
+  getrandom       (0x7fb43f206768, 0x8, 0x1) = 8
+  brk             (0, 0, 0x202b0) = 0x7fb401024000
+  brk             (0x7fb401048000, 0x7fb401048000, 0x7fb43f207320) = 0x7fb401048000
+  openat          (0xffffffffffffff9c, 0x7fb43f7bb580, 0x241) = 3
+  newfstatat      (0xffffffffffffff9c, 0x7fb40103bd20, 0x7fb43ffff958) = 0
+  newfstatat      (0xffffffffffffff9c, 0x7fb40103bd20, 0x7fb43ffff6d8) = 0
+  openat          (0xffffffffffffff9c, 0x7fb40103bd20, 0x84800) = 4
+  fstat           (0x4, 0x7fb43ffff6c8, 0) = 0
+  brk             (0x7fb40106c000, 0x7fb40106c000, 0x20560) = 0x7fb40106c000
+  getdents64      (0x4, 0x7fb401040540, 0x8000) = 120
+  getdents64      (0x4, 0x7fb401040540, 0x8000) = 0
+  close           (0x4, 0xffff, 0x7fb43f200aa0) = 0
+  openat          (0xffffffffffffff9c, 0x7fb401048550, 0x80100) = 4
+  read            (0x4, 0x7fb401040450, 0x1000) = 399
+  read            (0x4, 0x7fb4010405df, 0xe71) = 0
+  read            (0x4, 0x7fb401040450, 0x1000) = 0
+  close           (0x4, 0, 0) = 0
+  openat          (0xffffffffffffff9c, 0x7fb401048580, 0x80100) = 4
+  read            (0x4, 0x7fb401040450, 0x1000) = 54
+  read            (0x4, 0x7fb401040486, 0xfca) = 0
+  read            (0x4, 0x7fb401040450, 0x1000) = 0
+  close           (0x4, 0, 0) = 0
+  newfstatat      (0xffffffffffffff9c, 0x7fb40103c8e0, 0x7fb43ffff958) = -2
+  newfstatat      (0xffffffffffffff9c, 0x7fb40103c750, 0x7fb43ffff938) = 0
+  newfstatat      (0xffffffffffffff9c, 0x7fb43ffffa08, 0x7fb43ffff938) = 0
+  newfstatat      (0xffffffffffffff9c, 0x7fb40103c8e0, 0x7fb43ffff938) = -2
+  openat          (0xffffffffffffff9c, 0x7fb40103e940, 0) = 4
+  read            (0x4, 0x7fb401040aa0, 0x1fff) = 2062
+  read            (0x4, 0x7fb401040aa0, 0x1fff) = 0
+  newfstatat      (0xffffffffffffff9c, 0x7fb401048580, 0x7fb43ffff2d8) = 0
+  openat          (0xffffffffffffff9c, 0x7fb401048580, 0) = 5
+  read            (0x5, 0x7fb4010438b0, 0x1fff) = 2729
+  read            (0x5, 0x7fb4010438b0, 0x1fff) = 0
+  close           (0x5, 0x7fb43f0ce460, 0x808) = 0
+  close           (0x4, 0x7fb43f0ce460, 0x808) = 0
+  rt_sigaction    (0xd, 0x7fb43ffff988, 0x7fb43ffffa20) = 0
+  ioctl           (0x1, 0x5401, 0x7fb43ffffaf0) = -25
+  rt_sigaction    (0x1c, 0x7fb43ffff918, 0x7fb43ffff9b0) = 0
+  ioctl           (0x1, 0x5413, 0x7fb43ffffbb8) = -13
+  newfstatat      (0xffffffffffffff9c, 0x7fb40103c750, 0x7fb43ffff5e8) = 0
+  openat          (0xffffffffffffff9c, 0x7fb40103c750, 0x80100) = 4
+  read            (0x4, 0x7fb4010438b0, 0x1000) = 44
+  read            (0x4, 0x7fb4010438dc, 0xfd4) = 0
+  newfstatat      (0xffffffffffffff9c, 0x7fb43fffe708, 0x7fb43fffe718) = 0
+  pipe2           (0x7fb43fffe810, 0, 0x7fb3fa4423d3) = 0
+  rt_sigprocmask  (0, 0x7fb43f1b88a8, 0x7fb43fffe5d0) = 0
+  clone           (0x1200011, 0, 0) = 3
+  rt_sigprocmask  (0x2, 0x7fb43fffe5d0, 0) = 0
+  close           (0x6, 0, 0) = 0
+  fcntl           (0x5, 0x3, 0x7fb43f6b6e34) = 0
+  fstat           (0x5, 0x7fb43fffe718, 0x7fb43f0ce40c) = 0
+  set_robust_list (0x7fb43f7fe240, 0x18, 0) = 0
+  rt_sigprocmask  (0x2, 0x7fb43fffe5d0, 0) = 0
+  rt_sigaction    (0xd, 0x7fb43fffe4a8, 0x7fb43fffe540) = 0
+  rt_sigaction    (0x3, 0x7fb43fffe4a8, 0x7fb43fffe540) = 0
+  rt_sigaction    (0x2, 0x7fb43fffe4a8, 0x7fb43fffe540) = 0
+  rt_sigaction    (0x1c, 0x7fb43fffe4a8, 0x7fb43fffe540) = 0
+  rt_sigaction    (0x12, 0x7fb43fffe4a8, 0x7fb43fffe540) = 0
+  rt_sigaction    (0x14, 0x7fb43fffe4a8, 0x7fb43fffe540) = 0
+  openat          (0xffffffffffffff9c, 0x7fb43f6b1080, 0x84800) = -2
+  prlimit64       (0, 0x7, 0) = 0
+  fcntl           (0x3, 0x2, 0x1) = 0
+  fcntl           (0x4, 0x2, 0x1) = 0
+  fcntl           (0x5, 0x2, 0x1) = 0
+  fcntl           (0x6, 0x2, 0x1) = 0
+  fcntl           (0x7, 0x2, 0x1) = -9
+  fcntl           (0x8, 0x2, 0x1) = -9
+  fcntl           (0x9, 0x2, 0x1) = -9
+  fcntl           (0xa, 0x2, 0x1) = -9
+  fcntl           (0xb, 0x2, 0x1) = -9
+  fcntl           (0xc, 0x2, 0x1) = -9
+  fcntl           (0xd, 0x2, 0x1) = -9
+  fcntl           (0xe, 0x2, 0x1) = -9
+  fcntl           (0xf, 0x2, 0x1) = -9
+  fcntl           (0x10, 0x2, 0x1) = -9
+  fcntl           (0x11, 0x2, 0x1) = -9
+  fcntl           (0x12, 0x2, 0x1) = -9
+  fcntl           (0x13, 0x2, 0x1) = -9
+  fcntl           (0x14, 0x2, 0x1) = -9
+  fcntl           (0x15, 0x2, 0x1) = -9
+  fcntl           (0x16, 0x2, 0x1) = -9
+  fcntl           (0x17, 0x2, 0x1) = -9
+  fcntl           (0x18, 0x2, 0x1) = -9
+  fcntl           (0x19, 0x2, 0x1) = -9
+  fcntl           (0x1a, 0x2, 0x1) = -9
+  fcntl           (0x1b, 0x2, 0x1) = -9
+  fcntl           (0x1c, 0x2, 0x1) = -9
+  fcntl           (0x1d, 0x2, 0x1) = -9
+  fcntl           (0x1e, 0x2, 0x1) = -9
+  fcntl           (0x1f, 0x2, 0x1) = -9
+  fcntl           (0x20, 0x2, 0x1) = -9
+  fcntl           (0x21, 0x2, 0x1) = -9
+  fcntl           (0x22, 0x2, 0x1) = -9
+  fcntl           (0x23, 0x2, 0x1) = -9
+  fcntl           (0x24, 0x2, 0x1) = -9
+  fcntl           (0x25, 0x2, 0x1) = -9
+  fcntl           (0x26, 0x2, 0x1) = -9
+  fcntl           (0x27, 0x2, 0x1) = -9
+  fcntl           (0x28, 0x2, 0x1) = -9
+  fcntl           (0x29, 0x2, 0x1) = -9
+  fcntl           (0x2a, 0x2, 0x1) = -9
+  fcntl           (0x2b, 0x2, 0x1) = -9
+  fcntl           (0x2c, 0x2, 0x1) = -9
+  fcntl           (0x2d, 0x2, 0x1) = -9
+  fcntl           (0x2e, 0x2, 0x1) = -9
+  fcntl           (0x2f, 0x2, 0x1) = -9
+  fcntl           (0x30, 0x2, 0x1) = -9
+  fcntl           (0x31, 0x2, 0x1) = -9
+  fcntl           (0x32, 0x2, 0x1) = -9
+  fcntl           (0x33, 0x2, 0x1) = -9
+  fcntl           (0x34, 0x2, 0x1) = -9
+  fcntl           (0x35, 0x2, 0x1) = -9
+  fcntl           (0x36, 0x2, 0x1) = -9
+  fcntl           (0x37, 0x2, 0x1) = -9
+  fcntl           (0x38, 0x2, 0x1) = -9
+  fcntl           (0x39, 0x2, 0x1) = -9
+  fcntl           (0x3a, 0x2, 0x1) = -9
+  fcntl           (0x3b, 0x2, 0x1) = -9
+  fcntl           (0x3c, 0x2, 0x1) = -9
+  fcntl           (0x3d, 0x2, 0x1) = -9
+  fcntl           (0x3e, 0x2, 0x1) = -9
+  fcntl           (0x3f, 0x2, 0x1) = -9
+  fcntl           (0x40, 0x2, 0x1) = -9
+  fcntl           (0x41, 0x2, 0x1) = -9
+  fcntl           (0x42, 0x2, 0x1) = -9
+  fcntl           (0x43, 0x2, 0x1) = -9
+  fcntl           (0x44, 0x2, 0x1) = -9
+  fcntl           (0x45, 0x2, 0x1) = -9
+  fcntl           (0x46, 0x2, 0x1) = -9
+  fcntl           (0x47, 0x2, 0x1) = -9
+  fcntl           (0x48, 0x2, 0x1) = -9
+  fcntl           (0x49, 0x2, 0x1) = -9
+  fcntl           (0x4a, 0x2, 0x1) = -9
+  fcntl           (0x4b, 0x2, 0x1) = -9
+  fcntl           (0x4c, 0x2, 0x1) = -9
+  fcntl           (0x4d, 0x2, 0x1) = -9
+  fcntl           (0x4e, 0x2, 0x1) = -9
+  fcntl           (0x4f, 0x2, 0x1) = -9
+  fcntl           (0x50, 0x2, 0x1) = -9
+  fcntl           (0x51, 0x2, 0x1) = -9
+  fcntl           (0x52, 0x2, 0x1) = -9
+  fcntl           (0x53, 0x2, 0x1) = -9
+  fcntl           (0x54, 0x2, 0x1) = -9
+  fcntl           (0x55, 0x2, 0x1) = -9
+  fcntl           (0x56, 0x2, 0x1) = -9
+  fcntl           (0x57, 0x2, 0x1) = -9
+  fcntl           (0x58, 0x2, 0x1) = -9
+  fcntl           (0x59, 0x2, 0x1) = -9
+  fcntl           (0x5a, 0x2, 0x1) = -9
+  fcntl           (0x5b, 0x2, 0x1) = -9
+  fcntl           (0x5c, 0x2, 0x1) = -9
+  fcntl           (0x5d, 0x2, 0x1) = -9
+  fcntl           (0x5e, 0x2, 0x1) = -9
+  fcntl           (0x5f, 0x2, 0x1) = -9
+  fcntl           (0x60, 0x2, 0x1) = -9
+  fcntl           (0x61, 0x2, 0x1) = -9
+  fcntl           (0x62, 0x2, 0x1) = -9
+  fcntl           (0x63, 0x2, 0x1) = -9
+  fcntl           (0x64, 0x2, 0x1) = -9
+  fcntl           (0x65, 0x2, 0x1) = -9
+  fcntl           (0x66, 0x2, 0x1) = -9
+  fcntl           (0x67, 0x2, 0x1) = -9
+  fcntl           (0x68, 0x2, 0x1) = -9
+  fcntl           (0x69, 0x2, 0x1) = -9
+  fcntl           (0x6a, 0x2, 0x1) = -9
+  fcntl           (0x6b, 0x2, 0x1) = -9
+  fcntl           (0x6c, 0x2, 0x1) = -9
+  fcntl           (0x6d, 0x2, 0x1) = -9
+  fcntl           (0x6e, 0x2, 0x1) = -9
+  fcntl           (0x6f, 0x2, 0x1) = -9
+  fcntl           (0x70, 0x2, 0x1) = -9
+  fcntl           (0x71, 0x2, 0x1) = -9
+  fcntl           (0x72, 0x2, 0x1) = -9
+  fcntl           (0x73, 0x2, 0x1) = -9
+  fcntl           (0x74, 0x2, 0x1) = -9
+  fcntl           (0x75, 0x2, 0x1) = -9
+  fcntl           (0x76, 0x2, 0x1) = -9
+  fcntl           (0x77, 0x2, 0x1) = -9
+  fcntl           (0x78, 0x2, 0x1) = -9
+  fcntl           (0x79, 0x2, 0x1) = -9
+  fcntl           (0x7a, 0x2, 0x1) = -9
+  fcntl           (0x7b, 0x2, 0x1) = -9
+  fcntl           (0x7c, 0x2, 0x1) = -9
+  fcntl           (0x7d, 0x2, 0x1) = -9
+  fcntl           (0x7e, 0x2, 0x1) = -9
+  fcntl           (0x7f, 0x2, 0x1) = -9
+  fcntl           (0x80, 0x2, 0x1) = -9
+  fcntl           (0x81, 0x2, 0x1) = -9
+  fcntl           (0x82, 0x2, 0x1) = -9
+  fcntl           (0x83, 0x2, 0x1) = -9
+  fcntl           (0x84, 0x2, 0x1) = -9
+  fcntl           (0x85, 0x2, 0x1) = -9
+  fcntl           (0x86, 0x2, 0x1) = -9
+  fcntl           (0x87, 0x2, 0x1) = -9
+  fcntl           (0x88, 0x2, 0x1) = -9
+  fcntl           (0x89, 0x2, 0x1) = -9
+  fcntl           (0x8a, 0x2, 0x1) = -9
+  fcntl           (0x8b, 0x2, 0x1) = -9
+  fcntl           (0x8c, 0x2, 0x1) = -9
+  fcntl           (0x8d, 0x2, 0x1) = -9
+  fcntl           (0x8e, 0x2, 0x1) = -9
+  fcntl           (0x8f, 0x2, 0x1) = -9
+
+GOBLIN FAIL

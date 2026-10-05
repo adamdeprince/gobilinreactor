@@ -1,0 +1,148 @@
+page size            16384
+-- Developer: Debian bootstrap --
+PASS: Debian bootstrap status=0 elapsed_ms=245 
+-- Developer: install developer tools --
+PASS: install developer tools status=0 elapsed_ms=813 
+gcc (Debian 14.2.0-19) 14.2.0
+GNU Make 4.4.1
+Python 3.13.5
+-- Developer: ps shows live guest processes --
+PASS: ps shows live guest processes status=0 elapsed_ms=249 
+         1          0 bash
+         2          1 sleep
+-- Developer: pinned HTTPS clone --
+PASS: pinned HTTPS clone status=0 elapsed_ms=3498 
+51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf zlib 1.3.1
+Cloning into '/tmp/goblin-developer-768626983782/zlib'...
+-- Developer: GCC and Make build --
+PASS: GCC and Make build status=0 elapsed_ms=8968 
+hello world
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+		*** zlib test OK ***
+hello world
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+		*** zlib 64-bit test OK ***
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+-- Developer: Python venv and hashed wheel --
+FAILED: Python venv and hashed wheel status=1 elapsed_ms=706 
+Error: Command '['/tmp/goblin-developer-768626983782/venv/bin/python3', '-m', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1.
+Android DNS: queries=0 answers=0 failures=0 last_error=0
+Recent syscall errors:
+newfstatat      (0xffffffffffffff9c, 0x794b3f32bbb0, 0x794b3fffdc10) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f33cb90, 0x794b3fffdc10) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f32bed0, 0x794b3fffdc10) = -2
+ioctl           (0x3, 0x5401, 0x794b3fffd850) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd0d0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffc950) = -25
+newfstatat      (0xffffffffffffff9c, 0x794b3f365780, 0x794b3fffc590) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f33f770, 0x794b3fffc590) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f3657f0, 0x794b3fffc590) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f35b750, 0x794b3fffc590) = -2
+ioctl           (0x3, 0x5401, 0x794b3fffc1d0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffba50) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffba50) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffba50) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffcc20) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffbff0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffb870) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffc4a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd0d0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdfd0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdfd0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd850) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd850) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdfd0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdfd0) = -25
+syscall_20      (0x80000, 0x1, 0) = -38
+newfstatat      (0xffffffffffffff9c, 0x794b3f2df700, 0x794b3fffeb10) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f32b7f0, 0x794b3fffeb10) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f2df700, 0x794b3fffeb10) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f329ef0, 0x794b3fffeb10) = -2
+ioctl           (0x3, 0x5401, 0x794b3fffe750) = -25
+newfstatat      (0xffffffffffffff9c, 0x794b3f276e10, 0x794b3fffe800) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f276e50, 0x794b3fffe800) = -2
+ioctl           (0x3, 0x5401, 0x794b3fffe750) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdfd0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd850) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd850) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd0d0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd850) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdfd0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd850) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdfd0) = -25
+newfstatat      (0xffffffffffffff9c, 0x794b3f0622d0, 0x794b3fffe660) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f226030, 0x794b3fffe660) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f069da0, 0x794b3fffe660) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f226630, 0x794b3fffe660) = -2
+ioctl           (0x3, 0x5401, 0x794b3fffe2a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdb20) = -25
+newfstatat      (0xffffffffffffff9c, 0x794b3f06a040, 0x794b3fffd760) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f092940, 0x794b3fffd760) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f07ae70, 0x794b3fffd760) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3f092940, 0x794b3fffd760) = -2
+ioctl           (0x3, 0x5401, 0x794b3fffd3a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffcc20) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffc4a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffcc20) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd3a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffcc20) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffcc20) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffc4a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffbd20) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffcc20) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffcc20) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffc4a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd3a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffd3a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdb20) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffe6f0) = -25
+newfstatat      (0xffffffffffffff9c, 0x794b3eee2cf0, 0x794b3fffef80) = -2
+ioctl           (0x3, 0x5401, 0x794b3ffff3a0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffec00) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffe480) = -25
+ioctl           (0x1, 0x5413, 0x794b3fffeec8) = -13
+ioctl           (0x1, 0x5413, 0x794b3ffff1e8) = -13
+ioctl           (0x1, 0x5413, 0x794b3ffff1e8) = -13
+ioctl           (0x1, 0x5413, 0x794b3ffff1e8) = -13
+ioctl           (0x1, 0x5413, 0x794b3ffff1e8) = -13
+ioctl           (0x1, 0x5413, 0x794b3ffff1e8) = -13
+ioctl           (0x1, 0x5413, 0x794b3ffff1e8) = -13
+ioctl           (0x1, 0x5413, 0x794b3ffff1e8) = -13
+newfstatat      (0xffffffffffffff9c, 0x794b3ef5b570, 0x794b3ffff430) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3ef5b3e0, 0x794b3ffff3d0) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b3ef5b3e0, 0x794b3ffff430) = -2
+ioctl           (0x3, 0x5401, 0x794b3ffff200) = -25
+ioctl           (0x4, 0x5401, 0x794b3ffff200) = -25
+syscall_71      (0x4, 0x3, 0x794b3ffff428) = -38
+syscall_11      (0x794b3eee3830, 0x794b3eed6d30, 0x100) = -38
+ioctl           (0x3, 0x5401, 0x794b3fffece0) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffe560) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffe560) = -25
+ioctl           (0x3, 0x5401, 0x794b3fffdde0) = -25
+ioctl           (0x3, 0x5401, 0x794b3ffff070) = -25
+ioctl           (0x3, 0x5401, 0x794b3ffff0d0) = -25
+ioctl           (0x3, 0x5401, 0x794b3ffff0d0) = -25
+ioctl           (0x2, 0x5413, 0x794b3fffec20) = -25
+wait4           (0xffffffffffffffff, 0x794b3fffd8c0, 0x1) = -10
+GOBLIN FAIL

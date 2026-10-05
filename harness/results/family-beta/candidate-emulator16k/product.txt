@@ -1,0 +1,7 @@
+PASS: healthy terminal has no startup banner and respects Android screen timeout
+PASS: diagnostic export writes build/device/recovery information and excludes terminal and guest-file canaries
+PASS: help, notices and actual phone storage are available inside the app
+PASS: invalid backup leaves the same disk and guest data intact, restarts Linux and displays a persistent result
+PASS: the shutdown screen can reopen Linux with the installation preserved
+GOBLIN PRODUCT PASS
+

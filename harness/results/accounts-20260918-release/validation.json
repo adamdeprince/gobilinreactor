@@ -1,0 +1,34 @@
+{
+  "started_utc": "2026-09-18T19:28:35.912349+00:00",
+  "apk_sha256": "bec1ddea49ada064861ab0b18b5d774f9b096982d3d51b262b61ec14c680389d",
+  "serial": "emulator-5556",
+  "page_size": 16384,
+  "checks": [
+    {
+      "name": "regression",
+      "passed": true,
+      "exit_status": 0
+    },
+    {
+      "name": "persistent",
+      "passed": true,
+      "exit_status": 0
+    },
+    {
+      "name": "developer",
+      "passed": true,
+      "exit_status": 0
+    },
+    {
+      "name": "recovery",
+      "passed": true,
+      "exit_status": 0
+    },
+    {
+      "name": "kitty",
+      "passed": false,
+      "exit_status": 0
+    }
+  ],
+  "passed": false
+}

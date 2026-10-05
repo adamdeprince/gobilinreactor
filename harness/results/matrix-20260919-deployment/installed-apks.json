@@ -1,0 +1,14 @@
+{
+  "R5CX3468YQR": {
+    "apk_sha256": "13b2d2e52fe7d16410ce5dd527a00cdeb9add33dcc4d0b891b6d0c64226f94fe",
+    "verified": true
+  },
+  "emulator-5556": {
+    "apk_sha256": "13b2d2e52fe7d16410ce5dd527a00cdeb9add33dcc4d0b891b6d0c64226f94fe",
+    "verified": true
+  },
+  "emulator-5558": {
+    "apk_sha256": "13b2d2e52fe7d16410ce5dd527a00cdeb9add33dcc4d0b891b6d0c64226f94fe",
+    "verified": true
+  }
+}

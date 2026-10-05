@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "previous_apk_sha256": "775406133203277719f98f2667a742cd4c470917dacace0a9f4c61ea84339712",
+  "apk_sha256": "6b96faf1bbb578e49eb75b8284744ce3951a0a0edf5008e23e6a0921c214391c",
+  "existing_runtime_and_asset_files_compared": 94,
+  "differences": []
+}

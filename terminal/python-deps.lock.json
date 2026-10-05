@@ -1,0 +1,32 @@
+[
+  {
+    "name": "bzip2-1.0.8-3",
+    "filename": "bzip2-1.0.8-3-aarch64-linux-android.tar.gz",
+    "url": "https://github.com/beeware/cpython-android-source-deps/releases/download/bzip2-1.0.8-3/bzip2-1.0.8-3-aarch64-linux-android.tar.gz",
+    "sha256": "2385f46e173d525f079946957c007000a8ad11d8496ba66bae99129183d74bd9"
+  },
+  {
+    "name": "libffi-3.4.4-3",
+    "filename": "libffi-3.4.4-3-aarch64-linux-android.tar.gz",
+    "url": "https://github.com/beeware/cpython-android-source-deps/releases/download/libffi-3.4.4-3/libffi-3.4.4-3-aarch64-linux-android.tar.gz",
+    "sha256": "9f2c0255ce025c177d44db16174ad5158c7560efe3c7ef0c8c0c64b2196e6a9d"
+  },
+  {
+    "name": "openssl-3.0.15-4",
+    "filename": "openssl-3.0.15-4-aarch64-linux-android.tar.gz",
+    "url": "https://github.com/beeware/cpython-android-source-deps/releases/download/openssl-3.0.15-4/openssl-3.0.15-4-aarch64-linux-android.tar.gz",
+    "sha256": "623beb0f7eeb8f817166351f04e24c2acaf7d4f7d30152e2333a0afa271cead7"
+  },
+  {
+    "name": "sqlite-3.50.4-0",
+    "filename": "sqlite-3.50.4-0-aarch64-linux-android.tar.gz",
+    "url": "https://github.com/beeware/cpython-android-source-deps/releases/download/sqlite-3.50.4-0/sqlite-3.50.4-0-aarch64-linux-android.tar.gz",
+    "sha256": "f446f18d381ed641cb9d58b4768097f9cb7fcce79f7d13be371ee089f2c93e27"
+  },
+  {
+    "name": "xz-5.4.6-1",
+    "filename": "xz-5.4.6-1-aarch64-linux-android.tar.gz",
+    "url": "https://github.com/beeware/cpython-android-source-deps/releases/download/xz-5.4.6-1/xz-5.4.6-1-aarch64-linux-android.tar.gz",
+    "sha256": "320b76d45dc3499cf855e5310f875cba61c2608e4a98bb280cc4f1b8f189da1a"
+  }
+]

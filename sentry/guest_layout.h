@@ -7,30 +7,40 @@
 
 namespace goblin {
 
-// The guest is confined to one contiguous window, reserved once at start-up.
-//
-// The kernel picks where, because an app process already has ART's heap and dex
-// mappings scattered through the low address space and a fixed address collides
-// with them. What is fixed is the *alignment*: the window is aligned to 4 GiB and
-// no larger than 4 GiB, so every address in it shares one high word. That is what
-// lets the seccomp filter separate guest syscalls from the sentry's own with a
-// single comparison on the high half of the instruction pointer.
+// A high window holds PIEs, libraries, stacks and mmap allocations. A separate
+// low window accepts fixed-address Debian ELFs (Python and GCC's cc1). The broker
+// stages low pages at an unrelated address; only the isolated child moves them
+// into place, after removing its inherited Android mappings.
 class GuestWindow {
 public:
     static constexpr size_t kSize = 1ull << 30;       // 1 GiB
     static constexpr size_t kAlignment = 1ull << 32;  // 4 GiB
     static constexpr size_t kStackSize = 8u << 20;    // 8 MiB
-    static_assert(kSize <= kAlignment, "window must not straddle a 4 GiB boundary");
+    static constexpr uintptr_t kLowStart = 0x10000;
+    static constexpr uintptr_t kLowEnd = 0x4000000;   // 64 MiB in the child only
+    static_assert(kSize <= (1ull << 30), "stub filter arithmetic requires a window of at most 1 GiB");
 
     // Idempotent. Safe to call more than once; only the first call reserves.
     static bool Reserve(std::string* err);
+    static bool Reset(); // Reset broker scratch mappings; live stubs are separate.
 
     static uintptr_t start() { return start_; }
     static uintptr_t end() { return start_ + kSize; }
     static uint32_t high_word() { return static_cast<uint32_t>(start_ >> 32); }
+    static uintptr_t low_shadow() { return low_shadow_; }
+    // Call only after validating the complete guest range. This is for broker
+    // staging, never for process_vm_* addresses or values sent to the guest.
+    static uintptr_t BrokerAddress(uintptr_t addr) {
+        return addr >= kLowStart && addr < kLowEnd ? low_shadow_ + addr - kLowStart : addr;
+    }
 
     static bool Contains(uintptr_t addr) {
-        return start_ != 0 && addr >= start_ && addr < start_ + kSize;
+        return ContainsRange(addr, 1);
+    }
+    static bool ContainsRange(uintptr_t addr, size_t len) {
+        if (!start_) return false;
+        return (addr >= start_ && addr < end() && len <= end() - addr) ||
+               (addr >= kLowStart && addr < kLowEnd && len <= kLowEnd - addr);
     }
 
     // Stack at the top of the window, growing down.
@@ -39,9 +49,11 @@ public:
 
     // PIE images are biased to here. ET_EXEC images must already fall inside.
     static uintptr_t pie_base() { return start_ + 0x1000000; }  // +16 MiB
+    static uintptr_t signal_trampoline() { return start_ + 0x100000; }
 
 private:
     static uintptr_t start_;
+    static uintptr_t low_shadow_;
 };
 
 }  // namespace goblin

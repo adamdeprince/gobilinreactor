@@ -1,0 +1,11 @@
+{
+  "apk_sha256": "2652500fed9d5e961360d3927afec2a16d46d3b122f830025a33f71f59f92c6b",
+  "deployment_version": "76eb586a2f30e97b61ee8aa855cf5f32c22d18d7b3832a89ecd574635093166e",
+  "deployment_manifest": [
+    "libapparmor1 4.1.0-1 libapparmor1_4.1.0-1_arm64.deb",
+    "sudo 1.9.16p2-3+deb13u2 sudo_1.9.16p2-3+deb13u2_arm64.deb"
+  ],
+  "repository_source": "Types: deb deb-src\nURIs: https://apt.goblinreactor.com/\nSuites: trixie\nComponents: main\nArchitectures: arm64\nSigned-By: /etc/apt/keyrings/goblinreactor-archive-keyring.gpg\n",
+  "repository_key_sha256": "538561d6569bf6eb12f8bd95fc02c9939a2551936b8868edb8ede17b4764259e",
+  "purrfect_bundled": false
+}

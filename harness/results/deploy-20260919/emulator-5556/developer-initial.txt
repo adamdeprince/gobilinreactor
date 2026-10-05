@@ -1,0 +1,70 @@
+==> installing
+/tmp/goblin-deploy-test.apk: 1 file pushed, 0 skipped. 1117.5 MB/s (126565434 bytes in 0.108s)
+Performing Push Install
+Success
+==> running
+page size            16384
+-- Developer: Debian bootstrap --
+PASS: Debian bootstrap status=0 elapsed_ms=124 
+METRIC {"workload":"Debian bootstrap","page_size":16384,"wall_ns":97906375,"startup_ns":45201875,"syscalls":395,"wall_ns_per_syscall":184213,"broker_ns_per_syscall":38875.2,"broker_rss_start_bytes":145522688,"broker_rss_end_bytes":142721024,"broker_rss_sampled_peak_bytes":148668416}
+-- Developer: install developer tools --
+PASS: install developer tools status=0 elapsed_ms=50984 
+METRIC {"workload":"install developer tools","page_size":16384,"wall_ns":50980435566,"startup_ns":45677042,"syscalls":223400,"wall_ns_per_syscall":228091,"broker_ns_per_syscall":75680.8,"broker_rss_start_bytes":142721024,"broker_rss_end_bytes":137674752,"broker_rss_sampled_peak_bytes":255033344}
+gcc (Debian 14.2.0-19) 14.2.0
+GNU Make 4.4.1
+Python 3.13.5
+-- Developer: ps shows live guest processes --
+PASS: ps shows live guest processes status=0 elapsed_ms=184 
+METRIC {"workload":"ps shows live guest processes","page_size":16384,"wall_ns":167957250,"startup_ns":67106083,"syscalls":1104,"wall_ns_per_syscall":121461,"broker_ns_per_syscall":42569,"broker_rss_start_bytes":137674752,"broker_rss_end_bytes":139100160,"broker_rss_sampled_peak_bytes":149094400}
+         1          0 bash
+         2          1 sleep
+-- Developer: pinned HTTPS clone --
+PASS: pinned HTTPS clone status=0 elapsed_ms=3569 
+METRIC {"workload":"pinned HTTPS clone","page_size":16384,"wall_ns":3519924460,"startup_ns":59344958,"syscalls":15316,"wall_ns_per_syscall":227801,"broker_ns_per_syscall":32066.7,"broker_rss_start_bytes":139100160,"broker_rss_end_bytes":132661248,"broker_rss_sampled_peak_bytes":139100160}
+51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf zlib 1.3.1
+Cloning into '/tmp/goblin-developer-755067792026/zlib'...
+-- Developer: GCC and Make build --
+PASS: GCC and Make build status=0 elapsed_ms=9129 
+METRIC {"workload":"GCC and Make build","page_size":16384,"wall_ns":9082008921,"startup_ns":69154916,"syscalls":86417,"wall_ns_per_syscall":104661,"broker_ns_per_syscall":49496.1,"broker_rss_start_bytes":132661248,"broker_rss_end_bytes":135020544,"broker_rss_sampled_peak_bytes":145833984}
+hello world
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+		*** zlib test OK ***
+hello world
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+		*** zlib 64-bit test OK ***
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+-- Developer: Python venv and hashed wheel --
+PASS: Python venv and hashed wheel status=0 elapsed_ms=8542 
+METRIC {"workload":"Python venv and hashed wheel","page_size":16384,"wall_ns":8531705462,"startup_ns":62392124,"syscalls":52137,"wall_ns_per_syscall":163014,"broker_ns_per_syscall":58303.3,"broker_rss_start_bytes":135020544,"broker_rss_end_bytes":134512640,"broker_rss_sampled_peak_bytes":136560640}
+Collecting idna@ https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl (from -r requirements.txt (line 1))
+  Downloading idna-3.10-py3-none-any.whl (70 kB)
+Installing collected packages: idna
+Successfully installed idna-3.10
+venv, wheel hash and Unicode IDNA passed
+-- Developer: clean package audit and test cleanup --
+PASS: clean package audit and test cleanup status=0 elapsed_ms=994 
+METRIC {"workload":"clean package audit and test cleanup","page_size":16384,"wall_ns":948750750,"startup_ns":67262417,"syscalls":3748,"wall_ns_per_syscall":243728,"broker_ns_per_syscall":158398,"broker_rss_start_bytes":134512640,"broker_rss_end_bytes":136511488,"broker_rss_sampled_peak_bytes":136511488}
+GOBLIN PASS
+
+==> saved to /Users/adam/dev/goblin-linux/harness/results/sdk_gphone16k_arm64-developer-api36-20260919-154316.txt

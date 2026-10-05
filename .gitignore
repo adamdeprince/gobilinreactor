@@ -7,9 +7,19 @@ out/
 *.dex
 *.idsig
 *.keystore
+harness/signing/
+harness/build-release/
+harness/build-tests/
+harness/build-bundle/
+harness/tools/
+*.aab
+*.apks
+dist/
 
 # tooling
 .gradle/
 local.properties
 .idea/
 .DS_Store
+__pycache__/
+*.pyc

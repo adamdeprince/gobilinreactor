@@ -1,0 +1,111 @@
+--- a/arch/um/os-Linux/skas/process.c
++++ b/arch/um/os-Linux/skas/process.c
+@@ -8,6 +8,9 @@
+ #include <stdlib.h>
+ #include <stdbool.h>
+ #include <unistd.h>
++#ifdef __ANDROID__
++#include "../goblin-fds.h"
++#endif
+ #include <sched.h>
+ #include <errno.h>
+ #include <string.h>
+@@ -417,7 +420,12 @@
+ 	 * and then unsetting it on all memory related FDs.
+ 	 * This is not strictly necessary from a safety perspective.
+ 	 */
++#ifdef __ANDROID__
++	if (goblin_cleanup_fds(0, 1) < 0)
++		exit(3);
++#else
+ 	syscall(__NR_close_range, 0, ~0U, CLOSE_RANGE_CLOEXEC);
++#endif
+ 
+ 	fcntl(init_data.stub_data_fd, F_SETFD, 0);
+ 
+--- a/arch/um/kernel/skas/stub.c
++++ b/arch/um/kernel/skas/stub.c
+@@ -19,7 +19,7 @@
+  * signal/futex protocol before executing any guest instruction.
+  */
+ static void __attribute__((__noreturn__, __used__, __noinline__))
+-__section(".__syscall_stub") stub_clone_child(int sock)
++__section(".__syscall_stub") stub_clone_child(int sock, int last_fd)
+ {
+ 	struct stub_data *d = get_stub_data();
+ 	volatile struct {
+@@ -34,9 +34,13 @@
+ 	stack.ss_flags = 0;
+ 	stack.ss_size = STUB_DATA_SIZE;
+ 
+-	if (stub_syscall3(__NR_dup3, sock, 0, 0) < 0 ||
+-	    stub_syscall3(__NR_close_range, 1, ~0U, 0) < 0 ||
+-	    stub_syscall3(__NR_fcntl, 0, F_SETFL, O_NONBLOCK) < 0 ||
++	if (stub_syscall3(__NR_dup3, sock, 0, 0) < 0)
++		stub_syscall1(__NR_exit, 1);
++	/* Only stdin and the SCM_RIGHTS batch exist in this worker. Its FD
++	 * table is private after clone; close the actual inherited range. */
++	for (int fd = 1; fd <= last_fd; ++fd)
++		stub_syscall1(__NR_close, fd);
++	if (stub_syscall3(__NR_fcntl, 0, F_SETFL, O_NONBLOCK) < 0 ||
+ 	    stub_syscall2(__NR_prctl, PR_SET_PDEATHSIG, SIGKILL) < 0 ||
+ 	    stub_syscall2(__NR_sigaltstack, (unsigned long)&stack, 0) < 0 ||
+ 	    stub_syscall4(__NR_rt_sigprocmask, SIG_SETMASK,
+@@ -53,13 +57,14 @@
+  */
+ static long __attribute__((__naked__, __noinline__)) __section(".__syscall_stub")
+ stub_clone(unsigned long flags, unsigned long sp, int *ptid,
+-	   unsigned long tls, unsigned long ctid, int sock)
++	   unsigned long tls, unsigned long ctid, int sock, int last_fd)
+ {
+ 	__asm__ volatile (
+ 		"mov x8, %0\n"
+ 		"svc #0\n"
+ 		"cbnz x0, 1f\n"
+ 		"mov x0, x5\n"
++		"mov x1, x6\n"
+ 		"b stub_clone_child\n"
+ 		"1: ret\n" :: "i" (__NR_clone));
+ }
+@@ -87,7 +92,7 @@
+  * kernel that the process is reporting back the SIGALRM in a timely
+  * fashion.
+  */
+-static __always_inline int syscall_handler(int fd_map[STUB_MAX_FDS])
++static __always_inline int syscall_handler(int fd_map[STUB_MAX_FDS], int num_fds)
+ {
+ 	struct stub_data *d = get_stub_data();
+ 	int i;
+@@ -118,10 +123,13 @@
+ #if STUB_SHARED_WORKERS
+ 		case STUB_SYSCALL_CLONE: {
+ 			struct stub_data *child = (void *)sc->mem.addr;
++			int last_fd = 0;
++			for (int j = 0; j < num_fds; ++j)
++				if (fd_map[j] > last_fd) last_fd = fd_map[j];
+ 			long pid = stub_clone(CLONE_VM | CLONE_PARENT |
+ 					     CLONE_PARENT_SETTID | SIGCHLD,
+ 				sc->mem.addr + STUB_DATA_SIZE - 16,
+-				&child->host_pid, 0, 0, fd_map[sc->mem.fd]);
++				&child->host_pid, 0, 0, fd_map[sc->mem.fd], last_fd);
+ 			/* A resource failure belongs to this guest task, not the
+ 			 * mapping transport. Return it without poisoning the MM.
+ 			 */
+@@ -154,7 +162,7 @@
+ void __section(".__syscall_stub")
+ stub_syscall_handler(void)
+ {
+-	syscall_handler(NULL);
++	syscall_handler(NULL, 0);
+ 
+ 	trap_myself();
+ }
+@@ -273,7 +281,7 @@
+ 			num_fds = (fd_msg->cmsg_len - CMSG_LEN(0)) / sizeof(int);
+ 
+ 		/* Try running queued syscalls. */
+-		res = syscall_handler(fd_map);
++		res = syscall_handler(fd_map, num_fds);
+ 
+ 		while (num_fds)
+ 			stub_syscall2(__NR_close, fd_map[--num_fds], 0);

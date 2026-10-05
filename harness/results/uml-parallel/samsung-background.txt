@@ -1,0 +1,5 @@
+PASS: Android reports an active Goblin partial wake lock
+PARTIAL_WAKE_LOCK                 'Goblin:Linux' ACQ=-2m0s189ms LONG (uid=10513 isFrozen=false pid=27780 displayId=0 lock=6578c8d)
+PASS: Linux heartbeat advanced 13 times while the terminal was defocused; same VM and wake lock remained active
+Screen-off and lock-release lifecycle checks were run separately on both emulators.
+GOBLIN PHONE BACKGROUND PASS

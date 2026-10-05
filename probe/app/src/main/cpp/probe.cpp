@@ -869,7 +869,7 @@ void ProbeAddressSpace(Report* r) {
 
 std::string RunAllProbes(const ProbePaths& paths) {
     Report r;
-    r.Add(Status::kInfo, "goblin-linux probe", "phase 0 device capability report");
+    r.Add(Status::kInfo, "GoblinReactor probe", "phase 0 device capability report");
 
     ProbeEnvironment(&r);
 

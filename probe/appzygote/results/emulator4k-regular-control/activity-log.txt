@@ -1,0 +1,130 @@
+09-20 04:05:26.688   719  1004 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: start instr
+09-20 04:05:26.696   719   756 I ActivityManager: Start proc 10583:dev.goblinlinux.zygoteprobe/u0a215 for added application dev.goblinlinux.zygoteprobe
+09-20 04:05:26.828   719   756 I ActivityManager: Start proc 10613:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai0 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 04:05:26.850   719  1004 E ActivityManager: App crashed on incremental package dev.goblinlinux.zygoteprobe which is 100% loaded.
+09-20 04:05:26.856   719  1004 I ActivityManager: Process dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService (pid 10613) has died: fg  FGS 
+09-20 04:05:26.856   719  1004 W ActivityManager: Scheduling restart of crashed service dev.goblinlinux.zygoteprobe/.WorkerService in 1000ms for connection
+09-20 04:05:27.894   719  1827 I ActivityManager: Start proc 10629:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai1 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 04:05:27.907   719  1827 E ActivityManager: App crashed on incremental package dev.goblinlinux.zygoteprobe which is 100% loaded.
+09-20 04:05:27.911   719  1827 I ActivityManager: Process dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService (pid 10629) has died: fg  FGS 
+09-20 04:05:27.911   719  1827 W ActivityManager: Scheduling restart of crashed service dev.goblinlinux.zygoteprobe/.WorkerService in 1800000ms for connection
+09-20 04:05:46.774   719  2270 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: finished inst
+09-20 04:05:46.778   719  2270 I ActivityManager: Killing 10583:dev.goblinlinux.zygoteprobe/u0a215 (adj 0): stop dev.goblinlinux.zygoteprobe due to finished inst
+09-20 04:07:01.804   719   755 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=-1: installPackageLI
+09-20 04:07:01.809   719   780 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: pkg removed
+09-20 04:07:16.385   719  2270 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: start instr
+09-20 04:07:16.391   719   756 I ActivityManager: Start proc 10703:dev.goblinlinux.zygoteprobe/u0a215 for added application dev.goblinlinux.zygoteprobe
+09-20 04:07:16.525   719  2270 I ActivityManager: Start proc 10733:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai0 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 04:07:18.565   719   741 I ActivityManager: Killing 10733:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0a215i-9000 (adj 0): isolated not needed
+09-20 04:07:18.567   719  2270 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: finished inst
+09-20 04:07:18.599   719  2270 I ActivityManager: Killing 10703:dev.goblinlinux.zygoteprobe/u0a215 (adj 0): stop dev.goblinlinux.zygoteprobe due to finished inst
+09-20 04:08:46.236   719  2274 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: start instr
+09-20 04:08:46.243   719   756 I ActivityManager: Start proc 10797:dev.goblinlinux.zygoteprobe/u0a215 for added application dev.goblinlinux.zygoteprobe
+09-20 04:08:46.379   719  2274 I ActivityManager: Start proc 10827:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai0 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 04:11:46.456   719  2268 I ActivityManager: Killing 10827:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0a215i-9000 (adj 0): isolated not needed
+09-20 04:11:46.458   719  2271 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: finished inst
+09-20 04:11:46.475   719  2271 I ActivityManager: Killing 10797:dev.goblinlinux.zygoteprobe/u0a215 (adj 0): stop dev.goblinlinux.zygoteprobe due to finished inst
+09-20 04:12:16.437   719   792 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: start instr
+09-20 04:12:16.443   719   756 I ActivityManager: Start proc 11026:dev.goblinlinux.zygoteprobe/u0a215 for added application dev.goblinlinux.zygoteprobe
+09-20 04:12:16.505   719   756 I ActivityManager: Start proc 11041:dev.goblinlinux.zygoteprobe:regular/u0a215 for service {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.RegularService}
+09-20 04:14:40.229   719   755 I ActivityManager: Killing PhantomProcessRecord {79a0784 11055:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.241   719   755 I ActivityManager: Killing PhantomProcessRecord {ef79b6d 11058:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {41693a2 11059:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {fe46833 11060:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {67217f0 11061:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {57f8169 11062:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {ee47ee 11063:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {f73548f 11064:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {d78c31c 11065:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {b85cb25 11066:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {f7af4fa 11067:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {15aaaab 11068:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {edcf508 11069:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {2ecf4a1 11070:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {6f366c6 11071:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {2174687 11072:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {ed059b4 11073:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {f4339dd 11074:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {92f2952 11075:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {f17c423 11076:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {f35d20 11077:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {4be96d9 11078:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {bf2889e 11079:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {4187f7f 11080:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {812b4c 11081:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {af8c795 11082:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {afa90aa 11083:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {23f949b 11084:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {f3bb038 11085:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {f6b4811 11086:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {ec90d76 11087:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {cf8df77 11088:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   755 I ActivityManager: Killing PhantomProcessRecord {71797e4 11089:11041:libzygotechild.so/u0a215}: Trimming phantom processes
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {79a0784 11055:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {2174687 11072:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {b85cb25 11066:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {2ecf4a1 11070:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {afa90aa 11083:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {3ab544d 11096:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {92f2952 11075:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {4308b02 11093:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {891fc13 11120:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {aa84e50 11107:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {41693a2 11059:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {365e849 11115:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {a0554e 11121:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {d78c31c 11065:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {696466f 11118:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {4bff7c 11110:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {f73548f 11064:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {812b4c 11081:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {e1bc005 11106:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {f30785a 11112:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {beada8b 11113:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {f7af4fa 11067:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {4179768 11111:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {71797e4 11089:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {9d5781 11091:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {26dc026 11108:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {cf8df77 11088:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {caa9467 11117:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {c82c214 11104:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {a46eabd 11100:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {6e5b8b2 11119:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {f6b4811 11086:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {9c21003 11094:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.243   719   757 I ActivityManager: Process PhantomProcessRecord {dd3eb80 11095:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {9fc75b9 11098:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {272adfe 11114:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {c4ba95f 11105:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {bf2889e 11079:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {23f949b 11084:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {84c3fac 11102:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {ee5b475 11099:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {6f366c6 11071:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {c47ac0a 11109:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {ec90d76 11087:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {15aaaab 11068:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {aab7c7b 11092:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {af8c795 11082:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {57f8169 11062:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {ee47ee 11063:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {d13aa98 11116:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {8ea22f1 11103:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {f35d20 11077:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {ef79b6d 11058:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {fe46833 11060:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {67217f0 11061:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {9bc7ed6 11101:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {36b6557 11097:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {ed059b4 11073:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {f4339dd 11074:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {edcf508 11069:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {f17c423 11076:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {4be96d9 11078:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {5e4d844 11090:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {f3bb038 11085:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.244   719   757 I ActivityManager: Process PhantomProcessRecord {4187f7f 11080:11041:libzygotechild.so/u0a215} died
+09-20 04:14:40.246   719  1216 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: finished inst
+09-20 04:14:40.255   719  1216 I ActivityManager: Killing 11026:dev.goblinlinux.zygoteprobe/u0a215 (adj 0): stop dev.goblinlinux.zygoteprobe due to finished inst
+09-20 04:14:40.256   719  1216 I ActivityManager: Killing 11041:dev.goblinlinux.zygoteprobe:regular/u0a215 (adj 905): stop dev.goblinlinux.zygoteprobe due to finished inst

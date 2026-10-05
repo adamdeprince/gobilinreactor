@@ -1,0 +1,10 @@
+Warning: Activity not started, intent has been delivered to currently running top-most instance.
+PASS: regular-user terminal ready
+PASS: guest storage reported
+PASS: Emacs install command completed
+PASS: Emacs batch command completed
+PASS: clean package audit and working Emacs batch mode
+PASS: interactive Emacs opens a file
+PASS: Emacs saves edited text
+PASS: Emacs exits to the original terminal
+EMACS ACCEPTANCE PASS

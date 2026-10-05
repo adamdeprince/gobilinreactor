@@ -1,0 +1,12 @@
+{
+  "uri": "https://apt.goblinreactor.com/",
+  "suite": "trixie",
+  "components": ["main"],
+  "architectures": ["arm64"],
+  "key": {
+    "filename": "goblinreactor-archive-keyring.gpg",
+    "url": "https://apt.goblinreactor.com/goblinreactor-archive-keyring.gpg",
+    "fingerprint": "B7B61E8CB85A9270530364F23273CB62402FC793",
+    "sha256": "538561d6569bf6eb12f8bd95fc02c9939a2551936b8868edb8ede17b4764259e"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "started_utc": "2026-09-19T20:36:29.999805+00:00",
+  "apk_sha256": "2652500fed9d5e961360d3927afec2a16d46d3b122f830025a33f71f59f92c6b",
+  "devices": [
+    {
+      "serial": "emulator-5556",
+      "model": "sdk_gphone16k_arm64",
+      "page_size": 16384,
+      "checks": [
+        {
+          "name": "regression",
+          "passed": true,
+          "exit_status": 0
+        },
+        {
+          "name": "persistent",
+          "passed": true,
+          "exit_status": 0
+        },
+        {
+          "name": "kitty",
+          "passed": true,
+          "exit_status": 0
+        },
+        {
+          "name": "lifecycle",
+          "passed": true,
+          "exit_status": 0
+        }
+      ],
+      "passed": true
+    },
+    {
+      "serial": "R5CX3468YQR",
+      "model": "SM-S928U",
+      "page_size": 4096,
+      "checks": [
+        {
+          "name": "regression",
+          "passed": true,
+          "exit_status": 0
+        },
+        {
+          "name": "persistent",
+          "passed": true,
+          "exit_status": 0
+        },
+        {
+          "name": "kitty",
+          "passed": true,
+          "exit_status": 0
+        },
+        {
+          "name": "lifecycle",
+          "passed": true,
+          "exit_status": 0
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "finished_utc": "2026-09-19T20:38:42.917075+00:00"
+}

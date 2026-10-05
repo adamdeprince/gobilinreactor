@@ -1,0 +1,2 @@
+UML networking stopped; see uml/boot.log
+GOBLIN FAIL

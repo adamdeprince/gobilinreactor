@@ -7,7 +7,7 @@
     package="dev.goblinlinux.probe">
 
     <application
-        android:label="goblin-linux probe"
+        android:label="GoblinReactor probe"
         android:hasCode="false"
         android:allowBackup="false"
         android:debuggable="true"
@@ -15,7 +15,7 @@
 
         <activity
             android:name="android.app.NativeActivity"
-            android:label="goblin-linux probe"
+            android:label="GoblinReactor probe"
             android:exported="true">
             <meta-data android:name="android.app.lib_name" android:value="goblinprobe" />
             <intent-filter>

@@ -1,0 +1,26 @@
+09-20 04:05:26.688   719  1004 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: start instr
+09-20 04:05:26.696   719   756 I ActivityManager: Start proc 10583:dev.goblinlinux.zygoteprobe/u0a215 for added application dev.goblinlinux.zygoteprobe
+09-20 04:05:26.828   719   756 I ActivityManager: Start proc 10613:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai0 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 04:05:26.850   719  1004 E ActivityManager: App crashed on incremental package dev.goblinlinux.zygoteprobe which is 100% loaded.
+09-20 04:05:26.856   719  1004 I ActivityManager: Process dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService (pid 10613) has died: fg  FGS 
+09-20 04:05:26.856   719  1004 W ActivityManager: Scheduling restart of crashed service dev.goblinlinux.zygoteprobe/.WorkerService in 1000ms for connection
+09-20 04:05:27.894   719  1827 I ActivityManager: Start proc 10629:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai1 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 04:05:27.907   719  1827 E ActivityManager: App crashed on incremental package dev.goblinlinux.zygoteprobe which is 100% loaded.
+09-20 04:05:27.911   719  1827 I ActivityManager: Process dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService (pid 10629) has died: fg  FGS 
+09-20 04:05:27.911   719  1827 W ActivityManager: Scheduling restart of crashed service dev.goblinlinux.zygoteprobe/.WorkerService in 1800000ms for connection
+09-20 04:05:46.774   719  2270 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: finished inst
+09-20 04:05:46.778   719  2270 I ActivityManager: Killing 10583:dev.goblinlinux.zygoteprobe/u0a215 (adj 0): stop dev.goblinlinux.zygoteprobe due to finished inst
+09-20 04:07:01.804   719   755 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=-1: installPackageLI
+09-20 04:07:01.809   719   780 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: pkg removed
+09-20 04:07:16.385   719  2270 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: start instr
+09-20 04:07:16.391   719   756 I ActivityManager: Start proc 10703:dev.goblinlinux.zygoteprobe/u0a215 for added application dev.goblinlinux.zygoteprobe
+09-20 04:07:16.525   719  2270 I ActivityManager: Start proc 10733:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai0 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 04:07:18.565   719   741 I ActivityManager: Killing 10733:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0a215i-9000 (adj 0): isolated not needed
+09-20 04:07:18.567   719  2270 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: finished inst
+09-20 04:07:18.599   719  2270 I ActivityManager: Killing 10703:dev.goblinlinux.zygoteprobe/u0a215 (adj 0): stop dev.goblinlinux.zygoteprobe due to finished inst
+09-20 04:08:46.236   719  2274 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: start instr
+09-20 04:08:46.243   719   756 I ActivityManager: Start proc 10797:dev.goblinlinux.zygoteprobe/u0a215 for added application dev.goblinlinux.zygoteprobe
+09-20 04:08:46.379   719  2274 I ActivityManager: Start proc 10827:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai0 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 04:11:46.456   719  2268 I ActivityManager: Killing 10827:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0a215i-9000 (adj 0): isolated not needed
+09-20 04:11:46.458   719  2271 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10215 user=0: finished inst
+09-20 04:11:46.475   719  2271 I ActivityManager: Killing 10797:dev.goblinlinux.zygoteprobe/u0a215 (adj 0): stop dev.goblinlinux.zygoteprobe due to finished inst

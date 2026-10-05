@@ -1,0 +1,67 @@
+{
+  "apk_sha256": "277af60fb424f36035a209c6ed9dc8181ff36606af4bbfbefbb0057178fc37e6",
+  "runtime_candidate_apk_sha256": "b7fa7a0de95e4d7f7e8febd6bb740779bf217e68f656ab4ee48e010915c200f9",
+  "candidate_difference": "Final APK changes only the Emacs test repair sequence: apt --fix-broken install with no package names, followed by apt install emacs-nox. The runtime implementation is unchanged.",
+  "devices": [
+    {
+      "serial": "R5CX3468YQR",
+      "page_size": 4096,
+      "checks": [
+        {
+          "report": "regression-runtime-candidate.txt",
+          "apk_sha256": "b7fa7a0de95e4d7f7e8febd6bb740779bf217e68f656ab4ee48e010915c200f9",
+          "passed": true
+        },
+        {
+          "report": "emacs-headless.txt",
+          "apk_sha256": "277af60fb424f36035a209c6ed9dc8181ff36606af4bbfbefbb0057178fc37e6",
+          "passed": true
+        },
+        {
+          "report": "emacs.txt",
+          "apk_sha256": "277af60fb424f36035a209c6ed9dc8181ff36606af4bbfbefbb0057178fc37e6",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "serial": "emulator-5556",
+      "page_size": 16384,
+      "checks": [
+        {
+          "report": "regression.txt",
+          "apk_sha256": "277af60fb424f36035a209c6ed9dc8181ff36606af4bbfbefbb0057178fc37e6",
+          "passed": true
+        },
+        {
+          "report": "persistent.txt",
+          "apk_sha256": "277af60fb424f36035a209c6ed9dc8181ff36606af4bbfbefbb0057178fc37e6",
+          "passed": true
+        },
+        {
+          "report": "kitty.txt",
+          "apk_sha256": "277af60fb424f36035a209c6ed9dc8181ff36606af4bbfbefbb0057178fc37e6",
+          "passed": true
+        },
+        {
+          "report": "emacs-headless-runtime-candidate.txt",
+          "apk_sha256": "b7fa7a0de95e4d7f7e8febd6bb740779bf217e68f656ab4ee48e010915c200f9",
+          "passed": true
+        },
+        {
+          "report": "emacs-ui-runtime-candidate.txt",
+          "apk_sha256": "b7fa7a0de95e4d7f7e8febd6bb740779bf217e68f656ab4ee48e010915c200f9",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "host_checks": [
+    "harness_runner_test.sh: 7 cases passed",
+    "git diff --check",
+    "bash -n harness/run.sh",
+    "python3 -m py_compile tests/emacs_install_test.py"
+  ],
+  "passed": true,
+  "finished_utc": "2026-09-19T21:11:24.797170+00:00"
+}

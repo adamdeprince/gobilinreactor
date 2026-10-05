@@ -1,0 +1,29 @@
+09-20 07:34:27.196  2712  4670 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10515 user=0: start instr
+09-20 07:34:27.223  2712  3072 I ActivityManager: Start proc 29231:dev.goblinlinux.zygoteprobe/u0a515 for added application dev.goblinlinux.zygoteprobe
+09-20 07:34:27.479  2712  3072 I ActivityManager: Start proc 29263:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai200 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 07:44:27.937  2712  4690 I ActivityManager: Killing 29263:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0a515i-8800 (adj 0): isolated not needed
+09-20 07:44:27.946  2712  4677 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10515 user=0: finished inst
+09-20 07:44:27.948  2712  4677 I ActivityManager: Killing 29231:dev.goblinlinux.zygoteprobe/u0a515 (adj 0): stop dev.goblinlinux.zygoteprobe due to finished inst
+09-20 08:05:04.374  2712  3072 I ActivityManager: Start proc 6935:dev.goblinlinux.sentry/u0a513 for next-top-activity {dev.goblinlinux.sentry/dev.goblinlinux.sentry.TerminalActivity}
+09-20 08:05:04.529  2712  4677 I ActivityManager: Background started FGS: Allowed [callingPackage: dev.goblinlinux.sentry; callingUid: 10513; uidState: TOP ; uidBFSL: [BFSL]; intent: Intent { xflg=0x4 cmp=dev.goblinlinux.sentry/.SessionService }; code:PROC_STATE_TOP; tempAllowListReason:<null>; allowWiu:12; targetSdkVersion:36; callerTargetSdkVersion:36; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+09-20 08:05:16.297  2712  3071 I ActivityManager: Force stopping dev.goblinlinux.sentry appid=10513 user=-1: installPackageLI
+09-20 08:05:16.306  2712  3071 I ActivityManager: Killing 6935:dev.goblinlinux.sentry/u0a513 (adj 0): stop dev.goblinlinux.sentry due to installPackageLI
+09-20 08:05:16.338  2712  3136 I ActivityManager: Force stopping dev.goblinlinux.sentry appid=10513 user=0: pkg removed
+09-20 08:05:16.665  2712  3072 I ActivityManager: Start proc 7871:dev.goblinlinux.sentry/u0a513 for next-top-activity {dev.goblinlinux.sentry/dev.goblinlinux.sentry.TerminalActivity}
+09-20 08:05:16.989  2712  4678 I ActivityManager: Background started FGS: Allowed [callingPackage: dev.goblinlinux.sentry; callingUid: 10513; uidState: TOP ; uidBFSL: [BFSL]; intent: Intent { xflg=0x4 cmp=dev.goblinlinux.sentry/.SessionService }; code:PROC_STATE_TOP; tempAllowListReason:<null>; allowWiu:12; targetSdkVersion:36; callerTargetSdkVersion:36; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+09-20 08:05:17.572  2712  3072 I ActivityManager: Start proc 8176:dev.goblinlinux.sentry:network/u0a513 for service {dev.goblinlinux.sentry/dev.goblinlinux.sentry.NetworkService}
+09-20 08:05:17.787  2712  3072 I ActivityManager: Start proc 8240:dev.goblinlinux.sentry:linux:dev.goblinlinux.sentry.KernelService/u0ai200 for  {dev.goblinlinux.sentry/dev.goblinlinux.sentry.KernelService}
+09-20 08:07:18.615  2712  3071 I ActivityManager: Force stopping dev.goblinlinux.sentry.tests appid=10514 user=-1: installPackageLI
+09-20 08:07:18.628  2712  3136 I ActivityManager: Force stopping dev.goblinlinux.sentry.tests appid=10514 user=0: pkg removed
+09-20 08:07:19.631  2712  4376 I ActivityManager: Force stopping dev.goblinlinux.sentry appid=10513 user=0: start instr
+09-20 08:07:19.635  2712  4376 I ActivityManager: Killing 7871:dev.goblinlinux.sentry/u0a513 (adj 0): stop dev.goblinlinux.sentry due to start instr
+09-20 08:07:19.653  2712  4376 I ActivityManager: Killing 8176:dev.goblinlinux.sentry:network/u0a513 (adj 0): stop dev.goblinlinux.sentry due to start instr
+09-20 08:07:19.657  2712  4376 I ActivityManager: Killing 8240:dev.goblinlinux.sentry:linux:dev.goblinlinux.sentry.KernelService/u0a513i-8800 (adj 0): isolated not needed
+09-20 08:07:19.697  2712  3072 I ActivityManager: Start proc 11190:dev.goblinlinux.sentry/u0a513 for added application dev.goblinlinux.sentry
+09-20 08:07:19.883  2712  3298 I ActivityManager: Background started FGS: Allowed [callingPackage: dev.goblinlinux.sentry; callingUid: 10513; uidState: FGS ; uidBFSL: [BFSL]; intent: Intent { xflg=0x4 cmp=dev.goblinlinux.sentry/.SessionService }; code:ACTIVITY_STARTER; tempAllowListReason:<null>; allowWiu:52; targetSdkVersion:36; callerTargetSdkVersion:36; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+09-20 08:07:20.504  2712  3072 I ActivityManager: Start proc 11242:dev.goblinlinux.sentry:network/u0a513 for service {dev.goblinlinux.sentry/dev.goblinlinux.sentry.NetworkService}
+09-20 08:07:20.635  2712  3072 I ActivityManager: Start proc 11256:dev.goblinlinux.sentry:linux:dev.goblinlinux.sentry.KernelService/u0ai201 for  {dev.goblinlinux.sentry/dev.goblinlinux.sentry.KernelService}
+09-20 08:17:35.530  2712  4015 I ActivityManager: Force stopping dev.goblinlinux.sentry appid=10513 user=0: finished inst
+09-20 08:17:35.533  2712  4015 I ActivityManager: Killing 11190:dev.goblinlinux.sentry/u0a513 (adj 0): stop dev.goblinlinux.sentry due to finished inst
+09-20 08:17:35.537  2712  4015 I ActivityManager: Killing 11242:dev.goblinlinux.sentry:network/u0a513 (adj 0): stop dev.goblinlinux.sentry due to finished inst
+09-20 08:17:35.540  2712  4015 I ActivityManager: Killing 11256:dev.goblinlinux.sentry:linux:dev.goblinlinux.sentry.KernelService/u0a513i-8799 (adj 0): isolated not needed

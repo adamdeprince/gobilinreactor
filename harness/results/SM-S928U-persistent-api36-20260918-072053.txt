@@ -1,0 +1,48 @@
+-- Persistent: Debian package bootstrap --
+PASS: Debian package bootstrap status=0 
+-- Persistent: recover interrupted package configuration --
+PASS: recover interrupted package configuration status=0 
+-- Persistent: installed database and maintainer scripts --
+PASS: installed database and maintainer scripts status=0 
+-- Persistent: remount persistence --
+PASS: remount persistence status=0 
+-- Persistent: public DNS through Android --
+PASS: public DNS through Android status=0 
+-- Persistent: public HTTPS repository and Debian signature --
+PASS: public HTTPS repository and Debian signature status=0 
+-- Persistent: reject modified repository signature --
+PASS: reject modified repository signature status=0 
+-- Persistent: install curl git python3 with public apt --
+PASS: install curl git python3 with public apt status=0 
+-- Persistent: curl DNS and trusted HTTPS --
+FAILED: curl DNS and trusted HTTPS status=6 
+curl: (6) getaddrinfo() thread failed to start
+Android DNS: queries=0 answers=0 failures=0 last_error=0
+Recent syscall errors:
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+rseq            (0x773f7fa800, 0x20, 0) = -38
+openat          (0xffffffffffffff9c, 0x7701103110, 0x802) = -6
+ioctl           (0, 0x5401, 0x773ffff970) = -25
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+ioctl           (0x2, 0x540f, 0x773ffff884) = -25
+ioctl           (0x2, 0x540f, 0x773ffff834) = -25
+newfstatat      (0xffffffffffffff9c, 0x7701182930, 0x773ffff298) = -2
+newfstatat      (0xffffffffffffff9c, 0x7701182930, 0x773ffff298) = -2
+newfstatat      (0xffffffffffffff9c, 0x7701182930, 0x773ffff298) = -2
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+rseq            (0x773f6ed220, 0x20, 0) = -38
+newfstatat      (0xffffffffffffff9c, 0x773e6cccc8, 0x773ffffb68) = -2
+openat          (0xffffffffffffff9c, 0x77010a2220, 0) = -2
+openat          (0xffffffffffffff9c, 0x77010a22f0, 0) = -2
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+openat          (0xffffffffffffff9c, 0x77010a2220, 0) = -2
+ioctl           (0x1, 0x5401, 0x773ffff820) = -25
+ioctl           (0, 0x5413, 0x773ffff7c0) = -25
+syscall_19      (0, 0x80800, 0x80800) = -38
+syscall_19      (0, 0x80000, 0x80800) = -38
+close           (0xffffffffffffffff, 0, 0) = -9
+ioctl           (0x2, 0x5413, 0x773ffff3f0) = -25
+wait4           (0xffffffffffffffff, 0x773fffe090, 0x1) = -10
+GOBLIN FAIL

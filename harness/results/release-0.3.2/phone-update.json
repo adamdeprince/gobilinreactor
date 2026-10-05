@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "device": "Samsung SM-S928U, Android 16",
+  "version": "0.3.2 (30002)",
+  "apk_sha256": "775406133203277719f98f2667a742cd4c470917dacace0a9f4c61ea84339712",
+  "checks": [
+    "clean guest shutdown before in-place update",
+    "installed APK hash matches release",
+    "goblin home-directory terminal opens",
+    "Start Linux after reboot menu option is visible and unchecked"
+  ],
+  "phone_rebooted": false
+}

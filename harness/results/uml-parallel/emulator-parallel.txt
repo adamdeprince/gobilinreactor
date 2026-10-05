@@ -1,0 +1,11 @@
+Linux goblin 7.2.0-rc4-goblin #11 SMP Sun Sep 20 00:30:33 UTC 2026 aarch64 GNU/Linux
+PASS: Android hardware 0-3; guest configured=4, online=4
+Guest CPUs: 4; counter frequency: 24000000
+Native cross-core handoffs: 999/1000 below 100 us, fastest 0.167 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 4 cores, serial 0.871 s, parallel 0.213 s, speedup 4.09x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS

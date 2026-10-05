@@ -1,0 +1,14 @@
+FAIL: java.lang.AssertionError: Guest command failed: rm -f /tmp/parallel-check-85cf988a394f40d8a8b6b6d42b549802
+Connection refused
+
+java.lang.AssertionError: Guest command failed: rm -f /tmp/parallel-check-85cf988a394f40d8a8b6b6d42b549802
+Connection refused
+
+	at dev.goblinlinux.sentry.ServicesAcceptance.require(ServicesAcceptance.java:25)
+	at dev.goblinlinux.sentry.ServicesAcceptance.execute(ServicesAcceptance.java:46)
+	at dev.goblinlinux.sentry.ServicesAcceptance.execute(ServicesAcceptance.java:37)
+	at dev.goblinlinux.sentry.ServicesAcceptance.soak(ServicesAcceptance.java:180)
+	at dev.goblinlinux.sentry.ServicesAcceptance.onStart(ServicesAcceptance.java:191)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2597)
+GOBLIN SERVICES FAIL
+

@@ -1,0 +1,12 @@
+INSTRUMENTATION_RESULT: stream=PASS: upstream kitty screen displays the guest Bash prompt
+PASS: IME commits accented, wide, combining and supplementary Unicode through Bash
+PASS: IME composition replaces pre-edit text before committing
+PASS: less paints, navigates and restores the alternate screen
+PASS: Vim accepts direct input, Escape and commands, and saves Unicode
+PASS: Android surface resize changes guest PTY dimensions
+PASS: activity recreation preserves the kitty screen, shell and background job
+PASS: kitty file graphics requests are rejected without reading or unlinking broker paths
+PASS: terminal returns to Bash after full-screen application checks
+KITTY ACCEPTANCE PASS
+
+INSTRUMENTATION_CODE: -1

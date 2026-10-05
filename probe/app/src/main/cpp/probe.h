@@ -1,4 +1,4 @@
-// goblin-linux phase 0 device capability probe.
+// GoblinReactor phase 0 device capability probe.
 //
 // Every design decision in this project rests on empirical facts about a specific
 // device's kernel configuration and SELinux policy. This probe establishes them.

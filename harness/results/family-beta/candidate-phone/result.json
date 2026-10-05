@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "serial": "R5CX3468YQR",
+  "finished": "2026-09-20T17:45:47Z",
+  "apk_sha256": "24ac6d82fbf43cc98a76ef6e2dbbc1418c81a1d643df15167a74e3ecaf125fa5",
+  "soak_seconds": 120,
+  "ui": false,
+  "physical_unplugged_test": "separate ServicesAcceptance unplugged mode; not simulated here"
+}

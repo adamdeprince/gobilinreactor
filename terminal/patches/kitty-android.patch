@@ -1,0 +1,89 @@
+--- a/kitty/data-types.h
++++ b/kitty/data-types.h
+@@ -21,6 +21,18 @@
+ #include <locale.h>
+ #include "glfw-wrapper.h"
+ #include "banned.h"
++#ifdef __ANDROID__
++// POSIX named shared memory is unavailable in an Android app. Guest graphics
++// uses in-band data; never translate untrusted names into broker paths.
++#include <errno.h>
++static inline int goblin_android_shm_open(const char *n, int f, mode_t m) { (void)n; (void)f; (void)m; errno = ENOTSUP; return -1; }
++static inline int goblin_android_shm_unlink(const char *n) { (void)n; errno = ENOTSUP; return -1; }
++static inline void goblin_android_bzero(void *p, size_t n) { volatile unsigned char *v = p; while (n--) *v++ = 0; }
++#define shm_open goblin_android_shm_open
++#define shm_unlink goblin_android_shm_unlink
++#define explicit_bzero goblin_android_bzero
++#endif
++
+ // Required minimum OpenGL version
+ #define OPENGL_REQUIRED_VERSION_MAJOR 3
+ #ifdef __APPLE__
+--- a/kitty/data-types.c
++++ b/kitty/data-types.c
+@@ -848,7 +848,7 @@
+     if (!init_freetype_render_ui_text(m)) return NULL;
+ #endif
+     if (!init_fonts(m)) return NULL;
+-    if (!init_utmp(m)) return NULL;
++    /* Android: no desktop utmp database. */
+     if (!init_loop_utils(m)) return NULL;
+     if (!init_crypto_library(m)) return NULL;
+     if (!init_systemd_module(m)) return NULL;
+--- a/kitty/keys.c
++++ b/kitty/keys.c
+@@ -11,7 +11,7 @@
+ #include "glfw-wrapper.h"
+ #include <structmember.h>
+ 
+-#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__ANDROID__)
+ #include <xkbcommon/xkbcommon.h>
+ #endif
+ 
+@@ -51,7 +51,7 @@
+ static bool
+ is_no_action_key(const uint32_t key, const uint32_t native_key) {
+     switch (native_key) {
+-#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__ANDROID__)
+         case XKB_KEY_XF86Fn:
+         case XKB_KEY_XF86WakeUp:
+             return true;
+@@ -139,7 +139,7 @@
+ void
+ update_ime_position(Window* w UNUSED, Screen *screen UNUSED) {
+     GLFWIMEUpdateEvent ev = { .type = GLFW_IME_UPDATE_CURSOR_POSITION };
+-#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__ANDROID__)
+     prepare_ime_position_update_event(global_state.callback_os_window, w, screen, &ev);
+ #endif
+     glfwUpdateIMEState(global_state.callback_os_window->handle, &ev);
+@@ -337,7 +337,7 @@
+     const char *name;
+     int case_sensitive = 0;
+     PA("s|p", &name, &case_sensitive);
+-#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__ANDROID__)
+     if (glfwGetNativeKeyForName) {  // if this function is called before GLFW is initialized glfwGetNativeKeyForName will be NULL
+         int native_key = glfwGetNativeKeyForName(name, case_sensitive);
+         if (native_key) return Py_BuildValue("i", native_key);
+--- a/kitty/screen.c
++++ b/kitty/screen.c
+@@ -1668,6 +1668,16 @@
+ 
+ void
+ screen_handle_graphics_command(Screen *self, const GraphicsCommand *cmd, const uint8_t *payload) {
++#ifdef __ANDROID__
++    // Android graphics transport is not implemented. In particular, terminal
++    // output must never open/unlink paths in the broker's filesystem.
++    if (cmd->quiet < 2) {
++        char response[128]; snprintf(response,sizeof(response),"Gi=%u;ENOTSUP:Android graphics transport",cmd->id);
++        write_escape_code_to_child(self,ESC_APC,response);
++    }
++    return;
++#endif
++
+     unsigned int x = self->cursor->x, y = self->cursor->y;
+     const char *response = grman_handle_command(self->grman, cmd, payload, self->cursor, &self->is_dirty, self->cell_size);
+     if (response != NULL) write_escape_code_to_child(self, ESC_APC, response);

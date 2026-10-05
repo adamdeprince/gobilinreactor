@@ -1,0 +1,56 @@
+FAIL: java.lang.AssertionError: Guest command failed: systemd-run --quiet --unit=goblin-network-check-2feee9d5f93146d0a747525bc71760df /usr/bin/python3 -u -c 'import socket,threading,select
+def client(c):
+ try:
+  while True:
+   b=c.recv(65536)
+   if not b: break
+   c.sendall(b)
+ finally: c.close()
+ss=[]
+for family,addr in [(socket.AF_INET,'"'"'0.0.0.0'"'"'),(socket.AF_INET6,'"'"'::'"'"')]:
+ for kind in [socket.SOCK_STREAM,socket.SOCK_DGRAM]:
+  s=socket.socket(family,kind); s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+  if family==socket.AF_INET6:s.setsockopt(socket.IPPROTO_IPV6,socket.IPV6_V6ONLY,1)
+  s.bind((addr,38080))
+  if kind==socket.SOCK_STREAM:s.listen()
+  ss.append(s)
+while True:
+ for s in select.select(ss,[],[])[0]:
+  if s.type==socket.SOCK_STREAM:threading.Thread(target=client,args=(s.accept()[0],),daemon=True).start()
+  else:
+   data,peer=s.recvfrom(65536);s.sendto(data,peer)
+'
+[0;1;31mFailed to find executable /usr/bin/python3: No such file or directory[0m
+
+java.lang.AssertionError: Guest command failed: systemd-run --quiet --unit=goblin-network-check-2feee9d5f93146d0a747525bc71760df /usr/bin/python3 -u -c 'import socket,threading,select
+def client(c):
+ try:
+  while True:
+   b=c.recv(65536)
+   if not b: break
+   c.sendall(b)
+ finally: c.close()
+ss=[]
+for family,addr in [(socket.AF_INET,'"'"'0.0.0.0'"'"'),(socket.AF_INET6,'"'"'::'"'"')]:
+ for kind in [socket.SOCK_STREAM,socket.SOCK_DGRAM]:
+  s=socket.socket(family,kind); s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+  if family==socket.AF_INET6:s.setsockopt(socket.IPPROTO_IPV6,socket.IPV6_V6ONLY,1)
+  s.bind((addr,38080))
+  if kind==socket.SOCK_STREAM:s.listen()
+  ss.append(s)
+while True:
+ for s in select.select(ss,[],[])[0]:
+  if s.type==socket.SOCK_STREAM:threading.Thread(target=client,args=(s.accept()[0],),daemon=True).start()
+  else:
+   data,peer=s.recvfrom(65536);s.sendto(data,peer)
+'
+[0;1;31mFailed to find executable /usr/bin/python3: No such file or directory[0m
+
+	at dev.goblinlinux.sentry.ServicesAcceptance.require(ServicesAcceptance.java:26)
+	at dev.goblinlinux.sentry.ServicesAcceptance.execute(ServicesAcceptance.java:47)
+	at dev.goblinlinux.sentry.ServicesAcceptance.execute(ServicesAcceptance.java:38)
+	at dev.goblinlinux.sentry.ServicesAcceptance.network(ServicesAcceptance.java:94)
+	at dev.goblinlinux.sentry.ServicesAcceptance.onStart(ServicesAcceptance.java:254)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2248)
+GOBLIN SERVICES FAIL
+

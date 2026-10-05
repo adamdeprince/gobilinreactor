@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds the goblin-linux capability probe APK without Gradle or AGP.
+# Builds the GoblinReactor capability probe APK without Gradle or AGP.
 #
 # Deliberate: the probe has no dependencies to resolve, no network access, and no
 # AGP version compatibility surface. aapt2, clang, zipalign and apksigner are

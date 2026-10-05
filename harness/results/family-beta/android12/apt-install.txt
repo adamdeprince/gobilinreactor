@@ -1,0 +1,35 @@
+FAIL: java.lang.AssertionError: Guest command failed: set -e; su - goblin -c 'sudo -n apt-get install -y python3 hello less vim-tiny; hello'; test -z "$(dpkg --audit)"; test "$(dpkg-query -W -f='${db:Status-Status}' goblin-purrfect 2>/dev/null || true)" != installed
+Reading package lists... 0%Reading package lists... 0%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 2%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 0%Reading state information... Done
+Package less is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+E: Unable to locate package python3
+E: Unable to locate package hello
+E: Package 'less' has no installation candidate
+E: Unable to locate package vim-tiny
+-bash: line 1: hello: command not found
+
+java.lang.AssertionError: Guest command failed: set -e; su - goblin -c 'sudo -n apt-get install -y python3 hello less vim-tiny; hello'; test -z "$(dpkg --audit)"; test "$(dpkg-query -W -f='${db:Status-Status}' goblin-purrfect 2>/dev/null || true)" != installed
+Reading package lists... 0%Reading package lists... 0%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 2%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 0%Reading state information... Done
+Package less is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+E: Unable to locate package python3
+E: Unable to locate package hello
+E: Package 'less' has no installation candidate
+E: Unable to locate package vim-tiny
+-bash: line 1: hello: command not found
+
+	at dev.goblinlinux.sentry.ServicesAcceptance.require(ServicesAcceptance.java:26)
+	at dev.goblinlinux.sentry.ServicesAcceptance.execute(ServicesAcceptance.java:47)
+	at dev.goblinlinux.sentry.ServicesAcceptance.execute(ServicesAcceptance.java:38)
+	at dev.goblinlinux.sentry.ServicesAcceptance.onStart(ServicesAcceptance.java:262)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2248)
+GOBLIN SERVICES FAIL
+

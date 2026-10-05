@@ -1,0 +1,294 @@
+[
+  {
+    "Package": "apt",
+    "Version": "3.0.3",
+    "Filename": "pool/main/a/apt/apt_3.0.3_arm64.deb",
+    "SHA256": "9d88b95c6a6c9880b1bb40aebe7df3b34a0a160a9430d76fac496512a4cf69a6",
+    "Depends": "base-passwd (>= 3.6.1) | adduser, sqv (>= 1.3.0), libapt-pkg7.0 (>= 3.0.3), debian-archive-keyring, libc6 (>= 2.38), libgcc-s1 (>= 3.0), libseccomp2 (>= 2.4.2), libssl3t64 (>= 3.0.0), libstdc++6 (>= 13.1), libsystemd0"
+  },
+  {
+    "Package": "base-passwd",
+    "Version": "3.6.7",
+    "Filename": "pool/main/b/base-passwd/base-passwd_3.6.7_arm64.deb",
+    "SHA256": "c5755fd2cbf76961a1230e708b6bfc12c5400b57f3cd8a255675e9aa11d85848",
+    "Depends": "libc6 (>= 2.34), libdebconfclient0 (>= 0.145), libselinux1 (>= 3.1~)"
+  },
+  {
+    "Package": "bash",
+    "Version": "5.2.37-2+b10",
+    "Filename": "pool/main/b/bash/bash_5.2.37-2+b10_arm64.deb",
+    "SHA256": "9e2d2b3646b250f53be79b6128d9cff5e99cc5ff4a8c84e58efab59ad9bb0ddc",
+    "Depends": "base-files (>= 2.1.12), debianutils (>= 5.6-0.1)"
+  },
+  {
+    "Package": "coreutils",
+    "Version": "9.7-3",
+    "Filename": "pool/main/c/coreutils/coreutils_9.7-3_arm64.deb",
+    "SHA256": "99b2531e8d16e4f2d3f239ae3cb57913ec1f43764d2d6cd5c69154cbb1e57f3e"
+  },
+  {
+    "Package": "dash",
+    "Version": "0.5.12-12",
+    "Filename": "pool/main/d/dash/dash_0.5.12-12_arm64.deb",
+    "SHA256": "ce4c8688a1a3ea510186ba95aba74d4c49863094e47e1effc0b602839e840c04",
+    "Depends": "debianutils (>= 5.6-0.1)"
+  },
+  {
+    "Package": "debian-archive-keyring",
+    "Version": "2025.1",
+    "Filename": "pool/main/d/debian-archive-keyring/debian-archive-keyring_2025.1_all.deb",
+    "SHA256": "9ea7778e443144ca490668737a8ab22dd3e748bb99e805e22ec055abeb3c7fac"
+  },
+  {
+    "Package": "diffutils",
+    "Version": "1:3.10-4",
+    "Filename": "pool/main/d/diffutils/diffutils_3.10-4_arm64.deb",
+    "SHA256": "85cfb5576fa43ba2bd2047c53140fb465b929753048e53eb0fe6482ed343a5b9",
+    "Pre-Depends": "libc6 (>= 2.38)"
+  },
+  {
+    "Package": "dpkg",
+    "Version": "1.22.22",
+    "Filename": "pool/main/d/dpkg/dpkg_1.22.22_arm64.deb",
+    "SHA256": "1142468e57f69e13d174f517dff739508c61ee97d81c182c120cd6b281d8cdfa",
+    "Depends": "tar (>= 1.28-1)",
+    "Pre-Depends": "libbz2-1.0, libc6 (>= 2.38), liblzma5 (>= 5.4.0), libmd0 (>= 0.0.0), libselinux1 (>= 3.1~), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.1.4)"
+  },
+  {
+    "Package": "gcc-14-base",
+    "Version": "14.2.0-19",
+    "Filename": "pool/main/g/gcc-14/gcc-14-base_14.2.0-19_arm64.deb",
+    "SHA256": "34ee90679b018c0e64234747a4c4c0ae6b7f63541115037465a8627c2dfbc594"
+  },
+  {
+    "Package": "gzip",
+    "Version": "1.13-1+deb13u1",
+    "Filename": "pool/main/g/gzip/gzip_1.13-1+deb13u1_arm64.deb",
+    "SHA256": "02f83e5b4351ab4caa54f0405a334943dcd4986fdce740072bbda7b3c844e1f6",
+    "Pre-Depends": "libc6 (>= 2.38)"
+  },
+  {
+    "Package": "hello",
+    "Version": "2.10-5",
+    "Filename": "pool/main/h/hello/hello_2.10-5_arm64.deb",
+    "SHA256": "7a917c7f44fbd3373dff0f35a0b6bdf8ef564ff90579d8b130ff52fbf33fce1f",
+    "Depends": "libc6 (>= 2.38)",
+    "Role": "test-package"
+  },
+  {
+    "Package": "libacl1",
+    "Version": "2.3.2-2+b1",
+    "Filename": "pool/main/a/acl/libacl1_2.3.2-2+b1_arm64.deb",
+    "SHA256": "10b2399169e42e6d8db55944116cb2ed61caab997cf700acb83de0b0668e5721",
+    "Depends": "libc6 (>= 2.38)"
+  },
+  {
+    "Package": "libapt-pkg7.0",
+    "Version": "3.0.3",
+    "Filename": "pool/main/a/apt/libapt-pkg7.0_3.0.3_arm64.deb",
+    "SHA256": "c5aea30677a9c7a56edc92fcba3361f5e8cb31d5cdfedf72fc9d8e4fba150bda",
+    "Depends": "libbz2-1.0, libc6 (>= 2.38), libgcc-s1 (>= 3.0), liblz4-1 (>= 0.0~r127), liblzma5 (>= 5.1.1alpha+20120614), libssl3t64 (>= 3.0.0), libstdc++6 (>= 14), libsystemd0 (>= 221), libudev1 (>= 183), libxxhash0 (>= 0.8), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.2.2.3)"
+  },
+  {
+    "Package": "libattr1",
+    "Version": "1:2.5.2-3",
+    "Filename": "pool/main/a/attr/libattr1_2.5.2-3_arm64.deb",
+    "SHA256": "25057d7bfba969a76cdf18ae88ce7ff6e664520726ddf02cdde97c03d5e9a43c",
+    "Depends": "libc6 (>= 2.17)"
+  },
+  {
+    "Package": "libbz2-1.0",
+    "Version": "1.0.8-6",
+    "Filename": "pool/main/b/bzip2/libbz2-1.0_1.0.8-6_arm64.deb",
+    "SHA256": "3537fe4fc577a60c8a9568873cd577db7ebc135eb8bb1825f18caf8972d9d2f2",
+    "Depends": "libc6 (>= 2.17)"
+  },
+  {
+    "Package": "libc-bin",
+    "Version": "2.41-12+deb13u4",
+    "Filename": "pool/main/g/glibc/libc-bin_2.41-12+deb13u4_arm64.deb",
+    "SHA256": "3aba9182d6989d7c512178defdcb9d02b6906816bc8b2778a82a6c39582c880c",
+    "Depends": "libc6 (>> 2.41), libc6 (<< 2.42)"
+  },
+  {
+    "Package": "libc6",
+    "Version": "2.41-12+deb13u4",
+    "Filename": "pool/main/g/glibc/libc6_2.41-12+deb13u4_arm64.deb",
+    "SHA256": "8784eda966b189c777a384dac5ce009e8fc9b52d006926c5a013e7fa8aa688cc",
+    "Depends": "libgcc-s1"
+  },
+  {
+    "Package": "libc6-dev",
+    "Version": "2.41-12+deb13u4",
+    "Filename": "pool/main/g/glibc/libc6-dev_2.41-12+deb13u4_arm64.deb",
+    "SHA256": "71e373cb5e9da975b02fb4af555929cb1977560e2dd8245de4eb8a7b03677a08",
+    "Depends": "libc6 (= 2.41-12+deb13u4), libc-dev-bin (= 2.41-12+deb13u4), linux-libc-dev, libcrypt-dev, rpcsvc-proto",
+    "Role": "build-only"
+  },
+  {
+    "Package": "libcap2",
+    "Version": "1:2.75-10+deb13u1+b3",
+    "Filename": "pool/main/libc/libcap2/libcap2_2.75-10+deb13u1+b3_arm64.deb",
+    "SHA256": "863aa5b9cdf6f80010b48982d4639126b09a89eeef2c0c5c7be226297c811581",
+    "Depends": "libc6 (>= 2.38)"
+  },
+  {
+    "Package": "libdebconfclient0",
+    "Version": "0.280",
+    "Filename": "pool/main/c/cdebconf/libdebconfclient0_0.280_arm64.deb",
+    "SHA256": "8c2976dc62d0f5133018ea62636105335f9b17da77adce7fed1ffb24e2533dba",
+    "Depends": "libc6 (>= 2.38)"
+  },
+  {
+    "Package": "libgcc-s1",
+    "Version": "14.2.0-19",
+    "Filename": "pool/main/g/gcc-14/libgcc-s1_14.2.0-19_arm64.deb",
+    "SHA256": "1108bc87879833d6d9a145f22a4a15cddb34e065b4b5f4b97bee586adbac2851"
+  },
+  {
+    "Package": "libgmp10",
+    "Version": "2:6.3.0+dfsg-3",
+    "Filename": "pool/main/g/gmp/libgmp10_6.3.0+dfsg-3_arm64.deb",
+    "SHA256": "a27bbc27f119161ea9702c8dd66f54131cdf0d2ca73000f50ea91ef2fdfef0fb",
+    "Depends": "libc6 (>= 2.38)"
+  },
+  {
+    "Package": "libhogweed6t64",
+    "Version": "3.10.1-1",
+    "Filename": "pool/main/n/nettle/libhogweed6t64_3.10.1-1_arm64.deb",
+    "SHA256": "cb92d5a51c4fd6c7b7cbb62aaa60c7af830d0bea5b410fb1f47ee685e26944d1",
+    "Depends": "libc6 (>= 2.17), libgmp10 (>= 2:6.3.0+dfsg), libnettle8t64"
+  },
+  {
+    "Package": "liblz4-1",
+    "Version": "1.10.0-4",
+    "Filename": "pool/main/l/lz4/liblz4-1_1.10.0-4_arm64.deb",
+    "SHA256": "f86fa7f8112d56b74f99c4a8baade57a9962d187d7c8e319428e171b2a34d223",
+    "Depends": "libc6 (>= 2.17), libxxhash0 (>= 0.6.5)"
+  },
+  {
+    "Package": "liblzma5",
+    "Version": "5.8.1-1+deb13u1",
+    "Filename": "pool/main/x/xz-utils/liblzma5_5.8.1-1+deb13u1_arm64.deb",
+    "SHA256": "6a7b98005f84fc26d66a45e432f70d0793646a734f8c44cd1626b3ffa8edd7c6",
+    "Depends": "libc6 (>= 2.34)"
+  },
+  {
+    "Package": "libmd0",
+    "Version": "1.1.0-2+b1",
+    "Filename": "pool/main/libm/libmd/libmd0_1.1.0-2+b1_arm64.deb",
+    "SHA256": "772e86842fd3fa1816a0cfee4833a73996aaa550461491543b886b9c8f999052",
+    "Depends": "libc6 (>= 2.33)"
+  },
+  {
+    "Package": "libnettle8t64",
+    "Version": "3.10.1-1",
+    "Filename": "pool/main/n/nettle/libnettle8t64_3.10.1-1_arm64.deb",
+    "SHA256": "16107ce5a7b522da021fa8aba42d42af9c5e90ddabfcda3710aff6ea95808ee0",
+    "Depends": "libc6 (>= 2.17)"
+  },
+  {
+    "Package": "libpcre2-8-0",
+    "Version": "10.46-1~deb13u2",
+    "Filename": "pool/main/p/pcre2/libpcre2-8-0_10.46-1~deb13u2_arm64.deb",
+    "SHA256": "e7d2c997dac145c16457be0fed3d084c98cd030bec7633eec7e5bde6dbb97712",
+    "Depends": "libc6 (>= 2.34)"
+  },
+  {
+    "Package": "libseccomp2",
+    "Version": "2.6.0-2",
+    "Filename": "pool/main/libs/libseccomp/libseccomp2_2.6.0-2_arm64.deb",
+    "SHA256": "013d0af0444177960d5899f4673e35d492f31edfc40cb8d5a82bb56147ab2e35",
+    "Depends": "libc6 (>= 2.17)"
+  },
+  {
+    "Package": "libselinux1",
+    "Version": "3.8.1-1",
+    "Filename": "pool/main/libs/libselinux/libselinux1_3.8.1-1_arm64.deb",
+    "SHA256": "fc13da4c7783b8f4361d92ef1045931f298d1b0ac78ed1a85c2232615f49fc6f",
+    "Depends": "libc6 (>= 2.38), libpcre2-8-0 (>= 10.22)"
+  },
+  {
+    "Package": "libssl3t64",
+    "Version": "3.5.7-1~deb13u2",
+    "Filename": "pool/main/o/openssl/libssl3t64_3.5.7-1~deb13u2_arm64.deb",
+    "SHA256": "ec131326aa9fa9ec934eca386bc7991f328fe383eaefd3e43bd8901a9199c5ae"
+  },
+  {
+    "Package": "libstdc++6",
+    "Version": "14.2.0-19",
+    "Filename": "pool/main/g/gcc-14/libstdc++6_14.2.0-19_arm64.deb",
+    "SHA256": "6669b0c52a2e7c6af9adfdabce3ff6e286065cdfbc7b85280862b5f799daebee",
+    "Depends": "gcc-14-base (= 14.2.0-19), libc6 (>= 2.38), libgcc-s1 (>= 4.5)"
+  },
+  {
+    "Package": "libsystemd0",
+    "Version": "257.13-1~deb13u1",
+    "Filename": "pool/main/s/systemd/libsystemd0_257.13-1~deb13u1_arm64.deb",
+    "SHA256": "d2f63c408549c29eaefb6f4c948393edce99f45ee8e43c991391bef63fb7d54b",
+    "Depends": "libc6 (>= 2.39), libcap2 (>= 1:2.10)"
+  },
+  {
+    "Package": "libtinfo6",
+    "Version": "6.5+20250216-2",
+    "Filename": "pool/main/n/ncurses/libtinfo6_6.5+20250216-2_arm64.deb",
+    "SHA256": "2a747f7fff3c2347c357387a7133df997410f07ba1b1df1a1461a97bd7fbc2fc",
+    "Depends": "libc6 (>= 2.34)"
+  },
+  {
+    "Package": "libudev1",
+    "Version": "257.13-1~deb13u1",
+    "Filename": "pool/main/s/systemd/libudev1_257.13-1~deb13u1_arm64.deb",
+    "SHA256": "459b1c9c17cc3c586e90d13d2a991715d498c6eed6c046cabf321021167bc380",
+    "Depends": "libc6 (>= 2.38), libcap2 (>= 1:2.10)"
+  },
+  {
+    "Package": "libxxhash0",
+    "Version": "0.8.3-2",
+    "Filename": "pool/main/x/xxhash/libxxhash0_0.8.3-2_arm64.deb",
+    "SHA256": "66665776740ced6c5ddcb48a89a92b056d0dcb13851e1ff573d2b99b766e5c6c",
+    "Depends": "libc6 (>= 2.17)"
+  },
+  {
+    "Package": "libzstd1",
+    "Version": "1.5.7+dfsg-1",
+    "Filename": "pool/main/libz/libzstd/libzstd1_1.5.7+dfsg-1_arm64.deb",
+    "SHA256": "924540bd59fdbfa77a0604360efdaca54411a43daf11c7e002a3c64791b67448",
+    "Depends": "libc6 (>= 2.34)"
+  },
+  {
+    "Package": "linux-libc-dev",
+    "Version": "6.12.107-1",
+    "Filename": "pool/main/l/linux/linux-libc-dev_6.12.107-1_all.deb",
+    "SHA256": "dc68dd53c7356598d005866da0d19d7bd33af2a62971aced624cdf04492902b4",
+    "Role": "build-only"
+  },
+  {
+    "Package": "sqv",
+    "Version": "1.3.0-3+b2",
+    "Filename": "pool/main/r/rust-sequoia-sqv/sqv_1.3.0-3+b2_arm64.deb",
+    "SHA256": "feb611506f420594bf767b1a8748429802ff4f324536ab1154bcc61478b9a8b6",
+    "Depends": "libc6 (>= 2.34), libgcc-s1 (>= 4.2), libgmp10 (>= 2:6.3.0+dfsg), libhogweed6t64, libnettle8t64 (>= 3.9~)"
+  },
+  {
+    "Package": "tar",
+    "Version": "1.35+dfsg-3.1",
+    "Filename": "pool/main/t/tar/tar_1.35+dfsg-3.1_arm64.deb",
+    "SHA256": "c460a8294202ca3802b7c703b0bd70dd8bda1f2fc8785839595cf9d5e060d71b",
+    "Pre-Depends": "libacl1 (>= 2.2.23), libc6 (>= 2.38), libselinux1 (>= 3.1~)"
+  },
+  {
+    "Package": "xz-utils",
+    "Version": "5.8.1-1+deb13u1",
+    "Filename": "pool/main/x/xz-utils/xz-utils_5.8.1-1+deb13u1_arm64.deb",
+    "SHA256": "07b6145c6c934d744c712c252b293ce506d427ea127c7f77b711c518aead54b3",
+    "Depends": "libc6 (>= 2.34), liblzma5 (>= 5.6.2)"
+  },
+  {
+    "Package": "zlib1g",
+    "Version": "1:1.3.dfsg+really1.3.1-1+b1",
+    "Filename": "pool/main/z/zlib/zlib1g_1.3.dfsg+really1.3.1-1+b1_arm64.deb",
+    "SHA256": "209aa5cf671e97b9eb0410844fa6df4cae2e75b0c72e7802ab6c8ece13e6ddef",
+    "Depends": "libc6 (>= 2.17)"
+  }
+]

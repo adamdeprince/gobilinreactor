@@ -1,0 +1,167 @@
+pid=10838 ppid=10827 uid=90000 pagesize=4096 cpus=8 children=64 seconds=180
+/proc/self/attr/current: u:r:isolated_app:s0:c512,c768
+/proc/self/cgroup: 3:cpuset:/foreground
+2:cpu:/foreground
+1:blkio:/
+0::/apps/uid_90000/pid_10827
+
+private file path open: fd=-1 errno=2 (denial expected in isolated service)
+private file /proc/self/fd reopen: fd=-1 errno=13
+PASS passed private disk FD write/fsync
+PASS passed private disk FD shared mapping
+PASS passed TCP socket write
+direct TCP socket: fd=-1 errno=13 (denial expected in isolated service)
+PASS own executable memfd
+PASS memfd shared writable alias
+PASS reserve guest address range
+PASS memfd fixed executable alias runs ARM64 code
+PASS clone stack
+PASS CLONE_VM process shares memory
+PASS fork syscall-trap check
+PASS fork syscall-trap check
+PASS stacked seccomp SIGSYS trapping
+PASS shared worker heartbeat memory
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+READY children=64 busy=8 helper=10838 deadline_seconds=180
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+PASS fork workload child
+ALIVE children=64 elapsed=1
+ALIVE children=64 elapsed=16
+ALIVE children=64 elapsed=31
+ALIVE children=64 elapsed=46
+ALIVE children=64 elapsed=61
+ALIVE children=64 elapsed=76
+ALIVE children=64 elapsed=91
+ALIVE children=64 elapsed=106
+ALIVE children=64 elapsed=121
+ALIVE children=64 elapsed=136
+ALIVE children=64 elapsed=151
+ALIVE children=64 elapsed=166
+PASS workload children=64 seconds=180
+PASS parent TCP verification
+

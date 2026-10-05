@@ -1,0 +1,35 @@
+== goblin-linux phase 2: loader, sentry, stub process ==
+page size            4096
+memfd exec           supported (sealed, shared)
+guest window         0x7500000000 - 0x7540000000 (4 GiB aligned)
+
+-- guest: hello --
+image                2544 bytes
+loaded               bias=0x7501000000 entry=0x750100428c
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+  guest stdout: hello, world
+  syscall trace:
+    write           (0x1, 0x7501000238, 0xd) = 13
+FAILED: stub process died without reporting at boot stage 5: Segmentation fault
+
+-- guest: bench --
+image                2592 bytes
+loaded               bias=0x7501000000 entry=0x7501004284
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+FAILED: stub process died without reporting at boot stage 5: Segmentation fault
+
+-- guest: memtest --
+image                3528 bytes
+loaded               bias=0x7501000000 entry=0x750100439c
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+  syscall trace:
+    brk             (0, 0, 0) = 0x7501009000
+FAILED: stub process died without reporting at boot stage 5: Segmentation fault
+
+GOBLIN FAIL

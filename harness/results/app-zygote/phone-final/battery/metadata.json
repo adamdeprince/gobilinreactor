@@ -1,0 +1,48 @@
+{
+  "serial": "R5CX3468YQR",
+  "started_utc": "2026-09-20T13:14:03.518132+00:00",
+  "requested_seconds": 300,
+  "physical_battery_state_simulated": false,
+  "before": {
+    "monitor_setting": "null",
+    "monitor_property": "",
+    "selinux": "Enforcing",
+    "phantom_limit": [
+      "max_phantom_processes=32"
+    ]
+  },
+  "power_before": {
+    "AC powered": "false",
+    "USB powered": "true",
+    "Wireless powered": "false",
+    "Dock powered": "false",
+    "status": "5",
+    "level": "100"
+  },
+  "ready_log": "         1789910057.142  1387  1413 I goblin-battery: 0c44c209810047da9d7345f8a2b9a5be READY: unplug USB and turn the screen off for 300 seconds",
+  "run_token": "0c44c209810047da9d7345f8a2b9a5be",
+  "state": "COMPLETED",
+  "reported_test_condition": "User confirmed the phone call overlapped the battery test.",
+  "interpretation": "PASS for screen-off operation on battery during a call. A separate run after the call is required to assess normal idle operation.",
+  "measured_result": "PASS",
+  "idle_classification": "IN_CALL: user confirmed the call was still active after the completed screen-off interval",
+  "after": {
+    "monitor_setting": "null",
+    "monitor_property": "",
+    "selinux": "Enforcing",
+    "phantom_limit": [
+      "max_phantom_processes=32"
+    ]
+  },
+  "policy_unchanged": true,
+  "measurement_seconds": 300,
+  "android_power_samples": 301,
+  "guest_heartbeat_advance": 282,
+  "guest_restarted": false,
+  "battery_optimization_exemption": false,
+  "event_times_utc": {
+    "READY": "2026-09-20T13:14:17.142000+00:00",
+    "RUNNING": "2026-09-20T13:15:16.374000+00:00",
+    "PASS": "2026-09-20T13:20:17.288000+00:00"
+  }
+}

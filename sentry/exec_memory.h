@@ -23,8 +23,8 @@ bool MemfdExecSupported();
 // descriptor can be handed to other guest address spaces later, so every process
 // using an object shares one copy of it.
 //
-// The ordering matters: the contents are sealed against writes *before* anything
-// is made executable, so the mapping is provably not self-modifying code.
+// The backing contents are sealed before mapping. Private COW mappings can still
+// be changed by guest memory operations; a seal is not a W^X policy.
 class GuestImage {
 public:
     GuestImage() = default;

@@ -1,0 +1,3 @@
+userdel: goblintest7f222e11 mail spool (/var/mail/goblintest7f222e11) not found
+GOBLIN SERVICES PASS
+

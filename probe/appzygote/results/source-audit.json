@@ -1,0 +1,89 @@
+{
+  "recorded_at": "2026-09-20T08:26:06.733697+00:00",
+  "sources": [
+    {
+      "file": "AppZygote.java",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/android16-release/core/java/android/os/AppZygote.java",
+      "sha256": "70ded18e23969820088d7bcb50d21ca37025622021587f77df42135465ec747b",
+      "app_zygote_scan_exclusion": null
+    },
+    {
+      "file": "PhantomProcessList-android12-release.java",
+      "url": "https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/android12-release/services/core/java/com/android/server/am/PhantomProcessList.java",
+      "sha256": "c933acb6877d776d0bff1f21b409f19f84675af1ee5124b7f78ed7ea024a0690",
+      "app_zygote_scan_exclusion": true
+    },
+    {
+      "file": "PhantomProcessList-android13-release.java",
+      "url": "https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/android13-release/services/core/java/com/android/server/am/PhantomProcessList.java",
+      "sha256": "8985cec169f0b2bacc3d83c2cd5cbe8ee91dccfe3242748599b6bc69adc3989c",
+      "app_zygote_scan_exclusion": true
+    },
+    {
+      "file": "PhantomProcessList-android14-release.java",
+      "url": "https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/android14-release/services/core/java/com/android/server/am/PhantomProcessList.java",
+      "sha256": "8985cec169f0b2bacc3d83c2cd5cbe8ee91dccfe3242748599b6bc69adc3989c",
+      "app_zygote_scan_exclusion": true
+    },
+    {
+      "file": "PhantomProcessList-android15-release.java",
+      "url": "https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/android15-release/services/core/java/com/android/server/am/PhantomProcessList.java",
+      "sha256": "8985cec169f0b2bacc3d83c2cd5cbe8ee91dccfe3242748599b6bc69adc3989c",
+      "app_zygote_scan_exclusion": true
+    },
+    {
+      "file": "PhantomProcessList-android16-release.java",
+      "url": "https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/android16-release/services/core/java/com/android/server/am/PhantomProcessList.java",
+      "sha256": "b78b7c0b546987617e9dc25214e2f549568ae99c28485b390613f931ee0cbe07",
+      "app_zygote_scan_exclusion": true
+    },
+    {
+      "file": "PhantomProcessList-master.java",
+      "url": "https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/master/services/core/java/com/android/server/am/PhantomProcessList.java",
+      "sha256": "b78b7c0b546987617e9dc25214e2f549568ae99c28485b390613f931ee0cbe07",
+      "app_zygote_scan_exclusion": true
+    },
+    {
+      "file": "PhantomProcessList-official-android16-qpr2-release.java",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/android16-qpr2-release/services/core/java/com/android/server/am/PhantomProcessList.java",
+      "sha256": "1a22f678964e758f56de907fea1e67f3aa5763e494b30ad36f0cea976b7417e8",
+      "app_zygote_scan_exclusion": true
+    },
+    {
+      "file": "PhantomProcessList-official-main.java",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/main/services/core/java/com/android/server/am/PhantomProcessList.java",
+      "sha256": "b78b7c0b546987617e9dc25214e2f549568ae99c28485b390613f931ee0cbe07",
+      "app_zygote_scan_exclusion": true
+    },
+    {
+      "file": "ProcessRecord-official-android16-qpr2-release.java",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/android16-qpr2-release/services/core/java/com/android/server/am/ProcessRecord.java",
+      "sha256": "2aca3f124746991b80d09c2e32a37a3e997d5222d8d773c50b86d9bf62d3a50d",
+      "app_zygote_scan_exclusion": null
+    },
+    {
+      "file": "ProcessRecord-official-main.java",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/main/services/core/java/com/android/server/am/ProcessRecord.java",
+      "sha256": "a6046af9c6b3fb00bdddf2e9c97cb3402b8e27ae29d624f1145b6ebdb42a63dc",
+      "app_zygote_scan_exclusion": null
+    },
+    {
+      "file": "com_android_internal_os_Zygote.cpp",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/android16-release/core/jni/com_android_internal_os_Zygote.cpp",
+      "sha256": "ec8baf78eb5fd12c7196e9b825c284a6d78ced9e3109ff2f9126158dd7e11a69",
+      "app_zygote_scan_exclusion": null
+    },
+    {
+      "file": "seccomp_policy.cpp",
+      "url": "https://android.googlesource.com/platform/bionic/+/android16-release/libc/seccomp/seccomp_policy.cpp",
+      "sha256": "ca8b2270bc0f1ab4f108ee13185ae81b22245bbf9036c33628d97e857363a35b",
+      "app_zygote_scan_exclusion": null
+    },
+    {
+      "file": "te_macros",
+      "url": "https://android.googlesource.com/platform/system/sepolicy/+/android16-release/public/te_macros",
+      "sha256": "39876a485ea1fe6cf76418268bc058dde7ae50690fd2901051e32125c5678243",
+      "app_zygote_scan_exclusion": null
+    }
+  ]
+}

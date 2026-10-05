@@ -1,0 +1,7 @@
+PASS: extra keys are visible without a physical keyboard
+PASS: login shell is ready for keyboard input
+PASS: connecting a physical keyboard hides the extra keys
+PASS: terminal menu remains accessible with the extra keys hidden
+PASS: physical keyboard input executes in the terminal
+PASS: disconnecting the physical keyboard restores the extra keys
+TERMINAL KEYBOARD PASS

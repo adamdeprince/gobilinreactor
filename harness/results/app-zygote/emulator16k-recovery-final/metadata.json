@@ -1,0 +1,29 @@
+{
+  "serial": "emulator-5554",
+  "mode": "recovery",
+  "seconds": 600,
+  "before": {
+    "monitor_setting": "null",
+    "monitor_property": "",
+    "phantom_limit": [
+      "max_phantom_processes=32"
+    ],
+    "selinux": "Enforcing"
+  },
+  "fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:16/BE2A.250530.026.F3/13894323:userdebug/dev-keys",
+  "after": {
+    "monitor_setting": "null",
+    "monitor_property": "",
+    "phantom_limit": [
+      "max_phantom_processes=32"
+    ],
+    "selinux": "Enforcing"
+  },
+  "duration_seconds": 78.6,
+  "adb_returncode": 0,
+  "acceptance_passed": true,
+  "policy_unchanged": true,
+  "peak_workers": 35,
+  "tracked_phantoms": [],
+  "workers_remaining_after_stop": []
+}

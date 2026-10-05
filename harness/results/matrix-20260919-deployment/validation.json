@@ -1,0 +1,132 @@
+{
+  "apk_sha256": "13b2d2e52fe7d16410ce5dd527a00cdeb9add33dcc4d0b891b6d0c64226f94fe",
+  "validated_utc": "2026-09-19T20:00:05.089940+00:00",
+  "initial_matrix": "matrix.json",
+  "installed_apks": "installed-apks.json",
+  "devices": [
+    {
+      "serial": "R5CX3468YQR",
+      "model": "SM-S928U",
+      "page_size": 4096,
+      "api": "36",
+      "checks": [
+        {
+          "name": "regression",
+          "passed": true,
+          "report": "R5CX3468YQR/regression.txt"
+        },
+        {
+          "name": "persistent",
+          "passed": true,
+          "report": "R5CX3468YQR/persistent.txt"
+        },
+        {
+          "name": "developer",
+          "passed": true,
+          "report": "R5CX3468YQR/developer.txt"
+        },
+        {
+          "name": "recovery",
+          "passed": true,
+          "report": "R5CX3468YQR/recovery.txt"
+        },
+        {
+          "name": "kitty",
+          "passed": true,
+          "report": "R5CX3468YQR/kitty.txt"
+        },
+        {
+          "name": "lifecycle",
+          "passed": true,
+          "report": "R5CX3468YQR/lifecycle-final.txt"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "serial": "emulator-5556",
+      "model": "sdk_gphone16k_arm64",
+      "page_size": 16384,
+      "api": "36",
+      "checks": [
+        {
+          "name": "regression",
+          "passed": true,
+          "report": "emulator-5556/regression.txt"
+        },
+        {
+          "name": "persistent",
+          "passed": true,
+          "report": "emulator-5556/persistent.txt"
+        },
+        {
+          "name": "developer",
+          "passed": true,
+          "report": "emulator-5556/developer.txt"
+        },
+        {
+          "name": "recovery",
+          "passed": true,
+          "report": "emulator-5556/recovery.txt"
+        },
+        {
+          "name": "kitty",
+          "passed": true,
+          "report": "emulator-5556/kitty.txt"
+        },
+        {
+          "name": "lifecycle",
+          "passed": true,
+          "report": "emulator-5556/lifecycle.txt"
+        },
+        {
+          "name": "keyboard",
+          "passed": true,
+          "report": "emulator-5556/keyboard.txt"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "serial": "emulator-5558",
+      "model": "sdk_gphone64_arm64",
+      "page_size": 4096,
+      "api": "36",
+      "checks": [
+        {
+          "name": "regression",
+          "passed": true,
+          "report": "../deploy-20260919/emulator-5558/regression-final.txt"
+        },
+        {
+          "name": "persistent",
+          "passed": true,
+          "report": "../deploy-20260919/emulator-5558/persistent-final.txt"
+        },
+        {
+          "name": "kitty",
+          "passed": true,
+          "report": "../deploy-20260919/emulator-5558/kitty-final.txt"
+        },
+        {
+          "name": "keyboard",
+          "passed": true,
+          "report": "../deploy-20260919/emulator-5558/keyboard-final.txt"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "notes": [
+    "The initial matrix retains a phone lifecycle runner failure: Close terminal was below the visible portion of a landscape popup menu.",
+    "Only the lifecycle host runner was changed to scroll the menu. The phone lifecycle suite then passed on the unchanged APK.",
+    "Keyboard hotplug uses temporary Android uinput USB keyboards on the emulators. A physical Bluetooth keyboard was not tested."
+  ],
+  "local_checks": [
+    "harness runner: 7 cases passed",
+    "Python syntax checks passed",
+    "git diff --check passed",
+    "bundled guest package hashes and migration version match source"
+  ],
+  "passed": true
+}

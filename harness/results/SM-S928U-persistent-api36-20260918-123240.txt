@@ -1,0 +1,38 @@
+page size            4096
+-- Persistent: Debian package bootstrap --
+PASS: Debian package bootstrap status=0 
+-- Persistent: recover interrupted package configuration --
+PASS: recover interrupted package configuration status=0 
+-- Persistent: installed database and maintainer scripts --
+PASS: installed database and maintainer scripts status=0 
+-- Persistent: remount persistence --
+PASS: remount persistence status=0 
+-- Persistent: public DNS through Android --
+PASS: public DNS through Android status=0 
+-- Persistent: public HTTPS repository and Debian signature --
+PASS: public HTTPS repository and Debian signature status=0 
+-- Persistent: reject modified repository signature --
+PASS: reject modified repository signature status=0 
+-- Persistent: install curl git python3 with public apt --
+PASS: install curl git python3 with public apt status=0 
+-- Persistent: curl DNS and trusted HTTPS --
+PASS: curl DNS and trusted HTTPS status=0 
+-- Persistent: reject untrusted HTTPS certificate --
+PASS: reject untrusted HTTPS certificate status=0 
+-- Persistent: git repository and commit --
+PASS: git repository and commit status=0 
+-- Persistent: Python files TLS and subprocess --
+PASS: Python files TLS and subprocess status=0 
+PASS: resource limit: filesystem
+PASS: resource limit: sigpipe
+PASS: resource limit: memory
+PASS: resource limit: tasks
+PASS: resource limit: disk
+PASS: captured output limit
+PASS: CPU loop stops at session deadline
+PASS: interactive shell input and output
+PASS: Ctrl-C targets foreground job
+PASS: Ctrl-Z, background and foreground resume
+PASS: terminal resize and transcript replay
+PASS: terminal shell clean shutdown
+GOBLIN PASS

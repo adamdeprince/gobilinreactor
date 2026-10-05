@@ -1,0 +1,119 @@
+== goblin-linux: isolated stub and memory ABI regression harness ==
+page size            4096
+memfd exec           supported (sealed, shared)
+guest window         0x7500000000 - 0x7540000000 (4 GiB aligned)
+core regressions     48 checks passed
+
+-- guest: hello --
+image                2544 bytes
+loaded               bias=0x7501000000 entry=0x750100428c
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+  guest stdout: hello, world
+  syscall trace:
+    write           (0x1, 0x7501000238, 0xd) = 13
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 2 syscalls
+
+-- guest: bench --
+image                2592 bytes
+loaded               bias=0x7501000000 entry=0x7501004284
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+  guest stdout: bench done
+exited               status 0 after 200002 syscalls
+cost                 28353 ns per syscall total
+  of which             30 ns in the sentry, 28323 ns in signal delivery
+
+-- guest: memtest --
+image                3528 bytes
+loaded               bias=0x7501000000 entry=0x750100439c
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+  guest stdout: memtest ok
+  syscall trace:
+    brk             (0, 0, 0) = 0x7501009000
+    brk             (0x7501019000, 0, 0) = 0x7501019000
+    mmap            (0, 0x4000, 0x3) = 0x753f7fc000
+    mprotect        (0x753f7fc000, 0x4000, 0x1) = 0
+    munmap          (0x753f7fc000, 0x4000, 0) = 0
+    mmap            (0, 0x4000, 0x3) = 0x753f7fc000
+    write           (0x1, 0x750100026f, 0xb) = 11
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 8 syscalls
+
+-- guest: memerrors --
+image                4016 bytes
+loaded               bias=0x7501000000 entry=0x75010042cc
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+  guest stdout: memory errors ok
+  syscall trace:
+    brk             (0, 0, 0) = 0x7501009000
+    brk             (0x7501009001, 0, 0) = 0x7501009001
+    brk             (0x7501009002, 0, 0) = 0x7501009002
+    brk             (0x7501009001, 0, 0) = 0x7501009001
+    mmap            (0, 0xffffffffffffffff, 0x3) = -12
+    mmap            (0x7501009001, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x40000000) = -22
+    mmap            (0, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x3) = 0x753f7fc000
+    mmap            (0x753f7fc000, 0x4000, 0x3) = -17
+    madvise         (0x753f7fc000, 0x4000, 0x4) = 0
+    madvise         (0x753f7fc000, 0x4000, 0x7fffffff) = -22
+    mprotect        (0x753f7fc000, 0x4000, 0x40000000) = -22
+    munmap          (0x753f7fc000, 0x4000, 0) = 0
+    mprotect        (0x753f7fc000, 0x4000, 0x1) = -12
+    madvise         (0x753f7fc000, 0x4000, 0x4) = -12
+    munmap          (0x753f7fc000, 0x4000, 0) = 0
+    mmap            (0x753f7fc000, 0x4000, 0x3) = 0x753f7fc000
+    mmap            (0, 0x4000, 0x3) = 0x753f7f8000
+    madvise         (0x753f7f8000, 0x4000, 0x8) = -22
+    write           (0x1, 0x7501000238, 0x11) = 17
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 23 syscalls
+
+-- guest: isolation --
+image                3600 bytes
+loaded               bias=0x7501000000 entry=0x75010042dc
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+  guest stdout: isolation and TLS ok
+  syscall trace:
+    getpid          (0, 0, 0) = 1
+    getpid          (0, 0, 0) = 1
+    brk             (0, 0, 0) = 0x7501009000
+    openat          (0xffffffffffffff9c, 0x753fffff10, 0) = -38
+    clone           (0x11, 0, 0) = -38
+    syscall_167     (0, 0, 0) = -38
+    getpid          (0, 0, 0) = 1
+    write           (0x1, 0x750100024a, 0x15) = 21
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 9 syscalls
+
+-- guest: oldcode --
+image                2776 bytes
+loaded               bias=0x7501000000 entry=0x75010042d4
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+expected fault       guest faulted: Segmentation fault at pc=0x7a46cdfc00 accessing 0x7a46cdfc00
+
+-- guest: badstack --
+image                2088 bytes
+loaded               bias=0x7501000000 entry=0x7501004200
+  mapped span        0x7501000000 - 0x7501009000
+  executable         0x7501004000 - 0x7501005000
+  backing            sealed memfd
+  syscall trace:
+    getpid          (0, 0, 0) = 1
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 2 syscalls
+
+GOBLIN PASS

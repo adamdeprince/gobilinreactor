@@ -1,0 +1,110 @@
+--stderr will be dropped soon
+IPv4: no external interface as template, use local mode
+Unable to open /proc/sys/net/ipv4/ip_local_port_range: Permission denied
+MAC:
+    host: 9a:55:9a:55:9a:55
+    NAT to host 127.0.0.1: 10.0.2.2
+DNS:
+    1.1.1.1
+Inbound forwarding rules (HOST):
+Failed to bind neighbour notifier socket: Permission denied
+Address space: host top 0x8000000000, stub at 0x7fffdf4000, guest TASK_SIZE 0x7fc0000000
+Core dump limits :
+	soft - 0
+	hard - NONE
+Stub signal stack: 16384 bytes, host AT_MINSIGSTKSZ 4720
+Checking PROT_EXEC mmap in /data/user/0/dev.goblinlinux.sentry/files/uml/tmp...OK
+Checking the stub's cycle counter...OK
+Checking that seccomp filters can be installed...OK
+Userspace mode: SECCOMP
+Linux version 7.2.0-rc4-goblin (root@localhost) (Debian clang version 19.1.7 (3+b1), Debian LLD 19.1.7) #11 SMP Sun Sep 20 00:30:33 UTC 2026
+random: crng init done
+Zone ranges:
+  Normal   [mem 0x0000000000000000-0x0000000314cabfff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000000000000-0x00000002b4cabfff]
+Initmem setup node 0 [mem 0x0000000000000000-0x00000002b4cabfff]
+On node 0, zone Normal: 213 pages in unavailable ranges
+percpu: Embedded 4 pages/cpu s31576 r0 d33960 u65536
+Kernel command line: ubd0=/data/user/0/dev.goblinlinux.sentry/files/uml/rootfs.ext4 con=null con0=null,fd:1 ssl=null ssl0=fd:3,fd:3 vec0:transport=fd,fd=4,mac=02:00:00:00:00:01 root=/dev/ubda rw console=tty0
+printk: log_buf_len individual max cpu contribution: 4096 bytes
+printk: log_buf_len total cpu_extra contributions: 28672 bytes
+printk: log_buf_len min size: 16384 bytes
+printk: log buffer data + meta data: 65536 + 229376 = 294912 bytes
+printk: early log buf free: 15224(92%)
+Dentry cache hash table entries: 2097152 (order: 10, 16777216 bytes, linear)
+Inode-cache hash table entries: 1048576 (order: 9, 8388608 bytes, linear)
+Built 1 zonelists, mobility grouping on.  Total pages: 709419
+mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+rcu: Hierarchical RCU implementation.
+rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=8.
+rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=8
+NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 64
+rcu: srcu_init: Setting srcu_struct sizes based on contention.
+clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+clocksource: timer: mask: 0xffffffffffffffff max_cycles: 0x1cd42e205, max_idle_ns: 881590404426 ns
+Calibrating delay loop... 3219.45 BogoMIPS (lpj=16097280)
+Checking that host ptys support output SIGIO...Yes
+pid_max: default: 32768 minimum: 301
+Mount-cache hash table entries: 32768 (order: 4, 262144 bytes, linear)
+Mountpoint-cache hash table entries: 32768 (order: 4, 262144 bytes, linear)
+VFS: Finished mounting rootfs on nullfs
+arm64: hwcap host 0xefbfffff/0x1ae181 -> guest 0x2fbff7ff/0x0 (masked out 0xc0000800/0x1ae181)
+rcu: Hierarchical SRCU implementation.
+rcu: 	Max phase no-delay instances is 1000.
+Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+smp: Bringing up secondary CPUs ...
+smp: Brought up 1 node, 8 CPUs
+Memory: 11257072K/11350704K available (5227K kernel code, 1467K rwdata, 1104K rodata, 202K init, 4489K bss, 84720K reserved, 0K cma-reserved)
+devtmpfs: initialized
+posixtimers hash table entries: 4096 (order: 2, 65536 bytes, linear)
+futex hash table entries: 2048 (65536 bytes on 1 NUMA nodes, total 64 KiB, linear).
+NET: Registered PF_NETLINK/PF_ROUTE protocol family
+pps_core: LinuxPPS API ver. 1 registered
+pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+PTP clock support registered
+clocksource: Switched to clocksource timer
+VFS: Disk quotas dquot_6.6.0
+VFS: Dquot-cache hash table entries: 2048 (16384 bytes)
+NET: Registered PF_INET protocol family
+IP idents hash table entries: 262144 (order: 7, 2097152 bytes, linear)
+tcp_listen_portaddr_hash hash table entries: 8192 (order: 3, 131072 bytes, linear)
+Table-perturb hash table entries: 65536 (order: 4, 262144 bytes, linear)
+TCP established hash table entries: 131072 (order: 6, 1048576 bytes, linear)
+TCP bind hash table entries: 65536 (order: 7, 2097152 bytes, linear)
+TCP: Hash tables configured (established 131072 bind 65536)
+UDP hash table entries: 8192 (order: 5, 524288 bytes, linear)
+NET: Registered PF_UNIX/PF_LOCAL protocol family
+printk: legacy console [stderr0] disabled
+Checking host MADV_REMOVE support...OK
+mconsole (version 2) initialized on /data/user/0/dev.goblinlinux.sentry/files/uml/tmp/goblin/mconsole
+Unpacking initramfs...
+workingset: timestamp_bits=46 (anon: 41) max_order=20 bucket_order=0 (anon: 0)
+fuse: init (API version 7.45)
+io scheduler mq-deadline registered
+io scheduler kyber registered
+io scheduler bfq registered
+loop: module loaded
+Freeing initrd memory: 2224K
+tun: Universal TUN/TAP device driver, 1.6
+PPP generic driver version 2.4.2
+SLIP: version 0.8.4-NET3.019-NEWTTY (dynamic channels, max=256).
+NET: Registered PF_INET6 protocol family
+Segment Routing with IPv6
+In-situ OAM (IOAM) with IPv6
+sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+NET: Registered PF_PACKET protocol family
+Initialized stdio console driver
+Console initialized on /dev/tty0
+printk: legacy console [tty0] enabled
+Initializing software serial port version 1
+printk: legacy console [mc-1] enabled
+epollctl add err fd 21, Operation not permitted
+Run /init as init process
+/dev/ubda: recovering journal
+/dev/ubda: clean, 22165/14606336 files, 1466143/58410548 blocks
+EXT4-fs (ubda): mounted filesystem a75d0fcf-9778-40a5-875c-bb9b40304c97 r/w with ordered data mode. Quota mode: none.
+New guest MAC address observed: 02:00:00:00:00:01

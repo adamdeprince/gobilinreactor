@@ -1,0 +1,1329 @@
+--- a/arch/arm64/um/shared/sysdep/stub.h
++++ b/arch/arm64/um/shared/sysdep/stub.h
+@@ -266,7 +266,12 @@
+ 		: "r" (~(unsigned long)(UM_KERN_PAGE_SIZE - 1)),
+ 		  "r" ((unsigned long)UM_KERN_PAGE_SIZE));
+ 
+-	return (void *)ret;
++	/* All callers run on a worker's signal stack, including the clone
++	 * trampoline. TLS belongs to the guest and cannot identify our slot.
++	 */
++	unsigned long sp;
++	__asm__ volatile ("mov %0, sp" : "=r" (sp));
++	return (void *)(ret + ((sp - ret) / STUB_DATA_SIZE) * STUB_DATA_SIZE);
+ }
+ 
+ /*
+--- a/arch/um/include/asm/mmu.h
++++ b/arch/um/include/asm/mmu.h
+@@ -11,9 +11,17 @@
+ #include <linux/spinlock.h>
+ #include <mm_id.h>
+ 
++struct mm_worker {
++	int ready; /* 1 when initialized, negative on startup failure */
++	struct mm_id id;
++	struct mutex turnstile;
++};
++
+ typedef struct mm_context {
+ 	struct mm_id id;
+ 	struct mutex turnstile;
++	struct mutex worker_lock;
++	struct mm_worker **workers;
+ 
+ 	struct list_head list;
+ 
+--- a/arch/um/include/asm/tlbflush.h
++++ b/arch/um/include/asm/tlbflush.h
+@@ -31,6 +31,8 @@
+  */
+ 
+ extern int um_tlb_sync(struct mm_struct *mm);
++extern void um_tlb_invalidate(struct mm_struct *mm, unsigned long start,
++			      unsigned long end);
+ 
+ extern void flush_tlb_all(void);
+ extern void flush_tlb_mm(struct mm_struct *mm);
+@@ -38,13 +40,13 @@
+ static inline void flush_tlb_page(struct vm_area_struct *vma,
+ 				  unsigned long address)
+ {
+-	um_tlb_mark_sync(vma->vm_mm, address, address + PAGE_SIZE);
++	um_tlb_invalidate(vma->vm_mm, address, address + PAGE_SIZE);
+ }
+ 
+ static inline void flush_tlb_range(struct vm_area_struct *vma,
+ 				   unsigned long start, unsigned long end)
+ {
+-	um_tlb_mark_sync(vma->vm_mm, start, end);
++	um_tlb_invalidate(vma->vm_mm, start, end);
+ }
+ 
+ static inline void flush_tlb_kernel_range(unsigned long start,
+--- a/arch/um/include/shared/as-layout.h
++++ b/arch/um/include/shared/as-layout.h
+@@ -53,7 +53,19 @@
+ #else
+ #define STUB_DATA_PAGES 2
+ #endif
+-#define STUB_SIZE ((1 + STUB_DATA_PAGES) * UM_KERN_PAGE_SIZE)
++/* Each CPU gets an independent signal frame in the shared host MM. Slot 0
++ * belongs to the mapping worker, which never runs guest instructions. Only
++ * address space is reserved here; worker pages are allocated on first use.
++ */
++#ifdef __aarch64__
++#define STUB_SHARED_WORKERS 1
++#define STUB_SLOTS (1 + UM_NR_CPUS)
++#else
++#define STUB_SHARED_WORKERS 0
++#define STUB_SLOTS 1
++#endif
++#define STUB_DATA_SIZE (STUB_DATA_PAGES * UM_KERN_PAGE_SIZE)
++#define STUB_SIZE ((1 + STUB_SLOTS * STUB_DATA_PAGES) * UM_KERN_PAGE_SIZE)
+ #define STUB_END (STUB_START + STUB_SIZE)
+ 
+ #ifndef __ASSEMBLER__
+--- a/arch/um/include/shared/os.h
++++ b/arch/um/include/shared/os.h
+@@ -291,6 +291,8 @@
+ /* skas/process.c */
+ extern int is_skas_winch(int pid, int fd, void *data);
+ extern int start_userspace(struct mm_id *mm_id);
++extern int clone_userspace(struct mm_id *parent, struct mm_id *child,
++			   unsigned int slot);
+ extern void userspace(struct uml_pt_regs *regs);
+ extern void new_thread(void *stack, jmp_buf *buf, void (*handler)(void));
+ extern void switch_threads(jmp_buf *me, jmp_buf *you);
+--- a/arch/um/include/shared/skas/mm_id.h
++++ b/arch/um/include/shared/skas/mm_id.h
+@@ -12,6 +12,7 @@
+ 
+ struct mm_id {
+ 	int pid;
++	struct mutex *turnstile;
+ 	unsigned long stack;
+ 	int syscall_data_len;
+ 
+--- a/arch/um/include/shared/skas/skas.h
++++ b/arch/um/include/shared/skas/skas.h
+@@ -23,7 +23,13 @@
+ extern void handle_syscall(struct uml_pt_regs *regs);
+ extern unsigned long current_stub_stack(void);
+ extern struct mm_id *current_mm_id(void);
+-extern void current_mm_sync(void);
++extern int current_mm_sync(void);
++extern struct mm_id *userspace_enter(void);
++extern void userspace_exit(struct mm_id *id);
++extern void interrupt_userspace(void);
++struct mm_struct;
++extern struct mm_id *prepare_mm_worker(struct mm_struct *mm, unsigned int cpu);
++extern void kill_mm_workers(struct mm_struct *mm);
+ void initial_jmpbuf_lock(void);
+ void initial_jmpbuf_unlock(void);
+ 
+--- a/arch/um/include/shared/skas/stub-data.h
++++ b/arch/um/include/shared/skas/stub-data.h
+@@ -99,6 +99,7 @@
+ 	STUB_SYSCALL_UNSET = 0,
+ 	STUB_SYSCALL_MMAP,
+ 	STUB_SYSCALL_MUNMAP,
++	STUB_SYSCALL_CLONE,
+ };
+ 
+ struct stub_syscall {
+@@ -115,6 +116,9 @@
+ 
+ struct stub_data {
+ 	long err;
++	/* CLONE_PARENT_SETTID publishes this before a new worker can exit. */
++	int host_pid;
++	int starting;
+ 
+ 	int syscall_data_len;
+ 
+--- a/arch/um/kernel/asm-offsets.c
++++ b/arch/um/kernel/asm-offsets.c
+@@ -18,6 +18,7 @@
+ {
+ 	DEFINE(KERNEL_MADV_REMOVE, MADV_REMOVE);
+ 
++	DEFINE(UM_NR_CPUS, NR_CPUS);
+ 	DEFINE(UM_KERN_PAGE_SIZE, PAGE_SIZE);
+ 	DEFINE(UM_KERN_PAGE_MASK, PAGE_MASK);
+ 	DEFINE(UM_KERN_PAGE_SHIFT, PAGE_SHIFT);
+--- a/arch/um/kernel/reboot.c
++++ b/arch/um/kernel/reboot.c
+@@ -20,7 +20,6 @@
+ static void kill_off_processes(void)
+ {
+ 	struct task_struct *p;
+-	int pid;
+ 
+ 	read_lock(&tasklist_lock);
+ 	for_each_process(p) {
+@@ -29,9 +28,8 @@
+ 		t = find_lock_task_mm(p);
+ 		if (!t)
+ 			continue;
+-		pid = t->mm->context.id.pid;
++		kill_mm_workers(t->mm);
+ 		task_unlock(t);
+-		os_kill_ptraced_process(pid, 1);
+ 	}
+ 	read_unlock(&tasklist_lock);
+ }
+--- a/arch/um/kernel/skas/mmu.c
++++ b/arch/um/kernel/skas/mmu.c
+@@ -2,12 +2,11 @@
+ /*
+  * Copyright (C) 2015 Thomas Meyer (thomas@m3y3r.de)
+  * Copyright (C) 2002 - 2007 Jeff Dike (jdike@{addtoit,linux.intel}.com)
++ * ARM64 shared-MM execution workers for Goblin.
+  */
+-
+ #include <linux/mm.h>
+ #include <linux/sched/signal.h>
+ #include <linux/slab.h>
+-
+ #include <shared/irq_kern.h>
+ #include <asm/pgalloc.h>
+ #include <asm/sections.h>
+@@ -17,84 +16,115 @@
+ #include <skas.h>
+ #include <stub-data.h>
+ 
+-/* Ensure the stub_data struct covers the allocated area */
+-static_assert(sizeof(struct stub_data) == STUB_DATA_PAGES * UM_KERN_PAGE_SIZE);
+-
+-static spinlock_t mm_list_lock;
+-static struct list_head mm_list;
+-
+-struct mutex *__get_turnstile(struct mm_id *mm_id)
+-{
+-	struct mm_context *ctx = container_of(mm_id, struct mm_context, id);
+-
+-	return &ctx->turnstile;
+-}
+-
+-void enter_turnstile(struct mm_id *mm_id)
+-{
+-	mutex_lock(__get_turnstile(mm_id));
+-}
+-
+-void exit_turnstile(struct mm_id *mm_id)
+-{
+-	mutex_unlock(__get_turnstile(mm_id));
++static_assert(sizeof(struct stub_data) == STUB_DATA_SIZE);
++static DEFINE_SPINLOCK(mm_list_lock);
++static LIST_HEAD(mm_list);
++
++struct mutex *__get_turnstile(struct mm_id *id)
++{
++	return id->turnstile;
++}
++
++void enter_turnstile(struct mm_id *id)
++{
++	mutex_lock(id->turnstile);
++}
++
++void exit_turnstile(struct mm_id *id)
++{
++	mutex_unlock(id->turnstile);
+ }
+ 
+ int init_new_context(struct task_struct *task, struct mm_struct *mm)
+ {
+-	struct mm_id *new_id = &mm->context.id;
+-	unsigned long stack = 0;
++	struct mm_context *ctx = &mm->context;
++	struct mm_id *id = &ctx->id;
+ 	int ret = -ENOMEM;
+ 
+-	mutex_init(&mm->context.turnstile);
+-	spin_lock_init(&mm->context.sync_tlb_lock);
+-
+-	/*
+-	 * Fault-around detector starts cold: prefault_level is used as an
+-	 * array index in trap.c, so it must never be garbage.
++	mutex_init(&ctx->turnstile);
++	mutex_init(&ctx->worker_lock);
++	spin_lock_init(&ctx->sync_tlb_lock);
++	ctx->sync_tlb_range_from = ctx->sync_tlb_range_to = 0;
++	ctx->prefault_next = ctx->prefault_level = 0;
++	ctx->workers = NULL;
++	*id = (struct mm_id){ .sock = -1, .turnstile = &ctx->turnstile };
++
++	if (STUB_SHARED_WORKERS && using_seccomp) {
++		ctx->workers = kcalloc(nr_cpu_ids, sizeof(*ctx->workers), GFP_KERNEL);
++		if (!ctx->workers)
++			return -ENOMEM;
++	}
++	id->stack = __get_free_pages(GFP_KERNEL | __GFP_ZERO,
++				     ilog2(STUB_DATA_PAGES));
++	if (!id->stack)
++		goto out_workers;
++
++	scoped_guard(spinlock_irqsave, &mm_list_lock)
++		list_add(&ctx->list, &mm_list);
++	ret = start_userspace(id);
++	if (ret < 0) {
++		scoped_guard(spinlock_irqsave, &mm_list_lock)
++			list_del(&ctx->list);
++		free_pages(id->stack, ilog2(STUB_DATA_PAGES));
++		goto out_workers;
++	}
++	/* The base worker handles mapping commands only. */
++	unmap(id, 0, STUB_START);
++	return 0;
++
++out_workers:
++	kfree(ctx->workers);
++	ctx->workers = NULL;
++	return ret;
++}
++
++struct mm_id *prepare_mm_worker(struct mm_struct *mm, unsigned int cpu)
++{
++	struct mm_context *ctx = &mm->context;
++	struct mm_worker *worker;
++	int ret;
++
++	if (!ctx->workers)
++		return &ctx->id;
++	worker = READ_ONCE(ctx->workers[cpu]);
++	if (worker && smp_load_acquire(&worker->ready))
++		return worker->ready < 0 ? ERR_PTR(worker->ready) : &worker->id;
++
++	guard(mutex)(&ctx->worker_lock);
++	worker = ctx->workers[cpu];
++	if (worker)
++		return worker->ready < 0 ? ERR_PTR(worker->ready) : &worker->id;
++	worker = kzalloc(sizeof(*worker), GFP_KERNEL);
++	if (!worker)
++		return ERR_PTR(-ENOMEM);
++	mutex_init(&worker->turnstile);
++	worker->id.turnstile = &worker->turnstile;
++	worker->id.sock = -1;
++	worker->id.stack = __get_free_pages(GFP_KERNEL | __GFP_ZERO,
++					   ilog2(STUB_DATA_PAGES));
++	if (!worker->id.stack) {
++		kfree(worker);
++		return ERR_PTR(-ENOMEM);
++	}
++
++	/* Publish before clone. CLONE_PARENT_SETTID writes host_pid in these
++	 * shared pages before the child can die, closing the startup/reap race.
+ 	 */
+-	mm->context.prefault_next = 0;
+-	mm->context.prefault_level = 0;
+-
+-	stack = __get_free_pages(GFP_KERNEL | __GFP_ZERO, ilog2(STUB_DATA_PAGES));
+-	if (stack == 0) {
+-		printk(KERN_ERR "%s: failed to allocate %d stub data pages\n",
+-		       __func__, STUB_DATA_PAGES);
+-		goto out;
+-	}
+-
+-	new_id->stack = stack;
+-	new_id->syscall_data_len = 0;
+-	new_id->syscall_fd_num = 0;
+-
+-	scoped_guard(spinlock_irqsave, &mm_list_lock) {
+-		/* Insert into list, used for lookups when the child dies */
+-		list_add(&mm->context.list, &mm_list);
+-	}
+-
+-	ret = start_userspace(new_id);
++	scoped_guard(spinlock_irqsave, &mm_list_lock)
++		WRITE_ONCE(ctx->workers[cpu], worker);
++	scoped_guard(spinlock_irqsave, &ctx->sync_tlb_lock)
++		ret = clone_userspace(&ctx->id, &worker->id, cpu + 1);
++	smp_store_release(&worker->ready, ret < 0 ? ret : 1);
+ 	if (ret < 0) {
+-		printk(KERN_ERR "%s: start_userspace failed: %d\n",
+-		       __func__, ret);
+-		goto out_free;
+-	}
+-
+-	/* Ensure the new MM is clean and nothing unwanted is mapped */
+-	unmap(new_id, 0, STUB_START);
+-
+-	return 0;
+-
+- out_free:
+-	free_pages(new_id->stack, ilog2(STUB_DATA_PAGES));
+- out:
+-	return ret;
+-}
+-
+-/*
+- * A stub that has been killed but not yet reaped, and the resources that
+- * cannot be released until the host says it is gone. destroy_context() cannot
+- * keep a pointer into mm->context for this: the mm_struct is freed as soon as
+- * it returns, so the few fields that matter are copied out.
++		printk(KERN_ERR "UML: cannot start CPU %u MM worker: %d\n", cpu, ret);
++		/* Keep its pages until destroy_context confirms the host is gone. */
++		return ERR_PTR(ret);
++	}
++	return &worker->id;
++}
++
++/* An mm_struct may disappear before the host confirms its children died.
++ * Retain each child's shared pages and socket until waitpid has reaped it.
+  */
+ struct dying_stub {
+ 	struct list_head list;
+@@ -102,11 +132,83 @@
+ 	unsigned long stack;
+ 	int sock;
+ };
+-
+ static LIST_HEAD(dying_stubs);
+ 
+-/* Release what destroy_context() deferred, now that @pid is confirmed dead. */
+-static void reap_dying_stub(pid_t pid)
++static void release_stub(unsigned long stack, int sock)
++{
++	if (sock >= 0)
++		os_close_file(sock);
++	free_pages(stack, ilog2(STUB_DATA_PAGES));
++}
++
++/* Called with mm_list_lock held, including registration and kill, so an
++ * early SIGCHLD cannot be reaped between removing the MM and deferring it.
++ */
++static void destroy_stub(struct mm_id *id)
++{
++	int pid = id->pid;
++	struct dying_stub *d;
++
++	if (!id->stack)
++		return;
++	if (!pid)
++		pid = ((struct stub_data *)id->stack)->host_pid;
++	if (pid > 1 && using_seccomp) {
++		d = kmalloc(sizeof(*d), GFP_ATOMIC);
++		if (d) {
++			d->pid = pid;
++			d->stack = id->stack;
++			d->sock = id->sock;
++			list_add(&d->list, &dying_stubs);
++			os_kill_ptraced_process(pid, 0);
++			id->pid = -1;
++			return;
++		}
++	}
++	/* Allocation failure must not free pages while a child still uses them. */
++	if (pid > 1)
++		os_kill_ptraced_process(pid, 1);
++	id->pid = -1;
++	release_stub(id->stack, id->sock);
++}
++
++void destroy_context(struct mm_struct *mm)
++{
++	struct mm_context *ctx = &mm->context;
++	unsigned int cpu;
++
++	if (!ctx->id.stack)
++		return;
++	scoped_guard(spinlock_irqsave, &mm_list_lock) {
++		list_del(&ctx->list);
++		destroy_stub(&ctx->id);
++		if (ctx->workers) {
++			for (cpu = 0; cpu < nr_cpu_ids; cpu++) {
++				struct mm_worker *worker = ctx->workers[cpu];
++				if (!worker)
++					continue;
++				destroy_stub(&worker->id);
++				kfree(worker);
++			}
++		}
++	}
++	kfree(ctx->workers);
++}
++
++void kill_mm_workers(struct mm_struct *mm)
++{
++	struct mm_context *ctx = &mm->context;
++	unsigned int cpu;
++
++	if (ctx->id.pid > 1)
++		os_kill_ptraced_process(ctx->id.pid, 1);
++	if (ctx->workers)
++		for (cpu = 0; cpu < nr_cpu_ids; cpu++)
++			if (ctx->workers[cpu] && ctx->workers[cpu]->id.pid > 1)
++				os_kill_ptraced_process(ctx->workers[cpu]->id.pid, 1);
++}
++
++static bool reap_dying_stub(pid_t pid)
+ {
+ 	struct dying_stub *d, *tmp;
+ 
+@@ -114,142 +216,60 @@
+ 		if (d->pid != pid)
+ 			continue;
+ 		list_del(&d->list);
+-		if (d->sock)
+-			os_close_file(d->sock);
+-		free_pages(d->stack, ilog2(STUB_DATA_PAGES));
++		release_stub(d->stack, d->sock);
+ 		kfree(d);
+-		return;
+-	}
+-}
+-
+-void destroy_context(struct mm_struct *mm)
+-{
+-	struct mm_context *mmu = &mm->context;
+-
+-	/*
+-	 * If init_new_context wasn't called, this will be
+-	 * zero, resulting in a kill(0), which will result in the
+-	 * whole UML suddenly dying.  Also, cover negative and
+-	 * 1 cases, since they shouldn't happen either.
+-	 *
+-	 * Negative cases happen if the child died unexpectedly.
+-	 */
+-	if (mmu->id.pid >= 0 && mmu->id.pid < 2) {
+-		printk(KERN_ERR "corrupt mm_context - pid = %d\n",
+-		       mmu->id.pid);
+-		return;
+-	}
+-
+-	scoped_guard(spinlock_irqsave, &mm_list_lock)
+-		list_del(&mm->context.list);
+-
+-	/*
+-	 * Killing a stub is cheap; waiting for it to die is not, and this path
+-	 * runs twice for every guest execve. os_kill_ptraced_process() with
+-	 * reap_child set blocks in waitpid() with signals off, so the whole
+-	 * kernel stops for as long as the host takes to reap: measured on a
+-	 * Galaxy S26 at 54.5-55.0us, and flat at 0, 32, 128 and 512 mappings,
+-	 * so it is the reap latency itself rather than any work being done.
+-	 *
+-	 * The wait is not gratuitous, though, which is why this is not simply
+-	 * dropped: the free_pages() below hands back the page the stub shares
+-	 * with us, and doing that while the stub is still alive is a
+-	 * use-after-free on the other side.
+-	 *
+-	 * So keep the ordering and lose the wait: hand the pid and its pages to
+-	 * the SIGCHLD reaper, which already runs and already knows how to
+-	 * collect dead stubs, and let it free them once the host confirms the
+-	 * process is gone. In ptrace mode there is no SIGCHLD handler
+-	 * registered at all (see arch/um/os-Linux/signal.c), so there is nobody
+-	 * to hand to and the synchronous path stays.
+-	 */
+-	if (mmu->id.pid > 0 && using_seccomp) {
+-		struct dying_stub *d = kmalloc(sizeof(*d), GFP_ATOMIC);
+-
+-		if (d) {
+-			d->pid = mmu->id.pid;
+-			d->stack = mmu->id.stack;
+-			d->sock = mmu->id.sock;
+-			scoped_guard(spinlock_irqsave, &mm_list_lock)
+-				list_add(&d->list, &dying_stubs);
+-			os_kill_ptraced_process(mmu->id.pid, 0);
+-			mmu->id.pid = -1;
+-			return;
++		return true;
++	}
++	return false;
++}
++
++static bool stub_died(struct mm_id *id, pid_t pid)
++{
++	struct stub_data *data = (void *)id->stack;
++
++	if (!data || (id->pid != pid &&
++		      (id->pid != 0 || READ_ONCE(data->host_pid) != pid)))
++		return false;
++	WRITE_ONCE(id->pid, -1);
++	WRITE_ONCE(data->err, -ESRCH);
++	WRITE_ONCE(data->futex, FUTEX_IN_KERN);
++	/* Unconditional: a waiter may still be between spinning and parking. */
++	os_futex_wake(&data->futex);
++	return true;
++}
++
++static irqreturn_t mm_sigchld_irq(int irq, void *dev)
++{
++	struct mm_context *ctx;
++	pid_t pid;
++	unsigned int cpu;
++
++	guard(spinlock)(&mm_list_lock);
++	while ((pid = os_reap_child()) > 0) {
++		if (reap_dying_stub(pid))
++			continue;
++		list_for_each_entry(ctx, &mm_list, list) {
++			bool found = stub_died(&ctx->id, pid);
++			if (ctx->workers)
++				for (cpu = 0; cpu < nr_cpu_ids; cpu++)
++					if (ctx->workers[cpu])
++						found |= stub_died(&ctx->workers[cpu]->id, pid);
++			if (!found)
++				continue;
++			printk(KERN_ERR "UML: lost MM worker %d; terminating affected MM\n", pid);
++			/* A lost mapping worker makes the whole shared MM unusable.
++			 * Treat a lost execution worker identically to avoid leaving
++			 * a partly alive process spinning on its dead thread's locks.
++			 */
++			if (ctx->id.pid > 1)
++				os_kill_ptraced_process(ctx->id.pid, 0);
++			if (ctx->workers)
++				for (cpu = 0; cpu < nr_cpu_ids; cpu++)
++					if (ctx->workers[cpu] && ctx->workers[cpu]->id.pid > 1)
++						os_kill_ptraced_process(ctx->workers[cpu]->id.pid, 0);
++			break;
+ 		}
+-		/* Out of memory: do it the slow, safe way below instead. */
+-	}
+-
+-	if (mmu->id.pid > 0) {
+-		os_kill_ptraced_process(mmu->id.pid, 1);
+-		mmu->id.pid = -1;
+-	}
+-
+-	if (using_seccomp && mmu->id.sock)
+-		os_close_file(mmu->id.sock);
+-
+-	free_pages(mmu->id.stack, ilog2(STUB_DATA_PAGES));
+-}
+-
+-static irqreturn_t mm_sigchld_irq(int irq, void* dev)
+-{
+-	struct mm_context *mm_context;
+-	pid_t pid;
+-
+-	guard(spinlock)(&mm_list_lock);
+-
+-	while ((pid = os_reap_child()) > 0) {
+-		/*
+-		 * Most reaped children are stubs destroy_context() killed and
+-		 * handed over rather than waited for. Release those first; the
+-		 * search below is for a stub that died without being asked to,
+-		 * and a handed-over one is no longer on mm_list to be found.
+-		 */
+-		reap_dying_stub(pid);
+-
+-		/*
+-		* A child died, check if we have an MM with the PID. This is
+-		* only relevant in SECCOMP mode (as ptrace will fail anyway).
+-		*
+-		* See wait_stub_done_seccomp for more details.
+-		*/
+-		list_for_each_entry(mm_context, &mm_list, list) {
+-			if (mm_context->id.pid == pid) {
+-				struct stub_data *stub_data;
+-				printk("Unexpectedly lost MM child! Affected tasks will segfault.");
+-
+-				/* Marks the MM as dead */
+-				mm_context->id.pid = -1;
+-
+-				stub_data = (void *)mm_context->id.stack;
+-				stub_data->futex = FUTEX_IN_KERN;
+-				/*
+-				 * Unconditional on purpose -- the waiter-bit
+-				 * wake elision must never be used on this
+-				 * path. The waiter can be anywhere between
+-				 * spinning and parking, and a dead stub will
+-				 * never issue another handoff to correct a
+-				 * skipped wake: a spurious FUTEX_WAKE here is
+-				 * noise, a missed one is a task hung forever.
+-				 * The plain store can race with the waiter's
+-				 * fetch_or of its waiter bit; that is fine,
+-				 * because FUTEX_WAIT revalidates the value it
+-				 * was passed and this wake always fires. The
+-				 * syscall also carries the barrier the plain
+-				 * store lacks. (This was SMP-only before the
+-				 * spin existed; now the wake is the one kick
+-				 * that works no matter where the waiter is.)
+-				 */
+-				os_futex_wake(&stub_data->futex);
+-
+-				/*
+-				 * NOTE: Currently executing syscalls by
+-				 * affected tasks may finish normally.
+-				 */
+-				break;
+-			}
+-		}
+-	}
+-
++	}
+ 	return IRQ_HANDLED;
+ }
+ 
+@@ -257,27 +277,14 @@
+ {
+ 	int err;
+ 
+-	/*
+-	 * The handoff word must own its cacheline outright: both sides poll
+-	 * it, and a field the peer writes sharing the line would turn the
+-	 * spin in stub-futex.h into a stream of coherence misses. Assert the
+-	 * layout so a reorder of struct stub_data cannot quietly regress
+-	 * this -- it would still be correct, just slow in a way nothing
+-	 * functional would ever catch.
+-	 */
+ 	BUILD_BUG_ON(offsetof(struct stub_data, futex) % STUB_FUTEX_ALIGN != 0);
+ 	BUILD_BUG_ON(offsetofend(struct stub_data, syscall_data_len) >
+ 		     offsetof(struct stub_data, futex));
+ 	BUILD_BUG_ON(offsetof(struct stub_data, syscall_data) <
+ 		     offsetof(struct stub_data, futex) + STUB_FUTEX_ALIGN);
+-
+-	spin_lock_init(&mm_list_lock);
+-	INIT_LIST_HEAD(&mm_list);
+-
+ 	err = request_irq(SIGCHLD_IRQ, mm_sigchld_irq, 0, "SIGCHLD", NULL);
+ 	if (err < 0)
+ 		panic("Failed to register SIGCHLD IRQ: %d", err);
+-
+ 	return 0;
+ }
+ early_initcall(init_child_tracking)
+--- a/arch/um/kernel/skas/process.c
++++ b/arch/um/kernel/skas/process.c
+@@ -8,6 +8,8 @@
+ #include <linux/sched/task_stack.h>
+ #include <linux/sched/task.h>
+ #include <linux/smp-internal.h>
++#include <linux/slab.h>
++#include <stub-data.h>
+ 
+ #include <asm/tlbflush.h>
+ 
+@@ -42,28 +44,65 @@
+ 				 &init_task.thread.switch_buf);
+ }
+ 
++struct mm_id *current_mm_id(void)
++{
++	struct mm_context *ctx;
++	struct mm_worker *worker;
++
++	if (!current->mm)
++		return NULL;
++	ctx = &current->mm->context;
++	if (ctx->workers) {
++		worker = READ_ONCE(ctx->workers[raw_smp_processor_id()]);
++		if (worker)
++			return &worker->id;
++	}
++	return &ctx->id;
++}
++
+ unsigned long current_stub_stack(void)
+ {
+-	if (current->mm == NULL)
+-		return 0;
++	struct mm_id *id = current_mm_id();
+ 
+-	return current->mm->context.id.stack;
++	return id ? id->stack : 0;
+ }
+ 
+-struct mm_id *current_mm_id(void)
++void interrupt_userspace(void)
+ {
+-	if (current->mm == NULL)
+-		return NULL;
++	struct mm_id *id = current_mm_id();
++	int pid = id ? READ_ONCE(id->pid) : -1;
+ 
+-	return &current->mm->context.id;
++	if (pid > 1)
++		os_alarm_process(pid);
+ }
+ 
+-void current_mm_sync(void)
++/* Created lazily; process/thread counts are unrestricted. Each CPU can run
++ * one task from this MM at a time, with its own registers, TLS and sigstack.
++ * Keep the task on that CPU until its worker has returned to the kernel.
++ */
++struct mm_id *userspace_enter(void)
+ {
+-	if (current->mm == NULL)
+-		return;
++	struct mm_id *id;
+ 
+-	um_tlb_sync(current->mm);
++	migrate_disable();
++	id = prepare_mm_worker(current->mm, smp_processor_id());
++	if (IS_ERR(id)) {
++		migrate_enable();
++		fatal_sigsegv();
++	}
++	enter_turnstile(id);
++	return id;
++}
++
++void userspace_exit(struct mm_id *id)
++{
++	exit_turnstile(id);
++	migrate_enable();
++}
++
++int current_mm_sync(void)
++{
++	return current->mm ? um_tlb_sync(current->mm) : 0;
+ }
+ 
+ static DEFINE_SPINLOCK(initial_jmpbuf_spinlock);
+--- a/arch/um/kernel/skas/stub.c
++++ b/arch/um/kernel/skas/stub.c
+@@ -9,6 +9,61 @@
+ #include <linux/futex.h>
+ #include <sys/socket.h>
+ #include <errno.h>
++#include <linux/sched.h>
++#include <sys/prctl.h>
++#include <fcntl.h>
++
++#if STUB_SHARED_WORKERS
++/* This child shares mappings, but neither descriptors nor signal state, with
++ * its siblings. It starts on its own reserved stack and enters the ordinary
++ * signal/futex protocol before executing any guest instruction.
++ */
++static void __attribute__((__noreturn__, __used__, __noinline__))
++__section(".__syscall_stub") stub_clone_child(int sock)
++{
++	struct stub_data *d = get_stub_data();
++	volatile struct {
++		void *ss_sp;
++		int ss_flags;
++		size_t ss_size;
++	} stack;
++	unsigned long long mask = 0;
++
++	/* Scalar volatile stores keep constants inside the relocated code page. */
++	stack.ss_sp = d;
++	stack.ss_flags = 0;
++	stack.ss_size = STUB_DATA_SIZE;
++
++	if (stub_syscall3(__NR_dup3, sock, 0, 0) < 0 ||
++	    stub_syscall3(__NR_close_range, 1, ~0U, 0) < 0 ||
++	    stub_syscall3(__NR_fcntl, 0, F_SETFL, O_NONBLOCK) < 0 ||
++	    stub_syscall2(__NR_prctl, PR_SET_PDEATHSIG, SIGKILL) < 0 ||
++	    stub_syscall2(__NR_sigaltstack, (unsigned long)&stack, 0) < 0 ||
++	    stub_syscall4(__NR_rt_sigprocmask, SIG_SETMASK,
++			  (unsigned long)&mask, 0, sizeof(mask)) < 0)
++		stub_syscall1(__NR_exit, 1);
++
++	trap_myself();
++	stub_syscall1(__NR_exit, 2);
++	__builtin_unreachable();
++}
++
++/* The child has a different SP: no compiler-generated epilogue may run after
++ * clone. x5 is unused by the host clone ABI and carries the control socket.
++ */
++static long __attribute__((__naked__, __noinline__)) __section(".__syscall_stub")
++stub_clone(unsigned long flags, unsigned long sp, int *ptid,
++	   unsigned long tls, unsigned long ctid, int sock)
++{
++	__asm__ volatile (
++		"mov x8, %0\n"
++		"svc #0\n"
++		"cbnz x0, 1f\n"
++		"mov x0, x5\n"
++		"b stub_clone_child\n"
++		"1: ret\n" :: "i" (__NR_clone));
++}
++#endif
+ 
+ /*
+  * Known security issues
+@@ -60,6 +115,20 @@
+ 				return -1;
+ 			}
+ 			break;
++#if STUB_SHARED_WORKERS
++		case STUB_SYSCALL_CLONE: {
++			struct stub_data *child = (void *)sc->mem.addr;
++			long pid = stub_clone(CLONE_VM | CLONE_PARENT |
++					     CLONE_PARENT_SETTID | SIGCHLD,
++				sc->mem.addr + STUB_DATA_SIZE - 16,
++				&child->host_pid, 0, 0, fd_map[sc->mem.fd]);
++			/* A resource failure belongs to this guest task, not the
++			 * mapping transport. Return it without poisoning the MM.
++			 */
++			sc->mem.offset = pid;
++			break;
++		}
++#endif
+ 		case STUB_SYSCALL_MUNMAP:
+ 			res = stub_syscall2(__NR_munmap,
+ 					    sc->mem.addr, sc->mem.length);
+@@ -141,6 +210,13 @@
+ 		} while (res == -EINTR);
+ 	}
+ 
++	if (d->starting) {
++		char ready = 1;
++		d->starting = 0;
++		if (stub_syscall3(__NR_write, 0, (unsigned long)&ready, 1) != 1)
++			stub_syscall1(__NR_exit, 3);
++	}
++
+ 	/*
+ 	 * Wait for the kernel's reply: spin within the budget first, so a fast
+ 	 * reply is observed without ever entering FUTEX_WAIT.
+--- a/arch/um/kernel/skas/stub_exe.c
++++ b/arch/um/kernel/skas/stub_exe.c
+@@ -185,38 +185,30 @@
+ 			BPF_STMT(BPF_LD | BPF_W | BPF_ABS,
+ 				 offsetof(struct seccomp_data, nr)),
+ 
+-			/* [10-16] Check against permitted syscalls */
+-			BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K, __NR_futex,
+-				 7, 0),
+-			BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K,__NR_recvmsg,
+-				 6, 0),
+-			BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K,__NR_close,
+-				 5, 0),
+-			BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K, STUB_MMAP_NR,
+-				 4, 0),
+-			BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K, __NR_munmap,
+-				 3, 0),
+-			/*
+-			 * The syscall the stub needs in order to reinstate
+-			 * guest TLS, which is architecture-specific:
+-			 * set_thread_area on i386, arch_prctl on x86-64, and
+-			 * nothing at all on arm64, where TPIDR_EL0 is written
+-			 * directly by the stub. STUB_SECCOMP_TLS_SYSCALL is -1
+-			 * in that case, which no real syscall number can match,
+-			 * so the slot is inert while every jump offset below
+-			 * stays as it is.
+-			 */
+-			BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K,
+-				 (unsigned int)STUB_SECCOMP_TLS_SYSCALL,
+-				 2, 0),
+-			BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K, __NR_rt_sigreturn,
+-				 1, 0),
+-
+-			/* [17] Not one of the permitted syscalls */
++/* These calls are permitted only from the stub code page. */
++#define STUB_ALLOW(nr) \
++	BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K, (unsigned int)(nr), 0, 1), \
++	BPF_STMT(BPF_RET | BPF_K, SECCOMP_RET_ALLOW)
++			STUB_ALLOW(__NR_futex),
++			STUB_ALLOW(__NR_recvmsg),
++			STUB_ALLOW(__NR_close),
++			STUB_ALLOW(STUB_MMAP_NR),
++			STUB_ALLOW(__NR_munmap),
++			STUB_ALLOW(STUB_SECCOMP_TLS_SYSCALL),
++			STUB_ALLOW(__NR_rt_sigreturn),
++#if STUB_SHARED_WORKERS
++			STUB_ALLOW(__NR_clone),
++			STUB_ALLOW(__NR_dup3),
++			STUB_ALLOW(__NR_close_range),
++			STUB_ALLOW(__NR_fcntl),
++			STUB_ALLOW(__NR_prctl),
++			STUB_ALLOW(__NR_sigaltstack),
++			STUB_ALLOW(__NR_rt_sigprocmask),
++			STUB_ALLOW(__NR_exit),
++			STUB_ALLOW(__NR_write),
++#endif
+ 			BPF_STMT(BPF_RET | BPF_K, SECCOMP_RET_KILL_PROCESS),
+-
+-			/* [18] Permitted call for the stub */
+-			BPF_STMT(BPF_RET | BPF_K, SECCOMP_RET_ALLOW),
++#undef STUB_ALLOW
+ 		};
+ 		struct sock_fprog prog = {
+ 			.len = sizeof(filter) / sizeof(filter[0]),
+--- a/arch/um/kernel/smp.c
++++ b/arch/um/kernel/smp.c
+@@ -20,6 +20,7 @@
+ #include <init.h>
+ #include <kern.h>
+ #include <os.h>
++#include <skas.h>
+ #include <smp.h>
+ 
+ enum {
+@@ -65,8 +66,7 @@
+ 
+ 	irq_enter();
+ 
+-	if (current->mm)
+-		os_alarm_process(current->mm->context.id.pid);
++	interrupt_userspace();
+ 
+ 	switch (vector) {
+ 	case UML_IPI_RES:
+--- a/arch/um/kernel/time.c
++++ b/arch/um/kernel/time.c
+@@ -19,6 +19,7 @@
+ #include <asm/param.h>
+ #include <kern_util.h>
+ #include <os.h>
++#include <skas.h>
+ #include <linux/delay.h>
+ #include <linux/time-internal.h>
+ #include <linux/um_timetravel.h>
+@@ -873,7 +874,7 @@
+ 	if (time_travel_mode != TT_MODE_INFCPU &&
+ 	    time_travel_mode != TT_MODE_EXTERNAL &&
+ 	    get_current()->mm)
+-		os_alarm_process(get_current()->mm->context.id.pid);
++		interrupt_userspace();
+ 
+ 	evt->event_handler(evt);
+ 
+--- a/arch/um/kernel/tlb.c
++++ b/arch/um/kernel/tlb.c
+@@ -197,10 +197,32 @@
+ 	if (ret == -ENOMEM)
+ 		report_enomem();
+ 
++	if (STUB_SHARED_WORKERS && using_seccomp && mm != &init_mm && !ret)
++		ret = syscall_stub_flush(ops.mm_idp);
++
+ 	mm->context.sync_tlb_range_from = 0;
+ 	mm->context.sync_tlb_range_to = 0;
+ 
+ 	return ret;
++}
++
++/* Revocation must finish before Linux frees a physical page or returns from
++ * mprotect. The caller may already hold page_table_lock: do not walk PTEs or
++ * acquire it here. munmap in the shared host MM performs the host TLB shootdown
++ * for every worker. A subsequent guest fault republishes the current PTE.
++ */
++void um_tlb_invalidate(struct mm_struct *mm, unsigned long start,
++		       unsigned long end)
++{
++	um_tlb_mark_sync(mm, start, end);
++	if (STUB_SHARED_WORKERS && using_seccomp && mm != &init_mm) {
++		guard(spinlock_irqsave)(&mm->context.sync_tlb_lock);
++
++		if (mm->context.id.pid > 0) {
++			unmap(&mm->context.id, start, end - start);
++			syscall_stub_flush(&mm->context.id);
++		}
++	}
+ }
+ 
+ void flush_tlb_all(void)
+@@ -221,5 +243,5 @@
+ 	VMA_ITERATOR(vmi, mm, 0);
+ 
+ 	for_each_vma(vmi, vma)
+-		um_tlb_mark_sync(mm, vma->vm_start, vma->vm_end);
+-}
++		um_tlb_invalidate(mm, vma->vm_start, vma->vm_end);
++}
+--- a/arch/um/kernel/trap.c
++++ b/arch/um/kernel/trap.c
+@@ -469,6 +469,18 @@
+ 	} while (!pte_present(*pte));
+ 	err = 0;
+ 
++	/* A synchronous shared-MM invalidation may have removed a host mapping
++	 * even though the guest PTE is already young and dirty. Republish it.
++	 */
++	if (STUB_SHARED_WORKERS && using_seccomp && is_user) {
++		guard(spinlock_irqsave)(&mm->page_table_lock);
++		pmd = pmd_off(mm, address);
++		pte = pte_offset_kernel(pmd, address);
++		*pte = pte_mkneedsync(*pte);
++		um_tlb_mark_sync(mm, address & PAGE_MASK,
++				 (address & PAGE_MASK) + PAGE_SIZE);
++	}
++
+ 	/*
+ 	 * The fault is resolved but not yet published to the stub -- that
+ 	 * happens in one batched handoff on the way back to userspace. Piggy-
+--- a/arch/um/os-Linux/process.c
++++ b/arch/um/os-Linux/process.c
+@@ -32,17 +32,18 @@
+ 
+ void os_kill_process(int pid, int reap_child)
+ {
++	int enabled;
+ 	if (pid <= 0)
+ 		return;
+ 
+-	/* Block signals until child is reaped */
+-	block_signals();
++	/* Preserve IRQ state when called by the child reaper or under a lock. */
++	enabled = um_set_signals(0);
+ 
+ 	kill(pid, SIGKILL);
+ 	if (reap_child)
+ 		CATCH_EINTR(waitpid(pid, NULL, __WALL));
+ 
+-	unblock_signals();
++	um_set_signals(enabled);
+ }
+ 
+ /* Kill off a ptraced child by all means available.  kill it normally first,
+@@ -52,11 +53,12 @@
+ 
+ void os_kill_ptraced_process(int pid, int reap_child)
+ {
++	int enabled;
+ 	if (pid <= 0)
+ 		return;
+ 
+-	/* Block signals until child is reaped */
+-	block_signals();
++	/* Preserve IRQ state when called by the child reaper or under a lock. */
++	enabled = um_set_signals(0);
+ 
+ 	kill(pid, SIGKILL);
+ 	ptrace(PTRACE_KILL, pid);
+@@ -64,7 +66,7 @@
+ 	if (reap_child)
+ 		CATCH_EINTR(waitpid(pid, NULL, __WALL));
+ 
+-	unblock_signals();
++	um_set_signals(enabled);
+ }
+ 
+ pid_t os_reap_child(void)
+--- a/arch/um/os-Linux/skas/mem.c
++++ b/arch/um/os-Linux/skas/mem.c
+@@ -9,6 +9,8 @@
+ #include <errno.h>
+ #include <string.h>
+ #include <sys/mman.h>
++#include <sys/socket.h>
++#include <mem.h>
+ #include <init.h>
+ #include <as-layout.h>
+ #include <mm_id.h>
+@@ -260,6 +262,56 @@
+ 	return 0;
+ }
+ 
++/* The caller owns the MM mapping lock and has published child in the reaper
++ * list. The worker's host MM is shared, so mapping its data through parent
++ * makes the window visible to every sibling without copying guest mappings.
++ */
++int clone_userspace(struct mm_id *parent, struct mm_id *child,
++		    unsigned int slot)
++{
++#if STUB_SHARED_WORKERS
++	struct stub_data *data = (void *)child->stack;
++	struct stub_syscall *sc;
++	unsigned long long offset;
++	unsigned long addr = STUB_DATA + slot * STUB_DATA_SIZE;
++	int sockets[2], fd, err, pid;
++
++	if (socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sockets))
++		return -errno;
++	child->sock = sockets[1];
++	data->futex = FUTEX_IN_CHILD;
++	data->starting = 1;
++	data->spin_ticks = ((struct stub_data *)parent->stack)->spin_ticks;
++	fd = phys_mapping(uml_to_phys(data), &offset);
++	map(parent, addr, STUB_DATA_SIZE, PROT_READ | PROT_WRITE, fd, offset);
++	fd = get_stub_fd(parent, sockets[0]);
++	sc = syscall_stub_alloc(parent);
++	sc->syscall = STUB_SYSCALL_CLONE;
++	sc->mem.addr = addr;
++	sc->mem.fd = fd;
++	err = syscall_stub_flush(parent);
++	pid = (long)sc->mem.offset;
++	close(sockets[0]);
++	if (err || pid < 0)
++		return err ?: pid;
++
++	/* The reaper may already have seen host_pid and marked child dead. */
++	__atomic_compare_exchange_n(&child->pid, &(int){0}, pid, 0,
++				    __ATOMIC_RELEASE, __ATOMIC_RELAXED);
++	/* The byte is sent after the child publishes its initial signal frame.
++	 * EOF reports setup failure even with guest IRQs disabled by our lock.
++	 */
++	char ready;
++	do { err = read(child->sock, &ready, 1); } while (err < 0 && errno == EINTR);
++	if (err != 1)
++		return -ECHILD;
++	wait_stub_done_seccomp(child, 1, 0);
++	return child->pid < 0 ? -ECHILD : data->err;
++#else
++	return -EOPNOTSUPP;
++#endif
++}
++
+ int map(struct mm_id *mm_idp, unsigned long virt, unsigned long len, int prot,
+ 	int phys_fd, unsigned long long offset)
+ {
+--- a/arch/um/os-Linux/skas/process.c
++++ b/arch/um/os-Linux/skas/process.c
+@@ -160,6 +160,11 @@
+ void wait_stub_done_seccomp(struct mm_id *mm_idp, int running, int wait_sigsys)
+ {
+ 	struct stub_data *data = (void *)mm_idp->stack;
++	/* This is a death-check interval, not a guest execution deadline. A
++	 * live/stopped worker can wait indefinitely. IRQs may be disabled by
++	 * the mapping lock, preventing the SIGCHLD reaper from waking us.
++	 */
++	const struct timespec death_check = { .tv_nsec = 100000000 };
+ 	unsigned long budget;
+ 	unsigned int futex_val;
+ 	int ret;
+@@ -260,8 +265,16 @@
+ 			 */
+ 			ret = syscall(__NR_futex, &data->futex,
+ 				      FUTEX_WAIT, futex_val,
+-				      NULL, NULL, 0);
+-			if (ret < 0 && errno != EINTR && errno != EAGAIN) {
++				      &death_check, NULL, 0);
++			if (ret < 0 && errno == ETIMEDOUT) {
++				siginfo_t child = {};
++				/* Observe without reaping: mmu.c still owns resource
++				 * release and notification of the other workers.
++				 */
++				if (!waitid(P_PID, mm_idp->pid, &child,
++					    WEXITED | WNOHANG | WNOWAIT) && child.si_pid)
++					goto out_kill;
++			} else if (ret < 0 && errno != EINTR && errno != EAGAIN) {
+ 				printk(UM_KERN_ERR "%s : FUTEX_WAIT failed, errno = %d\n",
+ 				       __func__, errno);
+ 				goto out_kill;
+@@ -302,6 +315,7 @@
+ 	return;
+ 
+ out_kill:
++	data->err = -ESRCH;
+ 	/*
+ 	 * pid < 0 here means the SIGCHLD reaper marked this mm dead, i.e. the
+ 	 * stub is gone. During start_userspace that is the common Android
+@@ -319,9 +333,7 @@
+ 		printk(UM_KERN_ERR
+ 		       "%s : failed to wait for stub, pid = %d, errno = %d\n",
+ 		       __func__, mm_idp->pid, errno);
+-	/* This is not true inside start_userspace */
+-	if (current_mm_id() == mm_idp)
+-		fatal_sigsegv();
++	/* Callers release their worker/MM locks before delivering a fatal signal. */
+ }
+ 
+ extern unsigned long current_stub_stack(void);
+@@ -589,7 +601,7 @@
+ 	};
+ 	void *stack;
+ 	unsigned long sp;
+-	int status, n, err;
++	int status, n, err, child;
+ 
+ 	/* setup a temporary stack page */
+ 	stack = mmap(NULL, UM_KERN_PAGE_SIZE,
+@@ -610,6 +622,7 @@
+ 		err = -errno;
+ 		printk(UM_KERN_ERR "%s : socketpair failed, errno = %d\n",
+ 		       __func__, errno);
++		munmap(stack, UM_KERN_PAGE_SIZE);
+ 		return err;
+ 	}
+ 
+@@ -632,10 +645,14 @@
+ 		seccomp_spin_us * stub_cycles_per_us() : 0;
+ 	}
+ 
+-	mm_id->pid = clone(userspace_tramp, (void *) sp,
+-		    CLONE_VFORK | CLONE_VM | SIGCHLD,
+-		    (void *)&tramp_data);
+-	if (mm_id->pid < 0) {
++	/* Publish the PID before this child can exit, just as for sibling
++	 * workers. Assigning clone's return value can otherwise resurrect a
++	 * PID that the SIGCHLD reaper already marked dead during startup.
++	 */
++	child = clone(userspace_tramp, (void *)sp,
++		      CLONE_VFORK | CLONE_VM | CLONE_PARENT_SETTID | SIGCHLD,
++		      &tramp_data, &mm_id->pid, NULL, NULL);
++	if (child < 0) {
+ 		err = -errno;
+ 		printk(UM_KERN_ERR "%s : clone failed, errno = %d\n",
+ 		       __func__, errno);
+@@ -644,6 +661,10 @@
+ 
+ 	if (using_seccomp) {
+ 		wait_stub_done_seccomp(mm_id, 1, 1);
++		if (proc_data->err < 0) {
++			err = proc_data->err;
++			goto out_kill;
++		}
+ 	} else {
+ 		do {
+ 			CATCH_EINTR(n = waitpid(mm_id->pid, &status,
+@@ -709,6 +730,7 @@
+ out_close:
+ 	close(tramp_data.sockpair[0]);
+ 	close(tramp_data.sockpair[1]);
++	munmap(stack, UM_KERN_PAGE_SIZE);
+ 
+ 	mm_id->pid = -1;
+ 
+@@ -753,14 +775,7 @@
+ 	interrupt_end();
+ 
+ 	while (1) {
+-		struct mm_id *mm_id = current_mm_id();
+-
+-		/*
+-		 * At any given time, only one CPU thread can enter the
+-		 * turnstile to operate on the same stub process, including
+-		 * executing stub system calls (mmap and munmap).
+-		 */
+-		enter_turnstile(mm_id);
++		struct mm_id *mm_id = userspace_enter();
+ 
+ 		/*
+ 		 * When we are in time-travel mode, userspace can theoretically
+@@ -787,7 +802,11 @@
+ 
+ 		time_travel_print_bc_msg();
+ 
+-		current_mm_sync();
++		err = current_mm_sync();
++		if (err) {
++			userspace_exit(mm_id);
++			fatal_sigsegv();
++		}
+ 
+ 		if (using_seccomp) {
+ 			struct stub_data *proc_data = (void *) mm_id->stack;
+@@ -796,6 +815,7 @@
+ 			if (err) {
+ 				printk(UM_KERN_ERR "%s - failed to set regs: %d",
+ 				       __func__, err);
++				userspace_exit(mm_id);
+ 				fatal_sigsegv();
+ 			}
+ 
+@@ -807,6 +827,10 @@
+ 			proc_data->syscall_data_len = mm_id->syscall_data_len;
+ 
+ 			wait_stub_done_seccomp(mm_id, 0, 0);
++			if (proc_data->err < 0) {
++				userspace_exit(mm_id);
++				fatal_sigsegv();
++			}
+ 
+ 			sig = proc_data->signal;
+ 
+@@ -825,6 +849,7 @@
+ 			if (err) {
+ 				printk(UM_KERN_ERR "%s - failed to get regs: %d",
+ 				       __func__, err);
++				userspace_exit(mm_id);
+ 				fatal_sigsegv();
+ 			}
+ 
+@@ -1072,7 +1097,7 @@
+ 			}
+ 		}
+ 
+-		exit_turnstile(mm_id);
++		userspace_exit(mm_id);
+ 
+ 		UPT_SYSCALL_NR(regs) = -1; /* Assume: It's not a syscall */
+ 

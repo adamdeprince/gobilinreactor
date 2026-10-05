@@ -1,0 +1,29 @@
+Linux goblin 7.2.0-rc4-goblin #11 SMP Sun Sep 20 00:30:33 UTC 2026 aarch64 GNU/Linux
+PASS: real Linux kernel, ext4, account and sudo login
+PASS: hard links and sparse file beyond the former 8 GiB quota
+PASS: pipelines and more than 64 concurrent processes
+PASS: deployed sudo and signed repository; consistent package state
+0% [Working]0% [Connecting to debian.map.fastly.net] [Connecting to apt.goblinreactor.com]0% [Connecting to debian.map.fastly.net (151.101.130.132)] [Connecting to apt.g0% [Connected to debian.map.fastly.net (151.101.130.132)] [Connected to apt.gob                                                                               Hit:1 https://deb.debian.org/debian trixie InRelease
+                                                                               0% [Waiting for headers]                        Hit:2 https://apt.goblinreactor.com trixie InRelease
+                        0% [Working]0% [Working]0% [Working]20% [Working]             Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 75%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 1%Reading state information... Done
+python3 is already the newest version (3.13.5-1).
+gcc is already the newest version (4:14.2.0-1).
+make is already the newest version (4.4.1-2).
+git is already the newest version (1:2.47.3-0+deb13u1).
+ca-certificates is already the newest version (20250419).
+curl is already the newest version (8.14.1-2+deb13u5).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+PASS: memory above 512 MiB, threads and Linux sockets
+PASS: virtual DNS address forwards UDP and TCP without changing guest configuration
+PASS: apt, native compiler and HTTPS
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 1%Reading state information... Done
+emacs-nox is already the newest version (1:30.1+1-6+deb13u1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+UML Emacs works
+PASS: emacs-nox installation and execution
+GOBLIN PASS

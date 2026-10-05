@@ -1,0 +1,7 @@
+/goblin/uml/archive.cpp: In lambda function:
+/goblin/uml/archive.cpp:129:57: warning: ignoring attributes on template argument ‘int (*)(DIR*)’ [-Wignored-attributes]
+  129 |                 std::unique_ptr<DIR, decltype(&closedir)> close_directory(dir, closedir);
+      |                                                         ^
+Debian files and ownership restored.
+invalid ownership metadata: home/a: No data available
+PASS: migration ownership, permissions, hard links, symlinks, sockets, journal recovery, usrmerge and invalid metadata

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs, runs and collects the goblin-linux capability probe.
+# Installs, runs and collects the GoblinReactor capability probe.
 #
 # Must be a real device. An emulator answers a different question: its kernel and
 # SELinux policy are not the ones the app will ship against, and the primitives

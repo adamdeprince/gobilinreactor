@@ -1,0 +1,33 @@
+{
+  "recorded_utc": "2026-09-18T20:21:09.393527+00:00",
+  "serial": "R5CX3468YQR",
+  "model": "SM-S928U",
+  "api": 36,
+  "page_size": 4096,
+  "apk_sha256": "376b93a05928d3908c9213b4120ec669b3cf314a9872fb4b45653432ea36efdb",
+  "installed_apk_sha256": "376b93a05928d3908c9213b4120ec669b3cf314a9872fb4b45653432ea36efdb",
+  "existing_debian_root_preserved": true,
+  "checks": [
+    {
+      "name": "regression",
+      "passed": true,
+      "exit_status": 0,
+      "log": "regression.txt"
+    },
+    {
+      "name": "kitty",
+      "passed": true,
+      "exit_status": 0,
+      "log": "kitty.txt"
+    },
+    {
+      "name": "lifecycle",
+      "passed": true,
+      "exit_status": 0,
+      "log": "lifecycle.txt"
+    }
+  ],
+  "lifecycle_script_sha256": "e84cff2f16f5b84f0f7ce59aba72abc1bbb94442adb18af0453a3d87e916d713",
+  "passed": true,
+  "updated_utc": "2026-09-18T20:25:02.511805+00:00"
+}

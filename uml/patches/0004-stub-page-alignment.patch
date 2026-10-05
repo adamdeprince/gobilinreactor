@@ -1,0 +1,21 @@
+--- a/arch/um/kernel/skas/Makefile
++++ b/arch/um/kernel/skas/Makefile
+@@ -32,14 +32,10 @@
+ 			   $(filter-out $(UM_GPROF_OPT) $(UM_GCOV_OPT),$(KBUILD_CFLAGS)) $(STUB_EXE_LDFLAGS) \
+ 			   $(filter %.o,$^)
+ 
+-# --no-rosegment: lld gives read-only data its own PT_LOAD, and with -n
+-# (nmagic, no page alignment) the two segments end up sharing a page. The
+-# kernel maps ET_EXEC segments with MAP_FIXED_NOREPLACE, so the second mmap of
+-# that page returns -EEXIST and the exec fails after the point of no return --
+-# which surfaces as the *guest* failing to start with -ENOMEM, because
+-# start_userspace() cannot exec the stub. Merging rodata into the text segment
+-# leaves one loadable segment, which is what -n was written for.
+-STUB_EXE_LDFLAGS = -Wl,-n -Wl,--no-rosegment -static
++# Android packages this executable alongside its native libraries. Declare
++# full 16 KiB PT_LOAD alignment for both Android page sizes and bundle checks.
++# Keep read-only data with text; do not use -n, which disables page alignment.
++STUB_EXE_LDFLAGS = -Wl,-z,max-page-size=16384 -Wl,--no-rosegment -static
+ 
+ targets += stub_exe.dbg stub_exe $(stub_exe_objs-y)
+ 

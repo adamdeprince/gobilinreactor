@@ -1,0 +1,23 @@
+INSTRUMENTATION_RESULT: stream=PASS: upstream kitty screen displays the guest Bash prompt
+PASS: goblin starts in /home/goblin with a real unprivileged UID and protected system files
+PASS: packaged sudo elevates commands without a password, supports login shells and leaves the terminal unprivileged
+PASS: sudo su - opens an interactive root login shell; exit returns to the same unprivileged terminal
+PASS: IME commits accented, wide, combining and supplementary Unicode through Bash
+PASS: IME composition replaces pre-edit text before committing
+PASS: less paints, navigates and restores the alternate screen
+PASS: Vim accepts direct input, Escape and commands, and saves Unicode
+Pinch font points: 12.75 -> 17.5 -> 13.5; PTY: 36 63 -> 27 46
+PASS: two-finger pinch zooms in and out and updates the guest terminal dimensions
+PASS: Android surface resize changes guest PTY dimensions
+PASS: pinch text size persists when the terminal activity is recreated
+PASS: activity recreation preserves the kitty screen, shell and background job
+PASS: kitty file graphics requests are rejected without reading or unlinking broker paths
+PASS: terminal reports its white foreground and black background to guest applications
+PASS: Ctrl and Alt apply once; Escape, Tab and all four arrows reach the PTY
+PASS: independent terminals share Linux processes; a detached HTTP server survives its terminal exiting
+PASS: closing every terminal ends its shells while Linux and detached services remain available
+PASS: account creation gives a separate home and UID; root administration is an explicit terminal
+PASS: terminal returns to Bash after full-screen application checks
+KITTY ACCEPTANCE PASS
+
+INSTRUMENTATION_CODE: -1

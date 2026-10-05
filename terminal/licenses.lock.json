@@ -1,0 +1,23 @@
+[
+  {
+    "name": "bzip2-1.0.8",
+    "url": "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
+    "member": "bzip2-1.0.8/LICENSE",
+    "sha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269"
+  },
+  {
+    "name": "libffi-3.4.4",
+    "url": "https://raw.githubusercontent.com/libffi/libffi/v3.4.4/LICENSE",
+    "sha256": "2c9c2acb9743e6b007b91350475308aee44691d96aa20eacef8e199988c8c388"
+  },
+  {
+    "name": "openssl-3.0.15",
+    "url": "https://raw.githubusercontent.com/openssl/openssl/openssl-3.0.15/LICENSE.txt",
+    "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+  },
+  {
+    "name": "sqlite-3.50.4",
+    "url": "https://raw.githubusercontent.com/sqlite/sqlite/version-3.50.4/LICENSE.md",
+    "sha256": "a7a58d6022c090c528e3167026167b3141d682efc6a3c188b473ba59f1788fc7"
+  }
+]

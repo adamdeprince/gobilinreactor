@@ -1,0 +1,68 @@
+-- Persistent: Debian package bootstrap --
+PASS: Debian package bootstrap status=0 
+-- Persistent: recover interrupted package configuration --
+PASS: recover interrupted package configuration status=0 
+-- Persistent: installed database and maintainer scripts --
+PASS: installed database and maintainer scripts status=0 
+-- Persistent: remount persistence --
+PASS: remount persistence status=0 
+-- Persistent: public DNS through Android --
+PASS: public DNS through Android status=0 
+-- Persistent: public HTTPS repository and Debian signature --
+PASS: public HTTPS repository and Debian signature status=0 
+-- Persistent: reject modified repository signature --
+PASS: reject modified repository signature status=0 
+-- Persistent: install curl git python3 with public apt --
+PASS: install curl git python3 with public apt status=0 
+-- Persistent: curl DNS and trusted HTTPS --
+PASS: curl DNS and trusted HTTPS status=0 
+-- Persistent: reject untrusted HTTPS certificate --
+FAILED: reject untrusted HTTPS certificate status=1 
+Android DNS: queries=2 answers=2 failures=0 last_error=0
+Recent syscall errors:
+faccessat       (0xffffffffffffff9c, 0x721200222ea0, 0x4) = -2
+rseq            (0x72123f7f4800, 0x20, 0) = -38
+openat          (0xffffffffffffff9c, 0x721201103110, 0x802) = -6
+ioctl           (0, 0x5401, 0x72123ffff8d0) = -25
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+ioctl           (0x2, 0x540f, 0x72123ffff7e4) = -25
+ioctl           (0x2, 0x540f, 0x72123ffff794) = -25
+newfstatat      (0xffffffffffffff9c, 0x721201183cd0, 0x72123ffff1f8) = -2
+newfstatat      (0xffffffffffffff9c, 0x721201183cd0, 0x72123ffff1f8) = -2
+newfstatat      (0xffffffffffffff9c, 0x721201183cd0, 0x72123ffff1f8) = -2
+faccessat       (0xffffffffffffff9c, 0x721200222ea0, 0x4) = -2
+rseq            (0x72123f7f5160, 0x20, 0) = -38
+ioctl           (0x2, 0x5413, 0x72123ffff350) = -25
+wait4           (0xffffffffffffffff, 0x72123fffdff0, 0x1) = -10
+newfstatat      (0xffffffffffffff9c, 0x721201183170, 0x72123fffee98) = -2
+newfstatat      (0xffffffffffffff9c, 0x721201183170, 0x72123fffee98) = -2
+newfstatat      (0xffffffffffffff9c, 0x721201183170, 0x72123fffee98) = -2
+faccessat       (0xffffffffffffff9c, 0x721200222ea0, 0x4) = -2
+rseq            (0x72123f6ecb60, 0x20, 0) = -38
+newfstatat      (0xffffffffffffff9c, 0x72123e6bccc8, 0x72123ffffb38) = -2
+openat          (0xffffffffffffff9c, 0x7212010a5220, 0) = -2
+openat          (0xffffffffffffff9c, 0x7212010a52f0, 0) = -2
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+openat          (0xffffffffffffff9c, 0x7212010a5220, 0) = -2
+ioctl           (0x1, 0x5401, 0x72123ffff7f0) = -25
+ioctl           (0, 0x5413, 0x72123ffff790) = -25
+syscall_435     (0x72123ffff270, 0x58, 0x72123f565e40) = -38
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x10, 0x80003, 0) = -97
+syscall_203     (0x5, 0x721238000f50, 0x10) = -97
+syscall_203     (0x4, 0x72120109f938, 0x1c) = -115
+syscall_203     (0x4, 0x7212010a0728, 0x10) = -115
+syscall_207     (0x4, 0x7212011249c3, 0x5) = -11
+newfstatat      (0xffffffffffffff9c, 0x721201140510, 0x72123fffec78) = -2
+newfstatat      (0xffffffffffffff9c, 0x721201140510, 0x72123fffec78) = -2
+newfstatat      (0xffffffffffffff9c, 0x721201140510, 0x72123fffec78) = -2
+syscall_207     (0x4, 0x721201163813, 0x5) = -11
+syscall_207     (0x4, 0x721201163813, 0x5) = -11
+syscall_207     (0x4, 0x721201163813, 0x5) = -11
+syscall_207     (0x4, 0x721201163813, 0x5) = -11
+ioctl           (0x2, 0x5413, 0x72123fffeff0) = -25
+wait4           (0xffffffffffffffff, 0x72123fffdc90, 0x1) = -10
+GOBLIN FAIL

@@ -1,0 +1,140 @@
+page size            16384
+-- Developer: Debian bootstrap --
+PASS: Debian bootstrap status=0 elapsed_ms=184 
+-- Developer: install developer tools --
+PASS: install developer tools status=0 elapsed_ms=69964 
+gcc (Debian 14.2.0-19) 14.2.0
+GNU Make 4.4.1
+Python 3.13.5
+-- Developer: ps shows live guest processes --
+PASS: ps shows live guest processes status=0 elapsed_ms=195 
+         1          0 bash
+         2          1 sleep
+-- Developer: pinned HTTPS clone --
+PASS: pinned HTTPS clone status=0 elapsed_ms=2710 
+51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf zlib 1.3.1
+Cloning into '/tmp/goblin-developer-191191600465/zlib'...
+-- Developer: GCC and Make build --
+FAILED: GCC and Make build status=1 elapsed_ms=605 
+Checking for gcc...
+Compiler error reporting is too harsh for /tmp/goblin-developer-191191600465/zlib/./configure (perhaps remove -Werror).
+** /tmp/goblin-developer-191191600465/zlib/./configure aborting.
+
+gcc -c ztest2.c
+gcc: fatal error: cannot execute '/usr/libexec/gcc/aarch64-linux-gnu/14/cc1': posix_spawn: Exec format error
+compilation terminated.
+... using cc
+
+Checking for obsessive-compulsive compiler options...
+=== ztest2.c ===
+int foo() { return 0; }
+===
+cc -c -O ztest2.c
+cc: fatal error: cannot execute '/usr/libexec/gcc/aarch64-linux-gnu/14/cc1': posix_spawn: Exec format error
+compilation terminated.
+(exit code 1)
+Compiler error reporting is too harsh for /tmp/goblin-developer-191191600465/zlib/./configure (perhaps remove -Werror).
+** /tmp/goblin-developer-191191600465/zlib/./configure aborting.
+--------------------
+
+
+cat: build.log: No such file or directory
+Android DNS: queries=0 answers=0 failures=0 last_error=0
+Recent syscall errors:
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+faccessat       (0xffffffffffffff9c, 0x550910, 0x4) = -2
+faccessat       (0xffffffffffffff9c, 0x550910, 0x4) = -2
+faccessat       (0xffffffffffffff9c, 0x550910, 0x4) = -2
+faccessat       (0xffffffffffffff9c, 0x794b3ffff9e0, 0x4) = -2
+syscall_435     (0x794b3fffe728, 0x58, 0x794b3f709f88) = -38
+execve          (0x552b80, 0x552a68, 0x5509d0) = -8
+syscall_95      (0x1, 0x1d, 0) = -38
+wait4           (0xffffffffffffffff, 0x794b3ffff81c, 0x1) = -10
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b00243340, 0x20, 0) = -38
+syscall_223     (0, 0, 0) = -38
+wait4           (0xffffffffffffffff, 0x794b3ffff7cc, 0x1) = -10
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b00243340, 0x20, 0) = -38
+syscall_223     (0x3, 0, 0) = -38
+syscall_285     (0x3, 0, 0x1) = -38
+wait4           (0xffffffffffffffff, 0x794b3fffecec, 0x1) = -10
+newfstatat      (0xffffffffffffff9c, 0x794b0103df00, 0x794b3fffeeb8) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b0103df00, 0x794b3fffeeb8) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b0103df00, 0x794b3fffeeb8) = -2
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b002433a0, 0x20, 0) = -38
+ioctl           (0x2, 0x5401, 0x794b3ffff9c0) = -25
+faccessat       (0xffffffffffffff9c, 0x794b3ffff800, 0x1) = -2
+faccessat       (0xffffffffffffff9c, 0x794b3ffff800, 0x1) = -2
+faccessat       (0xffffffffffffff9c, 0x794b3ffff800, 0x1) = -2
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+faccessat       (0xffffffffffffff9c, 0x794b3ffff800, 0x1) = -2
+faccessat       (0xffffffffffffff9c, 0x794b3ffff800, 0x1) = -2
+faccessat       (0xffffffffffffff9c, 0x794b3ffff800, 0x1) = -2
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffdb50, 0x794b3fffe370) = -22
+faccessat       (0xffffffffffffff9c, 0x550910, 0x4) = -2
+faccessat       (0xffffffffffffff9c, 0x550910, 0x4) = -2
+faccessat       (0xffffffffffffff9c, 0x550910, 0x4) = -2
+faccessat       (0xffffffffffffff9c, 0x794b3ffff9e0, 0x4) = -2
+syscall_435     (0x794b3fffe728, 0x58, 0x794b3f709f88) = -38
+execve          (0x552b80, 0x552a68, 0x5509d0) = -8
+syscall_95      (0x1, 0x21, 0) = -38
+wait4           (0xffffffffffffffff, 0x794b3ffff05c, 0x1) = -10
+close           (0xffffffffffffffff, 0, 0) = -9
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b00243320, 0x20, 0) = -38
+syscall_223     (0, 0, 0) = -38
+wait4           (0xffffffffffffffff, 0x794b3ffff74c, 0x1) = -10
+close           (0xffffffffffffffff, 0, 0) = -9
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b00243320, 0x20, 0) = -38
+syscall_223     (0, 0, 0) = -38
+wait4           (0xffffffffffffffff, 0x794b3ffff19c, 0x1) = -10
+newfstatat      (0xffffffffffffff9c, 0x794b0103df48, 0x794b3ffff248) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b0103df48, 0x794b3ffff248) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b0103df48, 0x794b3ffff248) = -2
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b00243320, 0x20, 0) = -38
+ioctl           (0, 0x5401, 0x794b3ffffa00) = -25
+newfstatat      (0xffffffffffffff9c, 0x794b01034380, 0x794b01035710) = -2
+syscall_35      (0xffffff9c, 0x794b01034380, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b01034380, 0x794b01035810) = -2
+syscall_35      (0xffffff9c, 0x794b01034380, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b01034380, 0x794b01035920) = -2
+syscall_35      (0xffffff9c, 0x794b01034380, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b01034380, 0x794b01035a30) = -2
+syscall_35      (0xffffff9c, 0x794b01034380, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b01034380, 0x794b01035b40) = -2
+syscall_35      (0xffffff9c, 0x794b01034380, 0) = -2
+lseek           (0, 0, 0x1) = -29
+wait4           (0xffffffffffffffff, 0x794b3ffff1ac, 0x1) = -10
+ioctl           (0x2, 0x5413, 0x794b3fffec00) = -25
+wait4           (0xffffffffffffffff, 0x794b3fffd8a0, 0x1) = -10
+newfstatat      (0xffffffffffffff9c, 0x794b01183560, 0x794b3fffe948) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b01183560, 0x794b3fffe948) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b01183560, 0x794b3fffe948) = -2
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b00243340, 0x20, 0) = -38
+syscall_223     (0x3, 0, 0) = -38
+openat          (0xffffffffffffff9c, 0x794b3fffffd4, 0) = -2
+ioctl           (0x2, 0x5413, 0x794b3fffeaa0) = -25
+wait4           (0xffffffffffffffff, 0x794b3fffd740, 0x1) = -10
+GOBLIN FAIL

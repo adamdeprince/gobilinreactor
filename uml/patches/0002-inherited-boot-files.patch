@@ -1,0 +1,219 @@
+--- a/arch/um/os-Linux/file.c
++++ b/arch/um/os-Linux/file.c
+@@ -9,6 +9,7 @@
+ #include <string.h>
+ #include <errno.h>
+ #include <fcntl.h>
++#include <limits.h>
+ #include <signal.h>
+ #include <linux/falloc.h>
+ #include <sys/ioctl.h>
+@@ -22,6 +23,29 @@
+ #include <sys/eventfd.h>
+ #include <poll.h>
+ #include <os.h>
++
++/* A launcher may grant an already-open file without granting pathname access.
++ * In particular, Android isolated services cannot reopen private files through
++ * /proc/self/fd. Keep the original descriptor alive and duplicate it directly.
++ * Return -1 for an ordinary pathname; reject malformed fd: names explicitly.
++ */
++static int inherited_file(const char *name)
++{
++	unsigned int fd = 0;
++
++	if (strncmp(name, "fd:", 3))
++		return -1;
++	name += 3;
++	if (!*name)
++		return -EINVAL;
++	while (*name) {
++		if (*name < '0' || *name > '9' ||
++		    fd > (INT_MAX - (*name - '0')) / 10U)
++			return -EINVAL;
++		fd = fd * 10 + *name++ - '0';
++	}
++	return fd;
++}
+ 
+ static void copy_stat(struct uml_stat *dst, const struct stat64 *src)
+ {
+@@ -58,7 +82,12 @@
+ int os_stat_file(const char *file_name, struct uml_stat *ubuf)
+ {
+ 	struct stat64 sbuf;
+-	int err;
++	int err, fd = inherited_file(file_name);
++
++	if (fd >= 0)
++		return os_stat_fd(fd, ubuf);
++	if (fd != -1)
++		return fd;
+ 
+ 	CATCH_EINTR(err = stat64(file_name, &sbuf));
+ 	if (err < 0)
+@@ -71,7 +100,21 @@
+ 
+ int os_access(const char *file, int mode)
+ {
+-	int amode, err;
++	int amode, err, fd = inherited_file(file);
++
++	if (fd != -1) {
++		if (fd < 0)
++			return fd;
++		err = fcntl(fd, F_GETFL);
++		if (err < 0)
++			return -errno;
++		amode = err & O_ACCMODE;
++		if ((mode & OS_ACC_X_OK) ||
++		    ((mode & OS_ACC_R_OK) && amode == O_WRONLY) ||
++		    ((mode & OS_ACC_W_OK) && amode == O_RDONLY))
++			return -EACCES;
++		return 0;
++	}
+ 
+ 	amode = (mode & OS_ACC_R_OK ? R_OK : 0) |
+ 		(mode & OS_ACC_W_OK ? W_OK : 0) |
+@@ -143,9 +186,21 @@
+ 
+ int os_file_mode(const char *file, struct openflags *mode_out)
+ {
+-	int err;
++	int err, fd = inherited_file(file);
+ 
+ 	*mode_out = OPENFLAGS();
++	if (fd != -1) {
++		if (fd < 0)
++			return fd;
++		err = fcntl(fd, F_GETFL);
++		if (err < 0)
++			return -errno;
++		if ((err & O_ACCMODE) != O_RDONLY)
++			*mode_out = of_write(*mode_out);
++		if ((err & O_ACCMODE) != O_WRONLY)
++			*mode_out = of_read(*mode_out);
++		return 0;
++	}
+ 
+ 	err = access(file, W_OK);
+ 	if (err && (errno != EACCES))
+@@ -164,7 +219,25 @@
+ 
+ int os_open_file(const char *file, struct openflags flags, int mode)
+ {
+-	int fd, err, f = 0;
++	int fd, err, f = 0, inherited = inherited_file(file);
++
++	if (inherited != -1) {
++		if (inherited < 0)
++			return inherited;
++		err = os_access(file, (flags.r ? OS_ACC_R_OK : 0) |
++				      (flags.w ? OS_ACC_W_OK : 0));
++		if (err)
++			return err;
++		f = fcntl(inherited, F_GETFL);
++		if (f < 0)
++			return -errno;
++		/* A duplicate shares status flags. Never silently change them. */
++		if (flags.c || flags.t || flags.e || flags.a ||
++		    (f & O_APPEND) || (flags.s && !(f & O_SYNC)))
++			return -EINVAL;
++		fd = fcntl(inherited, flags.cl ? F_DUPFD_CLOEXEC : F_DUPFD, 0);
++		return fd < 0 ? -errno : fd;
++	}
+ 
+ 	if (flags.r && flags.w)
+ 		f = O_RDWR;
+--- a/arch/um/os-Linux/umid.c
++++ b/arch/um/os-Linux/umid.c
+@@ -257,11 +257,15 @@
+ 
+ /* Changed in make_umid, which is called during early boot */
+ static int umid_setup = 0;
++static int uml_dir_disabled;
+ 
+ static int __init make_umid(void)
+ {
+ 	int fd, err;
+ 	char tmp[256];
++
++	if (uml_dir_disabled)
++		return -EOPNOTSUPP;
+ 
+ 	if (umid_setup)
+ 		return 0;
+@@ -336,6 +340,9 @@
+ 
+ static int __init make_umid_init(void)
+ {
++	if (uml_dir_disabled)
++		return 0;
++
+ 	if (!make_umid())
+ 		return 0;
+ 
+@@ -378,6 +385,9 @@
+ static int __init set_uml_dir(char *name, int *add)
+ {
+ 	*add = 0;
++	uml_dir_disabled = !strcmp(name, "none");
++	if (uml_dir_disabled)
++		return 0;
+ 
+ 	if (*name == '\0') {
+ 		os_warn("uml_dir can't be an empty string\n");
+@@ -406,7 +416,7 @@
+ 
+ __uml_setup("uml_dir=", set_uml_dir,
+ "uml_dir=<directory>\n"
+-"    The location to place the pid and umid files.\n\n"
++"    The location to place the pid and umid files, or none for an FD-only launcher.\n\n"
+ );
+ 
+ static void remove_umid_dir(void)
+@@ -431,7 +441,7 @@
+ 	 * under $HOME, and a bare shell with no writable home is exactly how
+ 	 * someone runs this the first time.
+ 	 */
+-	if (uml_dir == NULL)
++	if (uml_dir_disabled || uml_dir == NULL)
+ 		return;
+ 
+ 	dir = malloc(strlen(uml_dir) + UMID_LEN + 1);
+--- a/arch/um/drivers/ubd_kern.c
++++ b/arch/um/drivers/ubd_kern.c
+@@ -223,6 +223,19 @@
+  * otherwise, the str pointer is used (and owned) inside ubd_devs array, so it
+  * should not be freed on exit.
+  */
++/* Keep the fd: prefix intact; later colons still separate COW/serial fields. */
++static char *ubd_file_name(char **text)
++{
++	char *name = *text;
++
++	if (name && !strncmp(name, "fd:", 3)) {
++		*text += 3;
++		strsep(text, ",:");
++		return name;
++	}
++	return strsep(text, ",:");
++}
++
+ static int ubd_setup_common(char *str, int *index_out, char **error_out)
+ {
+ 	struct ubd *ubd_dev;
+@@ -301,11 +314,11 @@
+ 	goto out;
+ 
+ break_loop:
+-	file = strsep(&str, ",:");
++	file = ubd_file_name(&str);
+ 	if (*file == '\0')
+ 		file = NULL;
+ 
+-	backing_file = strsep(&str, ",:");
++	backing_file = ubd_file_name(&str);
+ 	if (backing_file && *backing_file == '\0')
+ 		backing_file = NULL;
+ 

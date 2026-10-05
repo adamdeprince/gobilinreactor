@@ -1,0 +1,6 @@
+Linux goblin 7.2.0-rc4-goblin #11 SMP Sun Sep 20 00:30:33 UTC 2026 aarch64 GNU/Linux
+PASS: real Linux kernel, ext4, account and sudo login
+PASS: hard links and sparse file beyond the former 8 GiB quota
+PASS: pipelines and more than 64 concurrent processes
+PASS: deployed sudo and signed repository; consistent package state
+GOBLIN PASS

@@ -1,0 +1,31 @@
+patching file arch/arm64/um/shared/sysdep/stub.h
+patching file arch/um/include/asm/mmu.h
+patching file arch/um/include/asm/tlbflush.h
+patching file arch/um/include/shared/as-layout.h
+patching file arch/um/include/shared/os.h
+patching file arch/um/include/shared/skas/mm_id.h
+patching file arch/um/include/shared/skas/skas.h
+patching file arch/um/include/shared/skas/stub-data.h
+patching file arch/um/kernel/asm-offsets.c
+patching file arch/um/kernel/reboot.c
+patching file arch/um/kernel/skas/mmu.c
+patching file arch/um/kernel/skas/process.c
+patching file arch/um/kernel/skas/stub.c
+patching file arch/um/kernel/skas/stub_exe.c
+patching file arch/um/kernel/smp.c
+patching file arch/um/kernel/time.c
+patching file arch/um/kernel/tlb.c
+patching file arch/um/kernel/trap.c
+patching file arch/um/os-Linux/process.c
+patching file arch/um/os-Linux/skas/mem.c
+patching file arch/um/os-Linux/skas/process.c
+patching file arch/um/os-Linux/file.c
+patching file arch/um/os-Linux/umid.c
+patching file arch/um/drivers/ubd_kern.c
+patching file arch/um/drivers/line.c
+patching file arch/um/drivers/chan_kern.c
+PASS: 27 patched files, clean application and idempotent repeat
+PASS: patched source matches the compiled tree
+0001-arm64-shared-mm-workers.patch 7f3a9d505854cec5e121f2d55430402f3125c0a2bb258e762c46c6a9819262ee
+0002-inherited-boot-files.patch ef2c077f107fc882e524828c912da1a5bb033de70266daeb1e713d816d10ea59
+0003-serial-flow-control.patch 40645d4704491522b6cb3b62f3e9b98db4cee3274d1a51840a65960062a2ed0d

@@ -2,22 +2,52 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.goblinlinux.sentry">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <instrumentation android:name=".TerminalAcceptance" android:targetPackage="dev.goblinlinux.sentry"
+        android:label="GoblinReactor kitty acceptance" />
+    <instrumentation android:name=".PowerAcceptance" android:targetPackage="dev.goblinlinux.sentry"
+        android:label="GoblinReactor power acceptance" />
+
     <application
-        android:label="goblin-linux sentry"
-        android:hasCode="false"
+        android:label="GoblinReactor"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@android:style/Theme.Material.NoActionBar"
         android:allowBackup="false"
         android:debuggable="true"
         android:extractNativeLibs="true">
 
-        <activity
-            android:name="android.app.NativeActivity"
-            android:label="goblin-linux sentry"
-            android:exported="true">
-            <meta-data android:name="android.app.lib_name" android:value="goblinsentry" />
+        <activity android:name=".TerminalActivity" android:label="GoblinReactor" android:exported="true"
+            android:configChanges="keyboard|keyboardHidden"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HarnessActivity" android:label="GoblinReactor acceptance tests" android:exported="true" />
+        <receiver android:name=".BootReceiver" android:exported="false" android:directBootAware="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".KernelService" android:exported="false" android:process=":linux"
+            android:isolatedProcess="true" android:useAppZygote="true" />
+        <service android:name=".NetworkService" android:exported="false" android:process=":network" />
+        <service android:name=".SessionService" android:exported="false" android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="User-controlled local Linux environment for terminals, package installation and background services; optionally starts after reboot when the user enables Start Linux after reboot. Runs with an ongoing notification and a shutdown action independently of the terminal screen." />
+        </service>
+        <service android:name=".MaintenanceService" android:exported="false" android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="User-requested Linux disk backup, restore or rescue transition; preserves a consistent disk while transferring through Android's document picker." />
+        </service>
     </application>
 </manifest>

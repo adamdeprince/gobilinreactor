@@ -1,0 +1,1109 @@
+-- Persistent: Debian package bootstrap --
+FAILED: Debian package bootstrap status=1 
+Selecting previously unselected package apt.
+(Reading database ... 0 files and directories currently installed.)
+Preparing to unpack .../apt_3.0.3_arm64.deb ...
+Unpacking apt (3.0.3) ...
+Selecting previously unselected package base-files.
+Preparing to unpack .../base-files_13.8+deb13u7_arm64.deb ...
+Unpacking base-files (13.8+deb13u7) ...
+Selecting previously unselected package base-passwd.
+Preparing to unpack .../base-passwd_3.6.7_arm64.deb ...
+Unpacking base-passwd (3.6.7) ...
+Selecting previously unselected package bash.
+Preparing to unpack .../bash_5.2.37-2+b10_arm64.deb ...
+Unpacking bash (5.2.37-2+b10) ...
+Selecting previously unselected package bsdutils.
+Preparing to unpack .../bsdutils_2.41.5-0+deb13u1_arm64.deb ...
+Unpacking bsdutils (1:2.41.5-0+deb13u1) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../ca-certificates_20250419_all.deb ...
+Unpacking ca-certificates (20250419) ...
+Selecting previously unselected package coreutils.
+Preparing to unpack .../coreutils_9.7-3_arm64.deb ...
+Unpacking coreutils (9.7-3) ...
+Selecting previously unselected package dash.
+Preparing to unpack .../dash_0.5.12-12_arm64.deb ...
+Unpacking dash (0.5.12-12) ...
+Selecting previously unselected package debconf.
+Preparing to unpack .../debconf_1.5.91_all.deb ...
+Unpacking debconf (1.5.91) ...
+Selecting previously unselected package debian-archive-keyring.
+Preparing to unpack .../debian-archive-keyring_2025.1_all.deb ...
+Unpacking debian-archive-keyring (2025.1) ...
+Selecting previously unselected package debianutils.
+Preparing to unpack .../debianutils_5.23.2_arm64.deb ...
+Unpacking debianutils (5.23.2) ...
+Selecting previously unselected package diffutils.
+Preparing to unpack .../diffutils_3.10-4_arm64.deb ...
+Unpacking diffutils (1:3.10-4) ...
+Selecting previously unselected package dpkg.
+Preparing to unpack .../dpkg_1.22.22_arm64.deb ...
+Unpacking dpkg (1.22.22) ...
+Selecting previously unselected package findutils.
+Preparing to unpack .../findutils_4.10.0-3_arm64.deb ...
+Unpacking findutils (4.10.0-3) ...
+Selecting previously unselected package gcc-14-base:arm64.
+Preparing to unpack .../gcc-14-base_14.2.0-19_arm64.deb ...
+Unpacking gcc-14-base:arm64 (14.2.0-19) ...
+Selecting previously unselected package grep.
+Preparing to unpack .../grep_3.11-4+b1_arm64.deb ...
+Unpacking grep (3.11-4+b1) ...
+Selecting previously unselected package gzip.
+Preparing to unpack .../gzip_1.13-1+deb13u1_arm64.deb ...
+Unpacking gzip (1.13-1+deb13u1) ...
+Selecting previously unselected package hostname.
+Preparing to unpack .../hostname_3.25_arm64.deb ...
+Unpacking hostname (3.25) ...
+Selecting previously unselected package init-system-helpers.
+Preparing to unpack .../init-system-helpers_1.69~deb13u1_all.deb ...
+Unpacking init-system-helpers (1.69~deb13u1) ...
+Selecting previously unselected package libacl1:arm64.
+Preparing to unpack .../libacl1_2.3.2-2+b1_arm64.deb ...
+Unpacking libacl1:arm64 (2.3.2-2+b1) ...
+Selecting previously unselected package libapt-pkg7.0:arm64.
+Preparing to unpack .../libapt-pkg7.0_3.0.3_arm64.deb ...
+Unpacking libapt-pkg7.0:arm64 (3.0.3) ...
+Selecting previously unselected package libattr1:arm64.
+Preparing to unpack .../libattr1_2.5.2-3_arm64.deb ...
+Unpacking libattr1:arm64 (1:2.5.2-3) ...
+Selecting previously unselected package libaudit-common.
+Preparing to unpack .../libaudit-common_4.0.2-2+deb13u1_all.deb ...
+Unpacking libaudit-common (1:4.0.2-2+deb13u1) ...
+Selecting previously unselected package libaudit1:arm64.
+Preparing to unpack .../libaudit1_4.0.2-2+deb13u1_arm64.deb ...
+Unpacking libaudit1:arm64 (1:4.0.2-2+deb13u1) ...
+Selecting previously unselected package libblkid1:arm64.
+Preparing to unpack .../libblkid1_2.41.5-0+deb13u1_arm64.deb ...
+Unpacking libblkid1:arm64 (2.41.5-0+deb13u1) ...
+Selecting previously unselected package libbsd0:arm64.
+Preparing to unpack .../libbsd0_0.12.2-2_arm64.deb ...
+Unpacking libbsd0:arm64 (0.12.2-2) ...
+Selecting previously unselected package libbz2-1.0:arm64.
+Preparing to unpack .../libbz2-1.0_1.0.8-6_arm64.deb ...
+Unpacking libbz2-1.0:arm64 (1.0.8-6) ...
+Selecting previously unselected package libc-bin.
+Preparing to unpack .../libc-bin_2.41-12+deb13u4_arm64.deb ...
+Unpacking libc-bin (2.41-12+deb13u4) ...
+Selecting previously unselected package libc6:arm64.
+Preparing to unpack .../libc6_2.41-12+deb13u4_arm64.deb ...
+Selecting previously unselected package libcap-ng0:arm64.
+Preparing to unpack .../libcap-ng0_0.8.5-4+b1_arm64.deb ...
+Unpacking libcap-ng0:arm64 (0.8.5-4+b1) ...
+Selecting previously unselected package libcap2:arm64.
+Preparing to unpack .../libcap2_2.75-10+deb13u1+b3_arm64.deb ...
+Unpacking libcap2:arm64 (1:2.75-10+deb13u1+b3) ...
+Selecting previously unselected package libcrypt1:arm64.
+Preparing to unpack .../libcrypt1_4.4.38-1_arm64.deb ...
+Unpacking libcrypt1:arm64 (1:4.4.38-1) ...
+Selecting previously unselected package libdb5.3t64:arm64.
+Preparing to unpack .../libdb5.3t64_5.3.28+dfsg2-9_arm64.deb ...
+Unpacking libdb5.3t64:arm64 (5.3.28+dfsg2-9) ...
+Selecting previously unselected package libdebconfclient0:arm64.
+Preparing to unpack .../libdebconfclient0_0.280_arm64.deb ...
+Unpacking libdebconfclient0:arm64 (0.280) ...
+Selecting previously unselected package libgcc-s1:arm64.
+Preparing to unpack .../libgcc-s1_14.2.0-19_arm64.deb ...
+Unpacking libgcc-s1:arm64 (14.2.0-19) ...
+Selecting previously unselected package libgmp10:arm64.
+Preparing to unpack .../libgmp10_6.3.0+dfsg-3_arm64.deb ...
+Unpacking libgmp10:arm64 (2:6.3.0+dfsg-3) ...
+Selecting previously unselected package libhogweed6t64:arm64.
+Preparing to unpack .../libhogweed6t64_3.10.1-1_arm64.deb ...
+Unpacking libhogweed6t64:arm64 (3.10.1-1) ...
+Selecting previously unselected package liblastlog2-2:arm64.
+Preparing to unpack .../liblastlog2-2_2.41.5-0+deb13u1_arm64.deb ...
+Unpacking liblastlog2-2:arm64 (2.41.5-0+deb13u1) ...
+Selecting previously unselected package liblz4-1:arm64.
+Preparing to unpack .../liblz4-1_1.10.0-4_arm64.deb ...
+Unpacking liblz4-1:arm64 (1.10.0-4) ...
+Selecting previously unselected package liblzma5:arm64.
+Preparing to unpack .../liblzma5_5.8.1-1+deb13u1_arm64.deb ...
+Unpacking liblzma5:arm64 (5.8.1-1+deb13u1) ...
+Selecting previously unselected package libmd0:arm64.
+Preparing to unpack .../libmd0_1.1.0-2+b1_arm64.deb ...
+Unpacking libmd0:arm64 (1.1.0-2+b1) ...
+Selecting previously unselected package libmount1:arm64.
+Preparing to unpack .../libmount1_2.41.5-0+deb13u1_arm64.deb ...
+Unpacking libmount1:arm64 (2.41.5-0+deb13u1) ...
+Selecting previously unselected package libnettle8t64:arm64.
+Preparing to unpack .../libnettle8t64_3.10.1-1_arm64.deb ...
+Unpacking libnettle8t64:arm64 (3.10.1-1) ...
+Selecting previously unselected package libpam-modules-bin.
+Preparing to unpack .../libpam-modules-bin_1.7.0-5_arm64.deb ...
+Unpacking libpam-modules-bin (1.7.0-5) ...
+Selecting previously unselected package libpam-modules:arm64.
+Preparing to unpack .../libpam-modules_1.7.0-5_arm64.deb ...
+Selecting previously unselected package libpam-runtime.
+Preparing to unpack .../libpam-runtime_1.7.0-5_all.deb ...
+Unpacking libpam-runtime (1.7.0-5) ...
+Selecting previously unselected package libpam0g:arm64.
+Preparing to unpack .../libpam0g_1.7.0-5_arm64.deb ...
+Unpacking libpam0g:arm64 (1.7.0-5) ...
+Selecting previously unselected package libpcre2-8-0:arm64.
+Preparing to unpack .../libpcre2-8-0_10.46-1~deb13u2_arm64.deb ...
+Unpacking libpcre2-8-0:arm64 (10.46-1~deb13u2) ...
+Selecting previously unselected package libseccomp2:arm64.
+Preparing to unpack .../libseccomp2_2.6.0-2_arm64.deb ...
+Unpacking libseccomp2:arm64 (2.6.0-2) ...
+Selecting previously unselected package libselinux1:arm64.
+Preparing to unpack .../libselinux1_3.8.1-1_arm64.deb ...
+Unpacking libselinux1:arm64 (3.8.1-1) ...
+Selecting previously unselected package libsemanage-common.
+Preparing to unpack .../libsemanage-common_3.8.1-1_all.deb ...
+Unpacking libsemanage-common (3.8.1-1) ...
+Selecting previously unselected package libsemanage2:arm64.
+Preparing to unpack .../libsemanage2_3.8.1-1_arm64.deb ...
+Unpacking libsemanage2:arm64 (3.8.1-1) ...
+Selecting previously unselected package libsepol2:arm64.
+Preparing to unpack .../libsepol2_3.8.1-1_arm64.deb ...
+Unpacking libsepol2:arm64 (3.8.1-1) ...
+Selecting previously unselected package libsmartcols1:arm64.
+Preparing to unpack .../libsmartcols1_2.41.5-0+deb13u1_arm64.deb ...
+Unpacking libsmartcols1:arm64 (2.41.5-0+deb13u1) ...
+Selecting previously unselected package libsqlite3-0:arm64.
+Preparing to unpack .../libsqlite3-0_3.46.1-7+deb13u2_arm64.deb ...
+Unpacking libsqlite3-0:arm64 (3.46.1-7+deb13u2) ...
+Selecting previously unselected package libssl3t64:arm64.
+Preparing to unpack .../libssl3t64_3.5.7-1~deb13u2_arm64.deb ...
+Unpacking libssl3t64:arm64 (3.5.7-1~deb13u2) ...
+Selecting previously unselected package libstdc++6:arm64.
+Preparing to unpack .../libstdc++6_14.2.0-19_arm64.deb ...
+Unpacking libstdc++6:arm64 (14.2.0-19) ...
+Selecting previously unselected package libsystemd0:arm64.
+Preparing to unpack .../libsystemd0_257.13-1~deb13u1_arm64.deb ...
+Unpacking libsystemd0:arm64 (257.13-1~deb13u1) ...
+Selecting previously unselected package libtinfo6:arm64.
+Preparing to unpack .../libtinfo6_6.5+20250216-2_arm64.deb ...
+Unpacking libtinfo6:arm64 (6.5+20250216-2) ...
+Selecting previously unselected package libudev1:arm64.
+Preparing to unpack .../libudev1_257.13-1~deb13u1_arm64.deb ...
+Unpacking libudev1:arm64 (257.13-1~deb13u1) ...
+Selecting previously unselected package libuuid1:arm64.
+Preparing to unpack .../libuuid1_2.41.5-0+deb13u1_arm64.deb ...
+Unpacking libuuid1:arm64 (2.41.5-0+deb13u1) ...
+Selecting previously unselected package libxxhash0:arm64.
+Preparing to unpack .../libxxhash0_0.8.3-2_arm64.deb ...
+Unpacking libxxhash0:arm64 (0.8.3-2) ...
+Selecting previously unselected package libzstd1:arm64.
+Preparing to unpack .../libzstd1_1.5.7+dfsg-1_arm64.deb ...
+Unpacking libzstd1:arm64 (1.5.7+dfsg-1) ...
+Selecting previously unselected package login.defs.
+Preparing to unpack .../login.defs_4.17.4-2_all.deb ...
+Unpacking login.defs (1:4.17.4-2) ...
+Selecting previously unselected package login.
+Preparing to unpack .../login_4.16.0-2+really2.41.5-0+deb13u1_arm64.deb ...
+Unpacking login (1:4.16.0-2+really2.41.5-0+deb13u1) ...
+Selecting previously unselected package mawk.
+Preparing to unpack .../mawk_1.3.4.20250131-1_arm64.deb ...
+Unpacking mawk (1.3.4.20250131-1) ...
+Selecting previously unselected package mount.
+Preparing to unpack .../mount_2.41.5-0+deb13u1_arm64.deb ...
+Unpacking mount (2.41.5-0+deb13u1) ...
+Selecting previously unselected package ncurses-base.
+Preparing to unpack .../ncurses-base_6.5+20250216-2_all.deb ...
+Unpacking ncurses-base (6.5+20250216-2) ...
+Selecting previously unselected package ncurses-bin.
+Preparing to unpack .../ncurses-bin_6.5+20250216-2_arm64.deb ...
+Unpacking ncurses-bin (6.5+20250216-2) ...
+Selecting previously unselected package openssl-provider-legacy.
+Preparing to unpack .../openssl-provider-legacy_3.5.7-1~deb13u2_arm64.deb ...
+Unpacking openssl-provider-legacy (3.5.7-1~deb13u2) ...
+Selecting previously unselected package openssl.
+Preparing to unpack .../openssl_3.5.7-1~deb13u2_arm64.deb ...
+Unpacking openssl (3.5.7-1~deb13u2) ...
+Selecting previously unselected package passwd.
+Preparing to unpack .../passwd_4.17.4-2_arm64.deb ...
+Unpacking passwd (1:4.17.4-2) ...
+Selecting previously unselected package perl-base.
+Preparing to unpack .../perl-base_5.40.1-6+deb13u1_arm64.deb ...
+Unpacking perl-base (5.40.1-6+deb13u1) ...
+Selecting previously unselected package sed.
+Preparing to unpack .../sed_4.9-2+deb13u1_arm64.deb ...
+Unpacking sed (4.9-2+deb13u1) ...
+Selecting previously unselected package sqv.
+Preparing to unpack .../sqv_1.3.0-3+b2_arm64.deb ...
+Unpacking sqv (1.3.0-3+b2) ...
+Selecting previously unselected package sysvinit-utils.
+Preparing to unpack .../sysvinit-utils_3.14-4_arm64.deb ...
+Unpacking sysvinit-utils (3.14-4) ...
+Selecting previously unselected package tar.
+Preparing to unpack .../tar_1.35+dfsg-3.1_arm64.deb ...
+Unpacking tar (1.35+dfsg-3.1) ...
+Selecting previously unselected package tzdata.
+Preparing to unpack .../tzdata_2026c-0+deb13u1_all.deb ...
+Unpacking tzdata (2026c-0+deb13u1) ...
+Selecting previously unselected package util-linux.
+Preparing to unpack .../util-linux_2.41.5-0+deb13u1_arm64.deb ...
+Unpacking util-linux (2.41.5-0+deb13u1) ...
+Selecting previously unselected package zlib1g:arm64.
+Preparing to unpack .../zlib1g_1.3.dfsg+really1.3.1-1+b1_arm64.deb ...
+Unpacking zlib1g:arm64 (1:1.3.dfsg+really1.3.1-1+b1) ...
+dpkg: regarding .../base-files_13.8+deb13u7_arm64.deb containing base-files, pre-dependency problem:
+ base-files pre-depends on awk
+  awk is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../bash_5.2.37-2+b10_arm64.deb containing bash, pre-dependency problem:
+ bash pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../bash_5.2.37-2+b10_arm64.deb containing bash, pre-dependency problem:
+ bash pre-depends on libtinfo6 (>= 6)
+  libtinfo6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../bsdutils_2.41.5-0+deb13u1_arm64.deb containing bsdutils, pre-dependency problem:
+ bsdutils pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../bsdutils_2.41.5-0+deb13u1_arm64.deb containing bsdutils, pre-dependency problem:
+ bsdutils pre-depends on libsystemd0 (>= 254)
+  libsystemd0 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../coreutils_9.7-3_arm64.deb containing coreutils, pre-dependency problem:
+ coreutils pre-depends on libacl1 (>= 2.2.23)
+  libacl1 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../coreutils_9.7-3_arm64.deb containing coreutils, pre-dependency problem:
+ coreutils pre-depends on libattr1 (>= 1:2.4.48)
+  libattr1 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../coreutils_9.7-3_arm64.deb containing coreutils, pre-dependency problem:
+ coreutils pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../coreutils_9.7-3_arm64.deb containing coreutils, pre-dependency problem:
+ coreutils pre-depends on libcap2 (>= 1:2.10)
+  libcap2 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../coreutils_9.7-3_arm64.deb containing coreutils, pre-dependency problem:
+ coreutils pre-depends on libgmp10 (>= 2:6.3.0+dfsg)
+  libgmp10 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../coreutils_9.7-3_arm64.deb containing coreutils, pre-dependency problem:
+ coreutils pre-depends on libselinux1 (>= 3.1~)
+  libselinux1 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../coreutils_9.7-3_arm64.deb containing coreutils, pre-dependency problem:
+ coreutils pre-depends on libssl3t64 (>= 3.0.0)
+  libssl3t64 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../coreutils_9.7-3_arm64.deb containing coreutils, pre-dependency problem:
+ coreutils pre-depends on libsystemd0 (>= 254)
+  libsystemd0 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../dash_0.5.12-12_arm64.deb containing dash, pre-dependency problem:
+ dash pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../debianutils_5.23.2_arm64.deb containing debianutils, pre-dependency problem:
+ debianutils pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../diffutils_3.10-4_arm64.deb containing diffutils, pre-dependency problem:
+ diffutils pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../dpkg_1.22.22_arm64.deb containing dpkg, pre-dependency problem:
+ dpkg pre-depends on libbz2-1.0
+  libbz2-1.0 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../dpkg_1.22.22_arm64.deb containing dpkg, pre-dependency problem:
+ dpkg pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../dpkg_1.22.22_arm64.deb containing dpkg, pre-dependency problem:
+ dpkg pre-depends on liblzma5 (>= 5.4.0)
+  liblzma5 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../dpkg_1.22.22_arm64.deb containing dpkg, pre-dependency problem:
+ dpkg pre-depends on libmd0 (>= 0.0.0)
+  libmd0 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../dpkg_1.22.22_arm64.deb containing dpkg, pre-dependency problem:
+ dpkg pre-depends on libselinux1 (>= 3.1~)
+  libselinux1 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../dpkg_1.22.22_arm64.deb containing dpkg, pre-dependency problem:
+ dpkg pre-depends on libzstd1 (>= 1.5.5)
+  libzstd1 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../dpkg_1.22.22_arm64.deb containing dpkg, pre-dependency problem:
+ dpkg pre-depends on zlib1g (>= 1:1.1.4)
+  zlib1g is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../findutils_4.10.0-3_arm64.deb containing findutils, pre-dependency problem:
+ findutils pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../findutils_4.10.0-3_arm64.deb containing findutils, pre-dependency problem:
+ findutils pre-depends on libselinux1 (>= 3.1~)
+  libselinux1 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../grep_3.11-4+b1_arm64.deb containing grep, pre-dependency problem:
+ grep pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../grep_3.11-4+b1_arm64.deb containing grep, pre-dependency problem:
+ grep pre-depends on libpcre2-8-0 (>= 10.32)
+  libpcre2-8-0 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../gzip_1.13-1+deb13u1_arm64.deb containing gzip, pre-dependency problem:
+ gzip pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../hostname_3.25_arm64.deb containing hostname, pre-dependency problem:
+ hostname pre-depends on libc6 (>= 2.34)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+debconf: DbDriver "config": /var/cache/debconf/config.dat is locked by another process: Function not implemented
+dpkg: error processing archive /var/cache/goblin-bootstrap/libc6_2.41-12+deb13u4_arm64.deb (--unpack):
+ new libc6:arm64 package pre-installation script subprocess returned error exit status 1
+dpkg: regarding .../libpam-modules_1.7.0-5_arm64.deb containing libpam-modules:arm64, pre-dependency problem:
+ libpam-modules pre-depends on libaudit1 (>= 1:2.2.1)
+  libaudit1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../libpam-modules_1.7.0-5_arm64.deb containing libpam-modules:arm64, pre-dependency problem:
+ libpam-modules pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../libpam-modules_1.7.0-5_arm64.deb containing libpam-modules:arm64, pre-dependency problem:
+ libpam-modules pre-depends on libcrypt1 (>= 1:4.3.0)
+  libcrypt1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../libpam-modules_1.7.0-5_arm64.deb containing libpam-modules:arm64, pre-dependency problem:
+ libpam-modules pre-depends on libdb5.3t64
+  libdb5.3t64:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../libpam-modules_1.7.0-5_arm64.deb containing libpam-modules:arm64, pre-dependency problem:
+ libpam-modules pre-depends on libpam0g (>= 1.4.1)
+  libpam0g is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../libpam-modules_1.7.0-5_arm64.deb containing libpam-modules:arm64, pre-dependency problem:
+ libpam-modules pre-depends on libselinux1 (>= 3.1~)
+  libselinux1 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../libpam-modules_1.7.0-5_arm64.deb containing libpam-modules:arm64, pre-dependency problem:
+ libpam-modules pre-depends on libsystemd0 (>= 254)
+  libsystemd0 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../libpam-modules_1.7.0-5_arm64.deb containing libpam-modules:arm64, pre-dependency problem:
+ libpam-modules pre-depends on debconf (>= 0.5) | debconf-2.0
+  debconf is unpacked, but has never been configured.
+  debconf provides debconf-2.0 but is unpacked but not configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../libpam-modules_1.7.0-5_arm64.deb containing libpam-modules:arm64, pre-dependency problem:
+ libpam-modules pre-depends on libpam-modules-bin (= 1.7.0-5)
+  libpam-modules-bin is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+debconf: DbDriver "config": /var/cache/debconf/config.dat is locked by another process: Function not implemented
+dpkg: error processing archive /var/cache/goblin-bootstrap/libpam-modules_1.7.0-5_arm64.deb (--unpack):
+ new libpam-modules:arm64 package pre-installation script subprocess returned error exit status 1
+dpkg: regarding .../login_4.16.0-2+really2.41.5-0+deb13u1_arm64.deb containing login, pre-dependency problem:
+ login pre-depends on login.defs (>= 1:4.16.0-1~)
+  login.defs is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../mount_2.41.5-0+deb13u1_arm64.deb containing mount, pre-dependency problem:
+ mount pre-depends on libblkid1 (= 2.41.5-0+deb13u1)
+  libblkid1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../mount_2.41.5-0+deb13u1_arm64.deb containing mount, pre-dependency problem:
+ mount pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../mount_2.41.5-0+deb13u1_arm64.deb containing mount, pre-dependency problem:
+ mount pre-depends on libmount1 (= 2.41.5-0+deb13u1)
+  libmount1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../mount_2.41.5-0+deb13u1_arm64.deb containing mount, pre-dependency problem:
+ mount pre-depends on libselinux1 (>= 3.1~)
+  libselinux1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../mount_2.41.5-0+deb13u1_arm64.deb containing mount, pre-dependency problem:
+ mount pre-depends on libsmartcols1 (= 2.41.5-0+deb13u1)
+  libsmartcols1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../ncurses-bin_6.5+20250216-2_arm64.deb containing ncurses-bin, pre-dependency problem:
+ ncurses-bin pre-depends on libc6 (>= 2.34)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../ncurses-bin_6.5+20250216-2_arm64.deb containing ncurses-bin, pre-dependency problem:
+ ncurses-bin pre-depends on libtinfo6 (>= 6.4+20230603)
+  libtinfo6:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../perl-base_5.40.1-6+deb13u1_arm64.deb containing perl-base, pre-dependency problem:
+ perl-base pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../perl-base_5.40.1-6+deb13u1_arm64.deb containing perl-base, pre-dependency problem:
+ perl-base pre-depends on libcrypt1 (>= 1:4.1.0)
+  libcrypt1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../sed_4.9-2+deb13u1_arm64.deb containing sed, pre-dependency problem:
+ sed pre-depends on libacl1 (>= 2.2.23)
+  libacl1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../sed_4.9-2+deb13u1_arm64.deb containing sed, pre-dependency problem:
+ sed pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../sed_4.9-2+deb13u1_arm64.deb containing sed, pre-dependency problem:
+ sed pre-depends on libselinux1 (>= 3.1~)
+  libselinux1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../tar_1.35+dfsg-3.1_arm64.deb containing tar, pre-dependency problem:
+ tar pre-depends on libacl1 (>= 2.2.23)
+  libacl1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../tar_1.35+dfsg-3.1_arm64.deb containing tar, pre-dependency problem:
+ tar pre-depends on libc6 (>= 2.38)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../tar_1.35+dfsg-3.1_arm64.deb containing tar, pre-dependency problem:
+ tar pre-depends on libselinux1 (>= 3.1~)
+  libselinux1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libpam-modules
+  libpam-modules is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libpam-runtime
+  libpam-runtime is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libblkid1 (= 2.41.5-0+deb13u1)
+  libblkid1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libc6 (>= 2.41)
+  libc6 is not installed.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libcap-ng0 (>= 0.7.9)
+  libcap-ng0:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libcrypt1 (>= 1:4.1.0)
+  libcrypt1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on liblastlog2-2 (= 2.41.5-0+deb13u1)
+  liblastlog2-2:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libmount1 (= 2.41.5-0+deb13u1)
+  libmount1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libpam0g (>= 0.99.7.1)
+  libpam0g:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libselinux1 (>= 3.1~)
+  libselinux1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libsmartcols1 (= 2.41.5-0+deb13u1)
+  libsmartcols1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libsystemd0
+  libsystemd0:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libtinfo6 (>= 6)
+  libtinfo6:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libudev1 (>= 183)
+  libudev1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+dpkg: regarding .../util-linux_2.41.5-0+deb13u1_arm64.deb containing util-linux, pre-dependency problem:
+ util-linux pre-depends on libuuid1 (= 2.41.5-0+deb13u1)
+  libuuid1:arm64 is unpacked, but has never been configured.
+
+dpkg: warning: ignoring pre-dependency problem!
+Errors were encountered while processing:
+ /var/cache/goblin-bootstrap/libc6_2.41-12+deb13u4_arm64.deb
+ /var/cache/goblin-bootstrap/libpam-modules_1.7.0-5_arm64.deb
+brk             (0, 0, 0) = 0x7701174000
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+openat          (0xffffffffffffff9c, 0x7700220d10, 0x80000) = -2
+openat          (0xffffffffffffff9c, 0x773fffec50, 0x80000) = 3
+read            (0x3, 0x773fffeef0, 0x340) = 832
+fstat           (0x3, 0x773fffed70, 0x3) = 0
+mmap            (0, 0x2000, 0x3) = 0x773f7fe000
+mmap            (0, 0x508d0, 0) = 0x773f7ad000
+mmap            (0x773f7b0000, 0x408d0, 0x5) = 0x773f7b0000
+munmap          (0x773f7ad000, 0x3000, 0x773f7b0000) = 0
+munmap          (0x773f7f1000, 0xc8d0, 0x773f7b0000) = 0
+mprotect        (0x773f7e0000, 0xc000, 0) = 0
+mmap            (0x773f7ec000, 0x5000, 0x3) = 0x773f7ec000
+close           (0x3, 0x3, 0x1) = 0
+openat          (0xffffffffffffff9c, 0x773fffec30, 0x80000) = 3
+read            (0x3, 0x773fffeed0, 0x340) = 832
+fstat           (0x3, 0x773fffed50, 0x3) = 0
+mmap            (0, 0x1ce010, 0) = 0x773f5e1000
+mmap            (0x773f5f0000, 0x1be010, 0x5) = 0x773f5f0000
+munmap          (0x773f5e1000, 0xf000, 0x773f5f0000) = 0
+munmap          (0x773f7af000, 0x10, 0x773f5f0000) = 0
+mprotect        (0x773f78c000, 0x11000, 0) = 0
+mmap            (0x773f79d000, 0x5000, 0x3) = 0x773f79d000
+mmap            (0x773f7a2000, 0xc010, 0x3) = 0x773f7a2000
+close           (0x3, 0x3, 0x6) = 0
+mmap            (0, 0x2000, 0x3) = 0x773f7fc000
+set_tid_address (0x773f7fc0f0, 0x7700240000, 0x773f7fc0e0) = 1
+set_robust_list (0x773f7fc100, 0x18, 0x773f7fc100) = 0
+rseq            (0x773f7fc800, 0x20, 0) = -38
+mprotect        (0x773f79d000, 0x3000, 0x1) = 0
+mprotect        (0x773f7ec000, 0x4000, 0x1) = 0
+mprotect        (0x770115b000, 0x5000, 0x1) = 0
+mprotect        (0x770023e000, 0x2000, 0x1) = 0
+prlimit64       (0, 0x3, 0) = 0
+openat          (0xffffffffffffff9c, 0x7701103110, 0x802) = -6
+ioctl           (0, 0x5401, 0x773ffff9d0) = -25
+getrandom       (0x773f7a6768, 0x8, 0x1) = 8
+brk             (0, 0, 0x202b0) = 0x7701174000
+brk             (0x7701195000, 0x7701195000, 0x773f7a7320) = 0x7701195000
+getuid          (0, 0x773f79e808, 0) = 0
+getgid          (0x7701160000, 0xffffffff, 0) = 0
+geteuid         (0, 0xffffffff, 0) = 0
+getegid         (0, 0xffffffff, 0) = 0
+rt_sigprocmask  (0, 0, 0x77011684d8) = 0
+syscall_169     (0x77011685b8, 0, 0x773fffffe6) = 0
+rt_sigaction    (0x11, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x11, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x2, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x2, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x3, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x3, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x14, 0x773ffff648, 0x773ffff6e0) = 0
+rt_sigaction    (0x14, 0x773ffff648, 0x773ffff6e0) = 0
+rt_sigaction    (0x15, 0x773ffff648, 0x773ffff6e0) = 0
+rt_sigaction    (0x15, 0x773ffff648, 0x773ffff6e0) = 0
+rt_sigaction    (0x16, 0x773ffff648, 0x773ffff6e0) = 0
+rt_sigaction    (0x16, 0x773ffff648, 0x773ffff6e0) = 0
+rt_sigprocmask  (0, 0, 0x7701170160) = 0
+rt_sigaction    (0x3, 0x773ffff668, 0x773ffff700) = 0
+uname           (0x773ffff790, 0xff, 0x770023fb60) = 0
+getcwd          (0x7701178aa0, 0x1000, 0x773f7a6000) = 2
+getpid          (0x7701178c40, 0, 0) = 1
+getppid         (0x770023fb60, 0, 0) = 0
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+newfstatat      (0xffffffffffffff9c, 0x773f756ee0, 0x773ffff440) = 0
+newfstatat      (0xffffffffffffff9c, 0x773f74ed28, 0x773ffff568) = 0
+openat          (0xffffffffffffff9c, 0x773f756ee0, 0x80000) = 3
+fstat           (0x3, 0x773ffff368, 0x773f66e40c) = 0
+read            (0x3, 0x7701179d80, 0x1000) = 58
+read            (0x3, 0x7701179d80, 0x1000) = 0
+fstat           (0x3, 0x773ffff440, 0x770023fb60) = 0
+close           (0x3, 0x773f66e460, 0x808) = 0
+openat          (0xffffffffffffff9c, 0x773f7579e0, 0x80000) = 3
+fstat           (0x3, 0x773ffff4c8, 0x773f66e40c) = 0
+lseek           (0x3, 0, 0) = 0
+read            (0x3, 0x7701179d80, 0x1000) = 32
+close           (0x3, 0x773f66e460, 0x808) = 0
+syscall_169     (0x773ffff848, 0, 0x770023fb60) = 0
+getpid          (0x1528, 0, 0x770023fb60) = 1
+getppid         (0x1, 0, 0x770023fb60) = 0
+syscall_169     (0x773ffff858, 0, 0x770023fb60) = 0
+getpid          (0, 0, 0x770023fb60) = 1
+getppid         (0x1, 0, 0x770023fb60) = 0
+syscall_155     (0, 0, 0) = 1
+ioctl           (0x2, 0x540f, 0x773ffff8e4) = -25
+rt_sigaction    (0x11, 0x773ffff648, 0x773ffff6e0) = 0
+ioctl           (0x2, 0x540f, 0x773ffff894) = -25
+prlimit64       (0, 0x6, 0) = 0
+rt_sigprocmask  (0, 0, 0x77011700d8) = 0
+rt_sigprocmask  (0, 0, 0x773ffff998) = 0
+rt_sigaction    (0x2, 0x773ffff468, 0x773ffff500) = 0
+rt_sigaction    (0x3, 0x773ffff468, 0x773ffff500) = 0
+rt_sigaction    (0x11, 0x773ffff468, 0x773ffff500) = 0
+execve          (0x7701181ca0, 0x77011821d0, 0x7701181ce0) = 0
+brk             (0, 0, 0) = 0x7701174000
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+openat          (0xffffffffffffff9c, 0x7700220d10, 0x80000) = -2
+openat          (0xffffffffffffff9c, 0x773fffec70, 0x80000) = 3
+read            (0x3, 0x773fffef10, 0x340) = 832
+fstat           (0x3, 0x773fffed90, 0x3) = 0
+mmap            (0, 0x2000, 0x3) = 0x773f7fe000
+mmap            (0, 0x508d0, 0) = 0x773f7ad000
+mmap            (0x773f7b0000, 0x408d0, 0x5) = 0x773f7b0000
+munmap          (0x773f7ad000, 0x3000, 0x773f7b0000) = 0
+munmap          (0x773f7f1000, 0xc8d0, 0x773f7b0000) = 0
+mprotect        (0x773f7e0000, 0xc000, 0) = 0
+mmap            (0x773f7ec000, 0x5000, 0x3) = 0x773f7ec000
+close           (0x3, 0x3, 0x1) = 0
+openat          (0xffffffffffffff9c, 0x773fffec50, 0x80000) = 3
+read            (0x3, 0x773fffeef0, 0x340) = 832
+fstat           (0x3, 0x773fffed70, 0x3) = 0
+mmap            (0, 0x1ce010, 0) = 0x773f5e1000
+mmap            (0x773f5f0000, 0x1be010, 0x5) = 0x773f5f0000
+munmap          (0x773f5e1000, 0xf000, 0x773f5f0000) = 0
+munmap          (0x773f7af000, 0x10, 0x773f5f0000) = 0
+mprotect        (0x773f78c000, 0x11000, 0) = 0
+mmap            (0x773f79d000, 0x5000, 0x3) = 0x773f79d000
+mmap            (0x773f7a2000, 0xc010, 0x3) = 0x773f7a2000
+close           (0x3, 0x3, 0x6) = 0
+mmap            (0, 0x2000, 0x3) = 0x773f7fc000
+set_tid_address (0x773f7fc0f0, 0x7700240000, 0x773f7fc0e0) = 1
+set_robust_list (0x773f7fc100, 0x18, 0x773f7fc100) = 0
+rseq            (0x773f7fc800, 0x20, 0) = -38
+mprotect        (0x773f79d000, 0x3000, 0x1) = 0
+mprotect        (0x773f7ec000, 0x4000, 0x1) = 0
+mprotect        (0x770115b000, 0x5000, 0x1) = 0
+mprotect        (0x770023e000, 0x2000, 0x1) = 0
+prlimit64       (0, 0x3, 0) = 0
+openat          (0xffffffffffffff9c, 0x7701103110, 0x802) = -6
+ioctl           (0, 0x5401, 0x773ffff9f0) = -25
+getrandom       (0x773f7a6768, 0x8, 0x1) = 8
+brk             (0, 0, 0x202b0) = 0x7701174000
+brk             (0x7701195000, 0x7701195000, 0x773f7a7320) = 0x7701195000
+getuid          (0, 0x773f79e808, 0) = 0
+getgid          (0x7701160000, 0xffffffff, 0) = 0
+geteuid         (0, 0xffffffff, 0) = 0
+getegid         (0, 0xffffffff, 0) = 0
+rt_sigprocmask  (0, 0, 0x77011684d8) = 0
+syscall_169     (0x77011685b8, 0, 0x773fffffe6) = 0
+rt_sigaction    (0x11, 0x773ffff688, 0x773ffff720) = 0
+rt_sigaction    (0x11, 0x773ffff688, 0x773ffff720) = 0
+rt_sigaction    (0x2, 0x773ffff688, 0x773ffff720) = 0
+rt_sigaction    (0x2, 0x773ffff688, 0x773ffff720) = 0
+rt_sigaction    (0x3, 0x773ffff688, 0x773ffff720) = 0
+rt_sigaction    (0x3, 0x773ffff688, 0x773ffff720) = 0
+rt_sigaction    (0x14, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x14, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x15, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x15, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x16, 0x773ffff668, 0x773ffff700) = 0
+rt_sigaction    (0x16, 0x773ffff668, 0x773ffff700) = 0
+rt_sigprocmask  (0, 0, 0x7701170160) = 0
+rt_sigaction    (0x3, 0x773ffff688, 0x773ffff720) = 0
+uname           (0x773ffff7b0, 0xff, 0x770023fb60) = 0
+newfstatat      (0xffffffffffffff9c, 0x7701178540, 0x773ffff738) = 0
+newfstatat      (0xffffffffffffff9c, 0x7701109ab0, 0x773ffff7b8) = 0
+getpid          (0x7701178b90, 0x7701178b90, 0x8001) = 1
+getppid         (0x770023fb60, 0, 0) = 0
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+newfstatat      (0xffffffffffffff9c, 0x773f756ee0, 0x773ffff460) = 0
+newfstatat      (0xffffffffffffff9c, 0x773f74ed28, 0x773ffff588) = 0
+openat          (0xffffffffffffff9c, 0x773f756ee0, 0x80000) = 3
+fstat           (0x3, 0x773ffff388, 0x773f66e40c) = 0
+read            (0x3, 0x7701179cd0, 0x1000) = 58
+read            (0x3, 0x7701179cd0, 0x1000) = 0
+fstat           (0x3, 0x773ffff460, 0x770023fb60) = 0
+close           (0x3, 0x773f66e460, 0x808) = 0
+openat          (0xffffffffffffff9c, 0x773f7579e0, 0x80000) = 3
+fstat           (0x3, 0x773ffff4e8, 0x773f66e40c) = 0
+lseek           (0x3, 0, 0) = 0
+read            (0x3, 0x7701179cd0, 0x1000) = 32
+close           (0x3, 0x773f66e460, 0x808) = 0
+syscall_169     (0x773ffff868, 0, 0x770023fb60) = 0
+getpid          (0xf564, 0, 0x770023fb60) = 1
+getppid         (0x1, 0, 0x770023fb60) = 0
+syscall_169     (0x773ffff878, 0, 0x770023fb60) = 0
+getpid          (0, 0, 0x770023fb60) = 1
+getppid         (0x1, 0, 0x770023fb60) = 0
+syscall_155     (0, 0, 0) = 1
+ioctl           (0x2, 0x540f, 0x773ffff904) = -25
+rt_sigaction    (0x11, 0x773ffff668, 0x773ffff700) = 0
+ioctl           (0x2, 0x540f, 0x773ffff8b4) = -25
+prlimit64       (0, 0x6, 0) = 0
+rt_sigprocmask  (0, 0, 0x77011700d8) = 0
+openat          (0xffffffffffffff9c, 0x7701180330, 0) = 3
+newfstatat      (0xffffffffffffff9c, 0x7701180330, 0x773ffffa18) = 0
+ioctl           (0x3, 0x5401, 0x773ffffa10) = -25
+lseek           (0x3, 0, 0x1) = 0
+read            (0x3, 0x773ffffb78, 0x50) = 80
+lseek           (0x3, 0, 0) = 0
+prlimit64       (0, 0x7, 0) = 0
+fcntl           (0xff, 0x1, 0x773ffffa74) = -9
+syscall_24      (0x3, 0xff, 0) = 255
+close           (0x3, 0, 0) = 0
+fcntl           (0xff, 0x2, 0x1) = 0
+fcntl           (0xff, 0x3, 0) = 0
+fstat           (0xff, 0x773ffff9c8, 0x770023fb60) = 0
+lseek           (0xff, 0, 0x1) = 0
+read            (0xff, 0x77011810a0, 0x237) = 567
+newfstatat      (0xffffffffffffff9c, 0x7701109ab0, 0x773ffff720) = 0
+newfstatat      (0xffffffffffffff9c, 0x7701182a60, 0x773ffff5d8) = -2
+newfstatat      (0xffffffffffffff9c, 0x7701182a60, 0x773ffff5d8) = 0
+newfstatat      (0xffffffffffffff9c, 0x7701182a60, 0x773ffff508) = 0
+geteuid         (0, 0x7701182a60, 0x773ffff508) = 0
+getegid         (0, 0x7701182a60, 0x773ffff508) = 0
+getuid          (0, 0x7701182a60, 0x773ffff508) = 0
+getgid          (0, 0x7701182a60, 0x773ffff508) = 0
+faccessat       (0xffffffffffffff9c, 0x7701182a60, 0x1) = 0
+newfstatat      (0xffffffffffffff9c, 0x7701182a60, 0x773ffff508) = 0
+geteuid         (0, 0x7701182a60, 0x773ffff508) = 0
+getegid         (0, 0x7701182a60, 0x773ffff508) = 0
+getuid          (0, 0x7701182a60, 0x773ffff508) = 0
+getgid          (0, 0x7701182a60, 0x773ffff508) = 0
+faccessat       (0xffffffffffffff9c, 0x7701182a60, 0x4) = 0
+rt_sigprocmask  (0, 0, 0x773ffff778) = 0
+rt_sigprocmask  (0, 0x773ffff678, 0x773ffff6f8) = 0
+lseek           (0xff, 0xfffffffffffffe4d, 0x1) = 132
+rt_sigprocmask  (0, 0x773f7588a8, 0x773ffff4e0) = 0
+clone           (0x1200011, 0, 0) = 2
+rt_sigprocmask  (0x2, 0x773ffff4e0, 0) = 0
+rt_sigprocmask  (0x2, 0x773ffff6f8, 0) = 0
+rt_sigprocmask  (0, 0x773ffff678, 0x773ffff6f8) = 0
+rt_sigprocmask  (0x2, 0x773ffff6f8, 0) = 0
+rt_sigprocmask  (0, 0x773ffff778, 0x773ffff7f8) = 0
+rt_sigaction    (0x2, 0x773ffff4a8, 0x773ffff540) = 0
+set_robust_list (0x773f7fc100, 0x18, 0) = 0
+rt_sigprocmask  (0x2, 0x773ffff4e0, 0) = 0
+getpid          (0x100, 0, 0) = 2
+close           (0xff, 0, 0) = 0
+rt_sigprocmask  (0x2, 0x7701170160, 0) = 0
+rt_sigaction    (0x14, 0x773ffff388, 0x773ffff420) = 0
+rt_sigaction    (0x15, 0x773ffff388, 0x773ffff420) = 0
+rt_sigaction    (0x16, 0x773ffff398, 0x773ffff430) = 0
+rt_sigaction    (0x2, 0x773ffff548, 0x773ffff5e0) = 0
+rt_sigaction    (0x3, 0x773ffff548, 0x773ffff5e0) = 0
+rt_sigaction    (0x11, 0x773ffff548, 0x773ffff5e0) = 0
+execve          (0x7701182a60, 0x77011837a0, 0x77011832f0) = 0
+brk             (0, 0, 0) = 0x7701031000
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+openat          (0xffffffffffffff9c, 0x7700220d10, 0x80000) = -2
+openat          (0xffffffffffffff9c, 0x773fffec80, 0x80000) = 3
+read            (0x3, 0x773fffef20, 0x340) = 832
+fstat           (0x3, 0x773fffeda0, 0x3) = 0
+mmap            (0, 0x2000, 0x3) = 0x773f7fe000
+mmap            (0, 0x62638, 0) = 0x773f79b000
+mmap            (0x773f7a0000, 0x52638, 0x5) = 0x773f7a0000
+munmap          (0x773f79b000, 0x5000, 0x773f7a0000) = 0
+munmap          (0x773f7f3000, 0xa638, 0x773f7a0000) = 0
+mprotect        (0x773f7d1000, 0x1e000, 0) = 0
+mmap            (0x773f7ef000, 0x2000, 0x3) = 0x773f7ef000
+mmap            (0x773f7f1000, 0x1638, 0x3) = 0x773f7f1000
+close           (0x3, 0x3, 0x1) = 0
+openat          (0xffffffffffffff9c, 0x773fffec60, 0x80000) = 3
+read            (0x3, 0x773fffef00, 0x340) = 832
+fstat           (0x3, 0x773fffed80, 0x3) = 0
+mmap            (0, 0x1ce010, 0) = 0x773f5d1000
+mmap            (0x773f5e0000, 0x1be010, 0x5) = 0x773f5e0000
+munmap          (0x773f5d1000, 0xf000, 0x773f5e0000) = 0
+munmap          (0x773f79f000, 0x10, 0x773f5e0000) = 0
+mprotect        (0x773f77c000, 0x11000, 0) = 0
+mmap            (0x773f78d000, 0x5000, 0x3) = 0x773f78d000
+mmap            (0x773f792000, 0xc010, 0x3) = 0x773f792000
+close           (0x3, 0x3, 0x6) = 0
+openat          (0xffffffffffffff9c, 0x773fffec20, 0x80000) = 3
+read            (0x3, 0x773fffeec0, 0x340) = 832
+fstat           (0x3, 0x773fffed40, 0x3) = 0
+mmap            (0, 0xc0288, 0) = 0x773f51f000
+mmap            (0x773f520000, 0xb0288, 0x5) = 0x773f520000
+munmap          (0x773f51f000, 0x1000, 0x773f520000) = 0
+munmap          (0x773f5d1000, 0xe288, 0x773f520000) = 0
+mprotect        (0x773f5b8000, 0x17000, 0) = 0
+mmap            (0x773f5cf000, 0x2000, 0x3) = 0x773f5cf000
+close           (0x3, 0x3, 0x1) = 0
+mmap            (0, 0x2000, 0x3) = 0x773f7fc000
+set_tid_address (0x773f7fc0f0, 0x7700240000, 0x773f7fc0e0) = 2
+set_robust_list (0x773f7fc100, 0x18, 0x773f7fc100) = 0
+rseq            (0x773f7fc8e0, 0x20, 0) = -38
+mprotect        (0x773f78d000, 0x3000, 0x1) = 0
+mprotect        (0x773f5cf000, 0x1000, 0x1) = 0
+mprotect        (0x773f7ef000, 0x1000, 0x1) = 0
+mprotect        (0x770102f000, 0x1000, 0x1) = 0
+mprotect        (0x770023e000, 0x2000, 0x1) = 0
+prlimit64       (0, 0x3, 0) = 0
+syscall_43      (0x773f7c7a48, 0x773ffffc10, 0) = -2
+syscall_43      (0x773f7c7a58, 0x773ffffc10, 0) = -2
+getrandom       (0x773f796768, 0x8, 0x1) = 8
+brk             (0, 0, 0x202b0) = 0x7701031000
+brk             (0x7701052000, 0x7701052000, 0x773f797320) = 0x7701052000
+openat          (0xffffffffffffff9c, 0x773f7c7a20, 0x80000) = -2
+openat          (0xffffffffffffff9c, 0x773f7c7a68, 0x80000) = -2
+faccessat       (0xffffffffffffff9c, 0x773f7c7a88, 0) = -2
+syscall_166     (0, 0x773f7901a8, 0) = 18
+syscall_166     (0x12, 0x773f7901a8, 0) = 0
+syscall_34      (0xffffffffffffff9c, 0x773fffffde, 0x1ff) = -17
+chdir           (0x773fffffde, 0x773fffffde, 0) = 0
+syscall_34      (0xffffffffffffff9c, 0x773fffffe3, 0x1ff) = -17
+newfstatat      (0xffffffffffffff9c, 0x773fffffe3, 0x773ffffa18) = 0
+syscall_34      (0xffffffffffffff9c, 0x773fffffce, 0x1ff) = -17
+chdir           (0x773fffffce, 0x773fffffce, 0) = 0
+syscall_34      (0xffffffffffffff9c, 0x773fffffd3, 0x1ff) = -17
+chdir           (0x773fffffd3, 0x773fffffd3, 0) = 0
+syscall_34      (0xffffffffffffff9c, 0x773fffffd7, 0x1ff) = 0
+close           (0x1, 0x773f65e460, 0x808) = 0
+close           (0x2, 0x773f65e460, 0x808) = 0
+exit_group      (0, 0, 0x773f7fc740) = 0
+wait4           (0xffffffffffffffff, 0x773ffff6f0, 0) = 2
+rt_sigaction    (0x2, 0x773ffff4a8, 0x773ffff540) = 0
+ioctl           (0x2, 0x5413, 0x773ffff730) = -25
+rt_sigprocmask  (0x2, 0x773ffff7f8, 0) = 0
+wait4           (0xffffffffffffffff, 0x773fffe3d0, 0x1) = -10
+rt_sigreturn    (0xffffffff, 0, 0) = 0
+read            (0xff, 0x77011810a0, 0x237) = 435
+newfstatat      (0xffffffffffffff9c, 0x7701181f70, 0x773ffff5b8) = -2
+openat          (0xffffffffffffff9c, 0x77011825b0, 0x84800) = 3
+fstat           (0x3, 0x773ffff468, 0) = 0
+getdents64      (0x3, 0x7701183bf0, 0x8000) = 4416
+getdents64      (0x3, 0x7701183bf0, 0x8000) = 0
+close           (0x3, 0xffff, 0x773f7a0aa0) = 0
+newfstatat      (0xffffffffffffff9c, 0x7701109ab0, 0x773ffff720) = 0
+newfstatat      (0xffffffffffffff9c, 0x77011880f0, 0x773ffff5d8) = -2
+newfstatat      (0xffffffffffffff9c, 0x77011880f0, 0x773ffff5d8) = 0
+newfstatat      (0xffffffffffffff9c, 0x77011880f0, 0x773ffff508) = 0
+geteuid         (0, 0x77011880f0, 0x773ffff508) = 0
+getegid         (0, 0x77011880f0, 0x773ffff508) = 0
+getuid          (0, 0x77011880f0, 0x773ffff508) = 0
+getgid          (0, 0x77011880f0, 0x773ffff508) = 0
+faccessat       (0xffffffffffffff9c, 0x77011880f0, 0x1) = 0
+newfstatat      (0xffffffffffffff9c, 0x77011880f0, 0x773ffff508) = 0
+geteuid         (0, 0x77011880f0, 0x773ffff508) = 0
+getegid         (0, 0x77011880f0, 0x773ffff508) = 0
+getuid          (0, 0x77011880f0, 0x773ffff508) = 0
+getgid          (0, 0x77011880f0, 0x773ffff508) = 0
+faccessat       (0xffffffffffffff9c, 0x77011880f0, 0x4) = 0
+rt_sigprocmask  (0, 0, 0x773ffff778) = 0
+rt_sigprocmask  (0, 0x773ffff678, 0x773ffff6f8) = 0
+lseek           (0xff, 0xffffffffffffff73, 0x1) = 426
+rt_sigprocmask  (0, 0x773f7588a8, 0x773ffff4e0) = 0
+clone           (0x1200011, 0, 0) = 3
+rt_sigprocmask  (0x2, 0x773ffff4e0, 0) = 0
+rt_sigprocmask  (0x2, 0x773ffff6f8, 0) = 0
+rt_sigprocmask  (0, 0x773ffff678, 0x773ffff6f8) = 0
+rt_sigprocmask  (0x2, 0x773ffff6f8, 0) = 0
+rt_sigprocmask  (0, 0x773ffff778, 0x773ffff7f8) = 0
+rt_sigaction    (0x2, 0x773ffff4a8, 0x773ffff540) = 0
+set_robust_list (0x773f7fc100, 0x18, 0) = 0
+rt_sigprocmask  (0x2, 0x773ffff4e0, 0) = 0
+getpid          (0x100, 0, 0) = 3
+close           (0xff, 0, 0) = 0
+rt_sigprocmask  (0x2, 0x7701170160, 0) = 0
+rt_sigaction    (0x14, 0x773ffff388, 0x773ffff420) = 0
+rt_sigaction    (0x15, 0x773ffff388, 0x773ffff420) = 0
+rt_sigaction    (0x16, 0x773ffff398, 0x773ffff430) = 0
+rt_sigaction    (0x2, 0x773ffff548, 0x773ffff5e0) = 0
+rt_sigaction    (0x3, 0x773ffff548, 0x773ffff5e0) = 0
+rt_sigaction    (0x11, 0x773ffff548, 0x773ffff5e0) = 0
+execve          (0x77011880f0, 0x7701188170, 0x77011832f0) = 0
+brk             (0, 0, 0) = 0x77012e5000
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+openat          (0xffffffffffffff9c, 0x7700220d10, 0x80000) = -2
+openat          (0xffffffffffffff9c, 0x773fffd700, 0x80000) = 3
+read            (0x3, 0x773fffd9a0, 0x340) = 832
+fstat           (0x3, 0x773fffd820, 0x3) = 0
+mmap            (0, 0x2000, 0x3) = 0x773f7fe000
+mmap            (0, 0x30058, 0) = 0x773f7cd000
+mmap            (0x773f7d0000, 0x20058, 0x5) = 0x773f7d0000
+munmap          (0x773f7cd000, 0x3000, 0x773f7d0000) = 0
+munmap          (0x773f7f1000, 0xc058, 0x773f7d0000) = 0
+mprotect        (0x773f7dd000, 0x12000, 0) = 0
+mmap            (0x773f7ef000, 0x2000, 0x3) = 0x773f7ef000
+close           (0x3, 0x3, 0x1) = 0
+openat          (0xffffffffffffff9c, 0x773fffd6e0, 0x80000) = 3
+read            (0x3, 0x773fffd980, 0x340) = 832
+fstat           (0x3, 0x773fffd800, 0x3) = 0
+mmap            (0, 0x62638, 0) = 0x773f76d000
+mmap            (0x773f770000, 0x52638, 0x5) = 0x773f770000
+munmap          (0x773f76d000, 0x3000, 0x773f770000) = 0
+munmap          (0x773f7c3000, 0xc638, 0x773f770000) = 0
+mprotect        (0x773f7a1000, 0x1e000, 0) = 0
+mmap            (0x773f7bf000, 0x2000, 0x3) = 0x773f7bf000
+mmap            (0x773f7c1000, 0x1638, 0x3) = 0x773f7c1000
+close           (0x3, 0x3, 0x1) = 0
+openat          (0xffffffffffffff9c, 0x773fffd6c0, 0x80000) = 3
+read            (0x3, 0x773fffd960, 0x340) = 832
+fstat           (0x3, 0x773fffd7e0, 0x3) = 0
+mmap            (0, 0x1ce010, 0) = 0x773f5a1000
+mmap            (0x773f5b0000, 0x1be010, 0x5) = 0x773f5b0000
+munmap          (0x773f5a1000, 0xf000, 0x773f5b0000) = 0
+munmap          (0x773f76f000, 0x10, 0x773f5b0000) = 0
+mprotect        (0x773f74c000, 0x11000, 0) = 0
+mmap            (0x773f75d000, 0x5000, 0x3) = 0x773f75d000
+mmap            (0x773f762000, 0xc010, 0x3) = 0x773f762000
+close           (0x3, 0x3, 0x6) = 0
+openat          (0xffffffffffffff9c, 0x773fffd680, 0x80000) = 3
+read            (0x3, 0x773fffd920, 0x340) = 832
+fstat           (0x3, 0x773fffd7a0, 0x3) = 0
+mmap            (0, 0xc0288, 0) = 0x773f4ef000
+mmap            (0x773f4f0000, 0xb0288, 0x5) = 0x773f4f0000
+munmap          (0x773f4ef000, 0x1000, 0x773f4f0000) = 0
+munmap          (0x773f5a1000, 0xe288, 0x773f4f0000) = 0
+mprotect        (0x773f588000, 0x17000, 0) = 0
+mmap            (0x773f59f000, 0x2000, 0x3) = 0x773f59f000
+close           (0x3, 0x3, 0x1) = 0
+mmap            (0, 0x2000, 0x3) = 0x773f7fc000
+set_tid_address (0x773f7fc510, 0x7700240000, 0x773f7fc500) = 3
+set_robust_list (0x773f7fc520, 0x18, 0x773f7fc520) = 0
+rseq            (0x773f7fcd00, 0x20, 0) = -38
+mprotect        (0x773f75d000, 0x3000, 0x1) = 0
+mprotect        (0x773f59f000, 0x1000, 0x1) = 0
+mprotect        (0x773f7bf000, 0x1000, 0x1) = 0
+mprotect        (0x773f7ef000, 0x1000, 0x1) = 0
+mprotect        (0x770105d000, 0x3000, 0x1) = 0
+mprotect        (0x770023e000, 0x2000, 0x1) = 0
+prlimit64       (0, 0x3, 0) = 0
+syscall_43      (0x773f797a48, 0x773fffe690, 0) = -2
+syscall_43      (0x773f797a58, 0x773fffe690, 0) = -2
+getrandom       (0x773f766768, 0x8, 0x1) = 8
+brk             (0, 0, 0x202b0) = 0x77012e5000
+brk             (0x7701306000, 0x7701306000, 0x773f767320) = 0x7701306000
+openat          (0xffffffffffffff9c, 0x773f797a20, 0x80000) = -2
+openat          (0xffffffffffffff9c, 0x773f797a68, 0x80000) = -2
+faccessat       (0xffffffffffffff9c, 0x773f797a88, 0) = -2
+ioctl           (0x1, 0x5401, 0x773fffe590) = -25
+syscall_166     (0x12, 0x7701022960, 0x77010222a0) = 18
+openat          (0xffffffffffffff9c, 0x77012e5510, 0x84800) = 3
+fstat           (0x3, 0x773fffe528, 0) = 0
+getdents64      (0x3, 0x77012e5560, 0x8000) = 48
+getdents64      (0x3, 0x77012e5560, 0x8000) = 0
+close           (0x3, 0xabf, 0x773f760000) = 0
+openat          (0xffffffffffffff9c, 0x77012e5510, 0) = 3
+fstat           (0x3, 0x773fffdfa8, 0x773f62e40c) = 0
+read            (0x3, 0x77012e5530, 0x1000) = 446
+read            (0x3, 0x77012e5530, 0x1000) = 0
+close           (0x3, 0x773f62e460, 0x808) = 0
+openat          (0xffffffffffffff9c, 0x77012e5510, 0) = -2
+getuid          (0, 0x4005200, 0) = 0
+getgid          (0, 0x4005200, 0) = 0
+getuid          (0, 0, 0x1) = 0
+geteuid         (0, 0, 0x1) = 0
+getuid          (0x77010606c0, 0, 0x16) = 0
+geteuid         (0, 0, 0x16) = 0
+faccessat       (0xffffffffffffff9c, 0x77012e5530, 0x2) = 0
+openat          (0xffffffffffffff9c, 0x77012e57f0, 0x242) = 3
+openat          (0xffffffffffffff9c, 0x77012e57d0, 0x242) = 4
+fcntl           (0x3, 0x1, 0x770023fb60) = 0
+fcntl           (0x3, 0x2, 0x1) = 0
+fcntl           (0x3, 0x6, 0x773fffe330) = 0
+fcntl           (0x4, 0x1, 0x770023fb60) = 0
+fcntl           (0x4, 0x2, 0x1) = 0
+fcntl           (0x4, 0x6, 0x773fffe370) = 0
+openat          (0xffffffffffffff9c, 0x77012e58e0, 0) = -2
+openat          (0xffffffffffffff9c, 0x77012e5820, 0) = 5
+fstat           (0x5, 0x773fffe308, 0) = 0
+close           (0x5, 0, 0) = 0
+openat          (0xffffffffffffff9c, 0x77012e5860, 0x84800) = 5
+fstat           (0x5, 0x773fffe308, 0) = 0
+getdents64      (0x5, 0x77012e6590, 0x8000) = 48
+getdents64      (0x5, 0x77012e6590, 0x8000) = 0
+close           (0x5, 0, 0) = 0
+openat          (0xffffffffffffff9c, 0x77012e5880, 0x241) = 5
+fcntl           (0x5, 0x1, 0) = 0
+fcntl           (0x5, 0x2, 0x1) = 0
+fstat           (0x5, 0x773fffe208, 0x773f62e40c) = 0
+write           (0x5, 0x77012e6560, 0x1000) = 4096
+write           (0x5, 0x77012e6560, 0x200) = 512
+lseek           (0x5, 0, 0) = 0
+openat          (0xffffffffffffff9c, 0x77012e5ad0, 0) = -2
+openat          (0xffffffffffffff9c, 0x77012e5ce0, 0x242) = 6
+fcntl           (0x6, 0x1, 0x770023fb60) = 0
+fcntl           (0x6, 0x2, 0x1) = 0
+fcntl           (0x6, 0x7, 0x773fffe270) = 0
+openat          (0xffffffffffffff9c, 0x77012e5ce0, 0) = -2
+openat          (0xffffffffffffff9c, 0x77012e5d60, 0x241) = 7
+fcntl           (0x7, 0x1, 0) = 0
+fcntl           (0x7, 0x2, 0x1) = 0
+openat          (0xffffffffffffff9c, 0x77012e5dd0, 0x241) = 8
+syscall_52      (0x8, 0x1a4, 0) = 0
+syscall_82      (0x8, 0, 0) = 0
+close           (0x8, 0x773f62e460, 0x808) = 0
+syscall_35      (0xffffffffffffff9c, 0x77012e6000, 0) = -2
+syscall_37      (0xffffffffffffff9c, 0x77012e5d40, 0xffffffffffffff9c) = 0
+syscall_38      (0xffffffffffffff9c, 0x77012e5dd0, 0xffffffffffffff9c) = 0
+openat          (0xffffffffffffff9c, 0x77012e5d40, 0x84800) = 8
+fstat           (0x8, 0x773fffe258, 0) = 0
+syscall_82      (0x8, 0, 0) = 0
+close           (0x8, 0, 0) = 0
+openat          (0xffffffffffffff9c, 0x77012e5860, 0x84800) = 8
+fstat           (0x8, 0x773fffe258, 0) = 0
+syscall_82      (0x8, 0, 0) = 0
+close           (0x8, 0, 0) = 0
+close           (0x7, 0x773f62e460, 0x808) = 0
+syscall_38      (0xffffffffffffff9c, 0x77012e5d60, 0xffffffffffffff9c) = 0
+openat          (0xffffffffffffff9c, 0x77012e5900, 0x84800) = 7
+fstat           (0x7, 0x773fffe2e8, 0) = 0
+syscall_82      (0x7, 0, 0) = 0
+close           (0x7, 0, 0) = 0
+fcntl           (0x6, 0x6, 0x773fffe370) = 0
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = -2
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = 0
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = -2
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = 0
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = -2
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = 0
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = -2
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = 0
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = -2
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = 0
+newfstatat      (0xffffffffffffff9c, 0x77012e5900, 0x773fffe328) = 0
+newfstatat      (0xffffffffffffff9c, 0x77012e6030, 0x773fffe328) = 0
+openat          (0xffffffffffffff9c, 0x77012e6000, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x77012e6090, 0x773fffe288) = -2
+GOBLIN FAIL

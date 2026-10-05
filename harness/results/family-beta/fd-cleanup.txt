@@ -1,0 +1,2 @@
+PASS: close covers sparse and high descriptors while preserving protected descriptors
+PASS: CLOEXEC covers sparse and high descriptors across directory batches

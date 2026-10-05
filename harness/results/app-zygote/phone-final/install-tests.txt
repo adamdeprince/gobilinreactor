@@ -1,0 +1,6 @@
+Serving...
+Performing Incremental Install
+Failure [INSTALL_PARSE_FAILED_NOT_APK: Failed to parse /data/app/vmdl2063791455.tmp/goblin-tests.apk: Failed to load asset path /data/app/vmdl2063791455.tmp/goblin-tests.apk]
+Performing Streamed Install
+Success
+All files should be loaded. Notifying the device.

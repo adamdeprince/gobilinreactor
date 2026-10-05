@@ -1,0 +1,88 @@
+[
+  {
+    "elapsed": 0.0,
+    "workers_alive": 0,
+    "tracked_phantoms": [],
+    "processes": []
+  },
+  {
+    "elapsed": 20.1,
+    "workers_alive": 0,
+    "tracked_phantoms": [],
+    "processes": [
+      "12387   449 u0_a215      dev.goblinlinux.zygoteprobe",
+      "12408   449 u0_a215      dev.goblinlinux.zygoteprobe_zygote",
+      "12418 12408 u0_i0        dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService"
+    ]
+  },
+  {
+    "elapsed": 40.1,
+    "workers_alive": 0,
+    "tracked_phantoms": [],
+    "processes": [
+      "12387   449 u0_a215      dev.goblinlinux.zygoteprobe",
+      "12408   449 u0_a215      dev.goblinlinux.zygoteprobe_zygote",
+      "12418 12408 u0_i0        dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService"
+    ]
+  },
+  {
+    "elapsed": 60.2,
+    "workers_alive": 0,
+    "tracked_phantoms": [],
+    "processes": [
+      "12387   449 u0_a215      dev.goblinlinux.zygoteprobe",
+      "12408   449 u0_a215      dev.goblinlinux.zygoteprobe_zygote",
+      "12418 12408 u0_i0        dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService"
+    ]
+  },
+  {
+    "elapsed": 80.3,
+    "workers_alive": 0,
+    "tracked_phantoms": [],
+    "processes": [
+      "12387   449 u0_a215      dev.goblinlinux.zygoteprobe",
+      "12408   449 u0_a215      dev.goblinlinux.zygoteprobe_zygote",
+      "12418 12408 u0_i0        dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService"
+    ]
+  },
+  {
+    "elapsed": 100.3,
+    "workers_alive": 0,
+    "tracked_phantoms": [],
+    "processes": [
+      "12387   449 u0_a215      dev.goblinlinux.zygoteprobe",
+      "12408   449 u0_a215      dev.goblinlinux.zygoteprobe_zygote",
+      "12418 12408 u0_i0        dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService"
+    ]
+  },
+  {
+    "elapsed": 120.4,
+    "workers_alive": 0,
+    "tracked_phantoms": [],
+    "processes": [
+      "12387   449 u0_a215      dev.goblinlinux.zygoteprobe",
+      "12408   449 u0_a215      dev.goblinlinux.zygoteprobe_zygote",
+      "12418 12408 u0_i0        dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService"
+    ]
+  },
+  {
+    "elapsed": 140.5,
+    "workers_alive": 0,
+    "tracked_phantoms": [],
+    "processes": [
+      "12387   449 u0_a215      dev.goblinlinux.zygoteprobe",
+      "12408   449 u0_a215      dev.goblinlinux.zygoteprobe_zygote",
+      "12418 12408 u0_i0        dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService"
+    ]
+  },
+  {
+    "elapsed": 160.6,
+    "workers_alive": 0,
+    "tracked_phantoms": [],
+    "processes": [
+      "12387   449 u0_a215      dev.goblinlinux.zygoteprobe",
+      "12408   449 u0_a215      dev.goblinlinux.zygoteprobe_zygote",
+      "12418 12408 u0_i0        dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService"
+    ]
+  }
+]

@@ -1,0 +1,4 @@
+PASS: Android backup, restore and previous-disk recovery retain the expected files and restart Linux
+PASS: Rescue boots independently of Debian and can inspect the retained ext4 disk read-only
+GOBLIN SERVICES PASS
+

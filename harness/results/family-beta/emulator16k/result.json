@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "apk_sha256": "d1a2f3d68c1ca78363464a67a17ba1e55a6ede7bb1fc5f44c220c158bd8cd119",
+  "serial": "emulator-5554",
+  "bundle_splits": true,
+  "checks": [
+    "upgrade-record",
+    "upgrade-verify",
+    "transport",
+    "network",
+    "soak",
+    "power",
+    "product"
+  ],
+  "finished": "2026-09-20T17:55:08Z"
+}

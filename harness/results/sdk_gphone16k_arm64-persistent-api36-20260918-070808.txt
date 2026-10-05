@@ -1,0 +1,226 @@
+-- Persistent: Debian package bootstrap --
+PASS: Debian package bootstrap status=0 
+-- Persistent: installed database and maintainer scripts --
+PASS: installed database and maintainer scripts status=0 
+-- Persistent: remount persistence --
+PASS: remount persistence status=0 
+PASS: resource limit: filesystem
+PASS: resource limit: sigpipe
+PASS: resource limit: memory
+PASS: resource limit: tasks
+PASS: resource limit: disk
+PASS: captured output limit
+PASS: CPU loop stops at session deadline
+PASS: interactive shell input and output
+PASS: Ctrl-C targets foreground job
+PASS: Ctrl-Z, background and foreground resume
+PASS: terminal resize and transcript replay
+PASS: terminal shell clean shutdown
+-- Persistent: public DNS through Android --
+PASS: public DNS through Android status=0 
+-- Persistent: public HTTPS repository and Debian signature --
+PASS: public HTTPS repository and Debian signature status=0 
+-- Persistent: reject modified repository signature --
+PASS: reject modified repository signature status=0 
+-- Persistent: install curl git python3 with public apt --
+FAILED: install curl git python3 with public apt status=1 
+Reading package lists...
+Building dependency tree...
+The following additional packages will be installed:
+  git-man libbrotli1 libcom-err2 libcurl3t64-gnutls libcurl4t64 liberror-perl
+  libexpat1 libffi8 libgdbm-compat4t64 libgdbm6t64 libgnutls30t64
+  libgssapi-krb5-2 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3
+  libkrb5support0 libldap2 libncursesw6 libnghttp2-14 libnghttp3-9
+  libngtcp2-16 libngtcp2-crypto-gnutls8 libp11-kit0 libperl5.40 libpsl5t64
+  libpython3-stdlib libpython3.13-minimal libpython3.13-stdlib libreadline8t64
+  librtmp1 libsasl2-2 libsasl2-modules-db libssh2-1t64 libtasn1-6
+  libunistring5 media-types netbase perl perl-modules-5.40 python3-minimal
+  python3.13 python3.13-minimal readline-common
+Suggested packages:
+  gettext-base git-doc git-email git-gui gitk gitweb git-cvs git-mediawiki
+  git-svn gdbm-l10n gnutls-bin krb5-doc krb5-user sensible-utils perl-doc
+  libterm-readline-gnu-perl | libterm-readline-perl-perl make
+  libtap-harness-archive-perl python3-doc python3-tk python3-venv
+  python3.13-venv python3.13-doc binutils binfmt-support readline-doc
+Recommended packages:
+  bash-completion patch less ssh-client krb5-locales libldap-common libgpm2
+  publicsuffix libsasl2-modules
+The following NEW packages will be installed:
+  curl git git-man libbrotli1 libcom-err2 libcurl3t64-gnutls libcurl4t64
+  liberror-perl libexpat1 libffi8 libgdbm-compat4t64 libgdbm6t64
+  libgnutls30t64 libgssapi-krb5-2 libidn2-0 libk5crypto3 libkeyutils1
+  libkrb5-3 libkrb5support0 libldap2 libncursesw6 libnghttp2-14 libnghttp3-9
+  libngtcp2-16 libngtcp2-crypto-gnutls8 libp11-kit0 libperl5.40 libpsl5t64
+  libpython3-stdlib libpython3.13-minimal libpython3.13-stdlib libreadline8t64
+  librtmp1 libsasl2-2 libsasl2-modules-db libssh2-1t64 libtasn1-6
+  libunistring5 media-types netbase perl perl-modules-5.40 python3
+  python3-minimal python3.13 python3.13-minimal readline-common
+0 upgraded, 47 newly installed, 0 to remove and 0 not upgraded.
+Need to get 29.7 MB of archives.
+After this operation, 150 MB of additional disk space will be used.
+Get:1 https://deb.debian.org/debian trixie/main arm64 libexpat1 arm64 2.8.3-1~deb13u1 [109 kB]
+Get:2 https://deb.debian.org/debian trixie/main arm64 libpython3.13-minimal arm64 3.13.5-2+deb13u5 [856 kB]
+Get:3 https://deb.debian.org/debian trixie/main arm64 python3.13-minimal arm64 3.13.5-2+deb13u5 [2008 kB]
+Get:4 https://deb.debian.org/debian trixie/main arm64 python3-minimal arm64 3.13.5-1 [27.2 kB]
+Get:5 https://deb.debian.org/debian trixie/main arm64 media-types all 13.0.0 [29.3 kB]
+Get:6 https://deb.debian.org/debian trixie/main arm64 netbase all 6.5 [12.4 kB]
+Get:7 https://deb.debian.org/debian trixie/main arm64 libffi8 arm64 3.4.8-2 [21.3 kB]
+Get:8 https://deb.debian.org/debian trixie/main arm64 libncursesw6 arm64 6.5+20250216-2 [124 kB]
+Get:9 https://deb.debian.org/debian trixie/main arm64 readline-common all 8.2-6 [69.4 kB]
+Get:10 https://deb.debian.org/debian trixie/main arm64 libreadline8t64 arm64 8.2-6 [159 kB]
+Get:11 https://deb.debian.org/debian trixie/main arm64 libpython3.13-stdlib arm64 3.13.5-2+deb13u5 [1895 kB]
+Get:12 https://deb.debian.org/debian trixie/main arm64 python3.13 arm64 3.13.5-2+deb13u5 [757 kB]
+Get:13 https://deb.debian.org/debian trixie/main arm64 libpython3-stdlib arm64 3.13.5-1 [10.2 kB]
+Get:14 https://deb.debian.org/debian trixie/main arm64 python3 arm64 3.13.5-1 [28.2 kB]
+Get:15 https://deb.debian.org/debian trixie/main arm64 perl-modules-5.40 all 5.40.1-6+deb13u1 [3014 kB]
+Get:16 https://deb.debian.org/debian trixie/main arm64 libgdbm6t64 arm64 1.24-2 [74.0 kB]
+Get:17 https://deb.debian.org/debian trixie/main arm64 libgdbm-compat4t64 arm64 1.24-2 [50.3 kB]
+Get:18 https://deb.debian.org/debian trixie/main arm64 libperl5.40 arm64 5.40.1-6+deb13u1 [4138 kB]
+Get:19 https://deb.debian.org/debian trixie/main arm64 perl arm64 5.40.1-6+deb13u1 [268 kB]
+Get:20 https://deb.debian.org/debian trixie/main arm64 libbrotli1 arm64 1.1.0-2+b7 [308 kB]
+Get:21 https://deb.debian.org/debian trixie/main arm64 libkrb5support0 arm64 1.21.3-5+deb13u1 [32.5 kB]
+Get:22 https://deb.debian.org/debian trixie/main arm64 libcom-err2 arm64 1.47.2-3+b12 [24.9 kB]
+Get:23 https://deb.debian.org/debian trixie/main arm64 libk5crypto3 arm64 1.21.3-5+deb13u1 [81.4 kB]
+Get:24 https://deb.debian.org/debian trixie/main arm64 libkeyutils1 arm64 1.6.3-6 [9716 B]
+Get:25 https://deb.debian.org/debian trixie/main arm64 libkrb5-3 arm64 1.21.3-5+deb13u1 [308 kB]
+Get:26 https://deb.debian.org/debian trixie/main arm64 libgssapi-krb5-2 arm64 1.21.3-5+deb13u1 [128 kB]
+Get:27 https://deb.debian.org/debian trixie/main arm64 libunistring5 arm64 1.3-2 [453 kB]
+Get:28 https://deb.debian.org/debian trixie/main arm64 libidn2-0 arm64 2.3.8-2 [107 kB]
+Get:29 https://deb.debian.org/debian trixie/main arm64 libsasl2-modules-db arm64 2.1.28+dfsg1-9 [20.1 kB]
+Get:30 https://deb.debian.org/debian trixie/main arm64 libsasl2-2 arm64 2.1.28+dfsg1-9 [55.6 kB]
+Get:31 https://deb.debian.org/debian trixie/main arm64 libldap2 arm64 2.6.10+dfsg-1 [179 kB]
+Get:32 https://deb.debian.org/debian trixie/main arm64 libnghttp2-14 arm64 1.64.0-1.1+deb13u1 [71.6 kB]
+Get:33 https://deb.debian.org/debian trixie/main arm64 libnghttp3-9 arm64 1.8.0-1 [63.2 kB]
+Get:34 https://deb.debian.org/debian trixie/main arm64 libpsl5t64 arm64 0.21.2-1.1+b1 [57.1 kB]
+Get:35 https://deb.debian.org/debian trixie/main arm64 libp11-kit0 arm64 0.25.5-3 [409 kB]
+Get:36 https://deb.debian.org/debian trixie/main arm64 libtasn1-6 arm64 4.20.0-2+deb13u1 [47.3 kB]
+Get:37 https://deb.debian.org/debian trixie/main arm64 libgnutls30t64 arm64 3.8.9-3+deb13u4 [1379 kB]
+Get:38 https://deb.debian.org/debian trixie/main arm64 librtmp1 arm64 2.4+20151223.gitfa8646d.1-2+b5 [56.8 kB]
+Get:39 https://deb.debian.org/debian trixie/main arm64 libssh2-1t64 arm64 1.11.1-1+deb13u2 [236 kB]
+Get:40 https://deb.debian.org/debian trixie/main arm64 libcurl4t64 arm64 8.14.1-2+deb13u5 [360 kB]
+Get:41 https://deb.debian.org/debian trixie/main arm64 curl arm64 8.14.1-2+deb13u5 [262 kB]
+Get:42 https://deb.debian.org/debian trixie/main arm64 libngtcp2-16 arm64 1.11.0-1+deb13u1 [121 kB]
+Get:43 https://deb.debian.org/debian trixie/main arm64 libngtcp2-crypto-gnutls8 arm64 1.11.0-1+deb13u1 [28.4 kB]
+Get:44 https://deb.debian.org/debian trixie/main arm64 libcurl3t64-gnutls arm64 8.14.1-2+deb13u5 [354 kB]
+Get:45 https://deb.debian.org/debian trixie/main arm64 liberror-perl all 0.17030-1 [26.9 kB]
+Get:46 https://deb.debian.org/debian trixie/main arm64 git-man all 1:2.47.3-0+deb13u1 [2205 kB]
+Get:47 https://deb.debian.org/debian trixie/main arm64 git arm64 1:2.47.3-0+deb13u1 [8666 kB]
+Fetched 29.7 MB in 2s (13.3 MB/s)
+Selecting previously unselected package libexpat1:arm64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5512 files and directories currently installed.)
+Preparing to unpack .../libexpat1_2.8.3-1~deb13u1_arm64.deb ...
+Unpacking libexpat1:arm64 (2.8.3-1~deb13u1) ...
+Selecting previously unselected package libpython3.13-minimal:arm64.
+Preparing to unpack .../libpython3.13-minimal_3.13.5-2+deb13u5_arm64.deb ...
+Unpacking libpython3.13-minimal:arm64 (3.13.5-2+deb13u5) ...
+Selecting previously unselected package python3.13-minimal.
+Preparing to unpack .../python3.13-minimal_3.13.5-2+deb13u5_arm64.deb ...
+Unpacking python3.13-minimal (3.13.5-2+deb13u5) ...
+Setting up libpython3.13-minimal:arm64 (3.13.5-2+deb13u5) ...
+Setting up libexpat1:arm64 (2.8.3-1~deb13u1) ...
+Setting up python3.13-minimal (3.13.5-2+deb13u5) ...
+/var/lib/dpkg/info/python3.13-minimal.postinst: 51: /usr/bin/python3.13: Exec format error
+dpkg: error processing package python3.13-minimal (--configure):
+ installed python3.13-minimal package post-installation script subprocess returned error exit status 126
+Errors were encountered while processing:
+ python3.13-minimal
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+Android DNS: queries=2 answers=2 failures=0 last_error=0
+Recent syscall errors:
+fcntl           (0xb5, 0x2, 0x1) = -9
+fcntl           (0xb6, 0x2, 0x1) = -9
+fcntl           (0xb7, 0x2, 0x1) = -9
+fcntl           (0xb8, 0x2, 0x1) = -9
+fcntl           (0xb9, 0x2, 0x1) = -9
+fcntl           (0xba, 0x2, 0x1) = -9
+fcntl           (0xbb, 0x2, 0x1) = -9
+fcntl           (0xbc, 0x2, 0x1) = -9
+fcntl           (0xbd, 0x2, 0x1) = -9
+fcntl           (0xbe, 0x2, 0x1) = -9
+fcntl           (0xbf, 0x2, 0x1) = -9
+fcntl           (0xc0, 0x2, 0x1) = -9
+fcntl           (0xc1, 0x2, 0x1) = -9
+fcntl           (0xc2, 0x2, 0x1) = -9
+fcntl           (0xc3, 0x2, 0x1) = -9
+fcntl           (0xc4, 0x2, 0x1) = -9
+fcntl           (0xc5, 0x2, 0x1) = -9
+fcntl           (0xc6, 0x2, 0x1) = -9
+fcntl           (0xc7, 0x2, 0x1) = -9
+fcntl           (0xc8, 0x2, 0x1) = -9
+fcntl           (0xc9, 0x2, 0x1) = -9
+fcntl           (0xca, 0x2, 0x1) = -9
+fcntl           (0xcb, 0x2, 0x1) = -9
+fcntl           (0xcc, 0x2, 0x1) = -9
+fcntl           (0xcd, 0x2, 0x1) = -9
+fcntl           (0xce, 0x2, 0x1) = -9
+fcntl           (0xcf, 0x2, 0x1) = -9
+fcntl           (0xd0, 0x2, 0x1) = -9
+fcntl           (0xd1, 0x2, 0x1) = -9
+fcntl           (0xd2, 0x2, 0x1) = -9
+fcntl           (0xd3, 0x2, 0x1) = -9
+fcntl           (0xd4, 0x2, 0x1) = -9
+fcntl           (0xd5, 0x2, 0x1) = -9
+fcntl           (0xd6, 0x2, 0x1) = -9
+fcntl           (0xd7, 0x2, 0x1) = -9
+fcntl           (0xd8, 0x2, 0x1) = -9
+fcntl           (0xd9, 0x2, 0x1) = -9
+fcntl           (0xda, 0x2, 0x1) = -9
+fcntl           (0xdb, 0x2, 0x1) = -9
+fcntl           (0xdc, 0x2, 0x1) = -9
+fcntl           (0xdd, 0x2, 0x1) = -9
+fcntl           (0xde, 0x2, 0x1) = -9
+fcntl           (0xdf, 0x2, 0x1) = -9
+fcntl           (0xe0, 0x2, 0x1) = -9
+fcntl           (0xe1, 0x2, 0x1) = -9
+fcntl           (0xe2, 0x2, 0x1) = -9
+fcntl           (0xe3, 0x2, 0x1) = -9
+fcntl           (0xe4, 0x2, 0x1) = -9
+fcntl           (0xe5, 0x2, 0x1) = -9
+fcntl           (0xe6, 0x2, 0x1) = -9
+fcntl           (0xe7, 0x2, 0x1) = -9
+fcntl           (0xe8, 0x2, 0x1) = -9
+fcntl           (0xe9, 0x2, 0x1) = -9
+fcntl           (0xea, 0x2, 0x1) = -9
+fcntl           (0xeb, 0x2, 0x1) = -9
+fcntl           (0xec, 0x2, 0x1) = -9
+fcntl           (0xed, 0x2, 0x1) = -9
+fcntl           (0xee, 0x2, 0x1) = -9
+fcntl           (0xef, 0x2, 0x1) = -9
+fcntl           (0xf0, 0x2, 0x1) = -9
+fcntl           (0xf1, 0x2, 0x1) = -9
+fcntl           (0xf2, 0x2, 0x1) = -9
+fcntl           (0xf3, 0x2, 0x1) = -9
+fcntl           (0xf4, 0x2, 0x1) = -9
+fcntl           (0xf5, 0x2, 0x1) = -9
+fcntl           (0xf6, 0x2, 0x1) = -9
+fcntl           (0xf7, 0x2, 0x1) = -9
+fcntl           (0xf8, 0x2, 0x1) = -9
+fcntl           (0xf9, 0x2, 0x1) = -9
+fcntl           (0xfa, 0x2, 0x1) = -9
+fcntl           (0xfb, 0x2, 0x1) = -9
+fcntl           (0xfc, 0x2, 0x1) = -9
+fcntl           (0xfd, 0x2, 0x1) = -9
+fcntl           (0xfe, 0x2, 0x1) = -9
+fcntl           (0xff, 0x2, 0x1) = -9
+faccessat       (0xffffffffffffff9c, 0x721200222ea0, 0x4) = -2
+rseq            (0x72123f7f48e0, 0x20, 0) = -38
+syscall_43      (0x72123f797a48, 0x72123ffffbf0, 0) = -2
+syscall_43      (0x72123f797a58, 0x72123ffffbf0, 0) = -2
+openat          (0xffffffffffffff9c, 0x72123f797a20, 0x80000) = -2
+openat          (0xffffffffffffff9c, 0x72123f797a68, 0x80000) = -2
+faccessat       (0xffffffffffffff9c, 0x72123f797a88, 0) = -2
+ioctl           (0x1, 0x5401, 0x72123ffffaf0) = -25
+openat          (0xffffffffffffff9c, 0x7212012e8510, 0) = -2
+openat          (0xffffffffffffff9c, 0x7212012e8760, 0) = -2
+close           (0x5, 0, 0) = -9
+ioctl           (0x2, 0x5413, 0x72123ffff1d0) = -25
+wait4           (0xffffffffffffffff, 0x72123fffde70, 0x1) = -10
+newfstatat      (0xffffffffffffff9c, 0x7212011827f0, 0x72123fffed18) = -2
+newfstatat      (0xffffffffffffff9c, 0x7212011827f0, 0x72123fffed18) = -2
+newfstatat      (0xffffffffffffff9c, 0x7212011827f0, 0x72123fffed18) = -2
+faccessat       (0xffffffffffffff9c, 0x721200222ea0, 0x4) = -2
+rseq            (0x721200243340, 0x20, 0) = -38
+syscall_223     (0x3, 0, 0) = -38
+ioctl           (0x2, 0x5413, 0x72123fffee70) = -25
+wait4           (0xffffffffffffffff, 0x72123fffdb10, 0x1) = -10
+GOBLIN FAIL

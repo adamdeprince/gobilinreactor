@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="dev.goblinlinux.zygoteprobe" android:versionCode="1" android:versionName="1">
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <application android:label="Goblin app-zygote research" android:debuggable="true" android:extractNativeLibs="true">
+    <service android:name=".WorkerService" android:exported="false" android:process=":isolated" android:isolatedProcess="true" android:useAppZygote="true" />
+    <service android:name=".RegularService" android:exported="false" android:process=":regular" />
+  </application>
+  <instrumentation android:name=".Research" android:targetPackage="dev.goblinlinux.zygoteprobe" />
+</manifest>

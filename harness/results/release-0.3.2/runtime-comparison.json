@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "baseline_apk_sha256": "ca3956bb0af34abfa947ee603d3526bd6f625cb70151eddd16d1271fb003cc26",
+  "apk_sha256": "775406133203277719f98f2667a742cd4c470917dacace0a9f4c61ea84339712",
+  "unchanged_payload_files": 94,
+  "checks": [
+    "native components and runtime/deployment assets unchanged from 0.3.1"
+  ]
+}

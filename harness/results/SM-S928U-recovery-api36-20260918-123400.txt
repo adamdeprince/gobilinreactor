@@ -1,0 +1,31 @@
+page size            4096
+-- Recovery: resume configuration after Android process death --
+PASS: resume configuration after Android process death status=0 
+METRIC {"workload":"resume configuration after Android process death","page_size":4096,"wall_ns":6969488278,"startup_ns":262978177,"syscalls":1725,"wall_ns_per_syscall":3.96683e+06,"broker_ns_per_syscall":3.56226e+06,"broker_rss_start_bytes":131674112,"broker_rss_end_bytes":143208448,"broker_rss_sampled_peak_bytes":159068160}
+-- Recovery: prepare disk exhaustion upgrade --
+PASS: prepare disk exhaustion upgrade status=0 
+METRIC {"workload":"prepare disk exhaustion upgrade","page_size":4096,"wall_ns":1731742447,"startup_ns":331008437,"syscalls":1843,"wall_ns_per_syscall":850101,"broker_ns_per_syscall":472999,"broker_rss_start_bytes":142790656,"broker_rss_end_bytes":144711680,"broker_rss_sampled_peak_bytes":158040064}
+-- Recovery: upgrade fails at the disk quota --
+PASS: upgrade fails at the disk quota status=1 
+METRIC {"workload":"upgrade fails at the disk quota","page_size":4096,"wall_ns":1726715000,"startup_ns":328799167,"syscalls":1348,"wall_ns_per_syscall":1.16139e+06,"broker_ns_per_syscall":731691,"broker_rss_start_bytes":144429056,"broker_rss_end_bytes":147890176,"broker_rss_sampled_peak_bytes":159891456}
+-- Recovery: retry after restoring disk capacity --
+PASS: retry after restoring disk capacity status=0 
+METRIC {"workload":"retry after restoring disk capacity","page_size":4096,"wall_ns":2654906145,"startup_ns":351958958,"syscalls":2650,"wall_ns_per_syscall":934962,"broker_ns_per_syscall":544594,"broker_rss_start_bytes":147918848,"broker_rss_end_bytes":147324928,"broker_rss_sampled_peak_bytes":161083392}
+-- Recovery: main Debian database remains clean --
+PASS: main Debian database remains clean status=0 
+METRIC {"workload":"main Debian database remains clean","page_size":4096,"wall_ns":507212760,"startup_ns":316680781,"syscalls":626,"wall_ns_per_syscall":557132,"broker_ns_per_syscall":196489,"broker_rss_start_bytes":147062784,"broker_rss_end_bytes":148455424,"broker_rss_sampled_peak_bytes":158707712}
+METRIC {"workload":"startup_true_0","page_size":4096,"wall_ns":334846250,"startup_ns":331332344,"syscalls":27,"wall_ns_per_syscall":6.5347e+06,"broker_ns_per_syscall":51840.3,"broker_rss_start_bytes":148447232,"broker_rss_end_bytes":148586496,"broker_rss_sampled_peak_bytes":148586496}
+METRIC {"workload":"startup_true_1","page_size":4096,"wall_ns":332430521,"startup_ns":329944427,"syscalls":27,"wall_ns_per_syscall":6.62507e+06,"broker_ns_per_syscall":50912.4,"broker_rss_start_bytes":148578304,"broker_rss_end_bytes":148733952,"broker_rss_sampled_peak_bytes":148733952}
+METRIC {"workload":"startup_true_2","page_size":4096,"wall_ns":331401822,"startup_ns":327050572,"syscalls":27,"wall_ns_per_syscall":6.56066e+06,"broker_ns_per_syscall":92777.8,"broker_rss_start_bytes":148525056,"broker_rss_end_bytes":148668416,"broker_rss_sampled_peak_bytes":148684800}
+METRIC {"workload":"startup_true_3","page_size":4096,"wall_ns":318222969,"startup_ns":316218021,"syscalls":27,"wall_ns_per_syscall":6.27814e+06,"broker_ns_per_syscall":43036.3,"broker_rss_start_bytes":148660224,"broker_rss_end_bytes":148885504,"broker_rss_sampled_peak_bytes":148885504}
+METRIC {"workload":"startup_true_4","page_size":4096,"wall_ns":337299322,"startup_ns":335185260,"syscalls":27,"wall_ns_per_syscall":6.22709e+06,"broker_ns_per_syscall":42297.4,"broker_rss_start_bytes":148877312,"broker_rss_end_bytes":149028864,"broker_rss_sampled_peak_bytes":149028864}
+METRIC {"workload":"bench","page_size":4096,"wall_ns":897401302,"startup_ns":315913541,"syscalls":200002,"wall_ns_per_syscall":3709.26,"broker_ns_per_syscall":92.1857,"broker_rss_start_bytes":148725760,"broker_rss_end_bytes":149233664,"broker_rss_sampled_peak_bytes":149233664}
+PASS: bench done
+
+METRIC {"workload":"forkbench","page_size":4096,"wall_ns":1941624114,"startup_ns":314982396,"syscalls":98,"wall_ns_per_syscall":1.83151e+07,"broker_ns_per_syscall":8.50962e+06,"broker_rss_start_bytes":149225472,"broker_rss_end_bytes":158347264,"broker_rss_sampled_peak_bytes":158388224}
+PASS: 32 fork/wait and COW checks passed
+
+-- Recovery: remove isolated recovery fixtures --
+PASS: remove isolated recovery fixtures status=0 
+METRIC {"workload":"remove isolated recovery fixtures","page_size":4096,"wall_ns":490044531,"startup_ns":348376614,"syscalls":506,"wall_ns_per_syscall":623973,"broker_ns_per_syscall":198848,"broker_rss_start_bytes":158081024,"broker_rss_end_bytes":149970944,"broker_rss_sampled_peak_bytes":158081024}
+GOBLIN PASS

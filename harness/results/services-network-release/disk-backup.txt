@@ -1,0 +1,5 @@
+PASS: live-disk lock enforced; sparse 100 GiB image exported without allocating holes
+PASS: atomic restore preserves every sampled byte, sparse size and the previous disk
+PASS: truncated, checksum-damaged and out-of-bounds backups leave the active disk intact
+PASS: restoring a previous disk atomically swaps independent images without needing another full copy
+GOBLIN DISK BACKUP PASS

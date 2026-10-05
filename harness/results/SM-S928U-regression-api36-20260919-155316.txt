@@ -1,0 +1,309 @@
+== goblin-linux: isolated stub and memory ABI regression harness ==
+page size            4096
+memfd exec           supported (sealed, shared)
+guest window         0x7700000000 - 0x7740000000 (4 GiB aligned)
+core regressions     99 checks passed
+
+-- guest: hello --
+image                2544 bytes
+loaded               bias=0x7701000000 entry=0x770100428c
+  mapped span        0x7701000000 - 0x7701009000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+  syscall trace:
+    write           (0x1, 0x7701000238, 0xd) = 13
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 2 syscalls
+
+-- guest: fixed --
+image                2808 bytes
+loaded               bias=0 entry=0x2204234
+  mapped span        0x2200000 - 0x2209000
+  executable         0x2204000 - 0x2205000
+  backing            sealed memfd
+  syscall trace:
+    brk             (0, 0, 0) = 0x2209000
+    brk             (0x220d000, 0, 0) = 0x220d000
+    brk             (0x5000000, 0, 0) = 0x220d000
+    mmap            (0x4000000, 0x4000, 0x3) = -12
+    mmap            (0x100000, 0x4000, 0x3) = 0x100000
+    mremap          (0x100000, 0x4000, 0x8000) = 0x773f7f8000
+    clone           (0x11, 0, 0) = 2
+    exit_group      (0, 0, 0) = 0
+    wait4           (0x2, 0x773ffffe0c, 0) = 2
+    write           (0x1, 0x2200190, 0x21) = 33
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 11 syscalls
+
+-- guest: bench --
+image                2592 bytes
+loaded               bias=0x7701000000 entry=0x7701004284
+  mapped span        0x7701000000 - 0x7701009000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+exited               status 0 after 200002 syscalls
+cost                 3535 ns per syscall total
+  of which             116 ns in the sentry, 3419 ns in signal delivery
+
+-- guest: memtest --
+image                3528 bytes
+loaded               bias=0x7701000000 entry=0x770100439c
+  mapped span        0x7701000000 - 0x7701009000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+  syscall trace:
+    brk             (0, 0, 0) = 0x7701009000
+    brk             (0x7701019000, 0, 0) = 0x7701019000
+    mmap            (0, 0x4000, 0x3) = 0x773f7fc000
+    mprotect        (0x773f7fc000, 0x4000, 0x1) = 0
+    munmap          (0x773f7fc000, 0x4000, 0) = 0
+    mmap            (0, 0x4000, 0x3) = 0x773f7fc000
+    write           (0x1, 0x770100026f, 0xb) = 11
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 8 syscalls
+
+-- guest: memerrors --
+image                4632 bytes
+loaded               bias=0x7701000000 entry=0x77010042cc
+  mapped span        0x7701000000 - 0x7701009000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+  syscall trace:
+    brk             (0, 0, 0) = 0x7701009000
+    brk             (0x7701009001, 0, 0) = 0x7701009001
+    brk             (0x7701009002, 0, 0) = 0x7701009002
+    brk             (0x7701009001, 0, 0) = 0x7701009001
+    mmap            (0, 0xffffffffffffffff, 0x3) = -12
+    mmap            (0x7701009001, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x40000000) = -22
+    mmap            (0, 0x4000, 0x3) = -22
+    mmap            (0, 0x4000, 0x3) = 0x773f7fc000
+    mmap            (0x773f7fc000, 0x4000, 0x3) = -17
+    madvise         (0x773f7fc000, 0x4000, 0x4) = 0
+    madvise         (0x773f7fc000, 0x4000, 0x7fffffff) = -22
+    mprotect        (0x773f7fc000, 0x4000, 0x40000000) = -22
+    munmap          (0x773f7fc000, 0x4000, 0) = 0
+    mprotect        (0x773f7fc000, 0x4000, 0x1) = -12
+    madvise         (0x773f7fc000, 0x4000, 0x4) = -12
+    munmap          (0x773f7fc000, 0x4000, 0) = 0
+    mmap            (0x773f7fc000, 0x4000, 0x3) = 0x773f7fc000
+    mmap            (0, 0x4000, 0x3) = 0x773f7f8000
+    madvise         (0x773f7f8000, 0x4000, 0x8) = -22
+    mmap            (0, 0x4000, 0x3) = 0x773f7f4000
+    mremap          (0x773f7f4000, 0x4000, 0x8000) = 0x773f7ec000
+    mprotect        (0x773f7f4000, 0x4000, 0x1) = -12
+    mremap          (0x773f7ec000, 0x8000, 0x4000) = 0x773f7ec000
+    mprotect        (0x773f7f0000, 0x4000, 0x1) = -12
+    mremap          (0x773f7ec001, 0x4000, 0x8000) = -22
+    mremap          (0x773f7ec000, 0x4000, 0xffffffffffffffff) = -22
+    mremap          (0x773f7ec000, 0x4000, 0x8000) = -12
+    mremap          (0x773f7ec000, 0x4000, 0x8000) = -95
+    write           (0x1, 0x7701000238, 0x11) = 17
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 32 syscalls
+
+-- guest: time_query --
+image                3440 bytes
+loaded               bias=0x7701000000 entry=0x77010042c4
+  mapped span        0x7701000000 - 0x7701009000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+  syscall trace:
+    syscall_169     (0, 0, 0) = 0
+    syscall_169     (0x1, 0, 0) = -14
+    syscall_169     (0x773ffffdf0, 0x773ffffde8, 0) = 0
+    mmap            (0, 0x4000, 0x3) = 0x773f7fc000
+    mprotect        (0x773f7fc000, 0x4000, 0x1) = 0
+    munmap          (0x773f7fc000, 0x4000, 0) = 0
+    write           (0x1, 0x7701000238, 0xe) = 14
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 8 syscalls
+
+-- guest: isolation --
+image                3600 bytes
+loaded               bias=0x7701000000 entry=0x77010042dc
+  mapped span        0x7701000000 - 0x7701009000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+  syscall trace:
+    getpid          (0, 0, 0) = 1
+    getpid          (0, 0, 0) = 1
+    brk             (0, 0, 0) = 0x7701009000
+    openat          (0xffffffffffffff9c, 0x773ffffdc0, 0) = -2
+    clone           (0x10011, 0, 0) = -22
+    syscall_167     (0, 0, 0) = -22
+    getpid          (0, 0, 0) = 1
+    write           (0x1, 0x770100024a, 0x15) = 21
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 9 syscalls
+
+-- guest: oldcode --
+image                2776 bytes
+loaded               bias=0x7701000000 entry=0x77010042d4
+  mapped span        0x7701000000 - 0x7701009000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+expected fault       guest terminated: Segmentation fault
+
+-- guest: badstack --
+image                2088 bytes
+loaded               bias=0x7701000000 entry=0x7701004200
+  mapped span        0x7701000000 - 0x7701009000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+  syscall trace:
+    getpid          (0, 0, 0) = 1
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 2 syscalls
+
+-- guest: process --
+image                5520 bytes
+loaded               bias=0x7701000000 entry=0x770100435c
+  mapped span        0x7701000000 - 0x770100d000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+  syscall trace:
+    mmap            (0, 0x1000, 0x3) = 0x773f7ff000
+    mmap            (0, 0x1000, 0x3) = 0x773f7fe000
+    mprotect        (0x773f7fe000, 0x1000, 0) = 0
+    pipe2           (0x773ffffe08, 0, 0) = 0
+    clone           (0x1300011, 0, 0x773ffffe04) = 2
+    close           (0x4, 0, 0) = 0
+    gettid          (0, 0, 0) = 2
+    mprotect        (0x773f7fe000, 0x1000, 0x1) = 0
+    close           (0x3, 0, 0) = 0
+    syscall_24      (0x4, 0x13, 0x80000) = 19
+    fcntl           (0x13, 0x1, 0) = 1
+    close           (0x4, 0, 0) = 0
+    futex           (0x773f7ff000, 0x1, 0x1) = 1
+    futex           (0x773f7ff000, 0, 0) = 0
+    write           (0x13, 0x773ffffdd0, 0x5) = 5
+    exit_group      (0x17, 0, 0) = 0
+    read            (0x3, 0x773ffffde8, 0x8) = 5
+    read            (0x3, 0x773ffffde8, 0x8) = 0
+    wait4           (0x2, 0x773ffffde4, 0) = 2
+    wait4           (0x2, 0x773ffffde4, 0x1) = -10
+    mprotect        (0x773f7fe000, 0x1000, 0x1) = 0
+    futex           (0x773f7ff000, 0, 0x2a) = -110
+    futex           (0x773f7ff000, 0, 0) = -11
+    clone           (0x11, 0, 0) = 3
+    kill            (0x3, 0x13, 0) = 0
+    wait4           (0x3, 0x773ffffde4, 0x2) = 3
+    kill            (0x3, 0x12, 0) = 0
+    wait4           (0x3, 0x773ffffde4, 0x8) = 3
+    kill            (0x3, 0xf, 0) = 0
+    wait4           (0x3, 0x773ffffde4, 0) = 3
+    clone           (0x4111, 0, 0) = 4
+    exit_group      (0, 0, 0) = 0
+    wait4           (0x4, 0x773ffffde4, 0) = 4
+    write           (0x1, 0x77010002b0, 0x26) = 38
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 37 syscalls
+
+-- guest: signals --
+image                4120 bytes
+loaded               bias=0x7701000000 entry=0x7701004354
+  mapped span        0x7701000000 - 0x770100d000
+  executable         0x7701004000 - 0x7701005000
+  backing            sealed memfd
+  syscall trace:
+    mmap            (0, 0x8000, 0x3) = 0x773f7f8000
+    syscall_132     (0x773ffffdf8, 0, 0) = 0
+    rt_sigaction    (0xa, 0x773ffffdd8, 0) = 0
+    rt_sigprocmask  (0, 0x773ffffdd0, 0) = 0
+    kill            (0x1, 0xa, 0) = 0
+    syscall_136     (0x773ffffdc8, 0x8, 0) = 0
+    rt_sigprocmask  (0x1, 0x773ffffdd0, 0) = 0
+    rt_sigreturn    (0xa, 0x773f7fedb0, 0x773f7fee30) = 0
+    clone           (0x11, 0, 0) = 2
+    kill            (0x1, 0xa, 0) = 0
+    exit_group      (0, 0, 0) = 0
+    rt_sigreturn    (0xa, 0x773f7fedb0, 0x773f7fee30) = -4
+    wait4           (0x2, 0x773ffffd9c, 0) = 2
+    kill            (0xf423f, 0x9, 0) = -3
+    write           (0x1, 0x7701000270, 0x24) = 36
+    exit_group      (0, 0, 0) = 0
+exited               status 0 after 18 syscalls
+VFS/ELF regressions  49 checks passed
+-- Debian: /bin/true --
+PASS: /bin/true status=0 syscalls=23 stdout=
+-- Debian: /tmp/filemap --
+PASS: /tmp/filemap status=0 syscalls=29 stdout=file mapping coherence and faults ok
+
+-- Debian: /tmp/pthreads --
+PASS: /tmp/pthreads status=0 syscalls=238 stdout=pthread TLS, locks, conditions, signals, preemption and robust recovery ok
+
+-- Debian: /tmp/pthreads --
+PASS: /tmp/pthreads status=0 syscalls=68 stdout=thread exec ok
+
+-- Debian: /tmp/pthreads --
+PASS: /tmp/pthreads status=37 syscalls=41 stdout=leader exit ok
+
+-- Debian: /tmp/pthreads --
+PASS: /tmp/pthreads status=19 syscalls=39 stdout=group exit ok
+
+-- Debian: /tmp/identity --
+PASS: /tmp/identity status=0 syscalls=152 stdout=credentials, user permissions, ownership, procfs and peer identity ok
+
+-- Debian: /tmp/setid --
+PASS: /tmp/setid status=0 syscalls=438 stdout=guest set-ID exec, secure environment, no_new_privs and write stripping ok
+
+-- Debian: /tmp/network --
+PASS: /tmp/network status=0 syscalls=116 stdout=TCP, UDP, socket vectors and localhost resolution ok
+
+-- Debian: /tmp/proc_ipc --
+PASS: /tmp/proc_ipc status=0 syscalls=785 stdout=guest procfs, Unix sockets and descriptor passing ok
+
+PASS: guest and Android abstract socket namespaces are isolated
+-- Debian: /tmp/fdexec --
+PASS: /tmp/fdexec status=0 syscalls=21 stdout=exec descriptors and signals ok
+
+-- Debian: /bin/echo --
+PASS: /bin/echo status=0 syscalls=31 stdout=Debian ARM64 works
+
+-- Debian: /bin/dash --
+PASS: /bin/dash status=7 syscalls=111 stdout=child
+
+-- Debian: /bin/dash --
+PASS: /bin/dash status=0 syscalls=158 stdout=pipeline works
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=202 stdout=bash works
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=168 stdout=signal caught
+after signal
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=517 stdout=printf 'pty ready\n' | /bin/cat
+exit 0
+bash-5.2# printf 'pty ready\n' | /bin/cat
+pty ready
+bash-5.2# exit 0
+exit
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=216 stdout=parent
+child
+/root
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=129 stdout=signal-status:143
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=228 stdout=y
+y
+y
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=3651 stdout=Hello, world!
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=233 stdout=script:works
+
+-- Debian: /bin/bash --
+PASS: /bin/bash status=0 syscalls=7680 stdout=Hello, world!
+
+
+GOBLIN PASS

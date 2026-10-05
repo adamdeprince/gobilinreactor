@@ -1,0 +1,6 @@
+09-20 07:34:27.196  2712  4670 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10515 user=0: start instr
+09-20 07:34:27.223  2712  3072 I ActivityManager: Start proc 29231:dev.goblinlinux.zygoteprobe/u0a515 for added application dev.goblinlinux.zygoteprobe
+09-20 07:34:27.479  2712  3072 I ActivityManager: Start proc 29263:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0ai200 for  {dev.goblinlinux.zygoteprobe/dev.goblinlinux.zygoteprobe.WorkerService}
+09-20 07:44:27.937  2712  4690 I ActivityManager: Killing 29263:dev.goblinlinux.zygoteprobe:isolated:dev.goblinlinux.zygoteprobe.WorkerService/u0a515i-8800 (adj 0): isolated not needed
+09-20 07:44:27.946  2712  4677 I ActivityManager: Force stopping dev.goblinlinux.zygoteprobe appid=10515 user=0: finished inst
+09-20 07:44:27.948  2712  4677 I ActivityManager: Killing 29231:dev.goblinlinux.zygoteprobe/u0a515 (adj 0): stop dev.goblinlinux.zygoteprobe due to finished inst

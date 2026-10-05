@@ -1,0 +1,13 @@
+{
+  "linux": {
+    "repository": "https://github.com/zalexdev/linux-um-arm64.git",
+    "commit": "8897487c52233cd00cf2850008ca068892f1ae91",
+    "branch": "um-arm64",
+    "license": "GPL-2.0-only"
+  },
+  "passt": {
+    "repository": "https://passt.top/passt",
+    "commit": "588b545dae741bec6fd7622a33c7852c06d72a59",
+    "license": "GPL-2.0-or-later AND BSD-3-Clause"
+  }
+}

@@ -1,0 +1,82 @@
+INSTRUMENTATION_RESULT: stream=PASS: upstream kitty screen displays the guest Bash prompt
+PASS: goblin starts in /home/goblin with a real unprivileged UID and protected system files
+FAILED: java.lang.AssertionError: deployed passwordless sudo; screen=Preparing your Debian environment…
+
+goblin@goblin:~$ mkdir /home/goblin/goblin-kitty-9d123a20-48c; GOBL
+IN_KITTY_PROOF=alive; sleep 120 & echo $! > /home/goblin/goblin-kit
+ty-9d123a20-48c/job; printf ready > /home/goblin/goblin-kitty-9d123
+a20-48c/ready
+[1] 5
+goblin@goblin:~$ test $(id -un) = goblin && test $(id -u) != 0 && t
+est "$HOME:$PWD" = /home/goblin:/home/goblin && test ! -w /etc/pass
+wd && printf regular > /home/goblin/goblin-kitty-9d123a20-48c/ident
+ity
+goblin@goblin:~$ sudo -n id -u > /home/goblin/goblin-kitty-9d123a20
+-48c/sudo-root; sudo -n -u nobody id -u > /home/goblin/goblin-kitty
+-9d123a20-48c/sudo-nobody; sudo -n -i sh -c 'test "$HOME" = /root &
+& id -u' > /home/goblin/goblin-kitty-9d123a20-48c/sudo-login; id -u
+ > /home/goblin/goblin-kitty-9d123a20-48c/sudo-parent
+sudo: pam_open_session: Critical error - immediate abort
+sudo: policy plugin failed session initialization
+Segmentation fault
+sudo: pam_open_session: Critical error - immediate abort
+sudo: policy plugin failed session initialization
+Segmentation fault
+sudo: pam_open_session: Critical error - immediate abort
+sudo: policy plugin failed session initialization
+Segmentation fault
+goblin@goblin:~$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Preparing your Debian environment…
+
+goblin@goblin:~$ mkdir /home/goblin/goblin-kitty-9d123a20-48c; GOBL
+IN_KITTY_PROOF=alive; sleep 120 & echo $! > /home/goblin/goblin-kit
+ty-9d123a20-48c/job; printf ready > /home/goblin/goblin-kitty-9d123
+a20-48c/ready
+[1] 5
+goblin@goblin:~$ test $(id -un) = goblin && test $(id -u) != 0 && t
+est "$HOME:$PWD" = /home/goblin:/home/goblin && test ! -w /etc/pass
+wd && printf regular > /home/goblin/goblin-kitty-9d123a20-48c/ident
+ity
+goblin@goblin:~$ sudo -n id -u > /home/goblin/goblin-kitty-9d123a20
+-48c/sudo-root; sudo -n -u nobody id -u > /home/goblin/goblin-kitty
+-9d123a20-48c/sudo-nobody; sudo -n -i sh -c 'test "$HOME" = /root &
+& id -u' > /home/goblin/goblin-kitty-9d123a20-48c/sudo-login; id -u
+ > /home/goblin/goblin-kitty-9d123a20-48c/sudo-parent
+sudo: pam_open_session: Critical error - immediate abort
+sudo: policy plugin failed session initialization
+Segmentation fault
+sudo: pam_open_session: Critical error - immediate abort
+sudo: policy plugin failed session initialization
+Segmentation fault
+sudo: pam_open_session: Critical error - immediate abort
+sudo: policy plugin failed session initialization
+Segmentation fault
+goblin@goblin:~$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSTRUMENTATION_CODE: 0

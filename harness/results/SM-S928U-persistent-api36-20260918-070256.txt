@@ -1,0 +1,36 @@
+-- Persistent: Debian package bootstrap --
+PASS: Debian package bootstrap status=0 
+-- Persistent: installed database and maintainer scripts --
+PASS: installed database and maintainer scripts status=0 
+-- Persistent: remount persistence --
+PASS: remount persistence status=0 
+PASS: resource limit: filesystem
+PASS: resource limit: sigpipe
+PASS: resource limit: memory
+PASS: resource limit: tasks
+PASS: resource limit: disk
+PASS: captured output limit
+PASS: CPU loop stops at session deadline
+PASS: interactive shell input and output
+FAILED: Ctrl-C targets foreground job
+PASS: Ctrl-Z, background and foreground resume
+PASS: terminal resize and transcript replay
+PASS: terminal shell clean shutdown
+Terminal transcript: printf '\122\105\101\104\131\n'
+goblin:/# printf '\122\105\101\104\131\n'
+READY
+goblin:/# sleep 30
+^C^Z
+[1]+  Stopped                 sleep 30
+goblin:/# bg
+[1]+ sleep 30 &
+goblin:/# fg
+sleep 30
+^C
+goblin:/#                                                                                                 goblin:/# stty size; printf '\122\105\103\117\116\116\105\103\124\n'
+31 97
+RECONNECT
+goblin:/# exit 0
+exit
+
+GOBLIN FAIL

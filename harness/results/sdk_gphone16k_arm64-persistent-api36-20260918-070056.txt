@@ -1,0 +1,40 @@
+-- Persistent: Debian package bootstrap --
+PASS: Debian package bootstrap status=0 
+-- Persistent: installed database and maintainer scripts --
+PASS: installed database and maintainer scripts status=0 
+-- Persistent: remount persistence --
+PASS: remount persistence status=0 
+PASS: resource limit: filesystem
+PASS: resource limit: sigpipe
+PASS: resource limit: memory
+PASS: resource limit: tasks
+PASS: resource limit: disk
+PASS: captured output limit
+PASS: CPU loop stops at session deadline
+PASS: interactive shell input and output
+PASS: Ctrl-C targets foreground job
+PASS: Ctrl-Z, background and foreground resume
+PASS: terminal resize and transcript replay
+PASS: terminal shell clean shutdown
+-- Persistent: public DNS through Android --
+FAILED: public DNS through Android status=2 
+Android DNS: queries=0 answers=0 failures=0 last_error=0
+Recent syscall errors:
+faccessat       (0xffffffffffffff9c, 0x721200222ea0, 0x4) = -2
+rseq            (0x72123f7f4800, 0x20, 0) = -38
+openat          (0xffffffffffffff9c, 0x721201103110, 0x802) = -6
+ioctl           (0, 0x5401, 0x72123ffff9e0) = -25
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+ioctl           (0x2, 0x540f, 0x72123ffff8f4) = -25
+ioctl           (0x2, 0x540f, 0x72123ffff8a4) = -25
+newfstatat      (0xffffffffffffff9c, 0x721201182080, 0x72123ffff4b8) = -2
+newfstatat      (0xffffffffffffff9c, 0x721201182080, 0x72123ffff4b8) = -2
+newfstatat      (0xffffffffffffff9c, 0x721201182080, 0x72123ffff4b8) = -2
+faccessat       (0xffffffffffffff9c, 0x721200222ea0, 0x4) = -2
+rseq            (0x721200243360, 0x20, 0) = -38
+syscall_198     (0x10, 0x80003, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_198     (0x1, 0x80801, 0) = -97
+syscall_208     (0x3, 0, 0xb) = -92
+GOBLIN FAIL

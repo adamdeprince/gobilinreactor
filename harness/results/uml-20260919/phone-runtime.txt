@@ -1,0 +1,25 @@
+Linux goblin 7.2.0-rc4-goblin #5 Sat Sep 19 22:09:48 UTC 2026 aarch64 GNU/Linux
+16384
+goblin:x:1000:1000::/home/goblin:/bin/bash
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/ubda       219G  1.1G  218G   1% /
+MemTotal:       11273408 kB
+MemFree:        11071120 kB
+MemAvailable:   11182640 kB
+Limit                     Soft Limit           Hard Limit           Units     
+Max cpu time              unlimited            unlimited            seconds   
+Max file size             unlimited            unlimited            bytes     
+Max data size             unlimited            unlimited            bytes     
+Max stack size            8388608              unlimited            bytes     
+Max core file size        0                    unlimited            bytes     
+Max resident set          unlimited            unlimited            bytes     
+Max processes             11015                11015                processes 
+Max open files            1024                 4096                 files     
+Max locked memory         8388608              8388608              bytes     
+Max address space         unlimited            unlimited            bytes     
+Max file locks            unlimited            unlimited            locks     
+Max pending signals       11015                11015                signals   
+Max msgqueue size         819200               819200               bytes     
+Max nice priority         0                    0                    
+Max realtime priority     0                    0                    
+Max realtime timeout      unlimited            unlimited            us        

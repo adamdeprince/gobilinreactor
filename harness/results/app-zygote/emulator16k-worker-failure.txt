@@ -1,0 +1,7 @@
+PASS: round 1, killed host 21532, guest 191 terminated, MM reaped, same VM responsive
+PASS: round 2, killed host 21972, guest 202 terminated, MM reaped, same VM responsive
+PASS: round 3, killed host 22418, guest 213 terminated, MM reaped, same VM responsive
+PASS: round 4, killed host 22874, guest 224 terminated, MM reaped, same VM responsive
+PASS: round 5, killed host 23325, guest 235 terminated, MM reaped, same VM responsive
+PASS: round 6, killed host 23786, guest 246 terminated, MM reaped, same VM responsive
+GOBLIN WORKER FAILURE PASS

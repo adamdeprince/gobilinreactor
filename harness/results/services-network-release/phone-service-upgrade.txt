@@ -1,0 +1,19 @@
+Warning: Activity not started, intent has been delivered to currently running top-most instance.
+Installing APK in place; guest probe data and configuration recorded.
+Performing Streamed Install
+Success
+{
+  "result": "PASS",
+  "serial": "R5CX3468YQR",
+  "apk_sha256": "ac44ccf0dabab8d33f0360dd8c60e2f1fd5339d13837f2212587578b408ff734",
+  "kernel_before": "#11 SMP Sun Sep 20 00:30:33 UTC 2026",
+  "kernel_after": "#11 SMP Sun Sep 20 00:30:33 UTC 2026",
+  "kernel_sha256": "29fda23f21b1af53e5bcd966af2bcdf8bb0083f4f790c03b0502d265e4c85e04",
+  "initramfs_sha256": "fb452d522452f048b62068bc97154adc6a47b0cc267a4b684a8f2c5f82f75b82",
+  "running_init_sha256": "9b5179b59c6f586d82233d08743b8ed9a002e59cf956633c97eac4944baacbe8",
+  "deployment": "7ff74e7bd007beecf2af134c5fd98d4d4b76e3c6ca4fb2c4fec877eb69fddbcb",
+  "preserved_paths": 15,
+  "preserved_packages": 189,
+  "same_disk": true,
+  "edited_and_deleted_config_tested": false
+}

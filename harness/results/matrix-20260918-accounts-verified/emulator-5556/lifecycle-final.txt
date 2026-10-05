@@ -1,0 +1,12 @@
+PASS: terminal activity starts Bash
+PASS: typed command reaches guest filesystem
+PASS: recreated activity reconnects to the same shell and live job
+PASS: closing the terminal reaps its shell and keeps its detached job
+PASS: new terminal joins the existing Linux runtime
+PASS: detached job survives closing every terminal
+ERROR: null root node returned by UiTestAutomationBridge.
+PASS: terminal starts after app process restart
+PASS: installed Python and guest files survive app restart
+PASS: shell exit leaves no guest children
+PASS: exit closes the terminal activity
+TERMINAL LIFECYCLE PASS

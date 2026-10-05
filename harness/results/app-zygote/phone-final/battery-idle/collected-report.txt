@@ -1,0 +1,6 @@
+Android battery-optimization exemption: false
+PASS: Actual battery power and screen-off operation for 300 seconds; 301 Android power samples; guest heartbeat advanced 281
+PASS: The same Linux instance survived the complete battery interval
+GOBLIN SERVICES PASS
+GOBLIN SERVICES PASS
+

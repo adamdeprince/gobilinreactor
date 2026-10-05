@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "serial": "R5CX3468YQR",
+  "apk_sha256": "18853eeb4248a1a08bf41c152979bfe916e97aa02e760a185c9f1f9e0f48022b",
+  "kernel_before": "#11 SMP Sun Sep 20 00:30:33 UTC 2026",
+  "kernel_after": "#13 SMP Sun Sep 20 11:53:15 UTC 2026",
+  "kernel_sha256": "a0109307453df83f4fc5408bfe9e8f25d8a7d96f084040e1efceaac257c01590",
+  "initramfs_sha256": "90438d3d8944d7ac30b8fc5ca811113945e66dd45a40be27b89c22300449a0d0",
+  "running_init_sha256": "58627f41782e4f9d399013dc4066ea75acf5ea062a210f4efce1fb1b0c611322",
+  "deployment": "7ff74e7bd007beecf2af134c5fd98d4d4b76e3c6ca4fb2c4fec877eb69fddbcb",
+  "preserved_paths": 15,
+  "preserved_packages": 199,
+  "same_disk": true,
+  "edited_and_deleted_config_tested": false
+}

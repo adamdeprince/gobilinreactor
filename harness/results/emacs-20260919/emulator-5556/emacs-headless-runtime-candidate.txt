@@ -1,0 +1,38 @@
+==> installing
+/tmp/goblin-emacs-final.apk: 1 file pushed, 0 skipped. 1086.8 MB/s (126586096 bytes in 0.111s)
+Performing Push Install
+Success
+==> running
+page size            16384
+-- Developer: Debian bootstrap --
+PASS: Debian bootstrap status=0 elapsed_ms=145 
+METRIC {"workload":"Debian bootstrap","page_size":16384,"wall_ns":140624251,"startup_ns":82076084,"syscalls":395,"wall_ns_per_syscall":240796,"broker_ns_per_syscall":39926,"broker_rss_start_bytes":141033472,"broker_rss_end_bytes":145620992,"broker_rss_sampled_peak_bytes":155402240}
+-- Developer: install and repair emacs-nox --
+PASS: install and repair emacs-nox status=0 elapsed_ms=1752 
+METRIC {"workload":"install and repair emacs-nox","page_size":16384,"wall_ns":1704186000,"startup_ns":73472542,"syscalls":8803,"wall_ns_per_syscall":189210,"broker_ns_per_syscall":85290,"broker_rss_start_bytes":145031168,"broker_rss_end_bytes":147603456,"broker_rss_sampled_peak_bytes":267829248}
+Reading package lists...
+Building dependency tree...
+Reading state information...
+emacs-nox is already the newest version (1:30.1+1-6+deb13u1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+1 not fully installed or removed.
+After this operation, 0 B of additional disk space will be used.
+Setting up emacs-nox (1:30.1+1-6+deb13u1) ...
+Install emacsen-common for emacs
+emacsen-common: Handling install of emacsen flavor emacs
+emacs-nox	1:30.1+1-6+deb13u1
+-- Developer: Emacs batch evaluation and file permissions --
+PASS: Emacs batch evaluation and file permissions status=0 elapsed_ms=1256 
+METRIC {"workload":"Emacs batch evaluation and file permissions","page_size":16384,"wall_ns":1229257084,"startup_ns":137007584,"syscalls":5576,"wall_ns_per_syscall":203212,"broker_ns_per_syscall":58792.6,"broker_rss_start_bytes":148127744,"broker_rss_end_bytes":148062208,"broker_rss_sampled_peak_bytes":158449664}
+EMACS:30.1
+Filesystem      Size  Used Avail Use% Mounted on
+-               5.9G  2.8G  2.9G  50% /
+
+
+In toplevel form:
+tmp/goblin-emacs.MUEYlK/compiled.el:1:1: Warning: file has no `lexical-binding' directive on its first line
+Goblin Emacs works
+df: Warning: cannot read table of mounted file systems: No such file or directory
+GOBLIN PASS
+
+==> saved to /Users/adam/dev/goblin-linux/harness/results/sdk_gphone16k_arm64-emacs-api36-20260919-170240.txt

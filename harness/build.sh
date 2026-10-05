@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Builds the phase 1 harness APK: the guest program, the sentry, and the
-# NativeActivity that runs one under the other. No Gradle, no AGP, no network.
+# Builds Goblin with the Linux/UML kernel and the existing Android terminal. No Gradle, no AGP, no network;
+# The fixture builders supply the pinned Debian data beforehand.
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$HERE/.." && pwd)"
-OUT="$HERE/build"
+VARIANT="${VARIANT:-debug}"
+case "$VARIANT" in debug) OUT="$HERE/build";; release) OUT="$HERE/build-release";; *) echo 'VARIANT must be debug or release' >&2; exit 1;; esac
 
 SDK="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-$HOME/Library/Android/sdk}}"
 NDK_VER="${NDK_VER:-29.0.14206865}"
@@ -36,64 +37,75 @@ CXX="$TOOLS/aarch64-linux-android$MIN_API-clang++"
 
 rm -rf "$OUT"
 mkdir -p "$OUT/lib/$ABI" "$OUT/assets"
-
-# The guest: position-independent so the loader can bias it into the guest
-# window, and with no PT_INTERP, because a guest dynamic linker is phase 2.
-echo "==> building guest"
-for g in hello bench; do
-    "$CC" \
-        -O2 -fPIE -pie -nostdlib -nostartfiles \
-        -Wl,--no-dynamic-linker -Wl,-e,_start \
-        -o "$OUT/assets/$g" \
-        "$ROOT/guest/$g.c"
-    echo "    $g: $("$TOOLS/llvm-readelf" -h "$OUT/assets/$g" | awk -F: '/Type:/{gsub(/^ +/,"",$2); printf "%s", $2}')"
+TERMINAL="$ROOT/terminal/build"
+if [ ! -f "$TERMINAL/lib/libgoblinkitty.so" ]; then
+    echo "error: build the native kitty runtime with terminal/build.py first" >&2
+    exit 1
+fi
+cp "$TERMINAL"/lib/*.so "$OUT/lib/$ABI/"
+cp "$TERMINAL"/assets/* "$OUT/assets/"
+python3 "$ROOT/fixtures/deployment.py" --offline "$OUT/assets/deployment"
+UML="$ROOT/uml/build/artifacts"
+for file in libgoblinuml-kernel.so libgoblinuml-stub.so libgoblinuml-netservice.so libgoblinuml-ports.so; do
+    test -f "$UML/$file" || { echo "Missing $UML/$file: build the UML artifacts first" >&2; exit 1; }
+    cp "$UML/$file" "$OUT/lib/$ABI/$file"
 done
+cp "$UML/initramfs.cpio.gz" "$OUT/assets/uml-initramfs.cpio.gz"
+if [ "$VARIANT" = debug ]; then cp "$ROOT/uml/acceptance.sh" "$OUT/assets/uml-acceptance.sh"; fi
+cp "$ROOT/fixtures/build/debian.pack" "$OUT/assets/debian.pack"
+cp "$ROOT/uml/sources.lock.json" "$OUT/assets/uml-sources.json"
+cp "$UML/initramfs-manifest.json" "$OUT/assets/uml-initramfs-manifest.json"
+cp -R "$UML/licenses" "$OUT/assets/uml-licenses"
+python3 "$HERE/package-metadata.py" "$OUT"
 
-echo "==> building sentry + harness"
-"$CXX" \
-    -std=c++17 -O2 -g -fPIC -shared \
-    -Wall -Wextra -Wno-unused-parameter \
-    -fvisibility=hidden \
-    -static-libstdc++ \
-    -I "$ROOT/sentry" \
-    -o "$OUT/lib/$ABI/libgoblinsentry.so" \
-    "$ROOT/sentry/guest_layout.cpp" \
-    "$ROOT/sentry/exec_memory.cpp" \
-    "$ROOT/sentry/elf_loader.cpp" \
-    "$ROOT/sentry/sentry.cpp" \
-    "$ROOT/sentry/stub.cpp" \
-    "$HERE/main.cpp" \
-    -llog -landroid
+echo "==> building UML terminal and lifecycle adapter"
+"$CXX" -std=c++17 -O2 -g -fPIC -shared -Wall -Wextra -fvisibility=hidden \
+    -static-libstdc++ -Wl,-z,max-page-size=16384 \
+    "$ROOT/uml/launcher.cpp" -o "$OUT/lib/$ABI/libgoblinlauncher.so"
+"$CXX" -std=c++17 -O2 -g -fPIC -shared -Wall -Wextra -fvisibility=hidden \
+    -static-libstdc++ -Wl,-z,max-page-size=16384 \
+    "$ROOT/uml/runtime.cpp" "$ROOT/uml/archive.cpp" "$ROOT/uml/maintenance.cpp" \
+    -L "$OUT/lib/$ABI" -lgoblinkitty -llog -landroid -lz \
+    -o "$OUT/lib/$ABI/libgoblinuml.so"
+"$CXX" -std=c++17 -O2 -fPIE -pie -static-libstdc++ -Wl,-z,max-page-size=16384 \
+    "$ROOT/uml/control.cpp" -o "$OUT/lib/$ABI/libgoblinuml-ctl.so"
+
+echo "==> compiling terminal application"
+mkdir -p "$OUT/classes" "$OUT/dex"
+SOURCES=()
+for source in "$HERE"/java/dev/goblinlinux/sentry/*.java; do
+    case "$source" in */ServicesAcceptance.java) continue;; esac
+    if [ "$VARIANT" = release ]; then
+        case "$source" in *Acceptance.java|*/HarnessActivity.java) continue;; esac
+    fi
+    SOURCES+=("$source")
+done
+"$JAVA_HOME/bin/javac" --release 8 -Xlint:-options -classpath "$ANDROID_JAR" \
+    -d "$OUT/classes" "${SOURCES[@]}"
+"$JAVA_HOME/bin/jar" cf "$OUT/terminal.jar" -C "$OUT/classes" .
+"$BT/d8" --min-api "$MIN_API" --lib "$ANDROID_JAR" --output "$OUT/dex" "$OUT/terminal.jar"
 
 echo "==> linking resources"
+python3 "$HERE/manifest.py" "$VARIANT" "$OUT/AndroidManifest.xml"
+"$BT/aapt2" compile --dir "$HERE/res" -o "$OUT/resources.zip"
 "$BT/aapt2" link \
-    --manifest "$HERE/AndroidManifest.xml" \
+    --manifest "$OUT/AndroidManifest.xml" \
     -I "$ANDROID_JAR" \
     -A "$OUT/assets" \
+    "$OUT/resources.zip" \
     --min-sdk-version "$MIN_API" \
     --target-sdk-version "$TARGET_API" \
     -o "$OUT/unaligned.apk"
 
 echo "==> adding native library"
-(cd "$OUT" && zip -q -r unaligned.apk "lib/$ABI/libgoblinsentry.so")
+(cd "$OUT" && zip -q -r unaligned.apk "lib/$ABI")
+(cd "$OUT/dex" && zip -q "$OUT/unaligned.apk" classes.dex)
 
 echo "==> aligning"
 "$BT/zipalign" -f -P 16 4 "$OUT/unaligned.apk" "$OUT/aligned.apk"
 
-KEYSTORE="$ROOT/probe/debug.keystore"
-[ -f "$KEYSTORE" ] || {
-    keytool -genkeypair -v -keystore "$KEYSTORE" -storepass android \
-        -keypass android -alias goblindebug -keyalg RSA -keysize 2048 \
-        -validity 10000 \
-        -dname "CN=goblin-linux debug, OU=probe, O=goblin-linux, C=US" >/dev/null
-}
-
 echo "==> signing"
-"$BT/apksigner" sign \
-    --ks "$KEYSTORE" --ks-pass pass:android --key-pass pass:android \
-    --ks-key-alias goblindebug \
-    --out "$OUT/goblin-sentry.apk" \
-    "$OUT/aligned.apk"
+python3 "$HERE/sign.py" "${SIGNING:-$VARIANT}" "$OUT/aligned.apk" "$OUT/goblin-sentry.apk" --build-tools "$BT"
 
 rm -f "$OUT/unaligned.apk" "$OUT/aligned.apk" "$OUT/goblin-sentry.apk.idsig"
 echo

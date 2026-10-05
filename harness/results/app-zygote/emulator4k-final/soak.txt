@@ -1,0 +1,229 @@
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.083 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.192 s, parallel 0.203 s, speedup 5.88x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.083 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.724 s, parallel 0.266 s, speedup 6.47x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.083 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.737 s, parallel 0.282 s, speedup 6.16x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.736 s, parallel 0.261 s, speedup 6.65x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.736 s, parallel 0.258 s, speedup 6.72x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.083 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.724 s, parallel 0.252 s, speedup 6.83x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 999/1000 below 100 us, fastest 0.083 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.737 s, parallel 0.260 s, speedup 6.67x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.083 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.738 s, parallel 0.351 s, speedup 4.95x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.732 s, parallel 0.269 s, speedup 6.43x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 2.150 s, parallel 0.279 s, speedup 7.70x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.083 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.118 s, parallel 0.152 s, speedup 7.35x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 2.202 s, parallel 0.271 s, speedup 8.11x, checksum 2084712531426758355
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 999/1000 below 100 us, fastest 0.083 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.125 s, parallel 0.158 s, speedup 7.11x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.103 s, parallel 0.147 s, speedup 7.51x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.118 s, parallel 0.151 s, speedup 7.39x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.107 s, parallel 0.150 s, speedup 7.39x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.106 s, parallel 0.137 s, speedup 8.07x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.083 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.091 s, parallel 0.157 s, speedup 6.97x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.122 s, parallel 0.156 s, speedup 7.19x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.097 s, parallel 0.149 s, speedup 7.36x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.112 s, parallel 0.156 s, speedup 7.15x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.119 s, parallel 0.144 s, speedup 7.76x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.115 s, parallel 0.148 s, speedup 7.55x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 1000/1000 below 100 us, fastest 0.167 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.119 s, parallel 0.148 s, speedup 7.57x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Guest CPUs: 8; counter frequency: 24000000
+Native cross-core handoffs: 999/1000 below 100 us, fastest 0.125 us
+PASS: two threads execute guest instructions concurrently
+CPU work: 8 cores, serial 1.120 s, parallel 0.143 s, speedup 7.81x, checksum 9043690652802618458
+PASS: CPU-affine work and independent TLS on every guest CPU
+PASS: cross-core mmap, mprotect, munmap and SIGSEGV delivery (100 rounds)
+PASS: 80 threads, migration between all CPUs, TLS and targeted signals
+PASS: fork copy-on-write and exec while a sibling runs (30 rounds)
+GOBLIN PARALLEL PASS
+Completed 25 native multicore iterations
+PASS: Sustained native multicore, TLS, mapping coherence, migration and fork/exec workload for at least 120 seconds on 8 CPUs
+GOBLIN SERVICES PASS
+

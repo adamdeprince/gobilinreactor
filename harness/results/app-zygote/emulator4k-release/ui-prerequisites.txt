@@ -1,0 +1,47 @@
+0% [Working]0% [Connecting to debian.map.fastly.net] [Connecting to apt.goblinreactor.com]0% [Connecting to debian.map.fastly.net (151.101.138.132)] [Connecting to apt.g0% [Connected to debian.map.fastly.net (151.101.138.132)] [Connected to apt.gob                                                                               Hit:1 https://deb.debian.org/debian trixie InRelease
+                                                                               0% [Waiting for headers]                        Hit:2 https://apt.goblinreactor.com trixie InRelease
+                        0% [Working]0% [Working]0% [Working]20% [Working]             Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 7%Reading state information... Done
+The following additional packages will be installed:
+  vim-common
+Suggested packages:
+  indent
+Recommended packages:
+  xxd
+The following NEW packages will be installed:
+  less vim-common vim-tiny
+0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1286 kB of archives.
+After this operation, 4415 kB of additional disk space will be used.
+0% [Working]0% [Connecting to debian.map.fastly.net (151.101.138.132)]                                                          0% [Connected to debian.map.fastly.net (151.101.138.132)]                                                         Get:1 https://deb.debian.org/debian trixie/main arm64 less arm64 668-1 [156 kB]
+                                                         3% [1 less 49.0 kB/156 kB 31%]                              16% [Working]             Get:2 https://deb.debian.org/debian trixie/main arm64 vim-common all 2:9.1.1230-2 [421 kB]
+20% [2 vim-common 64.7 kB/421 kB 15%]                                     49% [Working]             Get:3 https://deb.debian.org/debian trixie/main arm64 vim-tiny arm64 2:9.1.1230-2 [709 kB]
+52% [3 vim-tiny 36.4 kB/709 kB 5%]                                  100% [Working]              Fetched 1286 kB in 2s (737 kB/s)
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 79, <STDIN> line 3.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/aarch64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/aarch64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/aarch64-linux-gnu/perl-base /usr/lib/aarch64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 3.)
+debconf: falling back to frontend: Teletype
+Selecting previously unselected package less.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7580 files and directories currently installed.)
+Preparing to unpack .../archives/less_668-1_arm64.deb ...
+Unpacking less (668-1) ...
+Selecting previously unselected package vim-common.
+Preparing to unpack .../vim-common_2%3a9.1.1230-2_all.deb ...
+Unpacking vim-common (2:9.1.1230-2) ...
+Selecting previously unselected package vim-tiny.
+Preparing to unpack .../vim-tiny_2%3a9.1.1230-2_arm64.deb ...
+Unpacking vim-tiny (2:9.1.1230-2) ...
+Setting up less (668-1) ...
+Setting up vim-common (2:9.1.1230-2) ...
+Setting up vim-tiny (2:9.1.1230-2) ...
+update-alternatives: using /usr/bin/vim.tiny to provide /usr/bin/editor (editor) in auto mode
+update-alternatives: using /usr/bin/vim.tiny to provide /usr/bin/ex (ex) in auto mode
+update-alternatives: using /usr/bin/vim.tiny to provide /usr/bin/rview (rview) in auto mode
+update-alternatives: using /usr/bin/vim.tiny to provide /usr/bin/vi (vi) in auto mode
+update-alternatives: using /usr/bin/vim.tiny to provide /usr/bin/view (view) in auto mode
+GOBLIN SERVICES PASS
+

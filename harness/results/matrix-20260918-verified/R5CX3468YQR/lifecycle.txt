@@ -1,0 +1,8 @@
+PASS: terminal activity starts Bash
+PASS: typed command reaches guest filesystem
+PASS: recreated activity reconnects to the same shell and live job
+PASS: Stop reaps shell and background job
+PASS: terminal starts after app process restart
+PASS: installed Python and guest files survive app restart
+PASS: shell exit leaves no guest children
+TERMINAL LIFECYCLE PASS

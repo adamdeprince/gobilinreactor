@@ -1,0 +1,14 @@
+FAIL: java.lang.AssertionError: Guest command failed: rm -f /home/goblin/.backup-check-2d859d6bbc5947fea643d129fd36cbbc; sync
+No such file or directory
+
+java.lang.AssertionError: Guest command failed: rm -f /home/goblin/.backup-check-2d859d6bbc5947fea643d129fd36cbbc; sync
+No such file or directory
+
+	at dev.goblinlinux.sentry.ServicesAcceptance.require(ServicesAcceptance.java:26)
+	at dev.goblinlinux.sentry.ServicesAcceptance.execute(ServicesAcceptance.java:47)
+	at dev.goblinlinux.sentry.ServicesAcceptance.execute(ServicesAcceptance.java:38)
+	at dev.goblinlinux.sentry.ServicesAcceptance.recovery(ServicesAcceptance.java:151)
+	at dev.goblinlinux.sentry.ServicesAcceptance.onStart(ServicesAcceptance.java:225)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2597)
+GOBLIN SERVICES FAIL
+

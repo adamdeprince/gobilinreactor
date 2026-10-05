@@ -1,0 +1,68 @@
+[
+  {
+    "path": "python-recipes/bzip2-1.0.8-3.tar.gz",
+    "url": "https://codeload.github.com/beeware/cpython-android-source-deps/tar.gz/refs/tags/bzip2-1.0.8-3",
+    "sha256": "265397f190467b02c7240871856f0d8850750a08bbb2f51453520188e2fd4f7d",
+    "size": 9105
+  },
+  {
+    "path": "python-recipes/libffi-3.4.4-3.tar.gz",
+    "url": "https://codeload.github.com/beeware/cpython-android-source-deps/tar.gz/refs/tags/libffi-3.4.4-3",
+    "sha256": "a62b0629ceebad486149add1c7cb01a25a2b63a8ecc664384947b1b3cd2728d0",
+    "size": 7775
+  },
+  {
+    "path": "python-recipes/openssl-3.0.15-4.tar.gz",
+    "url": "https://codeload.github.com/beeware/cpython-android-source-deps/tar.gz/refs/tags/openssl-3.0.15-4",
+    "sha256": "d34f5b0d44c27817e19a869b6a82768b0ed55b219bf1a95dea8aedd1433e2c12",
+    "size": 8719
+  },
+  {
+    "path": "python-recipes/sqlite-3.50.4-0.tar.gz",
+    "url": "https://codeload.github.com/beeware/cpython-android-source-deps/tar.gz/refs/tags/sqlite-3.50.4-0",
+    "sha256": "f77e764265d52feb800901dfe42f9d5647726cbf72aa253eea46ae2526d069f8",
+    "size": 9346
+  },
+  {
+    "path": "python-recipes/xz-5.4.6-1.tar.gz",
+    "url": "https://codeload.github.com/beeware/cpython-android-source-deps/tar.gz/refs/tags/xz-5.4.6-1",
+    "sha256": "791b4ea0dcea392324f33acd83975ab7d192a5d1a568f7958bd908453c8ce2a2",
+    "size": 7780
+  },
+  {
+    "path": "python-sources/bzip2-1.0.8.tar.gz",
+    "url": "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
+    "sha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
+    "size": 810029
+  },
+  {
+    "path": "python-sources/libffi-3.4.4.tar.gz",
+    "url": "https://github.com/libffi/libffi/releases/download/v3.4.4/libffi-3.4.4.tar.gz",
+    "sha256": "d66c56ad259a82cf2a9dfc408b32bf5da52371500b84745f7fb8b645712df676",
+    "size": 1362394
+  },
+  {
+    "path": "python-sources/openssl-3.0.15.tar.gz",
+    "url": "https://github.com/openssl/openssl/releases/download/openssl-3.0.15/openssl-3.0.15.tar.gz",
+    "sha256": "23c666d0edf20f14249b3d8f0368acaee9ab585b09e1de82107c66e1f3ec9533",
+    "size": 15318633
+  },
+  {
+    "path": "python-sources/xz-5.4.6.tar.gz",
+    "url": "https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz",
+    "sha256": "aeba3e03bf8140ddedf62a0a367158340520f6b384f75ca6045ccc6c0d43fd5c",
+    "size": 2889306
+  },
+  {
+    "path": "python-sources/sqlite-autoconf-3500400.tar.gz",
+    "url": "https://www.sqlite.org/2025/sqlite-autoconf-3500400.tar.gz",
+    "sha256": "a3db587a1b92ee5ddac2f66b3edb41b26f9c867275782d46c3a088977d6a5b18",
+    "size": 3173050
+  },
+  {
+    "path": "python-sources/sqlite-src-3500400.zip",
+    "url": "https://www.sqlite.org/2025/sqlite-src-3500400.zip",
+    "sha256": "b7b4dc060f36053902fb65b344bbbed592e64b2291a26ac06fe77eec097850e9",
+    "size": 14393367
+  }
+]

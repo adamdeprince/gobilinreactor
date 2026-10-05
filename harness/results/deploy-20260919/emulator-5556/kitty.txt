@@ -1,0 +1,87 @@
+INSTRUMENTATION_RESULT: stream=PASS: upstream kitty screen displays the guest Bash prompt
+PASS: goblin starts in /home/goblin with a real unprivileged UID and protected system files
+PASS: packaged sudo elevates commands without a password, supports login shells and leaves the terminal unprivileged
+PASS: IME commits accented, wide, combining and supplementary Unicode through Bash
+PASS: IME composition replaces pre-edit text before committing
+PASS: less paints, navigates and restores the alternate screen
+PASS: Vim accepts direct input, Escape and commands, and saves Unicode
+FAILED: java.lang.AssertionError: pinch changes text size; screen=
+café 界 é 🙂
+goblin@goblin:~$ printf composed > /home/goblin/goblin-kitty-889fd2
+f2-c19/composition
+goblin@goblin:~$ python3 -c 'print('\''\n'\''.join('\''KITTY_LINE_%
+03d café 界'\'' % i for i in range(1,161)))' > /home/goblin/goblin-
+kitty-889fd2f2-c19/pages; less -R /home/goblin/goblin-kitty-889fd2f
+2-c19/pages
+goblin@goblin:~$ printf less_done > /home/goblin/goblin-kitty-889fd
+2f2-c19/less
+goblin@goblin:~$ vim.tiny -u NONE -N /home/goblin/goblin-kitty-889f
+d2f2-c19/edited
+goblin@goblin:~$ stty size > /home/goblin/goblin-kitty-889fd2f2-c19
+/size-before
+goblin@goblin:~$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+café 界 é 🙂
+goblin@goblin:~$ printf composed > /home/goblin/goblin-kitty-889fd2
+f2-c19/composition
+goblin@goblin:~$ python3 -c 'print('\''\n'\''.join('\''KITTY_LINE_%
+03d café 界'\'' % i for i in range(1,161)))' > /home/goblin/goblin-
+kitty-889fd2f2-c19/pages; less -R /home/goblin/goblin-kitty-889fd2f
+2-c19/pages
+goblin@goblin:~$ printf less_done > /home/goblin/goblin-kitty-889fd
+2f2-c19/less
+goblin@goblin:~$ vim.tiny -u NONE -N /home/goblin/goblin-kitty-889f
+d2f2-c19/edited
+goblin@goblin:~$ stty size > /home/goblin/goblin-kitty-889fd2f2-c19
+/size-before
+goblin@goblin:~$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSTRUMENTATION_CODE: 0

@@ -1,0 +1,57 @@
+{
+  "apk_sha256": "df149ab344331ed28c5defd039999beb684fe12c9230793777d622d1423835f4",
+  "sources": {
+    "linux": {
+      "repository": "https://github.com/zalexdev/linux-um-arm64.git",
+      "commit": "8897487c52233cd00cf2850008ca068892f1ae91",
+      "branch": "um-arm64",
+      "license": "GPL-2.0-only"
+    },
+    "passt": {
+      "repository": "https://passt.top/passt",
+      "commit": "588b545dae741bec6fd7622a33c7852c06d72a59",
+      "license": "GPL-2.0-or-later AND BSD-3-Clause"
+    }
+  },
+  "kernel_sha256": "ff258c81a2b22d04ed3482edb2478a6d754faf9a8541e6fe3c30830071893939",
+  "stub_sha256": "2d2c36931908e4cff0489d7f2c3a5e220d357ae7708ecf2d16eede0162b2567f",
+  "initramfs_sha256": "25e010c589849bd6ee1896f03f57f0f353c0550a89f9b9fa86ec7ccc48bcb2bf",
+  "network_helper_sha256": "572a6271519393891394d51b6506a0b81038416e6da833ed672425d4183be6d9",
+  "devices": [
+    {
+      "serial": "R5CX3468YQR",
+      "model": "Samsung SM-S928U",
+      "api": 36,
+      "host_page_size": 4096
+    },
+    {
+      "serial": "emulator-5554",
+      "model": "Android ARM64 16 KiB emulator",
+      "api": 36,
+      "host_page_size": 16384
+    }
+  ],
+  "final_apk_checks": [
+    "phone-terminal.txt",
+    "emulator-terminal.txt",
+    "phone-emacs-ui.txt",
+    "emulator-keyboard.txt",
+    "phone-runtime.txt"
+  ],
+  "component_and_integration_checks": [
+    "migration.txt",
+    "phone-fresh.txt",
+    "phone-packages.txt",
+    "emulator-recovery.txt",
+    "emulator-lifecycle.txt"
+  ],
+  "component_check_note": "Fresh bootstrap, package, recovery and lifecycle checks used the same kernel, initramfs and deployment assets before the final diagnostic-output cleanup and bundled notices; final APK UI and Emacs checks are listed separately.",
+  "resource_tests": {
+    "concurrent_children": 80,
+    "concurrent_terminals": 13,
+    "sparse_file_bytes": 10737418240,
+    "touched_allocation_bytes": 603979776
+  },
+  "intentionally_exhausted_device": false,
+  "migration_backup_retained": "files/debian"
+}

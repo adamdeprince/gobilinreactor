@@ -1,0 +1,63 @@
+page size            4096
+-- Developer: Debian bootstrap --
+PASS: Debian bootstrap status=0 elapsed_ms=293 
+METRIC {"workload":"Debian bootstrap","page_size":4096,"wall_ns":288129666,"startup_ns":76095916,"syscalls":402,"wall_ns_per_syscall":621637,"broker_ns_per_syscall":117745,"broker_rss_start_bytes":143581184,"broker_rss_end_bytes":139423744,"broker_rss_sampled_peak_bytes":156295168}
+-- Developer: install developer tools --
+PASS: install developer tools status=0 elapsed_ms=84572 
+METRIC {"workload":"install developer tools","page_size":4096,"wall_ns":84521635999,"startup_ns":152583084,"syscalls":212114,"wall_ns_per_syscall":398075,"broker_ns_per_syscall":129084,"broker_rss_start_bytes":139685888,"broker_rss_end_bytes":146014208,"broker_rss_sampled_peak_bytes":263979008}
+gcc (Debian 14.2.0-19) 14.2.0
+GNU Make 4.4.1
+Python 3.13.5
+-- Developer: ps shows live guest processes --
+PASS: ps shows live guest processes status=0 elapsed_ms=316 
+METRIC {"workload":"ps shows live guest processes","page_size":4096,"wall_ns":286240334,"startup_ns":112373959,"syscalls":1113,"wall_ns_per_syscall":197835,"broker_ns_per_syscall":76108.7,"broker_rss_start_bytes":145752064,"broker_rss_end_bytes":146984960,"broker_rss_sampled_peak_bytes":157200384}
+         1          0 bash
+         2          1 sleep
+-- Developer: pinned HTTPS clone --
+PASS: pinned HTTPS clone status=0 elapsed_ms=3167 
+METRIC {"workload":"pinned HTTPS clone","page_size":4096,"wall_ns":3141314001,"startup_ns":100587624,"syscalls":14832,"wall_ns_per_syscall":208426,"broker_ns_per_syscall":55124.2,"broker_rss_start_bytes":146984960,"broker_rss_end_bytes":143790080,"broker_rss_sampled_peak_bytes":160370688}
+51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf zlib 1.3.1
+Cloning into '/tmp/goblin-developer-508378160866/zlib'...
+-- Developer: GCC and Make build --
+PASS: GCC and Make build status=0 elapsed_ms=16350 
+METRIC {"workload":"GCC and Make build","page_size":4096,"wall_ns":16303463758,"startup_ns":111774666,"syscalls":88003,"wall_ns_per_syscall":184538,"broker_ns_per_syscall":81577.4,"broker_rss_start_bytes":143523840,"broker_rss_end_bytes":145031168,"broker_rss_sampled_peak_bytes":154808320}
+hello world
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+		*** zlib test OK ***
+hello world
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+		*** zlib 64-bit test OK ***
+zlib version 1.3.1 = 0x1310, compile flags = 0xa9
+uncompress(): hello, hello!
+gzread(): hello, hello!
+gzgets() after gzseek:  hello!
+inflate(): hello, hello!
+large_inflate(): OK
+after inflateSync(): hello, hello!
+inflate with dictionary: hello, hello!
+-- Developer: Python venv and hashed wheel --
+PASS: Python venv and hashed wheel status=0 elapsed_ms=11508 
+METRIC {"workload":"Python venv and hashed wheel","page_size":4096,"wall_ns":11465633297,"startup_ns":94108167,"syscalls":52177,"wall_ns_per_syscall":218813,"broker_ns_per_syscall":88485.6,"broker_rss_start_bytes":144900096,"broker_rss_end_bytes":145047552,"broker_rss_sampled_peak_bytes":146411520}
+Collecting idna@ https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl (from -r requirements.txt (line 1))
+  Downloading idna-3.10-py3-none-any.whl (70 kB)
+Installing collected packages: idna
+Successfully installed idna-3.10
+venv, wheel hash and Unicode IDNA passed
+-- Developer: clean package audit and test cleanup --
+PASS: clean package audit and test cleanup status=0 elapsed_ms=1523 
+METRIC {"workload":"clean package audit and test cleanup","page_size":4096,"wall_ns":1504735834,"startup_ns":110091001,"syscalls":3750,"wall_ns_per_syscall":385965,"broker_ns_per_syscall":241936,"broker_rss_start_bytes":144719872,"broker_rss_end_bytes":147128320,"broker_rss_sampled_peak_bytes":147128320}
+GOBLIN PASS

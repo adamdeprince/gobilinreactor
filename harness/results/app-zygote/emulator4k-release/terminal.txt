@@ -1,0 +1,85 @@
+PASS: upstream kitty screen displays the guest Bash prompt
+PASS: goblin starts in /home/goblin with a real unprivileged UID and protected system files
+PASS: packaged sudo elevates commands without a password, supports login shells and leaves the terminal unprivileged
+PASS: sudo su - opens an interactive root login shell; exit returns to the same unprivileged terminal
+PASS: IME commits accented, wide, combining and supplementary Unicode through Bash
+PASS: IME composition replaces pre-edit text before committing
+FAILED: java.lang.AssertionError: less first page; screen=
+café 界 é 🙂
+goblin@goblin:~$ printf composed > /home/goblin/goblin-kitty-474d7f
+59-6b8/composition
+goblin@goblin:~$ python3 -c 'print('\''\n'\''.join('\''KITTY_LINE_%
+03d café 界'\'' % i for i in range(1,161)))' > /home/goblin/goblin-
+kitty-474d7f59-6b8/pages; less -R /home/goblin/goblin-kitty-474d7f5
+9-6b8/pages
+-bash: less: command not found
+goblin@goblin:~$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+café 界 é 🙂
+goblin@goblin:~$ printf composed > /home/goblin/goblin-kitty-474d7f
+59-6b8/composition
+goblin@goblin:~$ python3 -c 'print('\''\n'\''.join('\''KITTY_LINE_%
+03d café 界'\'' % i for i in range(1,161)))' > /home/goblin/goblin-
+kitty-474d7f59-6b8/pages; less -R /home/goblin/goblin-kitty-474d7f5
+9-6b8/pages
+-bash: less: command not found
+goblin@goblin:~$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

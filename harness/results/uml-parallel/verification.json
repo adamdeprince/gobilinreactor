@@ -1,0 +1,75 @@
+{
+  "recorded_at_utc": "2026-09-20T03:05:53.969107+00:00",
+  "sources": {
+    "linux": {
+      "repository": "https://github.com/zalexdev/linux-um-arm64.git",
+      "commit": "8897487c52233cd00cf2850008ca068892f1ae91",
+      "branch": "um-arm64",
+      "license": "GPL-2.0-only"
+    },
+    "passt": {
+      "repository": "https://passt.top/passt",
+      "commit": "588b545dae741bec6fd7622a33c7852c06d72a59",
+      "license": "GPL-2.0-or-later AND BSD-3-Clause"
+    }
+  },
+  "artifacts_sha256": {
+    "harness/build/goblin-sentry.apk": "095ea566e560c139460d2b91e7a40904e6dcff26d4797b13377bd2870eed3c82",
+    "uml/patches/0001-arm64-shared-mm-workers.patch": "7f3a9d505854cec5e121f2d55430402f3125c0a2bb258e762c46c6a9819262ee",
+    "uml/build/artifacts/libgoblinuml-kernel.so": "29fda23f21b1af53e5bcd966af2bcdf8bb0083f4f790c03b0502d265e4c85e04",
+    "uml/build/artifacts/libgoblinuml-net.so": "572a6271519393891394d51b6506a0b81038416e6da833ed672425d4183be6d9",
+    "uml/build/artifacts/libgoblinuml-stub.so": "a255596bb2ed60e126e94ccabe41703d77d7943057ace002e31e5784825cb0d6",
+    "uml/build/artifacts/kernel.config": "2879d7e008a42d2628feeb8e861b406549b0ff8261282aad57ec383b4c884154",
+    "uml/build/artifacts/initramfs.cpio.gz": "ecaa17792dba0844b01e6ce3255b4426ee1d3d9c7f54c2ccc77411fe8169342c"
+  },
+  "results_sha256": {
+    "emulator-4k-core.txt": "573edaedfe8dcb522ff42890bbe71e4f4b928da7149a269fea8e8f09fa484e97",
+    "emulator-4k-eight-cpu.txt": "e85a9c210fa5f36452d29cf3f8083176a167a5867540271d76272960cf0008b4",
+    "emulator-4k-power.txt": "a2d082a8df19651649b81608d6b3ba1f36d69e14b3db5cfb8e215ab46fa19f17",
+    "emulator-final-upgrade.json": "cf123c584777b34e6888b80b20e67c1d05050858954e0ca3871431683db3af4c",
+    "emulator-packages.txt": "8e3ed0c75151789a0422dd06ba52df32c273f5188cb1107d2911d361ecf6e019",
+    "emulator-parallel.txt": "40fcf75d2149d17282ad93ae30f50edfdbd0a0311615bbabfb0f31bb5dc33860",
+    "emulator-power.txt": "a2d082a8df19651649b81608d6b3ba1f36d69e14b3db5cfb8e215ab46fa19f17",
+    "emulator-terminal.txt": "75b0021ee316ce5a9ca1c7d1cb7bb482247bc01de7df4263e7e5a32f6103465c",
+    "emulator-upgrade.json": "3f56dbd183081da47c036ba95353996ac6488b56aab61e8e8148399b5dfc67ec",
+    "emulator-worker-failure.txt": "ff526e0f4ca8369a00a30209b79c9f1e56c0784d9139e8e3deba014051ae923b",
+    "emulator-worker-recovery-boot.txt": "4cbc815d292e8c5af31a21c34e00ebd95b688f3f531ce6f0f31118b0f8386770",
+    "patch-application.txt": "2e028fae8d16156216f61428419b43cd0498ad88558040abe7dbf84c43e0f88d",
+    "samsung-background.txt": "f8e1fe334461299f7830bdd11d173211777fd8e1f53327238a5378856800dd56",
+    "samsung-boot.txt": "ddeaf6efb0fe2206a7bf4c882a8c22e9e39ba01acbd7f3ab3a63d4aa1076d1f1",
+    "samsung-packages.txt": "c311bd9ae8878f041bb7c557798cf5a491f2056150cfba5bbc3baf1856b30451",
+    "samsung-parallel.txt": "8ec241b9df44cddc2e02abf2c4744f536e3a396ef89760336a1e02aaa330ab8b",
+    "samsung-terminal.png": "641b9573079f2a4ea8710c5f19b2e55ecbe63107795eb1e09dd2a53490e641a6",
+    "samsung-upgrade.json": "043e05bd2db83660c0e784367cf1916ebf184af4fb2a9c206d630974837f005c"
+  },
+  "final_kernel": "#11 SMP Sun Sep 20 00:30:33 UTC 2026",
+  "final_apk_reports": [
+    "emulator-parallel.txt",
+    "emulator-4k-eight-cpu.txt",
+    "emulator-worker-failure.txt",
+    "emulator-packages.txt",
+    "emulator-4k-core.txt",
+    "emulator-power.txt",
+    "emulator-4k-power.txt",
+    "patch-application.txt",
+    "emulator-final-upgrade.json",
+    "samsung-parallel.txt",
+    "samsung-packages.txt",
+    "samsung-background.txt",
+    "samsung-upgrade.json"
+  ],
+  "terminal_report_kernel": "#10; frontend unchanged in final APK",
+  "physical_phone_deployment": {
+    "result": "PASS",
+    "serial": "R5CX3468YQR",
+    "model": "Samsung SM-S928U",
+    "hardware_cpus": 8,
+    "guest_online_cpus": 8,
+    "host_page_size": 4096,
+    "native_cpu_speedup": 5.58,
+    "preserved_packages": 189,
+    "power_check": "Actual OS wake lock and background heartbeat; no phone shutdown or screen-off injection",
+    "terminal_visual_check": "Goblin prompt visible in /home/goblin; black background and modifier/arrow key row; screenshot saved",
+    "left_running": true
+  }
+}

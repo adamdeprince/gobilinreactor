@@ -1,0 +1,588 @@
+{
+  "started_utc": "20260918-193855",
+  "apk_sha256": "376b93a05928d3908c9213b4120ec669b3cf314a9872fb4b45653432ea36efdb",
+  "devices": [
+    {
+      "serial": "emulator-5558",
+      "page_size": 4096,
+      "model": "sdk_gphone64_arm64",
+      "api": "36",
+      "checks": [
+        {
+          "name": "regression",
+          "passed": true,
+          "exit_status": 0,
+          "log": "regression.txt"
+        },
+        {
+          "name": "persistent",
+          "passed": true,
+          "exit_status": 0,
+          "log": "persistent.txt"
+        },
+        {
+          "name": "developer",
+          "passed": true,
+          "exit_status": 0,
+          "log": "developer.txt"
+        },
+        {
+          "name": "recovery",
+          "passed": true,
+          "exit_status": 0,
+          "log": "recovery.txt"
+        },
+        {
+          "name": "kitty",
+          "passed": true,
+          "exit_status": 0,
+          "log": "kitty.txt"
+        },
+        {
+          "name": "lifecycle",
+          "passed": true,
+          "exit_status": 0,
+          "log": "lifecycle-final.txt",
+          "initial_failed_log": "lifecycle.txt"
+        }
+      ],
+      "metrics": [
+        {
+          "workload": "Debian bootstrap",
+          "page_size": 4096,
+          "wall_ns": 288129666,
+          "startup_ns": 76095916,
+          "syscalls": 402,
+          "wall_ns_per_syscall": 621637,
+          "broker_ns_per_syscall": 117745,
+          "broker_rss_start_bytes": 143581184,
+          "broker_rss_end_bytes": 139423744,
+          "broker_rss_sampled_peak_bytes": 156295168
+        },
+        {
+          "workload": "install developer tools",
+          "page_size": 4096,
+          "wall_ns": 84521635999,
+          "startup_ns": 152583084,
+          "syscalls": 212114,
+          "wall_ns_per_syscall": 398075,
+          "broker_ns_per_syscall": 129084,
+          "broker_rss_start_bytes": 139685888,
+          "broker_rss_end_bytes": 146014208,
+          "broker_rss_sampled_peak_bytes": 263979008
+        },
+        {
+          "workload": "ps shows live guest processes",
+          "page_size": 4096,
+          "wall_ns": 286240334,
+          "startup_ns": 112373959,
+          "syscalls": 1113,
+          "wall_ns_per_syscall": 197835,
+          "broker_ns_per_syscall": 76108.7,
+          "broker_rss_start_bytes": 145752064,
+          "broker_rss_end_bytes": 146984960,
+          "broker_rss_sampled_peak_bytes": 157200384
+        },
+        {
+          "workload": "pinned HTTPS clone",
+          "page_size": 4096,
+          "wall_ns": 3141314001,
+          "startup_ns": 100587624,
+          "syscalls": 14832,
+          "wall_ns_per_syscall": 208426,
+          "broker_ns_per_syscall": 55124.2,
+          "broker_rss_start_bytes": 146984960,
+          "broker_rss_end_bytes": 143790080,
+          "broker_rss_sampled_peak_bytes": 160370688
+        },
+        {
+          "workload": "GCC and Make build",
+          "page_size": 4096,
+          "wall_ns": 16303463758,
+          "startup_ns": 111774666,
+          "syscalls": 88003,
+          "wall_ns_per_syscall": 184538,
+          "broker_ns_per_syscall": 81577.4,
+          "broker_rss_start_bytes": 143523840,
+          "broker_rss_end_bytes": 145031168,
+          "broker_rss_sampled_peak_bytes": 154808320
+        },
+        {
+          "workload": "Python venv and hashed wheel",
+          "page_size": 4096,
+          "wall_ns": 11465633297,
+          "startup_ns": 94108167,
+          "syscalls": 52177,
+          "wall_ns_per_syscall": 218813,
+          "broker_ns_per_syscall": 88485.6,
+          "broker_rss_start_bytes": 144900096,
+          "broker_rss_end_bytes": 145047552,
+          "broker_rss_sampled_peak_bytes": 146411520
+        },
+        {
+          "workload": "clean package audit and test cleanup",
+          "page_size": 4096,
+          "wall_ns": 1504735834,
+          "startup_ns": 110091001,
+          "syscalls": 3750,
+          "wall_ns_per_syscall": 385965,
+          "broker_ns_per_syscall": 241936,
+          "broker_rss_start_bytes": 144719872,
+          "broker_rss_end_bytes": 147128320,
+          "broker_rss_sampled_peak_bytes": 147128320
+        },
+        {
+          "workload": "resume configuration after Android process death",
+          "page_size": 4096,
+          "wall_ns": 3555625002,
+          "startup_ns": 504041917,
+          "syscalls": 1718,
+          "wall_ns_per_syscall": 1928760.0,
+          "broker_ns_per_syscall": 1559910.0,
+          "broker_rss_start_bytes": 130859008,
+          "broker_rss_end_bytes": 139141120,
+          "broker_rss_sampled_peak_bytes": 159379456
+        },
+        {
+          "workload": "prepare disk exhaustion upgrade",
+          "page_size": 4096,
+          "wall_ns": 783347584,
+          "startup_ns": 94993542,
+          "syscalls": 1840,
+          "wall_ns_per_syscall": 399732,
+          "broker_ns_per_syscall": 163660,
+          "broker_rss_start_bytes": 138776576,
+          "broker_rss_end_bytes": 142213120,
+          "broker_rss_sampled_peak_bytes": 151498752
+        },
+        {
+          "workload": "upgrade fails at the disk quota",
+          "page_size": 4096,
+          "wall_ns": 706568125,
+          "startup_ns": 94138917,
+          "syscalls": 1345,
+          "wall_ns_per_syscall": 490433,
+          "broker_ns_per_syscall": 246767,
+          "broker_rss_start_bytes": 142213120,
+          "broker_rss_end_bytes": 144846848,
+          "broker_rss_sampled_peak_bytes": 156803072
+        },
+        {
+          "workload": "retry after restoring disk capacity",
+          "page_size": 4096,
+          "wall_ns": 3158380876,
+          "startup_ns": 100198916,
+          "syscalls": 2646,
+          "wall_ns_per_syscall": 1173960.0,
+          "broker_ns_per_syscall": 969106,
+          "broker_rss_start_bytes": 144846848,
+          "broker_rss_end_bytes": 141991936,
+          "broker_rss_sampled_peak_bytes": 155332608
+        },
+        {
+          "workload": "main Debian database remains clean",
+          "page_size": 4096,
+          "wall_ns": 227497042,
+          "startup_ns": 91918042,
+          "syscalls": 623,
+          "wall_ns_per_syscall": 290600,
+          "broker_ns_per_syscall": 126400,
+          "broker_rss_start_bytes": 141991936,
+          "broker_rss_end_bytes": 143675392,
+          "broker_rss_sampled_peak_bytes": 143675392
+        },
+        {
+          "workload": "startup_true_0",
+          "page_size": 4096,
+          "wall_ns": 101694292,
+          "startup_ns": 96503125,
+          "syscalls": 27,
+          "wall_ns_per_syscall": 1963010.0,
+          "broker_ns_per_syscall": 23268.5,
+          "broker_rss_start_bytes": 143675392,
+          "broker_rss_end_bytes": 143675392,
+          "broker_rss_sampled_peak_bytes": 143675392
+        },
+        {
+          "workload": "startup_true_1",
+          "page_size": 4096,
+          "wall_ns": 101185041,
+          "startup_ns": 94756875,
+          "syscalls": 27,
+          "wall_ns_per_syscall": 1964400.0,
+          "broker_ns_per_syscall": 26330.2,
+          "broker_rss_start_bytes": 143675392,
+          "broker_rss_end_bytes": 143937536,
+          "broker_rss_sampled_peak_bytes": 143937536
+        },
+        {
+          "workload": "startup_true_2",
+          "page_size": 4096,
+          "wall_ns": 100146667,
+          "startup_ns": 95219668,
+          "syscalls": 27,
+          "wall_ns_per_syscall": 1989460.0,
+          "broker_ns_per_syscall": 24659,
+          "broker_rss_start_bytes": 143937536,
+          "broker_rss_end_bytes": 143937536,
+          "broker_rss_sampled_peak_bytes": 143937536
+        },
+        {
+          "workload": "startup_true_3",
+          "page_size": 4096,
+          "wall_ns": 96810000,
+          "startup_ns": 89607709,
+          "syscalls": 27,
+          "wall_ns_per_syscall": 1943630.0,
+          "broker_ns_per_syscall": 26601.8,
+          "broker_rss_start_bytes": 143806464,
+          "broker_rss_end_bytes": 143806464,
+          "broker_rss_sampled_peak_bytes": 143806464
+        },
+        {
+          "workload": "startup_true_4",
+          "page_size": 4096,
+          "wall_ns": 106799458,
+          "startup_ns": 101222625,
+          "syscalls": 27,
+          "wall_ns_per_syscall": 2101220.0,
+          "broker_ns_per_syscall": 26379.7,
+          "broker_rss_start_bytes": 143806464,
+          "broker_rss_end_bytes": 143937536,
+          "broker_rss_sampled_peak_bytes": 143937536
+        },
+        {
+          "workload": "bench",
+          "page_size": 4096,
+          "wall_ns": 7909477170,
+          "startup_ns": 100021458,
+          "syscalls": 200002,
+          "wall_ns_per_syscall": 39282.3,
+          "broker_ns_per_syscall": 219.156,
+          "broker_rss_start_bytes": 143937536,
+          "broker_rss_end_bytes": 145510400,
+          "broker_rss_sampled_peak_bytes": 145510400
+        },
+        {
+          "workload": "forkbench",
+          "page_size": 4096,
+          "wall_ns": 429079042,
+          "startup_ns": 105316792,
+          "syscalls": 98,
+          "wall_ns_per_syscall": 3873280.0,
+          "broker_ns_per_syscall": 1478670.0,
+          "broker_rss_start_bytes": 145510400,
+          "broker_rss_end_bytes": 154148864,
+          "broker_rss_sampled_peak_bytes": 154288128
+        },
+        {
+          "workload": "remove isolated recovery fixtures",
+          "page_size": 4096,
+          "wall_ns": 234616417,
+          "startup_ns": 102636417,
+          "syscalls": 503,
+          "wall_ns_per_syscall": 363684,
+          "broker_ns_per_syscall": 103341,
+          "broker_rss_start_bytes": 154148864,
+          "broker_rss_end_bytes": 145162240,
+          "broker_rss_sampled_peak_bytes": 154148864
+        }
+      ],
+      "passed": true
+    },
+    {
+      "serial": "emulator-5556",
+      "page_size": 16384,
+      "model": "sdk_gphone16k_arm64",
+      "api": "36",
+      "checks": [
+        {
+          "name": "regression",
+          "passed": true,
+          "exit_status": 0,
+          "log": "regression.txt"
+        },
+        {
+          "name": "persistent",
+          "passed": true,
+          "exit_status": 0,
+          "log": "persistent.txt"
+        },
+        {
+          "name": "developer",
+          "passed": true,
+          "exit_status": 0,
+          "log": "developer.txt"
+        },
+        {
+          "name": "recovery",
+          "passed": true,
+          "exit_status": 0,
+          "log": "recovery.txt"
+        },
+        {
+          "name": "kitty",
+          "passed": true,
+          "exit_status": 0,
+          "log": "kitty.txt"
+        },
+        {
+          "name": "lifecycle",
+          "passed": true,
+          "exit_status": 0,
+          "log": "lifecycle-final.txt",
+          "initial_failed_log": "lifecycle.txt"
+        }
+      ],
+      "metrics": [
+        {
+          "workload": "Debian bootstrap",
+          "page_size": 16384,
+          "wall_ns": 202221000,
+          "startup_ns": 123531208,
+          "syscalls": 395,
+          "wall_ns_per_syscall": 316811,
+          "broker_ns_per_syscall": 64409.5,
+          "broker_rss_start_bytes": 142540800,
+          "broker_rss_end_bytes": 145735680,
+          "broker_rss_sampled_peak_bytes": 145735680
+        },
+        {
+          "workload": "install developer tools",
+          "page_size": 16384,
+          "wall_ns": 860615334,
+          "startup_ns": 125523584,
+          "syscalls": 1731,
+          "wall_ns_per_syscall": 452859,
+          "broker_ns_per_syscall": 150914,
+          "broker_rss_start_bytes": 145735680,
+          "broker_rss_end_bytes": 148324352,
+          "broker_rss_sampled_peak_bytes": 200523776
+        },
+        {
+          "workload": "ps shows live guest processes",
+          "page_size": 16384,
+          "wall_ns": 255371709,
+          "startup_ns": 119816125,
+          "syscalls": 1104,
+          "wall_ns_per_syscall": 166353,
+          "broker_ns_per_syscall": 64426.8,
+          "broker_rss_start_bytes": 148324352,
+          "broker_rss_end_bytes": 148422656,
+          "broker_rss_sampled_peak_bytes": 158810112
+        },
+        {
+          "workload": "pinned HTTPS clone",
+          "page_size": 16384,
+          "wall_ns": 2258333251,
+          "startup_ns": 119940168,
+          "syscalls": 14660,
+          "wall_ns_per_syscall": 148905,
+          "broker_ns_per_syscall": 43985.8,
+          "broker_rss_start_bytes": 148422656,
+          "broker_rss_end_bytes": 148389888,
+          "broker_rss_sampled_peak_bytes": 158580736
+        },
+        {
+          "workload": "GCC and Make build",
+          "page_size": 16384,
+          "wall_ns": 12711957797,
+          "startup_ns": 133363542,
+          "syscalls": 86402,
+          "wall_ns_per_syscall": 146111,
+          "broker_ns_per_syscall": 70246.2,
+          "broker_rss_start_bytes": 148389888,
+          "broker_rss_end_bytes": 150732800,
+          "broker_rss_sampled_peak_bytes": 159973376
+        },
+        {
+          "workload": "Python venv and hashed wheel",
+          "page_size": 16384,
+          "wall_ns": 9331927005,
+          "startup_ns": 136965585,
+          "syscalls": 51716,
+          "wall_ns_per_syscall": 178715,
+          "broker_ns_per_syscall": 87125.7,
+          "broker_rss_start_bytes": 150732800,
+          "broker_rss_end_bytes": 151191552,
+          "broker_rss_sampled_peak_bytes": 152928256
+        },
+        {
+          "workload": "clean package audit and test cleanup",
+          "page_size": 16384,
+          "wall_ns": 1389315459,
+          "startup_ns": 133142542,
+          "syscalls": 3744,
+          "wall_ns_per_syscall": 348799,
+          "broker_ns_per_syscall": 230578,
+          "broker_rss_start_bytes": 151191552,
+          "broker_rss_end_bytes": 153337856,
+          "broker_rss_sampled_peak_bytes": 153337856
+        },
+        {
+          "workload": "resume configuration after Android process death",
+          "page_size": 16384,
+          "wall_ns": 2919908043,
+          "startup_ns": 494061708,
+          "syscalls": 1696,
+          "wall_ns_per_syscall": 1503500.0,
+          "broker_ns_per_syscall": 1306640.0,
+          "broker_rss_start_bytes": 137019392,
+          "broker_rss_end_bytes": 144916480,
+          "broker_rss_sampled_peak_bytes": 155926528
+        },
+        {
+          "workload": "prepare disk exhaustion upgrade",
+          "page_size": 16384,
+          "wall_ns": 576931167,
+          "startup_ns": 124405416,
+          "syscalls": 1813,
+          "wall_ns_per_syscall": 275468,
+          "broker_ns_per_syscall": 124555,
+          "broker_rss_start_bytes": 144900096,
+          "broker_rss_end_bytes": 148373504,
+          "broker_rss_sampled_peak_bytes": 159252480
+        },
+        {
+          "workload": "upgrade fails at the disk quota",
+          "page_size": 16384,
+          "wall_ns": 571886500,
+          "startup_ns": 125959458,
+          "syscalls": 1329,
+          "wall_ns_per_syscall": 372708,
+          "broker_ns_per_syscall": 209739,
+          "broker_rss_start_bytes": 148373504,
+          "broker_rss_end_bytes": 150749184,
+          "broker_rss_sampled_peak_bytes": 161513472
+        },
+        {
+          "workload": "retry after restoring disk capacity",
+          "page_size": 16384,
+          "wall_ns": 2645236168,
+          "startup_ns": 137085583,
+          "syscalls": 2613,
+          "wall_ns_per_syscall": 977960,
+          "broker_ns_per_syscall": 849026,
+          "broker_rss_start_bytes": 150749184,
+          "broker_rss_end_bytes": 148799488,
+          "broker_rss_sampled_peak_bytes": 161480704
+        },
+        {
+          "workload": "main Debian database remains clean",
+          "page_size": 16384,
+          "wall_ns": 246431584,
+          "startup_ns": 126176209,
+          "syscalls": 618,
+          "wall_ns_per_syscall": 270446,
+          "broker_ns_per_syscall": 123940,
+          "broker_rss_start_bytes": 148799488,
+          "broker_rss_end_bytes": 150274048,
+          "broker_rss_sampled_peak_bytes": 150274048
+        },
+        {
+          "workload": "startup_true_0",
+          "page_size": 16384,
+          "wall_ns": 136459833,
+          "startup_ns": 131240584,
+          "syscalls": 26,
+          "wall_ns_per_syscall": 2068960.0,
+          "broker_ns_per_syscall": 38729.2,
+          "broker_rss_start_bytes": 150274048,
+          "broker_rss_end_bytes": 150274048,
+          "broker_rss_sampled_peak_bytes": 150274048
+        },
+        {
+          "workload": "startup_true_1",
+          "page_size": 16384,
+          "wall_ns": 130012125,
+          "startup_ns": 125620917,
+          "syscalls": 26,
+          "wall_ns_per_syscall": 2007900.0,
+          "broker_ns_per_syscall": 23693.9,
+          "broker_rss_start_bytes": 150274048,
+          "broker_rss_end_bytes": 150274048,
+          "broker_rss_sampled_peak_bytes": 150274048
+        },
+        {
+          "workload": "startup_true_2",
+          "page_size": 16384,
+          "wall_ns": 128304333,
+          "startup_ns": 123603125,
+          "syscalls": 26,
+          "wall_ns_per_syscall": 1977080.0,
+          "broker_ns_per_syscall": 23758,
+          "broker_rss_start_bytes": 150274048,
+          "broker_rss_end_bytes": 150274048,
+          "broker_rss_sampled_peak_bytes": 150274048
+        },
+        {
+          "workload": "startup_true_3",
+          "page_size": 16384,
+          "wall_ns": 145516376,
+          "startup_ns": 140413834,
+          "syscalls": 26,
+          "wall_ns_per_syscall": 1990720.0,
+          "broker_ns_per_syscall": 23354.1,
+          "broker_rss_start_bytes": 149749760,
+          "broker_rss_end_bytes": 149749760,
+          "broker_rss_sampled_peak_bytes": 149749760
+        },
+        {
+          "workload": "startup_true_4",
+          "page_size": 16384,
+          "wall_ns": 133208334,
+          "startup_ns": 127723875,
+          "syscalls": 26,
+          "wall_ns_per_syscall": 1986050.0,
+          "broker_ns_per_syscall": 22807.8,
+          "broker_rss_start_bytes": 149749760,
+          "broker_rss_end_bytes": 148455424,
+          "broker_rss_sampled_peak_bytes": 149749760
+        },
+        {
+          "workload": "bench",
+          "page_size": 16384,
+          "wall_ns": 7274004045,
+          "startup_ns": 123349375,
+          "syscalls": 200002,
+          "wall_ns_per_syscall": 35983.7,
+          "broker_ns_per_syscall": 174.884,
+          "broker_rss_start_bytes": 148455424,
+          "broker_rss_end_bytes": 150028288,
+          "broker_rss_sampled_peak_bytes": 150028288
+        },
+        {
+          "workload": "forkbench",
+          "page_size": 16384,
+          "wall_ns": 305313042,
+          "startup_ns": 123206042,
+          "syscalls": 98,
+          "wall_ns_per_syscall": 2340680.0,
+          "broker_ns_per_syscall": 741293,
+          "broker_rss_start_bytes": 150028288,
+          "broker_rss_end_bytes": 158711808,
+          "broker_rss_sampled_peak_bytes": 158711808
+        },
+        {
+          "workload": "remove isolated recovery fixtures",
+          "page_size": 16384,
+          "wall_ns": 242731334,
+          "startup_ns": 130842959,
+          "syscalls": 500,
+          "wall_ns_per_syscall": 319714,
+          "broker_ns_per_syscall": 99554.8,
+          "broker_rss_start_bytes": 158711808,
+          "broker_rss_end_bytes": 151945216,
+          "broker_rss_sampled_peak_bytes": 158711808
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "errors": [],
+  "finished_utc": "2026-09-18T19:51:07.561401+00:00",
+  "initial_matrix": "matrix.json",
+  "revalidation": "Only lifecycle was rerun, on the unchanged APK. Android discarded stale events from long adb input-text batches; the script now injects at most 32 characters per batch. Initial failure logs are preserved.",
+  "lifecycle_script_sha256": "e84cff2f16f5b84f0f7ce59aba72abc1bbb94442adb18af0453a3d87e916d713"
+}

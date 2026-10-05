@@ -1,0 +1,152 @@
+{
+  "files": {
+    "usr/sbin/mke2fs": {
+      "sha256": "6a4db3fd82e9e5eb2d33b47b686ed68599c7f9fd6918108f7059499e9be3ab11",
+      "binary_package": "e2fsprogs"
+    },
+    "sbin/mke2fs": {
+      "sha256": "6a4db3fd82e9e5eb2d33b47b686ed68599c7f9fd6918108f7059499e9be3ab11",
+      "binary_package": "e2fsprogs"
+    },
+    "lib/aarch64-linux-gnu/libext2fs.so.2": {
+      "sha256": "ff1171dd10bd6b02f64b4fae6a740d60a8f173216fed73d1546d6ff087bbe411",
+      "binary_package": "libext2fs2t64:arm64"
+    },
+    "lib/aarch64-linux-gnu/libcom_err.so.2": {
+      "sha256": "6a3258ad8e42f54f4333b8a5b6c671922a4482d261a89f75114b0de3ef565013",
+      "binary_package": "libcom-err2:arm64"
+    },
+    "lib/aarch64-linux-gnu/libblkid.so.1": {
+      "sha256": "d7c45dbfe33b6d0067a9a1fa7f73f4401bb662bc9efdb31ca8ce52f0ace33741",
+      "binary_package": "libblkid1:arm64"
+    },
+    "lib/aarch64-linux-gnu/libuuid.so.1": {
+      "sha256": "0d9006452200e01835c6bb4d33bc93da4704410050e87f42475c9b24bcab555c",
+      "binary_package": "libuuid1:arm64"
+    },
+    "lib/aarch64-linux-gnu/libe2p.so.2": {
+      "sha256": "3417cf7f9d49fc05e1f071c86c32b32138e50b72e0317145a31440120c15b98e",
+      "binary_package": "libext2fs2t64:arm64"
+    },
+    "lib/aarch64-linux-gnu/libc.so.6": {
+      "sha256": "70fa4c4cf57eabeb96097cce47582d02379c4cd1de3db3e98ade4dd7089a1b13",
+      "binary_package": "libc6:arm64"
+    },
+    "lib/ld-linux-aarch64.so.1": {
+      "sha256": "1b882eddacd494b060413a8aa4f0a4754ee3f84775e68cecbf8a86092b59cca6",
+      "binary_package": "libc6:arm64"
+    },
+    "usr/sbin/e2fsck": {
+      "sha256": "208ef1596e53a37f3a2465ab66571d1338a8ca93ed0c08182c204108f62b0e7e",
+      "binary_package": "e2fsprogs"
+    },
+    "sbin/e2fsck": {
+      "sha256": "208ef1596e53a37f3a2465ab66571d1338a8ca93ed0c08182c204108f62b0e7e",
+      "binary_package": "e2fsprogs"
+    },
+    "usr/sbin/resize2fs": {
+      "sha256": "daf2898490c3326c67b6f9017bf8038bf8722903a0dd5bbd92dd140b2234a3ae",
+      "binary_package": "e2fsprogs"
+    },
+    "sbin/resize2fs": {
+      "sha256": "daf2898490c3326c67b6f9017bf8038bf8722903a0dd5bbd92dd140b2234a3ae",
+      "binary_package": "e2fsprogs"
+    },
+    "etc/mke2fs.conf": {
+      "sha256": "c998d64f9b58c2235186f8ee75ba602d1fdb2991d94695fd687ab0e8096b6727",
+      "binary_package": "e2fsprogs"
+    },
+    "bin/busybox": {
+      "sha256": "7d93682be37cf6ed46699f6fff546b80bf133cf8ec342c2d04bc23387f78bc34",
+      "binary_package": "busybox-static"
+    }
+  },
+  "packages": [
+    {
+      "package": "e2fsprogs",
+      "version": "1.47.2-3+b12",
+      "source": "e2fsprogs",
+      "source_version": "1.47.2-3"
+    },
+    {
+      "package": "libext2fs2t64",
+      "version": "1.47.2-3+b12",
+      "source": "e2fsprogs",
+      "source_version": "1.47.2-3"
+    },
+    {
+      "package": "libcom-err2",
+      "version": "1.47.2-3+b12",
+      "source": "e2fsprogs",
+      "source_version": "1.47.2-3"
+    },
+    {
+      "package": "libblkid1",
+      "version": "2.41.5-0+deb13u1",
+      "source": "util-linux",
+      "source_version": "2.41.5-0+deb13u1"
+    },
+    {
+      "package": "libuuid1",
+      "version": "2.41.5-0+deb13u1",
+      "source": "util-linux",
+      "source_version": "2.41.5-0+deb13u1"
+    },
+    {
+      "package": "libc6",
+      "version": "2.41-12+deb13u4",
+      "source": "glibc",
+      "source_version": "2.41-12+deb13u4"
+    },
+    {
+      "package": "busybox-static",
+      "version": "1:1.37.0-6+b9",
+      "source": "busybox",
+      "source_version": "1:1.37.0-6"
+    },
+    {
+      "package": "libc6-dev",
+      "version": "2.41-12+deb13u4",
+      "source": "glibc",
+      "source_version": "2.41-12+deb13u4"
+    },
+    {
+      "package": "libgcc-14-dev",
+      "version": "14.2.0-19",
+      "source": "gcc-14",
+      "source_version": "14.2.0-19"
+    },
+    {
+      "package": "libstdc++-14-dev",
+      "version": "14.2.0-19",
+      "source": "gcc-14",
+      "source_version": "14.2.0-19"
+    }
+  ],
+  "initramfs_manifest": {
+    "packages": [
+      "e2fsprogs 1.47.2-3+b12"
+    ],
+    "files": {
+      "init": "58627f41782e4f9d399013dc4066ea75acf5ea062a210f4efce1fb1b0c611322",
+      "usr/sbin/mke2fs": "6a4db3fd82e9e5eb2d33b47b686ed68599c7f9fd6918108f7059499e9be3ab11",
+      "sbin/mke2fs": "6a4db3fd82e9e5eb2d33b47b686ed68599c7f9fd6918108f7059499e9be3ab11",
+      "lib/aarch64-linux-gnu/libext2fs.so.2": "ff1171dd10bd6b02f64b4fae6a740d60a8f173216fed73d1546d6ff087bbe411",
+      "lib/aarch64-linux-gnu/libcom_err.so.2": "6a3258ad8e42f54f4333b8a5b6c671922a4482d261a89f75114b0de3ef565013",
+      "lib/aarch64-linux-gnu/libblkid.so.1": "d7c45dbfe33b6d0067a9a1fa7f73f4401bb662bc9efdb31ca8ce52f0ace33741",
+      "lib/aarch64-linux-gnu/libuuid.so.1": "0d9006452200e01835c6bb4d33bc93da4704410050e87f42475c9b24bcab555c",
+      "lib/aarch64-linux-gnu/libe2p.so.2": "3417cf7f9d49fc05e1f071c86c32b32138e50b72e0317145a31440120c15b98e",
+      "lib/aarch64-linux-gnu/libc.so.6": "70fa4c4cf57eabeb96097cce47582d02379c4cd1de3db3e98ade4dd7089a1b13",
+      "lib/ld-linux-aarch64.so.1": "1b882eddacd494b060413a8aa4f0a4754ee3f84775e68cecbf8a86092b59cca6",
+      "usr/sbin/e2fsck": "208ef1596e53a37f3a2465ab66571d1338a8ca93ed0c08182c204108f62b0e7e",
+      "sbin/e2fsck": "208ef1596e53a37f3a2465ab66571d1338a8ca93ed0c08182c204108f62b0e7e",
+      "usr/sbin/resize2fs": "daf2898490c3326c67b6f9017bf8038bf8722903a0dd5bbd92dd140b2234a3ae",
+      "sbin/resize2fs": "daf2898490c3326c67b6f9017bf8038bf8722903a0dd5bbd92dd140b2234a3ae",
+      "etc/mke2fs.conf": "c998d64f9b58c2235186f8ee75ba602d1fdb2991d94695fd687ab0e8096b6727",
+      "bin/busybox": "7d93682be37cf6ed46699f6fff546b80bf133cf8ec342c2d04bc23387f78bc34",
+      "etc/passwd": "74c8e11e0e16eb7ee65a4ae0880056b10f6d35890d7125789d2659eb1e61e1c1",
+      "etc/group": "7a696fcfba89a55a6d73fa1a03c7f071fad2141340027b17a25db249e26b9be8",
+      "etc/profile": "be65ab0f340e67a4018e95514634f2078386a1867c11ba30bbc1fb42a4a6ba9f"
+    }
+  }
+}

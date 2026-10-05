@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "device": "Android 12 ARM64 emulator, 4 KiB pages, 2 GiB RAM",
+  "apk_sha256": "ca3956bb0af34abfa947ee603d3526bd6f625cb70151eddd16d1271fb003cc26",
+  "upgrade_from": "0.3.0",
+  "version": "0.3.1 (30001)",
+  "checks": [
+    "same application updated in place",
+    "guest disk inode retained",
+    "synced home file survived update",
+    "goblin login in home directory",
+    "new product name and version displayed in About",
+    "trademark attribution displayed"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "freetype": {
+    "url": "https://codeload.github.com/freetype/freetype/tar.gz/refs/tags/VER-2-14-3",
+    "sha256": "dc49de6b01a266eef4876a4dd34d9842c475d3e28ff2eff63bd2fb760ab56261",
+    "version": "VER-2-14-3",
+    "directory": "freetype-VER-2-14-3"
+  },
+  "harfbuzz": {
+    "url": "https://codeload.github.com/harfbuzz/harfbuzz/tar.gz/refs/tags/14.4.0",
+    "sha256": "46dc4f3b6aefc4d8256b10017186f5ebe50ea086714ab8948cdac4695a7a80a8",
+    "version": "14.4.0",
+    "directory": "harfbuzz-14.4.0"
+  },
+  "libpng": {
+    "url": "https://codeload.github.com/pnggroup/libpng/tar.gz/refs/tags/v1.6.58",
+    "sha256": "a9d4df463d36a6e5f9c29bd6f4967312d17e996c1854f3511f833924eb1993cf",
+    "version": "v1.6.58",
+    "directory": "libpng-1.6.58"
+  },
+  "lcms": {
+    "url": "https://codeload.github.com/mm2/Little-CMS/tar.gz/refs/tags/lcms2.19.1",
+    "sha256": "267705e278e2f7c2fb886c259dadcbaeb2be52748bcbc71c79f08aacacb7a709",
+    "version": "lcms2.19.1",
+    "directory": "Little-CMS-lcms2.19.1"
+  },
+  "xxhash": {
+    "url": "https://codeload.github.com/Cyan4973/xxHash/tar.gz/refs/tags/v0.8.3",
+    "sha256": "aae608dfe8213dfd05d909a57718ef82f30722c392344583d3f39050c7f29a80",
+    "version": "v0.8.3",
+    "directory": "xxHash-0.8.3"
+  },
+  "simde": {
+    "url": "https://codeload.github.com/simd-everywhere/simde/tar.gz/refs/tags/v0.8.2",
+    "sha256": "ed2a3268658f2f2a9b5367628a85ccd4cf9516460ed8604eed369653d49b25fb",
+    "version": "v0.8.2",
+    "directory": "simde-0.8.2"
+  },
+  "cairo": {
+    "url": "https://www.cairographics.org/releases/cairo-1.18.4.tar.xz",
+    "sha256": "445ed8208a6e4823de1226a74ca319d3600e83f6369f99b14265006599c32ccb",
+    "directory": "cairo-1.18.4"
+  },
+  "pixman": {
+    "url": "https://www.cairographics.org/releases/pixman-0.46.4.tar.xz",
+    "sha256": "a098c33924754ad43f981b740f6d576c70f9ed1006e12221b1845431ebce1239",
+    "directory": "pixman-0.46.4"
+  },
+  "fontconfig": {
+    "url": "https://codeload.github.com/fontconfig/fontconfig/tar.gz/refs/tags/2.18.3",
+    "sha256": "9ae01e1d53acdef56010c5451cd34aa41d325b2faccd8606448d8fa01b2496b3",
+    "directory": "fontconfig-2.18.3"
+  },
+  "expat": {
+    "url": "https://codeload.github.com/libexpat/libexpat/tar.gz/refs/tags/R_2_8_4",
+    "sha256": "a8a9c5cbba9110000b13cc9943f50fcd7e552a5cbad49cb191142c500a0a11b7",
+    "directory": "libexpat-R_2_8_4"
+  },
+  "meson": {
+    "url": "https://files.pythonhosted.org/packages/07/68/b0117422eb0a46d9d8d9e328f0c5b5c835179bfc058688bca35c90c89eba/meson-1.12.0-py3-none-any.whl",
+    "sha256": "71f133147fa0fcfe8f4df49fa1045771064947834538409e5d97b3613aac8b4e",
+    "directory": "meson-tool"
+  },
+  "kitty": {
+    "url": "https://codeload.github.com/kovidgoyal/kitty/tar.gz/refs/tags/v0.48.2",
+    "sha256": "1d32d2985f6f03923ea63fb7c32683b49e2d4ce19aa9e90b161f7f24efb00c9c",
+    "directory": "kitty-0.48.2"
+  },
+  "python": {
+    "url": "https://www.python.org/ftp/python/3.13.7/Python-3.13.7.tar.xz",
+    "sha256": "5462f9099dfd30e238def83c71d91897d8caa5ff6ebc7a50f14d4802cdaaa79a",
+    "directory": "Python-3.13.7"
+  }
+}

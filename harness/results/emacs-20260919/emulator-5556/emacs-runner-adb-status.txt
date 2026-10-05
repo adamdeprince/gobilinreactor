@@ -1,0 +1,7 @@
+PASS: regular-user terminal ready
+PASS: guest storage reported
+Traceback (most recent call last):
+  File "/tmp/goblin-emacs-ui.py", line 36, in <module>
+    wait(lambda:'\n' in (read('storage.status') or ''),'guest storage reported');assert read('storage.status')=='0\n';collect('storage.json')
+                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

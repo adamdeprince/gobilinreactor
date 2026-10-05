@@ -1,0 +1,8 @@
+PASS: terminal activity starts Bash
+Traceback (most recent call last):
+  File "/Users/adam/dev/goblin-linux/tests/terminal_lifecycle_test.py", line 84, in <module>
+    wait_for(lambda: read_guest(root + "/data") == "persistent", "typed command reaches guest filesystem")
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/adam/dev/goblin-linux/tests/terminal_lifecycle_test.py", line 35, in wait_for
+    raise AssertionError(name)
+AssertionError: typed command reaches guest filesystem

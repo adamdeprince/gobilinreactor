@@ -1,0 +1,98 @@
+[
+  {
+    "Package": "emacs-bin-common",
+    "Status": "install ok unpacked",
+    "Version": "1:30.1+1-6+deb13u1",
+    "Installed-Size": "491"
+  },
+  {
+    "Package": "emacs-common",
+    "Status": "install ok not-installed",
+    "Version": null,
+    "Installed-Size": null
+  },
+  {
+    "Package": "emacs-el",
+    "Status": "install ok unpacked",
+    "Version": "1:30.1+1-6+deb13u1",
+    "Installed-Size": "19710"
+  },
+  {
+    "Package": "emacs-nox",
+    "Status": "install ok not-installed",
+    "Version": null,
+    "Installed-Size": null
+  },
+  {
+    "Package": "emacsen-common",
+    "Status": "install ok unpacked",
+    "Version": "3.0.8",
+    "Installed-Size": "61"
+  },
+  {
+    "Package": "install-info",
+    "Status": "install ok unpacked",
+    "Version": "7.1.1-1+b1",
+    "Installed-Size": "235"
+  },
+  {
+    "Package": "libasound2-data",
+    "Status": "install ok unpacked",
+    "Version": "1.2.14-1+deb13u1",
+    "Installed-Size": "197"
+  },
+  {
+    "Package": "libasound2t64",
+    "Status": "install ok unpacked",
+    "Version": "1.2.14-1+deb13u1",
+    "Installed-Size": "1269"
+  },
+  {
+    "Package": "libc-bin",
+    "Status": "install ok triggers-pending",
+    "Version": "2.41-12+deb13u4",
+    "Installed-Size": "2249"
+  },
+  {
+    "Package": "libdbus-1-3",
+    "Status": "install ok unpacked",
+    "Version": "1.16.2-2",
+    "Installed-Size": "489"
+  },
+  {
+    "Package": "libgccjit0",
+    "Status": "install ok not-installed",
+    "Version": null,
+    "Installed-Size": null
+  },
+  {
+    "Package": "libgpm2",
+    "Status": "install ok unpacked",
+    "Version": "1.20.7-11+b2",
+    "Installed-Size": "85"
+  },
+  {
+    "Package": "liblcms2-2",
+    "Status": "install ok unpacked",
+    "Version": "2.16-2+deb13u2",
+    "Installed-Size": "501"
+  },
+  {
+    "Package": "libtree-sitter0.22",
+    "Status": "install ok unpacked",
+    "Version": "0.22.6-6+b1",
+    "Installed-Size": "223"
+  },
+  {
+    "Package": "libxml2",
+    "Status": "install ok unpacked",
+    "Version": "2.12.7+dfsg+really2.9.14-2.1+deb13u3",
+    "Installed-Size": "1891"
+  },
+  {
+    "Package": null,
+    "Status": null,
+    "Version": null,
+    "Installed-Size": null
+  }
+]

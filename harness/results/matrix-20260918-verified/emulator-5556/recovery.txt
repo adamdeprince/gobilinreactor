@@ -1,0 +1,39 @@
+==> installing
+/var/folders/1v/9f1pp1gx7ygfwcmf6vqrfr5r0000gn/T/goblin-matrix-6d6nyqee/acceptance.apk: 1 file pushed, 0 skipped. 1107.0 MB/s (124070378 bytes in 0.107s)
+Performing Push Install
+Success
+==> running
+==> restarting after the deliberate Android process kill
+page size            16384
+-- Recovery: resume configuration after Android process death --
+PASS: resume configuration after Android process death status=0 
+METRIC {"workload":"resume configuration after Android process death","page_size":16384,"wall_ns":1994869876,"startup_ns":288424250,"syscalls":1700,"wall_ns_per_syscall":1.06839e+06,"broker_ns_per_syscall":905181,"broker_rss_start_bytes":135446528,"broker_rss_end_bytes":145080320,"broker_rss_sampled_peak_bytes":155303936}
+-- Recovery: prepare disk exhaustion upgrade --
+PASS: prepare disk exhaustion upgrade status=0 
+METRIC {"workload":"prepare disk exhaustion upgrade","page_size":16384,"wall_ns":338366209,"startup_ns":89983375,"syscalls":1816,"wall_ns_per_syscall":155657,"broker_ns_per_syscall":61984.2,"broker_rss_start_bytes":145604608,"broker_rss_end_bytes":148537344,"broker_rss_sampled_peak_bytes":158466048}
+-- Recovery: upgrade fails at the disk quota --
+PASS: upgrade fails at the disk quota status=1 
+METRIC {"workload":"upgrade fails at the disk quota","page_size":16384,"wall_ns":355870584,"startup_ns":76814166,"syscalls":1332,"wall_ns_per_syscall":232191,"broker_ns_per_syscall":120371,"broker_rss_start_bytes":148537344,"broker_rss_end_bytes":151715840,"broker_rss_sampled_peak_bytes":162185216}
+-- Recovery: retry after restoring disk capacity --
+PASS: retry after restoring disk capacity status=0 
+METRIC {"workload":"retry after restoring disk capacity","page_size":16384,"wall_ns":1668306876,"startup_ns":84258542,"syscalls":2616,"wall_ns_per_syscall":617213,"broker_ns_per_syscall":537482,"broker_rss_start_bytes":151715840,"broker_rss_end_bytes":148783104,"broker_rss_sampled_peak_bytes":163938304}
+-- Recovery: main Debian database remains clean --
+PASS: main Debian database remains clean status=0 
+METRIC {"workload":"main Debian database remains clean","page_size":16384,"wall_ns":135264833,"startup_ns":78098166,"syscalls":621,"wall_ns_per_syscall":140009,"broker_ns_per_syscall":43049.2,"broker_rss_start_bytes":148242432,"broker_rss_end_bytes":149848064,"broker_rss_sampled_peak_bytes":149848064}
+METRIC {"workload":"startup_true_0","page_size":16384,"wall_ns":79685458,"startup_ns":76514167,"syscalls":26,"wall_ns_per_syscall":1.27726e+06,"broker_ns_per_syscall":9493.65,"broker_rss_start_bytes":149848064,"broker_rss_end_bytes":150372352,"broker_rss_sampled_peak_bytes":150372352}
+METRIC {"workload":"startup_true_1","page_size":16384,"wall_ns":83935791,"startup_ns":79244916,"syscalls":26,"wall_ns_per_syscall":1.39671e+06,"broker_ns_per_syscall":18990.5,"broker_rss_start_bytes":150372352,"broker_rss_end_bytes":150896640,"broker_rss_sampled_peak_bytes":150896640}
+METRIC {"workload":"startup_true_2","page_size":16384,"wall_ns":87267417,"startup_ns":84095875,"syscalls":26,"wall_ns_per_syscall":1.32677e+06,"broker_ns_per_syscall":10835,"broker_rss_start_bytes":150896640,"broker_rss_end_bytes":150896640,"broker_rss_sampled_peak_bytes":150896640}
+METRIC {"workload":"startup_true_3","page_size":16384,"wall_ns":77953666,"startup_ns":74935583,"syscalls":26,"wall_ns_per_syscall":1.26055e+06,"broker_ns_per_syscall":9855.73,"broker_rss_start_bytes":150896640,"broker_rss_end_bytes":150896640,"broker_rss_sampled_peak_bytes":150896640}
+METRIC {"workload":"startup_true_4","page_size":16384,"wall_ns":78556291,"startup_ns":75409917,"syscalls":26,"wall_ns_per_syscall":1.25586e+06,"broker_ns_per_syscall":10024,"broker_rss_start_bytes":150896640,"broker_rss_end_bytes":150896640,"broker_rss_sampled_peak_bytes":150896640}
+METRIC {"workload":"bench","page_size":16384,"wall_ns":6411130462,"startup_ns":78982084,"syscalls":200002,"wall_ns_per_syscall":31824.4,"broker_ns_per_syscall":103.3,"broker_rss_start_bytes":150896640,"broker_rss_end_bytes":151945216,"broker_rss_sampled_peak_bytes":151945216}
+PASS: bench done
+
+METRIC {"workload":"forkbench","page_size":16384,"wall_ns":199378625,"startup_ns":78977750,"syscalls":98,"wall_ns_per_syscall":1.53006e+06,"broker_ns_per_syscall":475517,"broker_rss_start_bytes":151945216,"broker_rss_end_bytes":160628736,"broker_rss_sampled_peak_bytes":160661504}
+PASS: 32 fork/wait and COW checks passed
+
+-- Recovery: remove isolated recovery fixtures --
+PASS: remove isolated recovery fixtures status=0 
+METRIC {"workload":"remove isolated recovery fixtures","page_size":16384,"wall_ns":138507584,"startup_ns":80029458,"syscalls":503,"wall_ns_per_syscall":180015,"broker_ns_per_syscall":24632,"broker_rss_start_bytes":160628736,"broker_rss_end_bytes":152174592,"broker_rss_sampled_peak_bytes":160628736}
+GOBLIN PASS
+
+==> saved to /Users/adam/dev/goblin-linux/harness/results/sdk_gphone16k_arm64-recovery-api36-20260918-123258.txt

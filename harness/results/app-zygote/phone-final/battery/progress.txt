@@ -1,0 +1,3 @@
+         1789910057.142  1387  1413 I goblin-battery: 0c44c209810047da9d7345f8a2b9a5be READY: unplug USB and turn the screen off for 300 seconds
+         1789910116.374  1387  1413 I goblin-battery: 0c44c209810047da9d7345f8a2b9a5be RUNNING: actual battery power, screen off
+         1789910417.288  1387  1413 I goblin-battery: 0c44c209810047da9d7345f8a2b9a5be PASS: reconnect USB to collect the report

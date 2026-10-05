@@ -1,0 +1,38 @@
+[
+  {
+    "serial": "R5CX3468YQR",
+    "apk_sha256": "277af60fb424f36035a209c6ed9dc8181ff36606af4bbfbefbb0057178fc37e6",
+    "packages": {
+      "emacs-common": {
+        "Status": "install ok installed",
+        "Version": "1:30.1+1-6+deb13u1"
+      },
+      "emacs-nox": {
+        "Status": "install ok installed",
+        "Version": "1:30.1+1-6+deb13u1"
+      },
+      "libgccjit0": {
+        "Status": "install ok installed",
+        "Version": "14.2.0-19"
+      }
+    }
+  },
+  {
+    "serial": "emulator-5556",
+    "apk_sha256": "277af60fb424f36035a209c6ed9dc8181ff36606af4bbfbefbb0057178fc37e6",
+    "packages": {
+      "emacs-common": {
+        "Status": "install ok installed",
+        "Version": "1:30.1+1-6+deb13u1"
+      },
+      "emacs-nox": {
+        "Status": "install ok installed",
+        "Version": "1:30.1+1-6+deb13u1"
+      },
+      "libgccjit0": {
+        "Status": "install ok installed",
+        "Version": "14.2.0-19"
+      }
+    }
+  }
+]

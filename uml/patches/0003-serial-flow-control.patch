@@ -1,0 +1,57 @@
+--- a/arch/um/drivers/line.c
++++ b/arch/um/drivers/line.c
+@@ -22,7 +22,7 @@
+ 	struct line *line = chan->line;
+ 
+ 	if (line)
+-		chan_interrupt(line, irq);
++		schedule_delayed_work(&line->task, 0);
+ 
+ 	return IRQ_HANDLED;
+ }
+@@ -215,16 +215,21 @@
+ {
+ 	struct line *line = tty->driver_data;
+ 
+-	deactivate_chan(line->chan_in, line->read_irq);
+-	line->throttled = 1;
++	/* Keep the edge-triggered host registration: deactivate_fd() removes
++	 * it permanently. The input worker pauses until unthrottle queues it.
++	 */
++	WRITE_ONCE(line->throttled, 1);
+ }
+ 
+ void line_unthrottle(struct tty_struct *tty)
+ {
+ 	struct line *line = tty->driver_data;
+ 
+-	line->throttled = 0;
+-	chan_interrupt(line, line->read_irq);
++	WRITE_ONCE(line->throttled, 0);
++	/* Serialize reads with IRQ and buffer-room retries on every CPU. A
++	 * readable host fd need not produce another edge after throttling.
++	 */
++	schedule_delayed_work(&line->task, 0);
+ }
+ 
+ static irqreturn_t line_write_interrupt(int irq, void *data)
+--- a/arch/um/drivers/chan_kern.c
++++ b/arch/um/drivers/chan_kern.c
+@@ -166,7 +166,7 @@
+ {
+ 	struct line *line = container_of(work, struct line, task.work);
+ 
+-	if (!line->throttled)
++	if (!READ_ONCE(line->throttled))
+ 		chan_interrupt(line, line->read_irq);
+ }
+ 
+@@ -593,7 +593,7 @@
+ 		err = chan->ops->read(chan->fd_in, &c, chan->data);
+ 		if (err > 0)
+ 			tty_insert_flip_char(port, c, TTY_NORMAL);
+-	} while (err > 0);
++	} while (err > 0 && !READ_ONCE(line->throttled));
+ 
+ 	if (err == -EIO) {
+ 		if (chan->primary) {

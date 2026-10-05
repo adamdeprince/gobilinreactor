@@ -1,4 +1,4 @@
-// NativeActivity entry point for the goblin-linux capability probe.
+// NativeActivity entry point for the GoblinReactor capability probe.
 //
 // There is no Java in this APK at all -- the manifest declares
 // android:hasCode="false" and points android.app.lib_name at this library, so the

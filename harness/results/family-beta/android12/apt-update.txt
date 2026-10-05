@@ -1,0 +1,9 @@
+0% [Working]            Get:1 https://deb.debian.org/debian trixie InRelease [140 kB]
+0% [1 InRelease 32.8 kB/140 kB 23%] [Waiting for headers]                                                         Get:2 https://apt.goblinreactor.com trixie InRelease [3919 B]
+0% [1 InRelease 115 kB/140 kB 82%] [2 InRelease 3919 B/3919 B 100%]                                                                   0% [1 InRelease 140 kB/140 kB 100%]                                   0% [Working]0% [Working]            Get:3 https://apt.goblinreactor.com trixie/main Sources [1352 B]
+0% [3 Sources 1352 B/1352 B 100%]                                 0% [Working]0% [3 Sources store 0 B] [Waiting for headers]                                              0% [Waiting for headers]                        Get:4 https://apt.goblinreactor.com trixie/main arm64 Packages [1040 B]
+0% [4 Packages 1040 B/1040 B 100%]                                  0% [Working]0% [4 Packages store 0 B]                         0% [Working]18% [Working]             Get:5 https://deb.debian.org/debian trixie/main arm64 Packages [9614 kB]
+19% [5 Packages 64.8 kB/9614 kB 1%]40% [5 Packages 2635 kB/9614 kB 27%]61% [5 Packages 5224 kB/9614 kB 54%]82% [5 Packages 7731 kB/9614 kB 80%]                                    97% [Working]97% [5 Packages store 0 B]97% [5 Packages store 0 B]                          100% [Working]              Fetched 9761 kB in 4s (2466 kB/s)
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+GOBLIN SERVICES PASS
+

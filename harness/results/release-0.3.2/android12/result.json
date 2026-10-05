@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "serial": "emulator-5558",
+  "api": "31",
+  "host_page_size": "4096",
+  "real_reboots": 3,
+  "apk_sha256": "775406133203277719f98f2667a742cd4c470917dacace0a9f4c61ea84339712",
+  "checks": [
+    "Default-off setting leaves Linux stopped after a real reboot",
+    "Opt-in survives a real reboot and starts Linux with a foreground notification without opening the terminal",
+    "Enabled guest systemd service runs automatically; Keep Linux awake opt-out remains respected",
+    "Repeated boot notification retains the same Linux instance and guest service execution",
+    "Disabling startup leaves the current Linux instance running",
+    "Disabling the setting prevents startup on the following real reboot",
+    "Manual opening still starts Linux; guest files persist and test service is removed"
+  ],
+  "scope": "User unlocked automatically; no PIN-locked pre-unlock test. Emulator root observes the release app; app privileges are unchanged."
+}

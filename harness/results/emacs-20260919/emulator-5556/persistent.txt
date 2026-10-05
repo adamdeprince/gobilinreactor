@@ -1,0 +1,58 @@
+==> installing
+/tmp/goblin-emacs-final.apk: 1 file pushed, 0 skipped. 1107.1 MB/s (126590192 bytes in 0.109s)
+Performing Push Install
+Success
+==> running
+page size            16384
+-- Persistent: Debian package bootstrap --
+PASS: Debian package bootstrap status=0 
+-- Persistent: recover interrupted package configuration --
+PASS: recover interrupted package configuration status=0 
+-- Persistent: installed database and maintainer scripts --
+PASS: installed database and maintainer scripts status=0 
+-- Persistent: remount persistence --
+PASS: remount persistence status=0 
+-- Persistent: public DNS through Android --
+PASS: public DNS through Android status=0 
+-- Persistent: public HTTPS repository and Debian signature --
+PASS: public HTTPS repository and Debian signature status=0 
+-- Persistent: reject modified repository signature --
+PASS: reject modified repository signature status=0 
+-- Persistent: install curl git python3 with public apt --
+PASS: install curl git python3 with public apt status=0 
+-- Persistent: curl DNS and trusted HTTPS --
+PASS: curl DNS and trusted HTTPS status=0 
+-- Persistent: reject untrusted HTTPS certificate --
+PASS: reject untrusted HTTPS certificate status=0 
+-- Persistent: git repository and commit --
+PASS: git repository and commit status=0 
+-- Persistent: Python files TLS and subprocess --
+PASS: Python files TLS and subprocess status=0 
+PASS: resource limit: filesystem
+PASS: resource limit: sigpipe
+PASS: resource limit: memory
+PASS: resource limit: tasks
+PASS: resource limit: disk
+PASS: captured output limit
+PASS: CPU loop stops at session deadline
+PASS: interactive shell input and output
+PASS: Ctrl-C targets foreground job
+PASS: Ctrl-Z, background and foreground resume
+PASS: terminal resize and transcript replay
+PASS: terminal shell clean shutdown
+PASS: packaged guest deployment is repeatable
+PASS: deployment preserves existing accounts and home files
+PASS: runtime regular account and home directory
+PASS: deployed passwordless sudo changes only the requested guest command identity
+PASS: independent terminal shells share the Linux process namespace
+PASS: exiting all terminal shells leaves the Linux runtime alive
+PASS: detached Linux process survives with no terminals and remains manageable
+PASS: closing a terminal terminates its shell without stopping Linux
+PASS: explicit runtime shutdown reaps its remaining processes
+-- Persistent: Goblin Reactor signed ARM64 repository --
+PASS: Goblin Reactor signed ARM64 repository status=0 
+-- Persistent: Goblin Reactor rejects a different archive key --
+PASS: Goblin Reactor rejects a different archive key status=0 
+GOBLIN PASS
+
+==> saved to /Users/adam/dev/goblin-linux/harness/results/sdk_gphone16k_arm64-persistent-api36-20260919-170739.txt

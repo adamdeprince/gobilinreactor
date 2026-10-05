@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "baseline_version": "0.3.0",
+  "baseline_apk_sha256": "d1a2f3d68c1ca78363464a67a17ba1e55a6ede7bb1fc5f44c220c158bd8cd119",
+  "apk_sha256": "ca3956bb0af34abfa947ee603d3526bd6f625cb70151eddd16d1271fb003cc26",
+  "unchanged_payload_files": 94,
+  "checks": [
+    "all packaged native components and runtime/deployment assets unchanged",
+    "release metadata changes limited to name and version"
+  ]
+}

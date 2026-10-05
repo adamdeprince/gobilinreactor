@@ -1,0 +1,2 @@
+PASS: synced user data and installed packages survive Android force-stop and ext4 recovery
+GOBLIN PASS

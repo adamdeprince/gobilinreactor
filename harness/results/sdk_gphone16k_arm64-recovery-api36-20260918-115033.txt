@@ -1,0 +1,111 @@
+page size            16384
+-- Recovery: install original package in isolated database --
+FAILED: install original package in isolated database status=1 
+METRIC {"workload":"install original package in isolated database","page_size":16384,"wall_ns":407342375,"startup_ns":125567958,"syscalls":1314,"wall_ns_per_syscall":249216,"broker_ns_per_syscall":99511.9,"broker_rss_start_bytes":149061632,"broker_rss_end_bytes":147030016,"broker_rss_sampled_peak_bytes":159023104}
+Selecting previously unselected package goblin-recovery-fixture.
+(Reading database ... 0 files and directories currently installed.)
+Preparing to unpack /tmp/goblin-recovery-1.deb ...
+Unpacking goblin-recovery-fixture (1) ...
+dpkg: error processing archive /tmp/goblin-recovery-1.deb (--install):
+ unable to create '/tmp/goblin-upgrade-fixture/killed/usr/share/goblin-recovery/value.dpkg-new' (while processing './usr/share/goblin-recovery/value'): No such file or directory
+Errors were encountered while processing:
+ /tmp/goblin-recovery-1.deb
+Android DNS: queries=0 answers=0 failures=0 last_error=0
+Recent syscall errors:
+openat          (0xffffffffffffff9c, 0x794b012e8c10, 0) = -2
+openat          (0xffffffffffffff9c, 0x794b012e8c60, 0) = -2
+openat          (0xffffffffffffff9c, 0x794b012e8d10, 0) = -2
+openat          (0xffffffffffffff9c, 0x794b012e8480, 0x242) = -2
+openat          (0xffffffffffffff9c, 0x794b012e8480, 0) = -2
+syscall_35      (0xffffffffffffff9c, 0x794b012e9270, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9010, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e92c0, 0x794b3ffff818) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e92c0, 0x794b3ffff818) = -2
+openat          (0xffffffffffffff9c, 0x794b012e9040, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012e9270, 0x794b3ffff778) = -2
+openat          (0xffffffffffffff9c, 0x794b012e94f0, 0) = -2
+openat          (0xffffffffffffff9c, 0x794b012e9560, 0) = -2
+syscall_35      (0xffffffffffffff9c, 0x794b012ecef0, 0) = -2
+execve          (0x794b3fffef50, 0x794b3ffff030, 0x794b012e8660) = -2
+execve          (0x794b3fffef50, 0x794b3ffff030, 0x794b012e8660) = -2
+execve          (0x794b3fffef50, 0x794b3ffff030, 0x794b012e8660) = -2
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b3f7f4800, 0x20, 0) = -38
+ioctl           (0x1, 0x5401, 0x794b3ffffa10) = -25
+readlinkat      (0xffffffffffffff9c, 0x794b3fffedd0, 0x794b3ffff5f0) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffedd0, 0x794b3ffff5f0) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffedd0, 0x794b3ffff5f0) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffedf0, 0x794b3ffff610) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffedf0, 0x794b3ffff610) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffedf0, 0x794b3ffff610) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffedf0, 0x794b3ffff610) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffedf0, 0x794b3ffff610) = -22
+readlinkat      (0xffffffffffffff9c, 0x794b3fffedf0, 0x794b3ffff610) = -22
+syscall_35      (0xffffffffffffff9c, 0x794b012ecf40, 0x200) = -2
+execve          (0x794b3ffff020, 0x794b3ffff100, 0x794b012e8660) = -2
+execve          (0x794b3ffff020, 0x794b3ffff100, 0x794b012e8660) = -2
+execve          (0x794b3ffff020, 0x794b3ffff100, 0x794b012e8660) = -2
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b3f7f54c0, 0x20, 0) = -38
+ioctl           (0x1, 0x5401, 0x794b3ffff9f0) = -25
+lseek           (0x4, 0, 0x1) = -29
+execve          (0x794b3ffff810, 0x794b010c43c0, 0x794b3ffffcc0) = -2
+execve          (0x794b3ffff810, 0x794b010c43c0, 0x794b3ffffcc0) = -2
+execve          (0x794b3ffff810, 0x794b010c43c0, 0x794b3ffffcc0) = -2
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b3f7f48e0, 0x20, 0) = -38
+syscall_43      (0x794b3f797a48, 0x794b3ffffb20, 0) = -2
+syscall_43      (0x794b3f797a58, 0x794b3ffffb20, 0) = -2
+openat          (0xffffffffffffff9c, 0x794b3f797a20, 0x80000) = -2
+faccessat       (0xffffffffffffff9c, 0x794b3f797a88, 0) = -2
+ioctl           (0, 0x5401, 0x794b3ffff7e0) = -25
+ioctl           (0x1, 0x5401, 0x794b3fffecc0) = -25
+ioctl           (0x1, 0x5401, 0x794b3fffef80) = -25
+openat          (0xffffffffffffff9c, 0x794b012e9390, 0) = -2
+openat          (0xffffffffffffff9c, 0x794b012ecf40, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x794b012ecf40, 0x794b3ffff038) = -2
+execve          (0x794b3ffff030, 0x794b3ffff110, 0x794b012e8660) = -2
+execve          (0x794b3ffff030, 0x794b3ffff110, 0x794b012e8660) = -2
+execve          (0x794b3ffff030, 0x794b3ffff110, 0x794b012e8660) = -2
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b3f7f54c0, 0x20, 0) = -38
+ioctl           (0x1, 0x5401, 0x794b3ffffa20) = -25
+lseek           (0x4, 0, 0x1) = -29
+newfstatat      (0xffffffffffffff9c, 0x794b012e8f40, 0x794b3fffeca0) = -2
+syscall_38      (0xffffffffffffff9c, 0x794b012ef190, 0xffffffffffffff9c) = -2
+syscall_35      (0xffffffffffffff9c, 0x794b012ef240, 0x200) = -2
+syscall_35      (0xffffffffffffff9c, 0x794b012ef190, 0x200) = -2
+openat          (0xffffffffffffff9c, 0x794b012ef240, 0xc1) = -2
+ioctl           (0x1, 0x5401, 0x794b3ffff510) = -25
+newfstatat      (0xffffffffffffff9c, 0x794b012ef190, 0x794b3ffff698) = -2
+syscall_35      (0xffffffffffffff9c, 0x794b012ef240, 0x200) = -2
+close           (0xffffffffffffffff, 0, 0) = -9
+newfstatat      (0xffffffffffffff9c, 0x794b012ecf40, 0x794b3ffff5c8) = -2
+syscall_35      (0xffffffffffffff9c, 0x794b012ecf40, 0x200) = -39
+execve          (0x794b3ffff580, 0x794b3ffff660, 0x794b012e8660) = -2
+execve          (0x794b3ffff580, 0x794b3ffff660, 0x794b012e8660) = -2
+execve          (0x794b3ffff580, 0x794b3ffff660, 0x794b012e8660) = -2
+faccessat       (0xffffffffffffff9c, 0x794b00222ea0, 0x4) = -2
+rseq            (0x794b00243320, 0x20, 0) = -38
+ioctl           (0, 0x5401, 0x794b3ffff990) = -25
+lseek           (0, 0, 0x1) = -29
+syscall_35      (0xffffffffffffff9c, 0x794b012ecef0, 0x200) = -2
+ioctl           (0x2, 0x5413, 0x794b3fffee80) = -25
+wait4           (0xffffffffffffffff, 0x794b3fffdb20, 0x1) = -10
+GOBLIN FAIL

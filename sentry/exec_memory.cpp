@@ -115,7 +115,7 @@ bool GuestImage::Create(uintptr_t base, size_t size, std::string* err) {
         if (err) *err = "image span is not page aligned";
         return false;
     }
-    if (!GuestWindow::Contains(base) || !GuestWindow::Contains(base + size - 1)) {
+    if (!GuestWindow::ContainsRange(base, size)) {
         if (err) *err = "image falls outside the guest window";
         return false;
     }
@@ -130,7 +130,7 @@ bool GuestImage::Create(uintptr_t base, size_t size, std::string* err) {
     // Fallback: the mapping itself is the staging area. Contents are written in
     // place while it is still writable, then each range is dropped to its final
     // protection by MapRange.
-    void* p = mmap(reinterpret_cast<void*>(base), size, PROT_READ | PROT_WRITE,
+    void* p = mmap(reinterpret_cast<void*>(GuestWindow::BrokerAddress(base)), size, PROT_READ | PROT_WRITE,
                    MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED, -1, 0);
     if (p == MAP_FAILED) {
         if (err) *err = Errno("mapping image");
@@ -185,7 +185,7 @@ bool GuestImage::MapRange(uintptr_t addr, size_t len, int prot,
         // MAP_PRIVATE over a write-sealed memfd is allowed: the seal blocks
         // shared writable mappings, while private pages copy on write, which is
         // exactly the semantics a data segment wants.
-        void* got = mmap(reinterpret_cast<void*>(addr), len, prot,
+        void* got = mmap(reinterpret_cast<void*>(GuestWindow::BrokerAddress(addr)), len, prot,
                          MAP_PRIVATE | MAP_FIXED, fd_,
                          static_cast<off_t>(addr - base_));
         if (got == MAP_FAILED) {
@@ -195,12 +195,12 @@ bool GuestImage::MapRange(uintptr_t addr, size_t len, int prot,
         return true;
     }
 
-    if (mprotect(reinterpret_cast<void*>(addr), len, prot) != 0) {
+    if (mprotect(reinterpret_cast<void*>(GuestWindow::BrokerAddress(addr)), len, prot) != 0) {
         if (err) *err = Errno("mprotect segment");
         return false;
     }
     if ((prot & PROT_EXEC) != 0) {
-        char* p = reinterpret_cast<char*>(addr);
+        char* p = reinterpret_cast<char*>(GuestWindow::BrokerAddress(addr));
         __builtin___clear_cache(p, p + len);
     }
     return true;

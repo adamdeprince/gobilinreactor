@@ -1,0 +1,3 @@
+PASS: Sixteen large binary transfers preserve every byte and resume serial input after backpressure
+GOBLIN SERVICES PASS
+

@@ -1,0 +1,117 @@
+page size            4096
+-- Developer: Debian bootstrap --
+PASS: Debian bootstrap status=0 elapsed_ms=402 
+METRIC {"workload":"Debian bootstrap","page_size":4096,"wall_ns":398169687,"startup_ns":217314790,"syscalls":402,"wall_ns_per_syscall":731981,"broker_ns_per_syscall":254883,"broker_rss_start_bytes":138313728,"broker_rss_end_bytes":136908800,"broker_rss_sampled_peak_bytes":146931712}
+-- Developer: install and repair emacs-nox --
+FAILED: install and repair emacs-nox status=1 elapsed_ms=1238 
+METRIC {"workload":"install and repair emacs-nox","page_size":4096,"wall_ns":1209033385,"startup_ns":224186667,"syscalls":1141,"wall_ns_per_syscall":966313,"broker_ns_per_syscall":402346,"broker_rss_start_bytes":136224768,"broker_rss_end_bytes":140095488,"broker_rss_sampled_peak_bytes":195100672}
+Reading package lists...
+Building dependency tree...
+Reading state information...
+You might want to run 'apt --fix-broken install' to correct these.
+The following packages have unmet dependencies:
+ emacs-bin-common : Depends: emacs-common (= 1:30.1+1-6+deb13u1) but it is not going to be installed
+ emacs-el : Depends: emacs-common (= 1:30.1+1-6+deb13u1) but it is not going to be installed
+ emacs-nox : Depends: emacs-common (= 1:30.1+1-6+deb13u1) but it is not going to be installed
+             Depends: libgccjit0 (>= 12) but it is not going to be installed
+E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+E: The following information from --solver 3.0 may provide additional context:
+   Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+Android DNS: queries=0 answers=0 failures=0 last_error=0
+Recent syscall errors:
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+rseq            (0x773f7f9800, 0x20, 0) = -38
+openat          (0xffffffffffffff9c, 0x7701103110, 0x802) = -6
+ioctl           (0, 0x5401, 0x773ffff920) = -25
+syscall_203     (0x3, 0x773ffff2c8, 0x6e) = -2
+syscall_203     (0x3, 0x773ffff488, 0x6e) = -2
+ioctl           (0x2, 0x540f, 0x773ffff834) = -25
+ioctl           (0x2, 0x540f, 0x773ffff7e4) = -25
+newfstatat      (0xffffffffffffff9c, 0x7701183340, 0x773fffec48) = -2
+newfstatat      (0xffffffffffffff9c, 0x7701183340, 0x773fffec48) = -2
+newfstatat      (0xffffffffffffff9c, 0x7701183340, 0x773fffec48) = -2
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+rseq            (0x773f7f4280, 0x20, 0) = -38
+syscall_167     (0x17, 0x20, 0) = -22
+syscall_167     (0x17, 0xf, 0) = -22
+syscall_167     (0x17, 0x7, 0) = -22
+syscall_167     (0x17, 0x3, 0) = -22
+syscall_167     (0x17, 0x1, 0) = -22
+syscall_167     (0x17, 0, 0) = -22
+newfstatat      (0xffffffffffffff9c, 0x77010398e0, 0x773ffff8d8) = -2
+ioctl           (0x1, 0x5401, 0x773ffffa70) = -25
+ioctl           (0x1, 0x5413, 0x773ffffb38) = -13
+newfstatat      (0xffffffffffffff9c, 0x77010398e0, 0x773ffff508) = -2
+readlinkat      (0xffffffffffffff9c, 0x773fffe550, 0x773fffed70) = -22
+readlinkat      (0xffffffffffffff9c, 0x773fffe550, 0x773fffed70) = -22
+readlinkat      (0xffffffffffffff9c, 0x773fffe550, 0x773fffed70) = -22
+readlinkat      (0xffffffffffffff9c, 0x773fffe550, 0x773fffed70) = -22
+newfstatat      (0xffffffffffffff9c, 0x773fffef38, 0x773fffee78) = -2
+newfstatat      (0xffffffffffffff9c, 0x773ffff060, 0x773fffef08) = -2
+newfstatat      (0xffffffffffffff9c, 0x773ffff060, 0x773fffef08) = -2
+newfstatat      (0xffffffffffffff9c, 0x773ffff060, 0x773fffef08) = -2
+newfstatat      (0xffffffffffffff9c, 0x773ffff060, 0x773fffef08) = -2
+newfstatat      (0xffffffffffffff9c, 0x773ffff060, 0x773fffef08) = -2
+openat          (0xffffffffffffff9c, 0x770103e680, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x770103eaf0, 0x773ffff098) = -2
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+rseq            (0x773f7f9d00, 0x20, 0) = -38
+syscall_43      (0x773f797a48, 0x773ffffbf0, 0) = -2
+syscall_43      (0x773f797a58, 0x773ffffbf0, 0) = -2
+openat          (0xffffffffffffff9c, 0x773f797a20, 0x80000) = -2
+faccessat       (0xffffffffffffff9c, 0x773f797a88, 0) = -2
+ioctl           (0x1, 0x5401, 0x773ffffaf0) = -25
+openat          (0xffffffffffffff9c, 0x77012e5590, 0) = -2
+openat          (0xffffffffffffff9c, 0x77012e57e0, 0) = -2
+newfstatat      (0xffffffffffffff9c, 0x770103ec60, 0x773ffff088) = -2
+newfstatat      (0xffffffffffffff9c, 0x770103ec60, 0x773ffff088) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105ac10, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105a340, 0x773ffff158) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105a340, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105c1c0, 0x773ffff038) = -2
+newfstatat      (0xffffffffffffff9c, 0x770105ac10, 0x773ffff158) = -2
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+rseq            (0x773f7f9d00, 0x20, 0) = -38
+syscall_43      (0x773f797a48, 0x773ffffbf0, 0) = -2
+syscall_43      (0x773f797a58, 0x773ffffbf0, 0) = -2
+openat          (0xffffffffffffff9c, 0x773f797a20, 0x80000) = -2
+faccessat       (0xffffffffffffff9c, 0x773f797a88, 0) = -2
+ioctl           (0x1, 0x5401, 0x773ffffaf0) = -25
+openat          (0xffffffffffffff9c, 0x77012e5590, 0) = -2
+openat          (0xffffffffffffff9c, 0x77012e57e0, 0) = -2
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+rseq            (0x773f7f9d00, 0x20, 0) = -38
+syscall_43      (0x773f797a48, 0x773ffffbf0, 0) = -2
+syscall_43      (0x773f797a58, 0x773ffffbf0, 0) = -2
+openat          (0xffffffffffffff9c, 0x773f797a20, 0x80000) = -2
+faccessat       (0xffffffffffffff9c, 0x773f797a88, 0) = -2
+ioctl           (0x1, 0x5401, 0x773ffffaf0) = -25
+openat          (0xffffffffffffff9c, 0x77012e5590, 0) = -2
+openat          (0xffffffffffffff9c, 0x77012e57e0, 0) = -2
+openat          (0xffffffffffffff9c, 0x7701051000, 0x80100) = -2
+newfstatat      (0xffffffffffffff9c, 0x770103e7c0, 0x773fffedb8) = -2
+openat          (0xffffffffffffff9c, 0x7701059a10, 0x80100) = -2
+ioctl           (0x2, 0x5413, 0x773fffeda0) = -25
+wait4           (0xffffffffffffffff, 0x773fffda40, 0x1) = -10
+newfstatat      (0xffffffffffffff9c, 0x77011843b0, 0x773fffe8e8) = -2
+newfstatat      (0xffffffffffffff9c, 0x77011843b0, 0x773fffe8e8) = -2
+newfstatat      (0xffffffffffffff9c, 0x77011843b0, 0x773fffe8e8) = -2
+faccessat       (0xffffffffffffff9c, 0x7700222ea0, 0x4) = -2
+rseq            (0x773f7fc560, 0x20, 0) = -38
+syscall_223     (0x3, 0, 0) = -38
+ioctl           (0x2, 0x5413, 0x773fffea40) = -25
+wait4           (0xffffffffffffffff, 0x773fffd6e0, 0x1) = -10
+GOBLIN FAIL

@@ -1,0 +1,4 @@
+{
+  "apk_sha256": "b34aae25baaaf99d8647094ab2b81d5bd5e6fa46735f3e70467a0fedc015c68e",
+  "collector_note": "The initial samples.json used ps NAME for worker names and undercounted workers. verified-snapshots.json uses NAME,CMD and confirms 64 simultaneous workers. PhantomProcessRecord detection was unaffected. run.py now uses NAME,CMD."
+}

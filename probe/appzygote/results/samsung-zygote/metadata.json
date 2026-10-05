@@ -1,0 +1,28 @@
+{
+  "serial": "R5CX3468YQR",
+  "mode": "zygote",
+  "children": 64,
+  "seconds": 600,
+  "fingerprint": "samsung/e3qsqw/e3q:16/BP4A.251205.006/S928USQS6DZH3:user/release-keys",
+  "before": {
+    "monitor_setting": "null",
+    "monitor_property": "",
+    "phantom_limit": [
+      "max_phantom_processes=32"
+    ],
+    "selinux": "Enforcing"
+  },
+  "after": {
+    "monitor_setting": "null",
+    "monitor_property": "",
+    "phantom_limit": [
+      "max_phantom_processes=32"
+    ],
+    "selinux": "Enforcing"
+  },
+  "duration_seconds": 601.9,
+  "adb_returncode": 0,
+  "workload_passed": true,
+  "tcp_passed": true,
+  "policy_unchanged": true
+}

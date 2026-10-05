@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "serial": "R5CX3468YQR",
+  "host_page_size": 4096,
+  "hardware_cpus": 8,
+  "apk_sha256": "a2c0b5ca86361de8827cbc0f7deda84c5e2c74a13a13109c6b1a64dd37c02c14",
+  "soak_seconds": 600,
+  "peak_observed_workers": 77,
+  "monitoring_policy_unchanged": true,
+  "physical_unplugged_test": "PASS after call ended: 300 seconds unplugged with screen off, 301 Android power samples, 281 heartbeat increments, same Linux boot, battery-optimization exemption off, monitoring policy unchanged.",
+  "physical_unplugged_report": "battery-idle/metadata.json",
+  "in_call_battery_report": "battery/metadata.json"
+}

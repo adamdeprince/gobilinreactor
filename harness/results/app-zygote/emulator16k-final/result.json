@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "serial": "emulator-5554",
+  "host_page_size": 16384,
+  "apk_sha256": "a2c0b5ca86361de8827cbc0f7deda84c5e2c74a13a13109c6b1a64dd37c02c14",
+  "checks": [
+    "upgrade preservation",
+    "transport backpressure",
+    "networking and guest services"
+  ]
+}
