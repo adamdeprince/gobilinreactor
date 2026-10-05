@@ -125,7 +125,7 @@ and sends the shell SIGHUP; normal Linux job control applies. Detached services
 survive closing every terminal. Android force-stop ends the entire app and VM.
 
 The service holds the `Goblin:Linux` partial wake lock from startup through
-shutdown, with no elapsed-time cutoff. The terminal menu's **Keep Linux awake**
+shutdown, with no elapsed-time cutoff. The terminal menu's **Keep environment awake**
 preference defaults to enabled and releases/reacquires the lock without
 restarting Linux. Shutdown, startup failure and service destruction release it;
 Android also releases it if the app dies. **Android battery settings…** requests

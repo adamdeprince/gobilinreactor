@@ -1,12 +1,12 @@
 # GoblinReactor distribution notes
 
 GoblinReactor's default build packages a Linux® UML kernel, userspace stub, passt network
-helper, native kitty runtime, boot tools and deployment data in its APK. Debian
+helper, native kitty runtime, boot tools and deployment data in its APK. **Debian**
 programs run inside Linux UML. The old custom ABI backend is not linked.
 
 The kernel and helper source revisions are recorded in `uml/sources.lock.json`;
 local Android patches are in `uml/patch-kernel.py` and `uml/patch-passt.py`.
-The boot-tool manifest records Debian versions and file hashes. Terminal sources
+The boot-tool manifest records **Debian** versions and file hashes. Terminal sources
 and licenses are tracked separately under `terminal/`. A distributable release
 must include the corresponding notices and fulfill each component's source and
 redistribution requirements. See the [source handoff](../release/README.md) and
@@ -27,3 +27,5 @@ APK and App Bundle workflow. The product name and descriptive trademark usage
 are recorded in [trademark.md](trademark.md).
 
 Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
+
+GoblinReactor is independent of the **Debian** Project, which does not sponsor or endorse it. **Debian** is a registered trademark owned by Software in the Public Interest, Inc.

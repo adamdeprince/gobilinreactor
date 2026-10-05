@@ -43,14 +43,14 @@ inline void io(int fd, void* data, size_t count, uint64_t at, bool writing) {
     while (count) {
         ssize_t n = writing ? pwrite(fd, bytes, count, at) : pread(fd, bytes, count, at);
         if (n < 0 && errno == EINTR) continue;
-        require(n > 0, writing ? "Write restored disk; check phone storage" : "Read Linux disk");
+        require(n > 0, writing ? "Write restored disk; check phone storage" : "Read environment disk");
         bytes += n; count -= n; at += n;
     }
 }
 inline void validate(int fd, uint64_t size) {
     unsigned char super[1024];
     io(fd, super, sizeof(super), 1024, false);
-    if (super[56] != 0x53 || super[57] != 0xef) throw std::runtime_error("Backup does not contain an ext4 Linux disk");
+    if (super[56] != 0x53 || super[57] != 0xef) throw std::runtime_error("Backup does not contain an ext4 environment disk");
     auto u32 = [&](size_t at) -> uint64_t { return uint64_t(super[at]) | uint64_t(super[at+1])<<8 | uint64_t(super[at+2])<<16 | uint64_t(super[at+3])<<24; };
     uint64_t shift = u32(24), blocks = u32(4);
     if (u32(96) & 0x80) blocks |= u32(0x150) << 32;
@@ -74,7 +74,7 @@ inline void discardInterruptedImports(const std::string& directory) {
 }
 inline void exportDisk(const std::string& directory, int destination, const std::function<void(uint64_t)>& progress = {}) {
     File lock(open((directory + "/../debian.lock").c_str(), O_CREAT | O_RDWR | O_CLOEXEC, 0600));
-    require(flock(lock.fd, LOCK_EX | LOCK_NB) == 0, "Linux must be stopped for a consistent backup");
+    require(flock(lock.fd, LOCK_EX | LOCK_NB) == 0, "The environment must be stopped for a consistent backup");
     discardInterruptedImports(directory);
     File disk(open((directory + "/rootfs.ext4").c_str(), O_RDONLY | O_NOFOLLOW | O_CLOEXEC));
     struct stat st{}; require(fstat(disk.fd, &st) == 0, "Read disk size"); validate(disk.fd, st.st_size);
@@ -123,7 +123,7 @@ inline std::string publish(const std::string& directory, const std::string& temp
         try {
             require(rename(temporary.c_str(), previous.c_str()) == 0, "Stage restored disk");
             require(fsync(parent.fd) == 0, "Commit incoming recovery disk");
-            require(syscall(SYS_renameat2, AT_FDCWD, previous.c_str(), AT_FDCWD, image.c_str(), 2 /* RENAME_EXCHANGE */) == 0, "Exchange Linux disks atomically");
+            require(syscall(SYS_renameat2, AT_FDCWD, previous.c_str(), AT_FDCWD, image.c_str(), 2 /* RENAME_EXCHANGE */) == 0, "Exchange environment disks atomically");
         } catch (...) { unlink(previous.c_str()); throw; }
     }
     require(fsync(parent.fd) == 0, "Commit restored disk");
@@ -131,7 +131,7 @@ inline std::string publish(const std::string& directory, const std::string& temp
 }
 inline std::string importDisk(const std::string& directory, int source, const std::function<void(uint64_t)>& progress = {}) {
     File lock(open((directory + "/../debian.lock").c_str(), O_CREAT | O_RDWR | O_CLOEXEC, 0600));
-    require(flock(lock.fd, LOCK_EX | LOCK_NB) == 0, "Linux must be stopped to restore a backup");
+    require(flock(lock.fd, LOCK_EX | LOCK_NB) == 0, "The environment must be stopped to restore a backup");
     discardInterruptedImports(directory);
     std::string temporary = directory + "/rootfs.restore.XXXXXX";
     File disk(mkstemp(temporary.data()));
@@ -164,7 +164,7 @@ inline std::string restorePrevious(const std::string& directory, const std::stri
     if (name.find('/') != std::string::npos || name.compare(0, 22, "rootfs.before-restore.") != 0)
         throw std::runtime_error("Invalid previous disk name");
     File lock(open((directory + "/../debian.lock").c_str(), O_CREAT | O_RDWR | O_CLOEXEC, 0600));
-    require(flock(lock.fd, LOCK_EX | LOCK_NB) == 0, "Linux must be stopped to restore a previous disk");
+    require(flock(lock.fd, LOCK_EX | LOCK_NB) == 0, "The environment must be stopped to restore a previous disk");
     discardInterruptedImports(directory);
     std::string previous = directory + "/" + name, image = directory + "/rootfs.ext4";
     File source(open(previous.c_str(), O_RDONLY | O_NOFOLLOW | O_CLOEXEC));
@@ -175,7 +175,7 @@ inline std::string restorePrevious(const std::string& directory, const std::stri
     // Both disks already exist independently. Swapping them needs no third
     // full-sized copy and preserves the replaced disk at the selected path.
     require(syscall(SYS_renameat2, AT_FDCWD, previous.c_str(), AT_FDCWD, image.c_str(), 2 /* RENAME_EXCHANGE */) == 0,
-            "Exchange previous Linux disk atomically");
+            "Exchange previous environment disk atomically");
     require(fsync(parent.fd) == 0, "Commit previous disk restore");
     if (progress) progress(0);
     return previous;

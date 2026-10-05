@@ -43,11 +43,11 @@
         <service android:name=".NetworkService" android:exported="false" android:process=":network" />
         <service android:name=".SessionService" android:exported="false" android:foregroundServiceType="specialUse">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                android:value="User-controlled local Linux environment for terminals, package installation and background services; optionally starts after reboot when the user enables Start Linux after reboot. Runs with an ongoing notification and a shutdown action independently of the terminal screen." />
+                android:value="User-controlled local development environment for terminals, package installation and background services; optionally starts after reboot when the user enables Start environment after reboot. Runs with an ongoing notification and a shutdown action independently of the terminal screen." />
         </service>
         <service android:name=".MaintenanceService" android:exported="false" android:foregroundServiceType="specialUse">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                android:value="User-requested Linux disk backup, restore or rescue transition; preserves a consistent disk while transferring through Android's document picker." />
+                android:value="User-requested environment disk backup, restore or rescue transition; preserves a consistent disk while transferring through Android's document picker." />
         </service>
     </application>
 </manifest>

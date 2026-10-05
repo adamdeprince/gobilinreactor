@@ -24,7 +24,11 @@ final class AppHelp {
         } catch (Exception unavailable) { return "unknown"; }
     }
     static AlertDialog text(Activity activity, String title, String message) {
-        TextView body = new TextView(activity); body.setText(message); body.setTextIsSelectable(true);
+        TextView body = new TextView(activity); android.text.SpannableString styled = new android.text.SpannableString(message);
+        java.util.regex.Matcher marks = java.util.regex.Pattern.compile("\\bDebian\\b").matcher(message);
+        while (marks.find()) styled.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
+            marks.start(), marks.end(), android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        body.setText(styled); body.setTextIsSelectable(true);
         int pad = Math.round(20 * activity.getResources().getDisplayMetrics().density);
         body.setPadding(pad, pad, pad, pad);
         ScrollView scroll = new ScrollView(activity); scroll.addView(body);
@@ -32,16 +36,17 @@ final class AppHelp {
     }
     static AlertDialog guide(Activity activity) {
         return text(activity, name(activity) + " · " + version(activity),
-            "A terminal and local development environment for Android, using a Linux® kernel and Debian packages.\n\n"
+            "A terminal and local development environment for Android. Uses a Linux® kernel and packages from Debian.\n\n"
             + "Your account is goblin and your home is /home/goblin.\n\n"
             + "Tap the terminal to type. Pinch to change text size. Ctrl and Alt apply to the next key. A physical keyboard hides the extra-key row. Use ⋮ for the menu.\n\n"
             + "Install software with sudo apt update and sudo apt install PACKAGE. Sudo is passwordless. sudo su - opens a root login shell; exit returns to your account.\n\n"
-            + "New terminal opens another shell in the same Linux installation. exit closes that shell. Detached services can keep running after every terminal closes. Use Shut down Linux in the menu or notification to stop the whole instance cleanly.\n\n"
-            + "Keep Linux awake lets work continue with the screen off and uses battery. You control it in the menu. Android can still suspend or end the app; battery settings vary by phone.\n\n"
-            + "Start Linux after reboot is optional and off by default. Enable it in the menu to start Linux in the background after your first unlock following a phone restart. Services enabled in Linux can start again; open shells and unsaved work do not resume. Android force-stop or battery restrictions can prevent automatic startup until you open the app again.\n\n"
-            + "Linux uses your phone's memory and storage. Storage & recovery shows the phone's actual free space. Back up Linux saves your files, accounts, packages and configuration to a file you choose.\n\n"
-            + "App updates preserve your Linux installation. Uninstalling this app or clearing its Android storage deletes the local installation. Keep backups outside the app before doing either.\n\n"
-            + "If something breaks, save diagnostics from the menu and note what you were doing. Rescue shell and Previous Linux disks provide recovery options. Diagnostics exclude terminal contents and personal files.\n\n"
+            + "New terminal opens another shell in the same environment. exit closes that shell. Detached services can keep running after every terminal closes. Use Shut down environment in the menu or notification to stop the whole instance cleanly.\n\n"
+            + "Keep environment awake lets work continue with the screen off and uses battery. You control it in the menu. Android can still suspend or end the app; battery settings vary by phone.\n\n"
+            + "Start environment after reboot is optional and off by default. Enable it in the menu to start the environment in the background after your first unlock following a phone restart. Services enabled in the environment can start again; open shells and unsaved work do not resume. Android force-stop or battery restrictions can prevent automatic startup until you open the app again.\n\n"
+            + "The environment uses your phone's memory and storage. Storage & recovery shows the phone's actual free space. Back up environment saves your files, accounts, packages and configuration to a file you choose.\n\n"
+            + "App updates preserve your installation. Uninstalling this app or clearing its Android storage deletes the local installation. Keep backups outside the app before doing either.\n\n"
+            + "If something breaks, save diagnostics from the menu and note what you were doing. Rescue shell and Previous disks provide recovery options. Diagnostics exclude terminal contents and personal files.\n\n"
+            + "GoblinReactor is independent of the Debian Project, which does not sponsor or endorse it. Debian is a registered trademark owned by Software in the Public Interest, Inc.\n\n"
             + "Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.");
     }
     static long allocated(File file) {
@@ -55,9 +60,9 @@ final class AppHelp {
         long saved = 0; if (previous != null) for (File file : previous) saved += allocated(file);
         StatFs space = new StatFs(context.getFilesDir().getAbsolutePath());
         return "Phone space available: " + Formatter.formatFileSize(context, space.getAvailableBytes())
-            + "\nLinux disk stored on phone: " + Formatter.formatFileSize(context, allocated(disk))
+            + "\nEnvironment disk stored on phone: " + Formatter.formatFileSize(context, allocated(disk))
             + "\nPrevious disks: " + (previous == null ? 0 : previous.length) + " · " + Formatter.formatFileSize(context, saved)
-            + "\n\nLinux's reported free space is shared with Android and other apps. It is not reserved."
+            + "\n\nThe environment’s reported free space is shared with Android and other apps. It is not reserved."
             + "\n\nA backup needs space at the selected destination. Restoring needs space for the restored data while retaining your current disk.";
     }
     static String diagnostics(Context context) throws IOException {
@@ -74,15 +79,15 @@ final class AppHelp {
         ActivityManager manager = context.getSystemService(ActivityManager.class); manager.getMemoryInfo(memory);
         report.append("Memory total/available: ").append(memory.totalMem).append('/').append(memory.availMem).append('\n');
         report.append("Low memory: ").append(memory.lowMemory).append('\n');
-        report.append("Linux state: ").append(SessionService.status()).append('\n');
-        report.append("Linux running: ").append(SessionService.runningNative()).append('\n');
+        report.append("Environment state: ").append(SessionService.status()).append('\n');
+        report.append("Environment running: ").append(SessionService.runningNative()).append('\n');
         report.append("Rescue mode: ").append(SessionService.rescueNative()).append('\n');
         String terminals = SessionService.terminalsNative();
         report.append("Open terminals: ").append(terminals.isEmpty() ? 0 : terminals.split("\n").length).append('\n');
         report.append("Maintenance: ").append(MaintenanceService.status()).append('\n');
         PowerManager power = context.getSystemService(PowerManager.class);
-        report.append("Keep Linux awake: ").append(SessionService.keepAwake(context)).append('\n');
-        report.append("Start Linux after reboot: ").append(BootReceiver.enabled(context)).append('\n');
+        report.append("Keep environment awake: ").append(SessionService.keepAwake(context)).append('\n');
+        report.append("Start environment after reboot: ").append(BootReceiver.enabled(context)).append('\n');
         report.append("Last boot start request: ").append(BootReceiver.lastRequest(context)).append('\n');
         report.append("Battery optimization exempt: ").append(power.isIgnoringBatteryOptimizations(context.getPackageName())).append('\n');
         report.append("Power save / device idle: ").append(power.isPowerSaveMode()).append('/').append(power.isDeviceIdleMode()).append('\n');

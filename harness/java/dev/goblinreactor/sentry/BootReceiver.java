@@ -22,7 +22,7 @@ public final class BootReceiver extends BroadcastReceiver {
     }
     static void blocked(Context context, RuntimeException error) {
         context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE).edit().putString("last-request", "Blocked by Android").apply();
-        Log.w("goblin-boot", "Android did not allow Linux to start after reboot", error);
+        Log.w("goblin-boot", "Android did not allow the environment to start after reboot", error);
     }
     @Override public void onReceive(Context context, Intent intent) {
         if (intent == null || !Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) return;

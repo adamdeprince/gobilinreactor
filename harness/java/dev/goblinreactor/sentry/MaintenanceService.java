@@ -29,7 +29,7 @@ public final class MaintenanceService extends Service {
     private final Runnable progress = new Runnable() {
         @Override public void run() {
             if (!BUSY.get()) return;
-            currentStatus = "Linux " + action + " · " + android.text.format.Formatter.formatFileSize(MaintenanceService.this, progressNative());
+            currentStatus = "Environment " + action + " · " + android.text.format.Formatter.formatFileSize(MaintenanceService.this, progressNative());
             notifyProgress(currentStatus);
             main.postDelayed(this, 1000);
         }
@@ -37,18 +37,18 @@ public final class MaintenanceService extends Service {
     private Notification notification(String text) {
         PendingIntent open = PendingIntent.getActivity(this, 0, new Intent(this, TerminalActivity.class), PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         return new Notification.Builder(this, "maintenance").setSmallIcon(android.R.drawable.stat_notify_sync)
-            .setContentTitle("Linux maintenance").setContentText(text).setOngoing(true).setContentIntent(open).build();
+            .setContentTitle("Environment maintenance").setContentText(text).setOngoing(true).setContentIntent(open).build();
     }
     private void notifyProgress(String text) { getSystemService(NotificationManager.class).notify(2, notification(text)); }
     @Override public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null || !BUSY.compareAndSet(false, true)) return START_NOT_STICKY;
         action = intent.getAction();
-        currentStatus = "Stopping Linux cleanly…";
+        currentStatus = "Stopping environment cleanly…";
         try { Files.write(new File(getFilesDir(), "maintenance-active.txt").toPath(), action.getBytes(StandardCharsets.UTF_8)); }
         catch (Exception ignored) { }
-        getSystemService(NotificationManager.class).createNotificationChannel(new NotificationChannel("maintenance", "Linux backup and recovery", NotificationManager.IMPORTANCE_LOW));
-        if (Build.VERSION.SDK_INT >= 34) startForeground(2, notification("Stopping Linux cleanly…"), android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
-        else startForeground(2, notification("Stopping Linux cleanly…"));
+        getSystemService(NotificationManager.class).createNotificationChannel(new NotificationChannel("maintenance", "Environment backup and recovery", NotificationManager.IMPORTANCE_LOW));
+        if (Build.VERSION.SDK_INT >= 34) startForeground(2, notification("Stopping environment cleanly…"), android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
+        else startForeground(2, notification("Stopping environment cleanly…"));
         lock = getSystemService(PowerManager.class).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Goblin:Maintenance"); lock.acquire();
         boolean wasRunning = SessionService.runningNative() || SessionService.preparing(); Uri uri = intent.getData();
         SessionService.stopNative();
@@ -61,12 +61,12 @@ public final class MaintenanceService extends Service {
                 if ("rescue".equals(action)) {
                     Files.write(rescue.toPath(), new byte[]{1}); restart = true; message = "Opening the rescue shell";
                 } else if ("normal".equals(action)) {
-                    Files.deleteIfExists(rescue.toPath()); restart = true; message = "Starting Debian";
+                    Files.deleteIfExists(rescue.toPath()); restart = true; message = "Starting environment";
                 } else if ("previous".equals(action)) {
                     main.post(progress);
                     previousNative(directory.getAbsolutePath(), intent.getStringExtra("disk"));
                     Files.deleteIfExists(rescue.toPath()); restart = true;
-                    message = "Previous Linux disk restored; replaced disk retained";
+                    message = "Previous environment disk restored; replaced disk retained";
                 } else {
                     boolean restore = "restore".equals(action);
                     if (!restore && !"backup".equals(action)) throw new IllegalArgumentException("Unknown maintenance action");
@@ -75,10 +75,10 @@ public final class MaintenanceService extends Service {
                         if (stream == null) throw new java.io.IOException("Cannot open the selected file");
                         String previous = transferNative(directory.getAbsolutePath(), stream.getFd(), restore);
                         if (restore) { Files.deleteIfExists(rescue.toPath()); restart = true; }
-                        message = restore ? "Backup restored" + (previous.isEmpty() ? "" : ". The replaced disk is available in Previous Linux disks") : "Linux backup saved";
+                        message = restore ? "Backup restored" + (previous.isEmpty() ? "" : ". The replaced disk is available in Previous disks") : "Environment backup saved";
                     }
                 }
-            } catch (Exception error) { message = "Linux " + action + " failed: " + error.getMessage(); }
+            } catch (Exception error) { message = "Environment " + action + " failed: " + error.getMessage(); }
             final String result = message; final boolean start = restart;
             main.post(() -> {
                 main.removeCallbacks(progress);

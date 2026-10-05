@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "menu_labels": [
+    "Android battery settings…",
+    "Back up environment…",
+    "Close terminal",
+    "Create account…",
+    "Getting started / About…",
+    "Keep environment awake",
+    "Network access…",
+    "New terminal",
+    "Open as user…",
+    "Open-source notices…",
+    "Previous disks…",
+    "Rescue shell…",
+    "Restore backup…",
+    "Root terminal",
+    "Save diagnostics…",
+    "Shut down environment…",
+    "Start environment after reboot",
+    "Storage & recovery…",
+    "Terminal 1 · goblin"
+  ],
+  "notification_action": "Shut down environment",
+  "checks": [
+    "all visible menu rows scanned without Linux or Debian labels",
+    "shutdown confirmation and Open environment restart used",
+    "notification action verified after enabling emulator notification permission"
+  ]
+}

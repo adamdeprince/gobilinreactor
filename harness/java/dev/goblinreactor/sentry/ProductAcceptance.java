@@ -73,8 +73,8 @@ public final class ProductAcceptance extends Instrumentation {
             waitFor(() -> { dismiss(); return "Running".equals(SessionService.stateNative()) && screen().contains("goblin@goblin:"); }, "Initial Linux shell", 600000);
             require((activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) == 0,
                 "Terminal overrides the user's screen timeout");
-            require(button(activity.getWindow().getDecorView(), "Open Linux") != null, "Recovery controls are absent");
-            require(!button(activity.getWindow().getDecorView(), "Open Linux").isShown(), "Startup panel covers a healthy terminal");
+            require(button(activity.getWindow().getDecorView(), "Open environment") != null, "Recovery controls are absent");
+            require(!button(activity.getWindow().getDecorView(), "Open environment").isShown(), "Startup panel covers a healthy terminal");
             pass("healthy terminal has no startup banner and respects Android screen timeout");
 
             require(SessionService.inputNative(("printf '%s' '" + marker + "' | tee " + guestFile + "; printf '\\n'\n").getBytes(StandardCharsets.UTF_8)), "Send terminal canary");
@@ -112,7 +112,7 @@ public final class ProductAcceptance extends Instrumentation {
             // Allow the foreground service to complete its shutdown before a
             // user opens a replacement instance.
             SystemClock.sleep(1500);
-            press("Open Linux");
+            press("Open environment");
             waitFor(() -> "Running".equals(SessionService.stateNative()) && screen().contains("goblin@goblin:"), "Recovery button restart");
             require(new String(SessionService.readGuestNative(guestFile), StandardCharsets.UTF_8).equals(marker), "Restart lost guest data");
             pass("the shutdown screen can reopen Linux with the installation preserved");

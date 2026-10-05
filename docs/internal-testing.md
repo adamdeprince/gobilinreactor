@@ -24,10 +24,12 @@ The 0.3.0 runtime passed a fresh Android 12 emulator with 2 GiB RAM, the Android
 16 Samsung SM-S928U, and Android 16 emulators with 4 KiB and 16 KiB pages.
 Version 0.3.2 added optional startup after reboot. Version 0.3.3 updated branding
 and added the source and license handoff. Version 0.3.4 added the Goblin artwork. Version 0.3.5 moved the kernel
-to stable Linux 7.2.9. Version 0.3.6 establishes the public
-`dev.goblinreactor.sentry` application ID and GoblinReactor signing identity. Android 13–15 and other physical
+to stable Linux 7.2.9. Version 0.3.6 established the public
+`dev.goblinreactor.sentry` application ID and GoblinReactor signing identity.
+Version 0.3.7 uses neutral environment labels in menus and notifications and adds
+upstream trademark attribution. Android 13–15 and other physical
 manufacturers still need direct testing. Exact checks and artifact identities
-are listed in the [release evidence](../harness/results/release-0.3.6/README.md).
+are listed in the [release evidence](../harness/results/release-0.3.7/README.md).
 
 Install updates over the existing app. Keep the same signing identity and
 increase `harness/version.json` for each distributed update. The APK can update
@@ -35,7 +37,7 @@ the kernel and its runtime while retaining Linux files, packages, accounts and
 configuration. Uninstalling or clearing Android app storage deletes the local
 Linux installation. Export a backup outside the app before either action.
 
-On first launch, terminal files and Debian are prepared locally; older devices
+On first launch, terminal files and **Debian** are prepared locally; older devices
 can need several minutes. The progress
 panel keeps the menu available. Close the getting-started help, choose whether
 to allow notifications, and tap the terminal to type. The default account is
@@ -43,7 +45,7 @@ to allow notifications, and tap the terminal to type. The default account is
 
 ## A week of use
 
-Start with a backup from **Back up Linux…** and save it outside GoblinReactor. Use the
+Start with a backup from **Back up environment…** and save it outside GoblinReactor. Use the
 phone normally throughout the week; a failure during ordinary use is useful
 feedback. These are suggested activities, not pass/fail obligations:
 
@@ -52,21 +54,21 @@ feedback. These are suggested activities, not pass/fail obligations:
 | 1 | Install, use help, type commands, pinch text, rotate the phone, and switch between several terminals. |
 | 2 | Run `sudo apt update`, install an editor or development tool, and try `sudo su -` followed by `exit`. |
 | 3 | Work with files and long output. Use Ctrl, Alt, Esc and arrows. Connect/disconnect a physical keyboard if available. |
-| 4 | Run a long task or a detached service, leave the app, lock the screen, and return later. Try the Keep Linux awake setting and note battery use. |
+| 4 | Run a long task or a detached service, leave the app, lock the screen, and return later. Try the Keep environment awake setting and note battery use. |
 | 5 | Switch between Wi-Fi and mobile data and retry network commands. Try Network access if using a local service. |
-| 6 | Back up changes, restore the backup, and inspect Previous Linux disks. Restore intentionally replaces the current guest; keep a current backup first. |
+| 6 | Back up changes, restore the backup, and inspect Previous disks. Restore intentionally replaces the current guest; keep a current backup first. |
 | 7 | Install the next GoblinReactor APK over this one, confirm files/packages remain, and revisit anything that failed. |
 
 **exit** closes the current shell. Linux and detached services can stay alive
-after all terminals close. **Shut down Linux…** in the menu or notification
+after all terminals close. **Shut down environment…** in the menu or notification
 stops the whole instance cleanly. Android force-stop or a device restart can end
-Linux abruptly; recent writes not yet flushed to disk can be lost. Keep Linux awake is
+Linux abruptly; recent writes not yet flushed to disk can be lost. Keep environment awake is
 under the user's control and does not override every Android battery policy.
 
-**Start Linux after reboot** is off by default. Enable it in the terminal menu
+**Start environment after reboot** is off by default. Enable it in the terminal menu
 to start Linux in the background after the first unlock following a phone
 restart. The usual notification and shutdown action remain available, and
-**Keep Linux awake** still controls the wake lock. The terminal screen does not
+**Keep environment awake** still controls the wake lock. The terminal screen does not
 open automatically. Services enabled inside Linux start as part of its normal
 boot; open shells and unsaved work do not resume. Turning the option off affects
 future reboots and leaves the current Linux instance running. Android force-stop
@@ -95,10 +97,10 @@ Alongside the file, record:
 - Whether you can repeat it, and whether the screen was off or the network changed.
 - A screenshot if useful, after checking it for passwords or other private text.
 
-If startup fails, the app keeps recovery controls visible. Try **Open Linux**,
+If startup fails, the app keeps recovery controls visible. Try **Open environment**,
 check phone storage, or use **Rescue shell…** from the menu. A failed restore
 keeps the active disk; completed restores retain the replaced disk under
-**Previous Linux disks…**. Retry of an interrupted restore removes its abandoned
+**Previous disks…**. Retry of an interrupted restore removes its abandoned
 staging data. Save diagnostics before uninstalling or clearing app data.
 
 ## Build another test release
@@ -144,3 +146,5 @@ Use **GoblinReactor** as the app name in release listings and handoffs. See
 [naming and trademark usage](trademark.md) for descriptive technology references.
 
 Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
+
+GoblinReactor is independent of the **Debian** Project, which does not sponsor or endorse it. **Debian** is a registered trademark owned by Software in the Public Interest, Inc.

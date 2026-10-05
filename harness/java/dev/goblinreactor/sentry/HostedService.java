@@ -18,10 +18,10 @@ abstract class HostedService extends Service {
             ParcelFileDescriptor[] files = data.createTypedArray(ParcelFileDescriptor.CREATOR);
             ParcelFileDescriptor status = ParcelFileDescriptor.CREATOR.createFromParcel(data);
             try {
-                if (started) throw new IllegalStateException("Linux host already started");
+                if (started) throw new IllegalStateException("Environment host already started");
                 if (files == null || targets == null || files.length != targets.length) throw new IllegalArgumentException("Invalid descriptor handoff");
                 int pid = launch(args, targets, files, status);
-                if (pid <= 0) throw new IllegalStateException("Linux host launch failed");
+                if (pid <= 0) throw new IllegalStateException("Environment host launch failed");
                 started = true; reply.writeNoException(); reply.writeInt(pid);
             } catch (Exception e) { reply.writeException(e); }
             finally {

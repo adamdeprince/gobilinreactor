@@ -90,7 +90,7 @@ public final class SessionService extends Service {
         Notification notification = new Notification.Builder(this, "session")
                 .setSmallIcon(android.R.drawable.stat_notify_more).setContentTitle(AppHelp.name(this))
                 .setContentText("Terminals and background processes are running").setContentIntent(open)
-                .addAction(new Notification.Action.Builder(null, "Shut down Linux", stop).build())
+                .addAction(new Notification.Action.Builder(null, "Shut down environment", stop).build())
                 .setOngoing(true).build();
         try {
             if (Build.VERSION.SDK_INT >= 34) startForeground(1, notification, android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
@@ -98,7 +98,7 @@ public final class SessionService extends Service {
         } catch (IllegalStateException | SecurityException error) {
             if (!fromBoot) throw error;
             BootReceiver.blocked(this, error);
-            startupError = "Android prevented Linux from starting after reboot. Open Linux to start it manually.";
+            startupError = "Android prevented the environment from starting after reboot. Open environment to start it manually.";
             stopSelf(startId);
             return START_NOT_STICKY;
         }

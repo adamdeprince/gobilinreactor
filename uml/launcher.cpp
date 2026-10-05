@@ -34,7 +34,7 @@ extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_KernelService_sp
         JNIEnv* env, jclass, jstring executable, jobjectArray arguments,
         jintArray descriptors, jintArray destinations, jint status_fd) {
     std::unique_lock<std::mutex> guard(mutex);
-    if (machine > 0) { Error(env, "A Linux machine is already active"); return -1; }
+    if (machine > 0) { Error(env, "A environment machine is already active"); return -1; }
     std::string path = String(env, executable);
     std::vector<std::string> strings;
     for (int i = 0; i < env->GetArrayLength(arguments); ++i) {
@@ -59,7 +59,7 @@ extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_KernelService_sp
     if (status < 0 || disk_lock < 0 || std::find(copies.begin(), copies.end(), -1) != copies.end() ||
         prctl(PR_SET_CHILD_SUBREAPER, 1) < 0) {
         close_copies(); if (status >= 0) close(status); if (disk_lock >= 0) close(disk_lock);
-        Error(env, "Cannot retain Linux descriptors or supervise workers"); return -1;
+        Error(env, "Cannot retain environment descriptors or supervise workers"); return -1;
     }
     const pid_t parent = getpid();
     pid_t child = fork();
@@ -73,7 +73,7 @@ extern "C" JNIEXPORT jint JNICALL Java_dev_goblinreactor_sentry_KernelService_sp
     }
     close_copies();
     if (child < 0) {
-        close(status); close(disk_lock); Error(env, "Cannot fork Linux kernel"); return -1;
+        close(status); close(disk_lock); Error(env, "Cannot fork guest kernel"); return -1;
     }
     machine = child;
     std::thread([child, status, disk_lock] {

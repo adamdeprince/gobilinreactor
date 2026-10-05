@@ -1,8 +1,8 @@
-# Goblin: Linux guest execution and Google Play policy review
+# GoblinReactor: guest execution and Google Play policy review
 
 Updated October 5, 2026 for Google Play policy support.
 Android package: `dev.goblinreactor.sentry`.
-Current proposed public identity: preview 0.3.6, version code 30006.
+Current proposed public identity: preview 0.3.7, version code 30007.
 Earlier implementation evidence below was collected under the private test identity.
 
 **Purpose and requested clarification**
@@ -91,11 +91,11 @@ part of the proposed product's functionality.
 A user-started foreground service owns the Linux instance independently of
 terminal windows, allowing guest services to continue after terminals close.
 The notification provides shutdown. The app holds a partial wake lock while
-Linux runs when the user-controlled "Keep Linux awake" option is enabled; that
+Linux runs when the user-controlled "Keep environment awake" option is enabled; that
 option defaults to enabled. A separate menu action can request Android's
 battery-optimization exemption.
 
-Starting with version 0.3.2, an optional "Start Linux after reboot" setting
+Starting with version 0.3.2, an optional "Start environment after reboot" setting
 defaults to disabled. When enabled by the user, a non-exported `BOOT_COMPLETED`
 receiver starts the same `specialUse` foreground service after the first user
 unlock, without opening an activity. The guest disk remains in credential-

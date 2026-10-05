@@ -23,7 +23,7 @@ final class NetworkSettings {
         try { for (String line : new String(Files.readAllBytes(new File(a.getFilesDir(), "uml/ports.conf").toPath()), StandardCharsets.UTF_8).split("\n")) if (!line.isEmpty()) rules.add(line); }
         catch (Exception absent) { }
         LinearLayout body = new LinearLayout(a); body.setOrientation(LinearLayout.VERTICAL); body.setPadding(24, 16, 24, 8);
-        TextView help = new TextView(a); help.setText("Forward a phone port to a Linux server listening on 0.0.0.0 or ::. Local rules are reachable from Android apps at localhost. DNS follows Android automatically."); body.addView(help);
+        TextView help = new TextView(a); help.setText("Forward a phone port to a guest server listening on 0.0.0.0 or ::. Local rules are reachable from Android apps at localhost. DNS follows Android automatically."); body.addView(help);
         rows = new LinearLayout(a); rows.setOrientation(LinearLayout.VERTICAL); body.addView(rows);
         Button add = new Button(a); add.setText("Add port"); add.setOnClickListener(v -> add()); body.addView(add);
         status = new TextView(a); body.addView(status);
@@ -57,7 +57,7 @@ final class NetworkSettings {
         LinearLayout body = new LinearLayout(activity); body.setOrientation(LinearLayout.VERTICAL); body.setPadding(24, 8, 24, 8);
         Spinner protocol = new Spinner(activity); protocol.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_spinner_dropdown_item, new String[]{"TCP", "UDP"})); body.addView(protocol);
         EditText host = new EditText(activity), guest = new EditText(activity);
-        host.setHint("Phone port, e.g. 8080"); guest.setHint("Linux port, e.g. 8080");
+        host.setHint("Phone port, e.g. 8080"); guest.setHint("Guest port, e.g. 8080");
         host.setInputType(InputType.TYPE_CLASS_NUMBER); guest.setInputType(InputType.TYPE_CLASS_NUMBER);
         body.addView(host); body.addView(guest);
         CheckBox lan = new CheckBox(activity); lan.setText("Allow connections from other devices on the network"); body.addView(lan);

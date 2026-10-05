@@ -108,7 +108,7 @@ def boot_setting(value):
         return
     open_app()
     click('Terminal menu')
-    click('Start Linux after reboot')
+    click('Start environment after reboot')
     if value:
         click('Enable')
     wait(lambda: preference('linux-startup', 'after-reboot') == value, 'Boot preference persisted')
@@ -118,7 +118,7 @@ def wake_setting(value):
         return
     open_app()
     click('Terminal menu')
-    click('Keep Linux awake')
+    click('Keep environment awake')
     wait(lambda: preference('linux-power', 'keep-awake', True) == value, 'Wake preference persisted')
 
 def stop():
@@ -171,7 +171,7 @@ try:
     assert 'isForeground=true' in services
     assert not re.search(r"PARTIAL_WAKE_LOCK\s+'Goblin:Linux'", shell('dumpsys', 'power'))
     passed('Opt-in survives a real reboot and starts Linux with a foreground notification without opening the terminal')
-    passed('Enabled guest systemd service runs automatically; Keep Linux awake opt-out remains respected')
+    passed('Enabled guest systemd service runs automatically; Keep environment awake opt-out remains respected')
 
     guest_before = guest('cat /proc/sys/kernel/random/boot_id')
     shell('am', 'broadcast', '-a', 'android.intent.action.BOOT_COMPLETED', '-p', PACKAGE)

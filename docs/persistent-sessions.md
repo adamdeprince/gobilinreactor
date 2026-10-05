@@ -1,4 +1,4 @@
-# Persistent Linux sessions
+# Persistent environment sessions
 
 The Android foreground service binds an app-zygote isolated service hosting the
 real UML kernel and its workers. Networking runs in another Android-managed
@@ -7,10 +7,10 @@ without changing Android's monitoring settings. Activities display kitty
 screens and send terminal bytes; each shell runs on a Linux PTY. There is no
 terminal-count cap. Normal shell job control applies: an attached foreground job
 receives the PTY hangup, while properly detached jobs can outlive every terminal.
-Reopening Goblin joins the same running Linux environment. `exit` closes a shell;
-the notification's **Shut down Linux** action powers down the environment.
+Reopening GoblinReactor joins the same running Linux environment. `exit` closes a shell;
+the notification's **Shut down environment** action powers down the environment.
 
-**Keep Linux awake** is enabled by default and holds an Android partial wake
+**Keep environment awake** is enabled by default and holds an Android partial wake
 lock while the Linux service runs, including when every terminal is closed or
 the screen is off. Disabling it leaves Linux running but permits host sleep.
 The lock is released at shutdown. **Android battery settings…** lets the user

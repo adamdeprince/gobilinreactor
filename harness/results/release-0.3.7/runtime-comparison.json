@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "compared_to": "0.3.6",
+  "unchanged_entries": 262,
+  "unchanged_notices": 232,
+  "checks": [
+    "same kernel, boot image, deployment data, logo and upstream license assets",
+    "unchanged Android package identity and existing signing key retained"
+  ]
+}

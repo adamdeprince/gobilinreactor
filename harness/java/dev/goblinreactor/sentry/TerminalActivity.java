@@ -75,7 +75,7 @@ public final class TerminalActivity extends Activity {
         startupProgress.setVisibility(working ? View.VISIBLE : View.GONE);
         recoveryActions.setVisibility(working ? View.GONE : View.VISIBLE);
         runtimeStatus.setText(maintenance ? MaintenanceService.status() : "Stopped".equals(state)
-            ? "Linux is shut down. Your installation is saved." : state);
+            ? "The environment is shut down. Your installation is saved." : state);
     }
     private void restartLinux() {
         if (!MaintenanceService.busy()) startForegroundService(new Intent(this, SessionService.class));
@@ -90,7 +90,7 @@ public final class TerminalActivity extends Activity {
     }
     private void exportDiagnostics() {
         new AlertDialog.Builder(this).setTitle("Save diagnostics")
-            .setMessage("Saves the app version, device model, Linux status, storage and Android exit reasons. Terminal contents, commands and personal files are excluded. Choose where to save the report; nothing is sent automatically.")
+            .setMessage("Saves the app version, device model, environment status, storage and Android exit reasons. Terminal contents, commands and personal files are excluded. Choose where to save the report; nothing is sent automatically.")
             .setNegativeButton("Cancel", null).setPositiveButton("Choose file", (d, w) -> startActivityForResult(
                 new Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("text/plain")
                     .putExtra(Intent.EXTRA_TITLE, "goblin-diagnostics-" + new java.text.SimpleDateFormat("yyyyMMdd-HHmm", java.util.Locale.ROOT).format(new java.util.Date()) + ".txt"), 42)).show();
@@ -101,7 +101,7 @@ public final class TerminalActivity extends Activity {
         java.io.File result = new java.io.File(getFilesDir(), "maintenance-result.txt");
         if (interrupted.exists()) {
             try {
-                java.nio.file.Files.write(result.toPath(), "Linux maintenance was interrupted. Review your current installation and Previous Linux disks before retrying. Backups that did not finish may be incomplete.".getBytes(StandardCharsets.UTF_8));
+                java.nio.file.Files.write(result.toPath(), "Environment maintenance was interrupted. Review your current installation and Previous disks before retrying. Backups that did not finish may be incomplete.".getBytes(StandardCharsets.UTF_8));
                 interrupted.delete();
             } catch (java.io.IOException ignored) { }
         }
@@ -111,7 +111,7 @@ public final class TerminalActivity extends Activity {
         try {
             String message = new String(java.nio.file.Files.readAllBytes(result.toPath()), StandardCharsets.UTF_8);
             preferences.edit().putLong("maintenance-result-seen", changed).apply();
-            new AlertDialog.Builder(this).setTitle("Linux maintenance").setMessage(message)
+            new AlertDialog.Builder(this).setTitle("Environment maintenance").setMessage(message)
                 .setPositiveButton("OK", null).setNeutralButton("Storage & recovery", (d, w) -> storageDialog()).show();
         } catch (java.io.IOException ignored) { }
     }
@@ -145,7 +145,7 @@ public final class TerminalActivity extends Activity {
         EditText name = new EditText(this); name.setSingleLine(true); name.setHint("Username");
         name.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         name.setPadding(32, 16, 32, 16);
-        AlertDialog dialog = new AlertDialog.Builder(this).setTitle(create ? "Create Linux account" : "Open terminal as user")
+        AlertDialog dialog = new AlertDialog.Builder(this).setTitle(create ? "Create account" : "Open terminal as user")
             .setView(name).setNegativeButton("Cancel", null).setPositiveButton(create ? "Create" : "Open", null).create();
         dialog.setOnShowListener(d -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
             String user = name.getText().toString().trim();
@@ -167,33 +167,33 @@ public final class TerminalActivity extends Activity {
         popup.getMenu().add("Open as user…").setOnMenuItemClickListener(item -> { accountDialog(false); return true; });
         popup.getMenu().add("Create account…").setOnMenuItemClickListener(item -> { accountDialog(true); return true; });
         popup.getMenu().add("Network access…").setOnMenuItemClickListener(item -> { NetworkSettings.show(this); return true; });
-        popup.getMenu().add("Back up Linux…").setOnMenuItemClickListener(item -> {
-            new AlertDialog.Builder(this).setTitle("Back up Linux")
-                .setMessage("Linux will shut down cleanly while its files, accounts, packages and configuration are saved, then start again.\n\n" + AppHelp.storage(this))
+        popup.getMenu().add("Back up environment…").setOnMenuItemClickListener(item -> {
+            new AlertDialog.Builder(this).setTitle("Back up environment")
+                .setMessage("The environment will shut down cleanly while its files, accounts, packages and configuration are saved, then start again.\n\n" + AppHelp.storage(this))
                 .setNegativeButton("Cancel", null).setPositiveButton("Choose file", (d, w) -> startActivityForResult(
                     new Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("application/octet-stream")
                         .putExtra(Intent.EXTRA_TITLE, "goblinreactor-" + new java.text.SimpleDateFormat("yyyyMMdd-HHmm", java.util.Locale.ROOT).format(new java.util.Date()) + ".goblin.gz"), 40)).show();
             return true;
         });
-        popup.getMenu().add("Restore Linux backup…").setOnMenuItemClickListener(item -> {
+        popup.getMenu().add("Restore backup…").setOnMenuItemClickListener(item -> {
             startActivityForResult(new Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("*/*"), 41); return true;
         });
-        popup.getMenu().add("Previous Linux disks…").setOnMenuItemClickListener(item -> { previousDisks(); return true; });
+        popup.getMenu().add("Previous disks…").setOnMenuItemClickListener(item -> { previousDisks(); return true; });
         popup.getMenu().add("Storage & recovery…").setOnMenuItemClickListener(item -> { storageDialog(); return true; });
-        popup.getMenu().add(SessionService.rescueNative() ? "Restart Debian…" : "Rescue shell…").setOnMenuItemClickListener(item -> {
+        popup.getMenu().add(SessionService.rescueNative() ? "Restart environment…" : "Rescue shell…").setOnMenuItemClickListener(item -> {
             boolean normal = SessionService.rescueNative();
-            new AlertDialog.Builder(this).setTitle(normal ? "Restart Debian" : "Open rescue shell")
-                .setMessage(normal ? "Close the rescue shell and start the installed Debian system." : "Shut down Linux cleanly and open a root shell with filesystem inspection and repair tools. Your disk is retained.")
+            new AlertDialog.Builder(this).setTitle(normal ? "Restart environment" : "Open rescue shell")
+                .setMessage(normal ? "Close the rescue shell and start the installed environment." : "Shut down the environment cleanly and open a root shell with filesystem inspection and repair tools. Your disk is retained.")
                 .setNegativeButton("Cancel", null).setPositiveButton("Restart", (d, w) -> startForegroundService(new Intent(this, MaintenanceService.class).setAction(normal ? "normal" : "rescue"))).show();
             return true;
         });
-        popup.getMenu().add("Keep Linux awake").setCheckable(true).setChecked(SessionService.keepAwake(this))
+        popup.getMenu().add("Keep environment awake").setCheckable(true).setChecked(SessionService.keepAwake(this))
             .setOnMenuItemClickListener(item -> { SessionService.setKeepAwake(this, !item.isChecked()); return true; });
-        popup.getMenu().add("Start Linux after reboot").setCheckable(true).setChecked(BootReceiver.enabled(this))
+        popup.getMenu().add("Start environment after reboot").setCheckable(true).setChecked(BootReceiver.enabled(this))
             .setOnMenuItemClickListener(item -> {
                 if (item.isChecked()) BootReceiver.setEnabled(this, false);
-                else new AlertDialog.Builder(this).setTitle("Start Linux after reboot?")
-                    .setMessage("After restarting your phone and unlocking it for the first time, Linux will start in the background with its usual notification. Services enabled in Linux can start again. Open shells and unsaved work do not resume.\n\nYour Keep Linux awake setting still applies. You can turn this option off here at any time.")
+                else new AlertDialog.Builder(this).setTitle("Start environment after reboot?")
+                    .setMessage("After restarting your phone and unlocking it for the first time, the environment will start in the background with its usual notification. Services enabled in the environment can start again. Open shells and unsaved work do not resume.\n\nYour Keep environment awake setting still applies. You can turn this option off here at any time.")
                     .setNegativeButton("Cancel", null).setPositiveButton("Enable", (d, w) -> BootReceiver.setEnabled(this, true)).show();
                 return true;
             });
@@ -214,9 +214,9 @@ public final class TerminalActivity extends Activity {
             else SessionService.closeTerminalNative(id);
             return true;
         });
-        popup.getMenu().add("Shut down Linux…").setOnMenuItemClickListener(item -> {
-            new AlertDialog.Builder(this).setTitle("Shut down Linux?")
-                .setMessage("This stops every terminal and Linux service after syncing the disk. Your files and installed packages remain saved.")
+        popup.getMenu().add("Shut down environment…").setOnMenuItemClickListener(item -> {
+            new AlertDialog.Builder(this).setTitle("Shut down environment?")
+                .setMessage("This stops every terminal and guest service after syncing the disk. Your files and installed packages remain saved.")
                 .setNegativeButton("Cancel", null).setPositiveButton("Shut down", (d, w) ->
                     startService(new Intent(this, SessionService.class).setAction("stop"))).show(); return true;
         });
@@ -235,7 +235,7 @@ public final class TerminalActivity extends Activity {
         String[] names = new String[disks.length];
         java.text.DateFormat dates = java.text.DateFormat.getDateTimeInstance();
         for (int i = 0; i < disks.length; ++i) names[i] = dates.format(new java.util.Date(disks[i].lastModified())) + " · " + disks[i].getName().substring(22);
-        new AlertDialog.Builder(this).setTitle("Previous Linux disks").setItems(names, (dialog, which) -> {
+        new AlertDialog.Builder(this).setTitle("Previous disks").setItems(names, (dialog, which) -> {
             java.io.File disk = disks[which];
             new AlertDialog.Builder(this).setTitle(names[which])
                 .setMessage("Restore this disk and retain the current one, or permanently delete this saved copy to free storage.")
@@ -270,11 +270,11 @@ public final class TerminalActivity extends Activity {
         int padding = Math.round(20 * getResources().getDisplayMetrics().density);
         runtimePanel.setPadding(padding, padding, padding, padding);
         runtimeStatus = new TextView(this); runtimeStatus.setTextColor(Color.WHITE); runtimeStatus.setTextSize(17);
-        runtimeStatus.setGravity(Gravity.CENTER); runtimeStatus.setText("Starting Linux…");
+        runtimeStatus.setGravity(Gravity.CENTER); runtimeStatus.setText("Starting environment…");
         runtimeStatus.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
         startupProgress = new ProgressBar(this); runtimePanel.addView(startupProgress); runtimePanel.addView(runtimeStatus);
         recoveryActions = new LinearLayout(this); recoveryActions.setOrientation(LinearLayout.VERTICAL);
-        recoveryActions.addView(button("Open Linux", "Open Linux", this::restartLinux));
+        recoveryActions.addView(button("Open environment", "Open environment", this::restartLinux));
         recoveryActions.addView(button("Storage & recovery", "Storage and recovery", this::storageDialog));
         recoveryActions.addView(button("Save diagnostics", "Save diagnostics", this::exportDiagnostics));
         runtimePanel.addView(recoveryActions);
@@ -350,8 +350,8 @@ public final class TerminalActivity extends Activity {
         Intent operation = new Intent(this, MaintenanceService.class).setAction(request == 40 ? "backup" : "restore").setData(uri)
             .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         if (request == 40) startForegroundService(operation);
-        else new AlertDialog.Builder(this).setTitle("Restore this Linux backup?")
-            .setMessage("Linux will shut down. After the backup is checked, it will replace the current environment. The current disk will be retained for recovery.\n\n" + AppHelp.storage(this))
+        else new AlertDialog.Builder(this).setTitle("Restore this environment backup?")
+            .setMessage("The environment will shut down. After the backup is checked, it will replace the current environment. The current disk will be retained for recovery.\n\n" + AppHelp.storage(this))
             .setNegativeButton("Cancel", null).setPositiveButton("Restore", (d, w) -> startForegroundService(operation)).show();
     }
     @Override public void onPause() { handler.removeCallbacks(refresh); terminal.onPause(); super.onPause(); }

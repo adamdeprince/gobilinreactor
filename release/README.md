@@ -17,7 +17,7 @@ promise to supply sources later. No signing keys are part of the handoff.
 - `upstream/python-sources/` and `upstream/python-recipes/`: exact dependency
   sources and Android packaging recipes/patches. The prebuilt dependencies used
   in the original build are also supplied for the normal terminal build path.
-- `upstream/debian/`: `.dsc`, original source archives and Debian changes for
+- `upstream/debian/`: `.dsc`, original source archives and **Debian** changes for
   every source version used in the seed, deployment, boot image and static
   C/C++ runtimes. Both old seed and newer deployment versions are retained.
 - `SOURCE-REVISION`: the exact project commit. The adjacent `SOURCE-MANIFEST.json`
@@ -37,7 +37,7 @@ Verify SHA256SUMS before unpacking. On a case-sensitive filesystem:
 ```sh
 mkdir goblin-source
 cd goblin-source
-tar -xf ../GoblinReactor-0.3.6-corresponding-source.tar
+tar -xf ../GoblinReactor-0.3.7-corresponding-source.tar
 cd project
 git init
 python3 release/restore-source-cache.py
@@ -47,10 +47,10 @@ The local `git init` lets the Android builder enumerate source inputs for its
 embedded provenance record; no upstream checkout or private repository is needed.
 
 The source packages can be inspected or rebuilt without contacting the source
-hosts. For a Debian component, use `dpkg-source -x PACKAGE.dsc` from its directory
+hosts. For a **Debian** component, use `dpkg-source -x PACKAGE.dsc` from its directory
 under `upstream/debian/`, install its declared build dependencies and run
 `dpkg-buildpackage` in the extracted tree. Review the source package's copyright
-file and build rules for the relevant component. This includes the Debian
+file and build rules for the relevant component. This includes the **Debian**
 changes, rather than only the unmodified upstream tarball.
 
 For modified Android Python libraries, unpack the matching archive in
@@ -62,9 +62,9 @@ library, replace that library in the CPython prefix and rerun `terminal/build.py
 without reusing the old native build. The unmodified path uses the verified
 prebuilt dependencies included in the handoff.
 
-Build UML on Debian 13 ARM64 with a case-sensitive disk, following
+Build UML on **Debian** 13 ARM64 with a case-sensitive disk, following
 `uml/README.md`. Also install `busybox-static` for the rescue image. The original
-builder used clang 19.1.7, GCC 14.2.0, and the Debian runtime versions recorded in
+builder used clang 19.1.7, GCC 14.2.0, and the **Debian** runtime versions recorded in
 `release/boot-packages.lock.json`. Exact kernel configuration is in
 `release/kernel.config`. Restore the upstream trees locally:
 
@@ -82,7 +82,7 @@ The kernel preparation step verifies stable Linux 7.2.9 and applies the ARM64
 port from `uml/port-patches/`. The aggregate `uml/build.sh` fetches missing inputs
 for a normal checkout; passt uses a pinned Git checkout. The kernel build script
 applies the separate Android integration patches. Install the recorded
-Debian package versions when reproducing the original boot image; an intentional
+**Debian** package versions when reproducing the original boot image; an intentional
 change requires refreshing the boot-package audit and corresponding source locks.
 
 On the Android build host, install Python 3.12+, Android SDK API 36, Build Tools
@@ -96,9 +96,9 @@ python3 terminal/build.py --offline
 VARIANT=release SIGNING=debug bash harness/build.sh
 ```
 
-The fixture builders download SHA-256-pinned Debian binary packages and never
+The fixture builders download SHA-256-pinned **Debian** binary packages and never
 execute them on the build host. Their corresponding sources are included for
-modification/rebuilding. Rebuilt Debian packages require updating the fixture
+modification/rebuilding. Rebuilt **Debian** packages require updating the fixture
 locks to their versions and hashes. A rebuilt or modified boot image similarly
 requires rerunning `release/audit-boot-packages.py` on its Linux builder, with
 `initramfs-manifest.json` on stdin, into `release/boot-packages.lock.json`.
@@ -114,7 +114,7 @@ rebuilt runtime components beyond Android's normal APK signing rules.
 
 1. Update `harness/version.json` and release notes. Preserve the app ID and key.
 2. Refresh package/source locks only when inputs change. The resolver reads
-   pinned binary package control records and Debian `Sources.xz` indexes in
+   pinned binary package control records and **Debian** `Sources.xz` indexes in
    `release/build/cache/`. `audit-boot-packages.py` verifies actual boot-file
    hashes and records binary and source versions, including static runtimes.
 3. Run `release/collect-sources.py` and `release/export-uml-sources.py` to collect
@@ -130,3 +130,5 @@ rebuilt runtime components beyond Android's normal APK signing rules.
 Large upstream archives, private keys, build outputs and local VM disks are
 excluded from the project Git tree. Source locks and the handoff checks make
 those separately shipped archives reviewable and verifiable.
+
+GoblinReactor is independent of the **Debian** Project, which does not sponsor or endorse it. **Debian** is a registered trademark owned by Software in the Public Interest, Inc.

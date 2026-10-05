@@ -106,7 +106,7 @@ struct Terminal {
 struct Runtime {
     std::mutex mutex;
     std::atomic<bool> running{true}, stop{false};
-    std::string state = "Preparing Linux", data, library, diagnostics;
+    std::string state = "Preparing environment", data, library, diagnostics;
     std::map<int, std::shared_ptr<Terminal>> terminals;
     int selected = 0, next = 1, test_mode = -1;
     Fd wake{eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC)};
@@ -132,7 +132,7 @@ void JavaCheck(JNIEnv* env) {
     jclass type = env->GetObjectClass(error);
     jmethodID describe = env->GetMethodID(type, "toString", "()Ljava/lang/String;");
     auto value = static_cast<jstring>(env->CallObjectMethod(error, describe));
-    std::string message = value ? JavaString(env, value) : "Android Linux host failed";
+    std::string message = value ? JavaString(env, value) : "Android environment host failed";
     if (env->ExceptionCheck()) env->ExceptionClear();
     if (value) env->DeleteLocalRef(value);
     env->DeleteLocalRef(type); env->DeleteLocalRef(error);
@@ -153,7 +153,7 @@ int StartManaged(JNIEnv* env, const std::shared_ptr<Runtime>& r, bool kernel,
     env->SetIntArrayRegion(src, 0, sources.size(), sources.data()); env->SetIntArrayRegion(dst, 0, targets.size(), targets.data());
     JavaCheck(env);
     int pid = env->CallStaticIntMethod(r->managed_class, r->managed_start, jboolean(kernel), arguments, src, dst, jint(status));
-    JavaCheck(env); Check(pid > 0, "start Android Linux host"); return pid;
+    JavaCheck(env); Check(pid > 0, "start Android environment host"); return pid;
 }
 void StopManaged(JNIEnv* env, const std::shared_ptr<Runtime>& r, bool kernel) {
     env->CallStaticVoidMethod(r->managed_class, r->managed_stop, jboolean(kernel)); JavaCheck(env);
@@ -162,7 +162,7 @@ void StopManaged(JNIEnv* env, const std::shared_ptr<Runtime>& r, bool kernel) {
 bool HostExited(int fd, int* status) {
     ssize_t n; do { n = read(fd, status, sizeof(*status)); } while (n < 0 && errno == EINTR);
     if (n < 0 && errno == EAGAIN) return false;
-    Check(n >= 0, "read Linux host status");
+    Check(n >= 0, "read environment host status");
     if (n != sizeof(*status)) *status = 127 << 8;
     return true;
 }
@@ -234,12 +234,12 @@ void Worker(std::shared_ptr<Runtime> r, JavaVM* vm, jobject reference) {
     JNIEnv* env = nullptr; bool attached = vm->AttachCurrentThread(&env, nullptr) == JNI_OK;
     std::string failure;
     try {
-        if (!attached) throw std::runtime_error("Cannot attach Linux setup worker");
+        if (!attached) throw std::runtime_error("Cannot attach environment setup worker");
         AAssetManager* assets = AAssetManager_fromJava(env, reference);
         const std::string directory = r->data + "/uml", share = directory + "/share", image = directory + "/rootfs.ext4";
         Directory(directory); Directory(share); Directory(directory + "/tmp");
         Fd lock(open((r->data + "/debian.lock").c_str(), O_CREAT | O_RDWR | O_CLOEXEC, 0600));
-        Check(flock(lock.n, LOCK_EX | LOCK_NB) == 0, "another Linux runtime is active");
+        Check(flock(lock.n, LOCK_EX | LOCK_NB) == 0, "another environment runtime is active");
         // Refresh APK-owned boot components independently of deployment
         // configuration versions. The persistent guest disk is reused below.
         Asset(assets, "uml-initramfs.cpio.gz", directory + "/initramfs.cpio.gz");
@@ -251,27 +251,27 @@ void Worker(std::shared_ptr<Runtime> r, JavaVM* vm, jobject reference) {
         AAssetDir_close(deployment);
         bool fresh = !Exists(image); const std::string disk = fresh ? image + ".pending" : image;
         if (fresh) {
-            State(r, "Migrating Debian");
-            Feed(r, 1, "Preparing Linux and preserving your Debian files…\r\n");
+            State(r, "Migrating environment");
+            Feed(r, 1, "Preparing environment and preserving your files…\r\n");
             if (Exists(r->data + "/debian")) {
                 std::string error;
-                if (!ExportLegacy(r->data + "/debian", share + "/import.pack", &error)) throw std::runtime_error("Debian migration: " + error);
+                if (!ExportLegacy(r->data + "/debian", share + "/import.pack", &error)) throw std::runtime_error("Environment migration: " + error);
             } else { unlink((share + "/import.pack").c_str()); Asset(assets, "debian.pack", share + "/debian.pack"); }
-            File(share + "/new-root", "Create the pending filesystem; original Debian files are retained.\n");
+            File(share + "/new-root", "Create the pending filesystem; original files are retained.\n");
         } else unlink((share + "/new-root").c_str());
         struct statvfs space{}; Check(statvfs(directory.c_str(), &space) == 0, "phone filesystem capacity");
         const uint64_t capacity = uint64_t(space.f_blocks) * space.f_frsize;
         Fd disk_file(open(disk.c_str(), O_RDWR | O_CREAT | O_NOFOLLOW | O_CLOEXEC, 0600));
-        struct stat st{}; Check(fstat(disk_file.n, &st) == 0, "Linux disk image");
+        struct stat st{}; Check(fstat(disk_file.n, &st) == 0, "Environment disk image");
         // A sparse backing disk has the phone filesystem's capacity, with no
         // smaller Goblin quota. Android allocates blocks only as they are used.
         if (uint64_t(st.st_size) < capacity) {
-            Check(ftruncate(disk_file.n, capacity) == 0, "grow Linux backing disk");
+            Check(ftruncate(disk_file.n, capacity) == 0, "grow environment backing disk");
             if (!fresh) File(share + "/grow-root", "Backing storage grew.\n");
         }
         std::string archive_error;
         if (!ExportLegacy(share, directory + "/boot-assets.pack", &archive_error, {"debian.pack", "import.pack"}))
-            throw std::runtime_error("Preparing Linux boot assets: " + archive_error);
+            throw std::runtime_error("Preparing environment boot assets: " + archive_error);
         {
             Fd archive(open((directory + "/boot-assets.pack").c_str(), O_RDWR | O_CLOEXEC));
             struct stat info{}; Check(fstat(archive.n, &info) == 0, "boot archive size");
@@ -339,7 +339,7 @@ void Worker(std::shared_ptr<Runtime> r, JavaVM* vm, jobject reference) {
         std::string incoming, net_in, test_report; std::vector<std::unique_ptr<Client>> clients;
         bool ready = false, stop_sent = false, testing = false, ports_applied = false; uint32_t request = 0x80000000u;
         constexpr uint32_t test_request = 0x7fffffffu;
-        State(r, "Booting Linux");
+        State(r, "Booting environment");
         auto report = [&](bool ok) {
             if (!ok) test_report += "\nGOBLIN FAIL\n";
             File(r->data + "/phase1-report.txt.new", test_report);
@@ -406,7 +406,7 @@ void Worker(std::shared_ptr<Runtime> r, JavaVM* vm, jobject reference) {
                         for (auto& t : r->terminals) t.second->user = "root";
                     }
                     if (fresh && h.operation == Ready) {
-                        Check(fsync(disk_file.n) == 0 && rename(disk.c_str(), image.c_str()) == 0, "commit migrated Linux filesystem");
+                        Check(fsync(disk_file.n) == 0 && rename(disk.c_str(), image.c_str()) == 0, "commit migrated environment filesystem");
                         Fd parent(open(directory.c_str(), O_RDONLY | O_DIRECTORY | O_CLOEXEC));
                         Check(fsync(parent.n) == 0, "commit migration directory"); fresh = false;
                         unlink((share + "/new-root").c_str()); unlink((share + "/import.pack").c_str());
@@ -486,7 +486,7 @@ void Worker(std::shared_ptr<Runtime> r, JavaVM* vm, jobject reference) {
             int status;
             if (HostExited(network_exit.n, &status)) throw std::runtime_error("UML networking stopped; see uml/boot.log");
             if (HostExited(kernel_exit.n, &status)) {
-                if (!stop_sent && (!ready || !WIFEXITED(status) || WEXITSTATUS(status))) throw std::runtime_error("Linux stopped; see uml/boot.log");
+                if (!stop_sent && (!ready || !WIFEXITED(status) || WEXITSTATUS(status))) throw std::runtime_error("Environment stopped; see uml/boot.log");
                 break;
             }
         }
@@ -538,7 +538,7 @@ extern "C" JNIEXPORT jboolean JNICALL Java_dev_goblinreactor_sentry_SessionServi
     auto r = Current(); if (!r) return false; std::lock_guard<std::mutex> guard(r->mutex); return r->rescue;
 }
 extern "C" JNIEXPORT jstring JNICALL Java_dev_goblinreactor_sentry_NetworkSettings_applyNative(JNIEnv* env, jclass, jstring value) {
-    auto r = Current(); auto error = r && r->running ? ApplyPorts(r, JavaString(env, value)) : "Start Linux before changing port forwarding";
+    auto r = Current(); auto error = r && r->running ? ApplyPorts(r, JavaString(env, value)) : "Start environment before changing port forwarding";
     return env->NewStringUTF(error.c_str());
 }
 }

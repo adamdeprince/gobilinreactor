@@ -1,4 +1,4 @@
-I've been building GoblinReactor, a local Debian development environment for Android, and I'm ready to share an early preview.
+I've been building GoblinReactor, a local development environment for Android, and I'm ready to share an early preview.
 
 It runs on the phone. No rooting or remote server required. You get a terminal, apt packages, multiple shells, and background services. Install an editor, run Python, or bring a project over and see what works.
 

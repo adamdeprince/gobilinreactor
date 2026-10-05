@@ -30,24 +30,24 @@ final class ManagedLinux {
 
     // Called from the native setup worker, never from Android's main thread.
     static synchronized int start(boolean kernel, String[] args, int[] sources, int[] targets, int status) throws Exception {
-        if (Looper.myLooper() == Looper.getMainLooper()) throw new IllegalStateException("Linux startup needs a worker thread");
+        if (Looper.myLooper() == Looper.getMainLooper()) throw new IllegalStateException("Environment startup needs a worker thread");
         int slot = kernel ? 0 : 1;
-        if (context == null || handles[slot] != null) throw new IllegalStateException("Linux service already bound or uninitialized");
+        if (context == null || handles[slot] != null) throw new IllegalStateException("Guest service already bound or uninitialized");
         Handle handle = new Handle();
         Intent intent = new Intent(context, kernel ? KernelService.class : NetworkService.class);
         if (!context.bindService(intent, handle, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT))
-            throw new IllegalStateException("Cannot bind Linux service");
+            throw new IllegalStateException("Cannot bind guest service");
         handles[slot] = handle;
         Parcel data = Parcel.obtain(), reply = Parcel.obtain();
         ParcelFileDescriptor[] descriptors = new ParcelFileDescriptor[sources.length];
         try (ParcelFileDescriptor exit = ParcelFileDescriptor.fromFd(status)) {
             if (!handle.connected.await(30, TimeUnit.SECONDS) || handle.binder == null || handle.died.getCount() == 0)
-                throw new IllegalStateException("Linux service did not connect");
+                throw new IllegalStateException("Guest service did not connect");
             for (int i = 0; i < sources.length; ++i) descriptors[i] = ParcelFileDescriptor.fromFd(sources[i]);
             data.writeInterfaceToken(PROTOCOL);
             data.writeStringArray(args); data.writeIntArray(targets);
             data.writeTypedArray(descriptors, 0); exit.writeToParcel(data, 0);
-            if (!handle.binder.transact(START, data, reply, 0)) throw new IllegalStateException("Linux service rejected startup");
+            if (!handle.binder.transact(START, data, reply, 0)) throw new IllegalStateException("Guest service rejected startup");
             reply.readException();
             return reply.readInt();
         } catch (Exception e) {
@@ -78,7 +78,7 @@ final class ManagedLinux {
         }
         if (handle.binder != null) {
             try {
-                if (!handle.died.await(30, TimeUnit.SECONDS)) throw new IllegalStateException("Linux host did not terminate");
+                if (!handle.died.await(30, TimeUnit.SECONDS)) throw new IllegalStateException("Environment host did not terminate");
             } catch (InterruptedException e) { Thread.currentThread().interrupt(); throw new IllegalStateException(e); }
         }
     }
